@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# PDF-/CI-Generatoren: verschachtelte Tool-node_modules nicht committen
+**/node_modules/

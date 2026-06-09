@@ -92,8 +92,8 @@ export function ForestSilhouette() {
             />
           ))}
         </g>
-        {/* Vordere Reihe — dunkler, größer */}
-        <g fill="#0a110d">
+        {/* Vordere Reihe — exakt im Footer-Farbton (--color-night), damit der Übergang nahtlos ist */}
+        <g fill="var(--color-night)">
           {FRONT.map((tr, i) => (
             <path
               key={`f${i}`}
