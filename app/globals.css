@@ -1,26 +1,128 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ----------------------------------------------------------------------------
+   Black Forest Retreats — Tailwind v4 Theme (Single Source of Truth gespiegelt)
+   Palette: lib/theme/colors.ts · Fonts: app/layout.tsx (next/font)
+---------------------------------------------------------------------------- */
+@theme {
+  /* Marken-Palette */
+  --color-night: #0f1813;
+
+  --color-forest-50: #f1f5f2;
+  --color-forest-100: #dce7df;
+  --color-forest-300: #9bb4a3;
+  --color-forest-500: #3f5a48;
+  --color-forest-700: #2a3e31;
+  --color-forest-800: #22332a;
+  --color-forest-900: #1b2a21;
+
+  --color-bark-100: #e9ddd0;
+  --color-bark-300: #c8a98c;
+  --color-bark-500: #9c7a5b;
+  --color-bark-700: #6f513a;
+  --color-bark-900: #43301f;
+
+  --color-cream-50: #faf7f1;
+  --color-cream-100: #f3ede2;
+  --color-cream-300: #ddd2c0;
+  --color-cream-500: #b8a98f;
+
+  --color-brass-300: #d8bd85;
+  --color-brass-400: #c9a96a;
+  --color-brass-600: #a6863f;
+
+  /* Fonts — next/font setzt --font-fraunces / --font-jakarta auf <html> */
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-jakarta);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ------------------------------ Base ------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* Offset für fixen Header bei Anchor-Sprüngen */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-cream-50);
+  color: var(--color-forest-900);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: var(--color-brass-400);
+  color: var(--color-night);
+}
+
+/* ------------------------- Textur: feines Grain -------------------------- */
+/* Auf eine absolut positionierte Overlay-Div legen (parent: position: relative). */
+.bf-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* ----------------------------- Keyframes -------------------------------- */
+@keyframes bf-float {
+  0%, 100% { transform: translateY(0); opacity: 0.9; }
+  50% { transform: translateY(8px); opacity: 0.5; }
+}
+
+@keyframes bf-drift {
+  0% { transform: scale(1.05) translate(0, 0); }
+  100% { transform: scale(1.12) translate(-1.5%, -1.5%); }
+}
+
+@keyframes bf-rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bf-scrollcue {
+  animation: bf-float 2.4s ease-in-out infinite;
+}
+
+.bf-hero-drift {
+  animation: bf-drift 24s ease-in-out infinite alternate;
+}
+
+/* --------------------- Reveal (JS toggelt .is-visible) ------------------- */
+.bf-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.bf-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------- Wald-Silhouette: aus dem Boden wachsen ------------ */
+.bf-tree {
+  transform: scaleY(0.03);
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.bf-tree.is-grown {
+  transform: scaleY(1);
+}
+
+/* --------------------- Barrierefreiheit: reduzierte Motion --------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .bf-reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .bf-tree {
+    transform: none;
+  }
 }
