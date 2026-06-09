@@ -1,0 +1,11 @@
+{
+  "name": "angebot-test-an-2026-5021",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node generate.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.48.0"
+  }
+}

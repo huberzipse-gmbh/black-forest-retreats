@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<title>Black Forest Retreats — Markenhandbuch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#0f1813;
+    --forest-900:#1b2a21; --forest-800:#22332a; --forest-700:#2a3e31; --forest-500:#3f5a48; --forest-300:#9bb4a3; --forest-100:#dce7df; --forest-50:#f1f5f2;
+    --bark-900:#43301f; --bark-700:#6f513a; --bark-500:#9c7a5b; --bark-300:#c8a98c; --bark-100:#e9ddd0;
+    --cream-50:#faf7f1; --cream-100:#f3ede2; --cream-300:#ddd2c0; --cream-500:#b8a98f;
+    --brass-600:#a6863f; --brass-400:#c9a96a; --brass-300:#d8bd85;
+  }
+  @page{ size:A4; margin:0; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body{ font-family:'Plus Jakarta Sans',sans-serif; color:var(--forest-900); }
+  .ff-d{ font-family:'Fraunces',Georgia,serif; }
+  .ff-b{ font-family:'Plus Jakarta Sans',sans-serif; }
+
+  .page{
+    position:relative; width:210mm; height:297mm; overflow:hidden;
+    page-break-after:always; background:var(--cream-50);
+    padding:22mm 20mm; display:flex; flex-direction:column;
+  }
+  .page:last-child{ page-break-after:auto; }
+  .dark{ background:var(--night); color:var(--cream-50); }
+
+  .eyebrow{ font-family:'Plus Jakarta Sans'; text-transform:uppercase; letter-spacing:0.26em; font-size:9.5pt; font-weight:600; color:var(--brass-600); }
+  .dark .eyebrow{ color:var(--brass-300); }
+  .sec-title{ font-family:'Fraunces'; font-weight:400; font-size:30pt; letter-spacing:-0.01em; margin-top:6mm; color:var(--forest-900); }
+  .lead{ font-size:11pt; line-height:1.7; color:var(--forest-700); max-width:150mm; }
+  .pg-foot{ position:absolute; left:20mm; right:20mm; bottom:13mm; display:flex; justify-content:space-between;
+    font-size:7.5pt; letter-spacing:0.14em; text-transform:uppercase; color:var(--cream-500); }
+  .dark .pg-foot{ color:var(--forest-300); }
+  .rule{ height:1px; background:var(--brass-400); border:0; margin:7mm 0; opacity:.7; }
+
+  /* ---------- Wordmark ---------- */
+  .wm{ text-align:center; }
+  .wm .name{ font-family:'Fraunces'; font-weight:400; letter-spacing:0.14em; line-height:1; }
+  .wm .loc{ font-family:'Plus Jakarta Sans'; text-transform:uppercase; font-weight:500; letter-spacing:0.34em; }
+  .wm .bar{ height:1px; background:currentColor; opacity:.45; margin:3.5mm auto; }
+
+  /* ---------- Cover ---------- */
+  .cover-top{ display:flex; justify-content:space-between; align-items:flex-start; }
+  .cover-center{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .cover-bottom{ display:flex; justify-content:space-between; align-items:flex-end; font-size:9pt; letter-spacing:0.1em; }
+  .cover-bottom .k{ text-transform:uppercase; letter-spacing:0.22em; font-size:8pt; color:var(--forest-300); margin-bottom:2mm; }
+
+  /* ---------- Leitgedanke ---------- */
+  .claim{ font-family:'Fraunces'; font-weight:400; font-size:46pt; line-height:1.06; letter-spacing:-0.02em; color:var(--forest-900); max-width:165mm; }
+  .claim em{ font-style:italic; color:var(--bark-700); }
+
+  /* ---------- Logo-Seite ---------- */
+  .logo-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8mm; margin-top:8mm; }
+  .logo-box{ height:62mm; border-radius:3mm; display:flex; align-items:center; justify-content:center; }
+  .logo-box.light{ background:var(--cream-100); border:1px solid var(--cream-300); }
+  .logo-box.onforest{ background:var(--forest-900); }
+  .logo-box.onnight{ background:var(--night); }
+  .logo-cap{ font-size:8pt; text-transform:uppercase; letter-spacing:0.2em; color:var(--cream-500); margin-top:2.5mm; }
+  .specs{ margin-top:10mm; display:grid; grid-template-columns:1fr 1fr; gap:6mm 12mm; }
+  .spec h4{ font-family:'Plus Jakarta Sans'; font-size:9pt; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--forest-900); margin-bottom:1.5mm; }
+  .spec p{ font-size:9.5pt; line-height:1.55; color:var(--forest-700); }
+
+  /* ---------- Farben ---------- */
+  .pal{ display:flex; flex-direction:column; gap:5mm; margin-top:7mm; }
+  .pal-group{ }
+  .pal-head{ display:flex; align-items:baseline; gap:4mm; margin-bottom:2.5mm; }
+  .pal-head h4{ font-family:'Fraunces'; font-weight:500; font-size:13pt; color:var(--forest-900); }
+  .pal-head span{ font-size:8.5pt; color:var(--forest-500); }
+  .sw-row{ display:flex; gap:3mm; }
+  .sw{ flex:1; border-radius:2mm; overflow:hidden; border:1px solid rgba(0,0,0,.06); }
+  .sw .chip{ height:17mm; }
+  .sw .meta{ padding:2mm 2.5mm; background:#fff; }
+  .sw .hex{ font-size:8pt; font-weight:700; letter-spacing:0.04em; color:var(--forest-900); }
+  .sw .nm{ font-size:7pt; text-transform:uppercase; letter-spacing:0.1em; color:var(--forest-500); margin-top:.5mm; }
+
+  /* ---------- Typografie ---------- */
+  .type-spec{ display:grid; grid-template-columns:1fr 1fr; gap:8mm; margin-top:8mm; }
+  .ts-card{ border:1px solid var(--cream-300); border-radius:3mm; padding:7mm; background:#fff; }
+  .ts-aa{ font-size:54pt; line-height:1; color:var(--forest-900); }
+  .ts-name{ font-family:'Plus Jakarta Sans'; font-weight:700; font-size:11pt; margin-top:4mm; }
+  .ts-role{ font-size:8.5pt; text-transform:uppercase; letter-spacing:0.18em; color:var(--brass-600); margin-top:1mm; }
+  .ts-glyph{ font-size:9pt; color:var(--forest-500); margin-top:3mm; letter-spacing:0.02em; }
+  .scale{ margin-top:9mm; }
+  .scale-row{ display:flex; align-items:baseline; gap:6mm; padding:2.6mm 0; border-bottom:1px solid var(--cream-300); }
+  .scale-row .r-name{ width:26mm; font-size:8pt; text-transform:uppercase; letter-spacing:0.16em; color:var(--forest-500); flex:none; }
+  .scale-row .r-sample{ flex:1; color:var(--forest-900); }
+  .scale-row .r-meta{ font-size:7.5pt; color:var(--bark-500); flex:none; letter-spacing:0.03em; }
+
+  /* ---------- Bildsprache ---------- */
+  .motifs{ display:grid; grid-template-columns:repeat(4,1fr); gap:5mm; margin-top:7mm; }
+  .motif{ border:1px solid var(--cream-300); border-radius:3mm; background:linear-gradient(180deg,#fff,var(--cream-100)); padding:5mm; text-align:center; }
+  .motif img{ width:100%; height:34mm; object-fit:contain; }
+  .motif .ml{ font-family:'Fraunces'; font-weight:500; font-size:10pt; margin-top:3mm; color:var(--forest-900); }
+  .motif .ms{ font-size:7.5pt; color:var(--forest-500); margin-top:.8mm; }
+  .photos{ display:grid; grid-template-columns:repeat(3,1fr); gap:4mm; margin-top:8mm; }
+  .photos figure{ border-radius:3mm; overflow:hidden; }
+  .photos img{ width:100%; height:40mm; object-fit:cover; display:block; }
+  .photos figcaption{ font-size:7.5pt; text-transform:uppercase; letter-spacing:0.14em; color:var(--forest-500); margin-top:1.8mm; }
+
+  .twocol{ display:grid; grid-template-columns:1fr 1fr; gap:10mm; margin-top:7mm; }
+  .twocol h4{ font-family:'Plus Jakarta Sans'; font-size:9pt; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--forest-900); margin-bottom:2mm; }
+  .twocol p, .twocol li{ font-size:9.5pt; line-height:1.6; color:var(--forest-700); }
+  .twocol ul{ padding-left:4.5mm; }
+  .twocol li{ margin:1mm 0; }
+
+  /* watermark element */
+  .wmark{ position:absolute; opacity:.06; mix-blend-mode:multiply; pointer-events:none; }
+</style>
+</head>
+<body>
+
+<!-- ============ 1 · COVER ============ -->
+<section class="page dark">
+  <img class="wmark" src="assets/uhr.png" style="width:120mm; right:-30mm; bottom:-20mm; opacity:.05; mix-blend-mode:screen;" />
+  <div class="cover-top">
+    <div class="eyebrow">Markenhandbuch · Corporate Identity</div>
+    <div class="eyebrow" style="text-align:right;">Schwarzwald<br/>Neuenbürg</div>
+  </div>
+
+  <div class="cover-center">
+    <div class="wm" style="color:var(--cream-50);">
+      <div class="name" style="font-size:33pt;">Black Forest Retreats</div>
+      <div class="bar" style="width:64mm; background:var(--brass-400); opacity:.9;"></div>
+      <div class="loc" style="font-size:11pt; color:var(--brass-300);">Neuenbürg</div>
+    </div>
+    <div style="margin-top:14mm; font-family:'Fraunces'; font-style:italic; font-weight:300; font-size:14pt; color:var(--forest-300);">Marken- &amp; Designrichtlinien</div>
+  </div>
+
+  <div class="cover-bottom">
+    <div>
+      <div class="k">Erstellt von</div>
+      <div class="ff-d" style="font-size:13pt; color:var(--cream-50);">Huber &amp; Zipse GmbH</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="k">Version · Datum</div>
+      <div class="ff-d" style="font-size:13pt; color:var(--cream-50);">1.0 · 09.06.2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 · LEITGEDANKE ============ -->
+<section class="page">
+  <img class="wmark ff-d" src="assets/hut.png" style="width:95mm; right:-22mm; top:-14mm;" />
+  <div class="eyebrow">Leitgedanke</div>
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+    <div class="claim">Der Schwarzwald, aber&nbsp;<em>privat</em>.</div>
+    <hr class="rule" style="width:60mm; margin-left:0;" />
+    <p class="lead">Keine Rezeption, kein Standard, kein Souvenir-Kitsch. Echte Apartments im Herzen von Neuenbürg — direkt beim Gastgeber gebucht, nicht über eine Plattform. Wer einmal hier war, kommt direkt wieder.</p>
+    <p class="lead" style="margin-top:5mm; color:var(--bark-700); font-weight:600;">Hochwertig. Ruhig. Echt. Und immer einen Tick wärmer als erwartet.</p>
+  </div>
+  <div class="pg-foot"><span>Black Forest Retreats · Markenhandbuch</span><span>01</span></div>
+</section>
+
+<!-- ============ 3 · LOGO ============ -->
+<section class="page">
+  <div class="eyebrow">Logo</div>
+  <h2 class="sec-title">Das Wortzeichen</h2>
+  <p class="lead" style="margin-top:3mm;">Das Logo ist ein reines Wortzeichen: der Name in der Display-Serif <strong>Fraunces</strong>, darunter der Ort in gesperrten Versalien. Ruhig, editorial, ohne Bildmarke — die Marke spricht durch Typografie.</p>
+
+  <div class="logo-grid">
+    <div>
+      <div class="logo-box light">
+        <div class="wm" style="color:var(--forest-900);">
+          <div class="name" style="font-size:18pt;">Black Forest Retreats</div>
+          <div class="bar" style="width:38mm;"></div>
+          <div class="loc" style="font-size:7pt; color:var(--forest-700);">Neuenbürg</div>
+        </div>
+      </div>
+      <div class="logo-cap" style="color:var(--forest-500);">Primär — auf Creme / hell</div>
+    </div>
+    <div>
+      <div class="logo-box onnight">
+        <div class="wm" style="color:var(--cream-50);">
+          <div class="name" style="font-size:18pt;">Black Forest Retreats</div>
+          <div class="bar" style="width:38mm; background:var(--brass-400); opacity:.9;"></div>
+          <div class="loc" style="font-size:7pt; color:var(--brass-300);">Neuenbürg</div>
+        </div>
+      </div>
+      <div class="logo-cap">Invers — auf Nacht / Foto</div>
+    </div>
+  </div>
+
+  <div class="specs">
+    <div class="spec"><h4>Schrift Name</h4><p>Fraunces, Regular. Laufweite +0,14 em — bewusst leicht gesperrt für editorialen, gelassenen Auftritt.</p></div>
+    <div class="spec"><h4>Schrift Ort</h4><p>Plus Jakarta Sans, Medium, Versalien. Laufweite +0,34 em — feiner, breit gesperrter Unterzug.</p></div>
+    <div class="spec"><h4>Schutzraum</h4><p>Mindestabstand ringsum = Höhe des Schriftzugs „BFR". Logo nie eng an Kanten oder Text setzen.</p></div>
+    <div class="spec"><h4>Don'ts</h4><p>Nicht verzerren, nicht neu einfärben, nicht in eine Box zwängen, Schriftpaarung nie tauschen.</p></div>
+  </div>
+  <div class="pg-foot"><span>Black Forest Retreats · Markenhandbuch</span><span>02</span></div>
+</section>
+
+<!-- ============ 4 · FARBEN ============ -->
+<section class="page">
+  <div class="eyebrow">Farbwelt</div>
+  <h2 class="sec-title">Farben</h2>
+  <p class="lead" style="margin-top:3mm;">Tannengrün als ruhiges Fundament, warmes Holz &amp; Erde als Gegenpol, Creme als Atemraum, Messing als einziger edler Akzent. Sparsam einsetzen — die Wärme entsteht durch Zurückhaltung.</p>
+
+  <div class="pal">
+    <div class="pal-group">
+      <div class="pal-head"><h4>Nacht &amp; Tannengrün</h4><span>Primär — Flächen, Header, dunkle Bänder, Footer</span></div>
+      <div class="sw-row">
+        <div class="sw"><div class="chip" style="background:#0f1813"></div><div class="meta"><div class="hex">#0F1813</div><div class="nm">Nacht</div></div></div>
+        <div class="sw"><div class="chip" style="background:#1b2a21"></div><div class="meta"><div class="hex">#1B2A21</div><div class="nm">Forest 900</div></div></div>
+        <div class="sw"><div class="chip" style="background:#2a3e31"></div><div class="meta"><div class="hex">#2A3E31</div><div class="nm">Forest 700</div></div></div>
+        <div class="sw"><div class="chip" style="background:#3f5a48"></div><div class="meta"><div class="hex">#3F5A48</div><div class="nm">Forest 500</div></div></div>
+        <div class="sw"><div class="chip" style="background:#9bb4a3"></div><div class="meta"><div class="hex">#9BB4A3</div><div class="nm">Forest 300</div></div></div>
+        <div class="sw"><div class="chip" style="background:#dce7df"></div><div class="meta"><div class="hex">#DCE7DF</div><div class="nm">Forest 100</div></div></div>
+      </div>
+    </div>
+
+    <div class="pal-group">
+      <div class="pal-head"><h4>Holz &amp; Erde</h4><span>Sekundär — warme Akzentflächen, Holz-Anmutung</span></div>
+      <div class="sw-row">
+        <div class="sw"><div class="chip" style="background:#43301f"></div><div class="meta"><div class="hex">#43301F</div><div class="nm">Bark 900</div></div></div>
+        <div class="sw"><div class="chip" style="background:#6f513a"></div><div class="meta"><div class="hex">#6F513A</div><div class="nm">Bark 700</div></div></div>
+        <div class="sw"><div class="chip" style="background:#9c7a5b"></div><div class="meta"><div class="hex">#9C7A5B</div><div class="nm">Bark 500</div></div></div>
+        <div class="sw"><div class="chip" style="background:#c8a98c"></div><div class="meta"><div class="hex">#C8A98C</div><div class="nm">Bark 300</div></div></div>
+        <div class="sw"><div class="chip" style="background:#e9ddd0"></div><div class="meta"><div class="hex">#E9DDD0</div><div class="nm">Bark 100</div></div></div>
+      </div>
+    </div>
+
+    <div class="pal-group">
+      <div class="pal-head"><h4>Creme &amp; Sand</h4><span>Neutral — Hauptflächen, Text auf Dunkel</span></div>
+      <div class="sw-row">
+        <div class="sw"><div class="chip" style="background:#faf7f1"></div><div class="meta"><div class="hex">#FAF7F1</div><div class="nm">Cream 50</div></div></div>
+        <div class="sw"><div class="chip" style="background:#f3ede2"></div><div class="meta"><div class="hex">#F3EDE2</div><div class="nm">Cream 100</div></div></div>
+        <div class="sw"><div class="chip" style="background:#ddd2c0"></div><div class="meta"><div class="hex">#DDD2C0</div><div class="nm">Cream 300</div></div></div>
+        <div class="sw"><div class="chip" style="background:#b8a98f"></div><div class="meta"><div class="hex">#B8A98F</div><div class="nm">Cream 500</div></div></div>
+      </div>
+    </div>
+
+    <div class="pal-group">
+      <div class="pal-head"><h4>Messing</h4><span>Akzent — CTAs, Eyebrows, Premium-Details (sparsam)</span></div>
+      <div class="sw-row" style="max-width:96mm;">
+        <div class="sw"><div class="chip" style="background:#a6863f"></div><div class="meta"><div class="hex">#A6863F</div><div class="nm">Brass 600</div></div></div>
+        <div class="sw"><div class="chip" style="background:#c9a96a"></div><div class="meta"><div class="hex">#C9A96A</div><div class="nm">Brass 400</div></div></div>
+        <div class="sw"><div class="chip" style="background:#d8bd85"></div><div class="meta"><div class="hex">#D8BD85</div><div class="nm">Brass 300</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="pg-foot"><span>Black Forest Retreats · Markenhandbuch</span><span>03</span></div>
+</section>
+
+<!-- ============ 5 · TYPOGRAFIE ============ -->
+<section class="page">
+  <div class="eyebrow">Schrift</div>
+  <h2 class="sec-title">Typografie</h2>
+  <p class="lead" style="margin-top:3mm;">Ein Paar, klar getrennt: <strong>Fraunces</strong> für alles Editoriale — Headlines, Zitate, das Logo. <strong>Plus Jakarta Sans</strong> für alles Funktionale — Fließtext, Navigation, Labels.</p>
+
+  <div class="type-spec">
+    <div class="ts-card">
+      <div class="ff-d ts-aa" style="font-weight:400;">Aa</div>
+      <div class="ts-name ff-d" style="font-size:13pt;">Fraunces</div>
+      <div class="ts-role">Display · Serif</div>
+      <div class="ts-glyph ff-d">ABCDEFG abcdefg 1234567890</div>
+      <div class="ts-glyph">Light 300 · Regular 400 · Medium 500</div>
+    </div>
+    <div class="ts-card">
+      <div class="ff-b ts-aa" style="font-weight:600;">Aa</div>
+      <div class="ts-name">Plus Jakarta Sans</div>
+      <div class="ts-role">Text · Sans</div>
+      <div class="ts-glyph ff-b">ABCDEFG abcdefg 1234567890</div>
+      <div class="ts-glyph">Regular 400 · Medium 500 · SemiBold 600 · Bold 700</div>
+    </div>
+  </div>
+
+  <div class="scale">
+    <div class="scale-row"><div class="r-name">Hero</div><div class="r-sample ff-d" style="font-size:24pt; font-weight:300; letter-spacing:-0.02em;">Ankommen, durchatmen</div><div class="r-meta">Fraunces Light · −0,02 em</div></div>
+    <div class="scale-row"><div class="r-name">Display</div><div class="r-sample ff-d" style="font-size:19pt;">Mitten im Schwarzwald</div><div class="r-meta">Fraunces Regular</div></div>
+    <div class="scale-row"><div class="r-name">H2</div><div class="r-sample ff-d" style="font-size:15pt;">Unsere Apartments</div><div class="r-meta">Fraunces Regular</div></div>
+    <div class="scale-row"><div class="r-name">Lead</div><div class="r-sample ff-b" style="font-size:12pt;">Direkt beim Gastgeber buchen.</div><div class="r-meta">Jakarta Regular</div></div>
+    <div class="scale-row"><div class="r-name">Body</div><div class="r-sample ff-b" style="font-size:10.5pt;">Hochwertige Ferienwohnungen, ruhig gelegen, persönlich geführt.</div><div class="r-meta">Jakarta Regular</div></div>
+    <div class="scale-row"><div class="r-name">Label</div><div class="r-sample ff-b" style="font-size:10pt; font-weight:600;">Jetzt buchen</div><div class="r-meta">Jakarta SemiBold</div></div>
+    <div class="scale-row"><div class="r-name">Eyebrow</div><div class="r-sample ff-b" style="font-size:9pt; font-weight:600; text-transform:uppercase; letter-spacing:0.22em; color:var(--brass-600);">Schwarzwald · Neuenbürg</div><div class="r-meta">Jakarta · Versal · +0,22 em</div></div>
+  </div>
+  <div class="pg-foot"><span>Black Forest Retreats · Markenhandbuch</span><span>04</span></div>
+</section>
+
+<!-- ============ 6 · BILDSPRACHE & ELEMENTE ============ -->
+<section class="page">
+  <div class="eyebrow">Bildsprache</div>
+  <h2 class="sec-title">Elemente &amp; Fotografie</h2>
+  <p class="lead" style="margin-top:3mm;">Vier Schwarzwald-Motive geben der Marke ein Augenzwinkern. Sie erscheinen nur dezent — als leise Wasserzeichen hinter Text, nie laut, nie als Sticker.</p>
+
+  <div class="motifs">
+    <div class="motif"><img src="assets/hut.png" /><div class="ml">Bollenhut</div><div class="ms">Tracht</div></div>
+    <div class="motif"><img src="assets/kirschtorte.png" /><div class="ml">Kirschtorte</div><div class="ms">Kulinarik</div></div>
+    <div class="motif"><img src="assets/schinken.png" /><div class="ml">Schwarzwälder Schinken</div><div class="ms">Kulinarik</div></div>
+    <div class="motif"><img src="assets/uhr.png" /><div class="ml">Kuckucksuhr</div><div class="ms">Handwerk</div></div>
+  </div>
+
+  <div class="twocol">
+    <div>
+      <h4>Einsatz der Elemente</h4>
+      <ul>
+        <li>Nur als Wasserzeichen, 5–10 % Deckkraft, „Multiply"</li>
+        <li>Hinter Zitaten und ruhigen Flächen — nie über Fotos</li>
+        <li>Ein Motiv pro Fläche, großzügig angeschnitten</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Fotografie</h4>
+      <ul>
+        <li>Warm, natürlich, ruhig — echtes Licht, keine Filter</li>
+        <li>Natur, Wellness, Kulinarik, Ort — Detail statt Pose</li>
+        <li>Menschen dezent, Räume aufgeräumt und hochwertig</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="photos">
+    <figure><img src="assets/nature-v3.jpg" /><figcaption>Natur</figcaption></figure>
+    <figure><img src="assets/culture-v3.jpg" /><figcaption>Kultur &amp; Ort</figcaption></figure>
+    <figure><img src="assets/restaurants-v3.jpg" /><figcaption>Kulinarik</figcaption></figure>
+  </div>
+  <div class="pg-foot"><span>Black Forest Retreats · Markenhandbuch</span><span>05</span></div>
+</section>
+
+<!-- ============ 7 · RÜCKSEITE ============ -->
+<section class="page dark">
+  <img class="wmark" src="assets/schinken.png" style="width:110mm; left:-26mm; top:-18mm; opacity:.05; mix-blend-mode:screen;" />
+  <div class="eyebrow">Markenhandbuch</div>
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+    <div class="wm" style="color:var(--cream-50); text-align:left;">
+      <div class="name" style="font-size:22pt;">Black Forest Retreats</div>
+      <div class="bar" style="width:46mm; margin:3.5mm 0; background:var(--brass-400); opacity:.9;"></div>
+      <div class="loc" style="font-size:8pt; color:var(--brass-300);">Neuenbürg · Schwarzwald</div>
+    </div>
+    <p class="ff-d" style="font-style:italic; font-weight:300; font-size:15pt; color:var(--forest-300); margin-top:12mm; max-width:130mm; line-height:1.5;">Eine Marke ist ein Versprechen. Dieses Dokument hält es konsistent.</p>
+  </div>
+
+  <div style="border-top:1px solid var(--forest-700); padding-top:6mm; display:flex; justify-content:space-between; align-items:flex-end;">
+    <div>
+      <div class="eyebrow" style="margin-bottom:2mm;">Konzept &amp; Gestaltung</div>
+      <div class="ff-d" style="font-size:13pt; color:var(--cream-50);">Huber &amp; Zipse GmbH</div>
+      <div class="ff-b" style="font-size:8.5pt; color:var(--forest-300); margin-top:1.5mm; line-height:1.5;">Eichenweg 6 · 75239 Eisingen<br/>www.huber-zipse.de</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="ff-b" style="font-size:8pt; text-transform:uppercase; letter-spacing:0.2em; color:var(--forest-300);">Version 1.0</div>
+      <div class="ff-d" style="font-size:13pt; color:var(--cream-50); margin-top:1.5mm;">09.06.2026</div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,488 @@
+/* H&Z Angebots-Stil — TEST GmbH AN-2026-5021 */
+
+@page {
+  size: A4;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 6mm;
+  font-family: -apple-system, "Helvetica Neue", Helvetica, "Segoe UI", Arial, sans-serif;
+  font-size: 10pt;
+  line-height: 1.5;
+  color: #222;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============ HEADER PRO SEITE ============ */
+.page-header {
+  position: running(pageheader);
+}
+
+/* Erste Seite Sender-Zeile */
+.sender-line {
+  font-size: 8.5pt;
+  color: #777;
+  margin-bottom: 28mm; /* Platz für Empfängerblock */
+  margin-top: 0;
+}
+
+/* ============ EMPFÄNGER + META ============ */
+.recipient-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18mm;
+  gap: 20mm;
+}
+
+.recipient {
+  font-size: 10pt;
+  line-height: 1.6;
+}
+
+.recipient .firma {
+  font-weight: 700;
+  margin-bottom: 2pt;
+}
+
+.meta {
+  font-size: 9.5pt;
+  text-align: right;
+  line-height: 1.7;
+}
+
+.meta-row {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 4pt 12pt;
+  justify-content: end;
+}
+
+.meta-row .label { color: #555; }
+.meta-row .value { font-weight: 700; }
+
+/* ============ HAUPTÜBERSCHRIFT ============ */
+h1.angebot-title {
+  font-size: 22pt;
+  font-style: italic;
+  font-weight: 700;
+  margin: 8mm 0 6mm 0;
+  line-height: 1.25;
+  padding: 0 0.05em;
+}
+
+/* ============ ANREDE & EINLEITUNG ============ */
+.intro {
+  font-size: 10.5pt;
+  line-height: 1.6;
+  margin-bottom: 8mm;
+}
+
+.intro p { margin: 0 0 6pt 0; }
+
+/* ============ SEKTIONS-HEADLINES ============ */
+h2 {
+  font-size: 16pt;
+  font-style: italic;
+  font-weight: 700;
+  margin: 10mm 0 4mm 0;
+  line-height: 1.3;
+  padding: 0 0.05em;
+  page-break-after: avoid;
+}
+
+h3 {
+  font-size: 11.5pt;
+  font-weight: 700;
+  margin: 5mm 0 2mm 0;
+  line-height: 1.35;
+  page-break-after: avoid;
+}
+
+h4 {
+  font-size: 10.5pt;
+  font-weight: 700;
+  margin: 3mm 0 1.5mm 0;
+  line-height: 1.35;
+  page-break-after: avoid;
+}
+
+/* ============ POSITIONS-TABELLEN ============ */
+table.pos-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 3mm 0 6mm 0;
+}
+
+/* Tabellen-Header wiederholt sich auf jeder Seite (Standard).
+   Klare einheitliche Abstandsregeln:
+   - 8 mm Padding-Top in jeder Body-Zelle
+   - 5 mm Padding-Bottom im Header (zwischen Header-Text und Strich)
+   - 8 mm Padding-Bottom in jeder Body-Zelle (zum nächsten Strich / Footer)
+   - Sub-Section-Title hat zusätzlich 8 mm Padding-Top (wirkt auch auf Continuation-Seiten) */
+table.pos-table thead th {
+  font-size: 8.5pt;
+  font-weight: 400;
+  color: #777;
+  text-align: left;
+  padding: 0 4pt 5mm 4pt;
+  border-bottom: 0.5pt solid #d8d8d8;
+}
+
+table.pos-table thead th.num,
+table.pos-table thead th.price {
+  text-align: right;
+}
+
+table.pos-table tbody td {
+  padding: 8mm 4pt 8mm 4pt;
+  vertical-align: top;
+  font-size: 10pt;
+  border-bottom: 0.5pt solid #ececec;
+}
+
+/* Letzte Tabellenzeile ohne unteren Strich */
+table.pos-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Preis-Zeile der Pos. 1 — kompakt, eng unter der Beschreibung,
+   damit der Preis am Ende der Leistung steht (nicht oben) */
+table.pos-table tbody tr.pos-price-row td {
+  padding: 5mm 4pt 5mm 4pt;
+}
+
+/* ============ OPTIONALE LEISTUNGEN: 2-Zeilen-Pattern ============
+   Beschreibungs-Zeile (opt-desc-row) und Preis-Zeile (opt-price-row)
+   bilden eine Einheit. Kein Trenn-Strich zwischen ihnen.
+   Trenn-Strich zwischen Optionalen sitzt nach opt-price-row. */
+
+/* Beschreibungs-Zeile: oben Atemraum vom vorherigen Strich, unten kompakt zur Preis-Zeile */
+table.pos-table tbody tr.opt-desc-row td {
+  padding: 8mm 4pt 3mm 4pt;
+  border-bottom: none;
+}
+
+/* Preis-Zeile: oben eng am Beschreibungsende, unten Atemraum vor Trenn-Strich */
+table.pos-table tbody tr.opt-price-row td {
+  padding: 0 4pt 8mm 4pt;
+  border-bottom: 0.5pt solid #ececec;
+}
+
+/* Letzte Preis-Zeile (Opt. 9): kein Trenn-Strich darunter */
+table.pos-table tbody tr.opt-price-row:last-child td {
+  border-bottom: none;
+}
+
+table.pos-table td.pos-num {
+  width: 12mm;
+  font-weight: 700;
+  font-size: 10pt;
+}
+
+table.pos-table td.pos-desc {
+  width: auto;
+}
+
+/* Preis-Spalten unten ausrichten — der Preis steht am Ende der Zeile */
+table.pos-table td.pos-menge,
+table.pos-table td.pos-einzel,
+table.pos-table td.pos-gesamt {
+  vertical-align: bottom;
+}
+
+table.pos-table td.pos-menge {
+  width: 20mm;
+  text-align: right;
+  font-size: 9.5pt;
+}
+
+table.pos-table td.pos-einzel,
+table.pos-table td.pos-gesamt {
+  width: 24mm;
+  text-align: right;
+  font-size: 10pt;
+}
+
+table.pos-table td.pos-gesamt {
+  font-weight: 700;
+}
+
+.pos-title {
+  font-weight: 700;
+  font-size: 10.5pt;
+  margin-bottom: 1mm;
+  line-height: 1.3;
+}
+
+.pos-summary {
+  font-size: 10pt;
+  margin: 0 0 3mm 0;
+  line-height: 1.5;
+}
+
+.pos-block-title {
+  font-weight: 700;
+  font-size: 10pt;
+  margin: 3mm 0 1mm 0;
+}
+
+/* Untertitel innerhalb Pos-Desc (A) Hotelverwaltung etc.
+   Sub-Section bleibt als Ganzes auf einer Seite. */
+.sub-section {
+  margin: 0;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Sub-Section-Title hat eigenen Padding-Top.
+   Wirkt zwischen Sub-Sections UND nach Tabellen-Header-Strich auf
+   Continuation-Seiten — daher KEIN Verlass auf padding der td-Zelle. */
+.sub-section-title {
+  font-weight: 700;
+  font-size: 10pt;
+  padding-top: 8mm;
+  margin: 0 0 1.5mm 0;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+/* Erste Sub-Section in der Pos-Desc: kein doppelter Top-Abstand
+   (die td hat schon 8 mm Padding-Top plus pos-summary mit margin-bottom). */
+.pos-desc > .sub-section:first-of-type > .sub-section-title {
+  padding-top: 4mm;
+}
+
+/* Sub-section-Title soll mit dem ersten Bullet zusammen bleiben */
+.sub-section-title + ul { break-before: avoid; }
+
+/* Bullets in Positionsbeschreibung */
+.pos-desc ul {
+  margin: 1mm 0 2mm 0;
+  padding-left: 5mm;
+}
+
+.pos-desc ul li {
+  margin: 0.8mm 0;
+  font-size: 9.5pt;
+  line-height: 1.5;
+}
+
+.pos-desc strong { font-weight: 700; }
+
+.badge-new {
+  display: inline-block;
+  font-size: 8pt;
+  font-weight: 700;
+  color: #4a6b3a;
+  background: #eaf2e3;
+  padding: 0.5pt 4pt;
+  border-radius: 2pt;
+  margin-left: 4pt;
+  vertical-align: middle;
+}
+
+/* ============ OPTIONALE LEISTUNGEN ============ */
+.opt-section-header {
+  page-break-before: always;
+  margin-top: 0;
+}
+
+table.pos-table td.opt-num {
+  width: 14mm;
+  font-weight: 700;
+  font-size: 10pt;
+  line-height: 1.3;
+}
+
+/* ============ SUMMEN-BOX ============ */
+.summary-block {
+  margin-top: 6mm;
+  page-break-inside: avoid;
+}
+
+.summary-block h3 {
+  margin-bottom: 2mm;
+}
+
+table.sum-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 4mm;
+}
+
+table.sum-table td {
+  padding: 2mm 4pt;
+  font-size: 10pt;
+  border-bottom: 0.5pt solid #ececec;
+}
+
+table.sum-table td.label { text-align: left; }
+table.sum-table td.value { text-align: right; }
+table.sum-table tr.total td {
+  font-weight: 700;
+  border-top: 0.5pt solid #999;
+  border-bottom: 0.5pt solid #999;
+}
+
+/* Highlight für Mengenrabatt */
+.mengenrabatt {
+  color: #4a6b3a;
+  font-weight: 700;
+  margin: 3mm 0 5mm 0;
+  font-size: 10pt;
+}
+
+/* ============ FLIESSTEXT-SEKTIONEN ============ */
+.section {
+  margin-top: 8mm;
+}
+
+.section-body p {
+  margin: 0 0 3mm 0;
+  font-size: 10pt;
+  line-height: 1.55;
+}
+
+.section-body ul {
+  margin: 1mm 0 4mm 0;
+  padding-left: 5mm;
+}
+
+.section-body ul li {
+  margin: 1mm 0;
+  font-size: 10pt;
+  line-height: 1.5;
+}
+
+.scenario-box {
+  margin: 4mm 0;
+  padding: 4mm 5mm;
+  border-left: 2pt solid #4a6b3a;
+  background: #f7f9f5;
+  page-break-inside: avoid;
+}
+
+.scenario-box .scenario-title {
+  font-weight: 700;
+  font-size: 10.5pt;
+  margin-bottom: 2mm;
+}
+
+.note {
+  font-size: 9.5pt;
+  color: #555;
+  font-style: italic;
+  margin: 3mm 0;
+}
+
+/* ============ ZEITPLAN-TABELLE ============ */
+table.timeline {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 3mm 0 5mm 0;
+  font-size: 9.5pt;
+}
+
+table.timeline thead th {
+  text-align: left;
+  font-weight: 700;
+  font-size: 9pt;
+  padding: 2mm 3pt;
+  border-bottom: 0.5pt solid #999;
+  background: #f4f4f0;
+}
+
+table.timeline tbody td {
+  padding: 2.5mm 3pt;
+  vertical-align: top;
+  border-bottom: 0.5pt solid #ececec;
+  line-height: 1.45;
+}
+
+table.timeline tbody td:nth-child(1) { width: 38mm; font-weight: 700; }
+table.timeline tbody td:nth-child(2) { width: 22mm; }
+
+/* ============ ZAHLUNGSPLAN-TABELLE ============ */
+table.payment {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 3mm 0 4mm 0;
+  font-size: 10pt;
+}
+
+table.payment thead th {
+  text-align: left;
+  font-weight: 700;
+  font-size: 9pt;
+  padding: 2mm 4pt;
+  border-bottom: 0.5pt solid #999;
+  background: #f4f4f0;
+}
+
+table.payment tbody td {
+  padding: 2.5mm 4pt;
+  border-bottom: 0.5pt solid #ececec;
+}
+
+table.payment tbody td:nth-child(1) { width: 20mm; }
+table.payment tbody td:nth-child(2) { width: 18mm; }
+table.payment tbody td:nth-child(3) { width: 28mm; font-weight: 700; }
+
+/* ============ PAGE-BREAK STEUERUNG ============ */
+.page-break { page-break-before: always; }
+.no-break { page-break-inside: avoid; }
+
+/* Verhindern, dass Tabellen mittendrin umbrechen */
+table.sum-table tr,
+table.payment tbody tr,
+table.timeline tbody tr {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+table.timeline tbody td {
+  break-inside: avoid;
+}
+
+/* Pos-Table darf umbrechen (lange Position 1) */
+table.pos-table tbody tr {
+  page-break-inside: auto;
+  break-inside: auto;
+}
+
+/* Aber Opt-Positionen sollen nicht mittendrin brechen */
+table.pos-table tbody tr.opt-row {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Sektion-Header soll nicht alleine am Seitenende stehen */
+h2, h3, h4 {
+  page-break-after: avoid;
+}
+
+/* Symmetrie und Lesbarkeit */
+p, li {
+  orphans: 2;
+  widows: 2;
+}
+
+/* Akzent-Farbe */
+.accent { color: #4a6b3a; font-weight: 700; }
+
+/* Schluss-Block */
+.closing {
+  margin-top: 8mm;
+}
+
+.closing p { margin: 0 0 3mm 0; }
+
+.signature {
+  margin-top: 5mm;
+  font-weight: 700;
+}
