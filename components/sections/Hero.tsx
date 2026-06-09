@@ -4,7 +4,7 @@ export function Hero() {
       id="top"
       className="relative min-h-[88svh] overflow-hidden bg-night md:min-h-[100svh]"
     >
-      {/* Hero-Video — Ping-Pong-Loop (vorwärts ↔ rückwärts), scharf, stumm */}
+      {/* Hero-Video — Ping-Pong-Loop (vorwärts ↔ rückwärts), leicht verschwommen, stumm */}
       <video
         autoPlay
         loop
@@ -12,7 +12,7 @@ export function Hero() {
         playsInline
         aria-hidden
         poster="/hero/hero-desktop-v4.png"
-        className="absolute inset-0 h-full w-full scale-105 object-cover object-center"
+        className="absolute inset-0 h-full w-full scale-105 object-cover object-center blur-[2px]"
       >
         <source src="/hero/hero-loop.mp4" type="video/mp4" />
       </video>
