@@ -6,54 +6,83 @@ import { useStrings } from "@/lib/i18n/useStrings";
 const VIEW_W = 1440;
 const GROUND = 420;
 
+// Auf 2 Nachkommastellen runden → identischer String auf Server & Client (kein Hydration-Mismatch).
+const r = (n: number) => Number(n.toFixed(2));
+
 /**
- * Tannen-/Fichten-Silhouette mit gestapelten, leicht hängenden Astetagen.
- * Zeichnerischer Look: weiche Bézier-Kurven an den Astkanten + dezente
- * deterministische Asymmetrie (kein Math.random → SSR-stabil).
- * Prinzipien: viele Etagen, unten breiter/länger, Astspitzen drooping.
+ * Tanne/Fichte als Silhouette: schlanke konische Form, klare Mittelachse,
+ * etagenweise gestapelte Astreihen mit leicht hängenden Spitzen, oben spitz,
+ * schmaler Stamm unten.
+ *
+ * Aufbau (immer geschlossener, NIE selbstüberschneidender Pfad):
+ *   Wipfel → rechte Seite Etage für Etage nach unten → Stammbasis →
+ *   linke Seite gespiegelt nach oben → Z.
+ * Jede Etage ist ein nach außen-unten gezogener Ast (quadratische Bézier),
+ * danach eine Einkerbung zum Stamm hin, leicht TIEFER als die vorige
+ * Astspitze — so überlappen sich die Etagen sauber wie bei einer echten Tanne.
+ *
+ * Dezente, deterministische Asymmetrie über `seed` (kein Math.random → SSR-stabil).
  */
 function fir(cx: number, h: number, hwBase: number, by = GROUND, seed = 0): string {
   const tip = by - h;
-  const tiers = h > 360 ? 6 : h > 270 ? 5 : 4;
-  const droop = h * 0.05; // wie stark die Astspitzen nach unten hängen
-  // leichte Links/Rechts-Asymmetrie für den handgezeichneten Eindruck
-  const jR = 1 + 0.06 * Math.sin(seed * 0.7 + 1.3);
-  const jL = 1 + 0.06 * Math.cos(seed * 0.9 + 0.4);
+  const tiers = h > 360 ? 7 : h > 270 ? 6 : 5;
 
-  // Geometrie je Etage (von oben nach unten)
-  const T = Array.from({ length: tiers }, (_, i) => {
-    const f = (i + 1) / tiers; // 0..1 von Spitze zur Basis
-    const w = hwBase * Math.pow(f, 0.72); // unten deutlich breiter
+  // Sehr dezente Seiten-Asymmetrie (max ~4 %), sanft begrenzt → keine kaputten Formen.
+  const jR = 1 + 0.04 * Math.sin(seed * 0.7 + 1.3);
+  const jL = 1 + 0.04 * Math.cos(seed * 0.9 + 0.4);
+
+  // Crownhöhe (belaubter Teil) lässt unten Platz für den Stamm.
+  const trunkH = h * 0.08;
+  const crownH = h - trunkH;
+  const trunkTop = tip + crownH;
+  const trunkHalf = hwBase * 0.06 + 2;
+
+  // Etagen-Geometrie von der Spitze (f=0) zur Basis (f=1).
+  type Tier = { yArm: number; yNotch: number; w: number; inner: number };
+  const T: Tier[] = Array.from({ length: tiers }, (_, i) => {
+    const f0 = i / tiers; // Oberkante dieser Etage
+    const f1 = (i + 1) / tiers; // Unterkante (Astspitze) dieser Etage
+    // Breite wächst progressiv nach unten (Potenz < 1 → schlanke, spitze Krone).
+    const w = hwBase * Math.pow(f1, 0.85);
     return {
+      yArm: r(tip + crownH * f1), // Höhe der Astspitze (Außenkante)
+      yNotch: r(tip + crownH * f0 + crownH * 0.04), // Einkerbung sitzt höher (am Etagenanfang)
       w,
-      inner: w * 0.34, // wie weit der Ast zum Stamm zurückspringt (Kerbe)
-      yTip: tip + h * f + droop, // Astspitze hängt unter die Kerbe
-      yNotch: tip + h * f - h * 0.02, // Kerbe sitzt etwas höher
+      inner: hwBase * 0.16 * (0.4 + 0.6 * f1), // Rücksprung zur Stammachse (wächst leicht)
     };
   });
 
-  const d: string[] = [`M ${cx} ${tip}`]; // Wipfel
+  const d: string[] = [`M ${r(cx)} ${r(tip)}`]; // Wipfel
 
-  // Rechte Seite: oben → unten
-  for (const { w, inner, yTip, yNotch } of T) {
-    const wR = w * jR;
-    const innerR = inner * jR;
-    d.push(`Q ${cx + wR * 0.6} ${yTip} ${cx + wR} ${yTip}`); // weicher Ast nach außen-unten
-    d.push(`L ${cx + innerR} ${yNotch}`); // zurück zur Stamm-Kerbe
+  // Rechte Seite, oben → unten.
+  for (let i = 0; i < tiers; i++) {
+    const { yArm, yNotch, w, inner } = T[i];
+    const armX = r(cx + w * jR);
+    const innerX = r(cx + inner * jR);
+    // Wölbung: Kontrollpunkt etwas über der Astspitze für eine weiche, leicht
+    // hängende Astkante. Erste Etage startet direkt am Wipfel (keine Kerbe davor).
+    if (i > 0) d.push(`L ${innerX} ${yNotch}`);
+    const ctrlX = r(cx + w * jR * 0.55);
+    const ctrlY = r(yArm - (yArm - yNotch) * 0.55);
+    d.push(`Q ${ctrlX} ${ctrlY} ${armX} ${yArm}`);
   }
 
-  // Stammbasis
-  const trunkHalf = hwBase * 0.07 + 2.5;
-  d.push(`L ${cx + trunkHalf} ${by}`);
-  d.push(`L ${cx - trunkHalf} ${by}`);
+  // Stammbasis rechts → unten → links.
+  d.push(`L ${r(cx + trunkHalf)} ${r(trunkTop)}`);
+  d.push(`L ${r(cx + trunkHalf)} ${r(by)}`);
+  d.push(`L ${r(cx - trunkHalf)} ${r(by)}`);
+  d.push(`L ${r(cx - trunkHalf)} ${r(trunkTop)}`);
 
-  // Linke Seite: unten → oben (gespiegelt)
+  // Linke Seite gespiegelt, unten → oben.
   for (let i = tiers - 1; i >= 0; i--) {
-    const { w, inner, yTip, yNotch } = T[i];
-    const wL = w * jL;
-    const innerL = inner * jL;
-    d.push(`L ${cx - innerL} ${yNotch}`);
-    d.push(`Q ${cx - wL * 0.6} ${yTip} ${cx - wL} ${yTip}`);
+    const { yArm, yNotch, w, inner } = T[i];
+    const armX = r(cx - w * jL);
+    const innerX = r(cx - inner * jL);
+    const ctrlX = r(cx - w * jL * 0.55);
+    const ctrlY = r(yArm - (yArm - yNotch) * 0.55);
+    d.push(`L ${armX} ${yArm}`);
+    if (i > 0) d.push(`Q ${ctrlX} ${ctrlY} ${innerX} ${yNotch}`);
+    else d.push(`Q ${ctrlX} ${ctrlY} ${r(cx)} ${r(tip)}`);
   }
 
   d.push("Z");
