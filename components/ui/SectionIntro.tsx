@@ -27,7 +27,7 @@ export function SectionIntro({
 
   return (
     <Reveal
-      className={`${isCenter ? "mx-auto text-center" : "text-left"} max-w-2xl ${className}`}
+      className={`${isCenter ? "mx-auto text-center" : "text-start"} max-w-2xl ${className}`}
     >
       {eyebrow && (
         <Type role="eyebrow" className={`${eyebrowColor} mb-5`}>

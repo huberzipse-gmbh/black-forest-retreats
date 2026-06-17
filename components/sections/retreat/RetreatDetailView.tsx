@@ -66,7 +66,10 @@ export function RetreatDetailView({ slug }: { slug: string }) {
             href="/#apartments"
             className="inline-flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-[0.18em] text-cream-100/80 transition-colors hover:text-cream-50"
           >
-            &larr; {t.detail.back}
+            <span aria-hidden className="inline-block rtl:rotate-180">
+              &larr;
+            </span>{" "}
+            {t.detail.back}
           </Link>
 
           <Type role="eyebrow" className="mt-8 text-brass-300">

@@ -36,7 +36,7 @@ export function MobileBookBar() {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="h-4 w-4"
+        className="h-4 w-4 rtl:rotate-180"
         aria-hidden
       >
         <path d="M5 12h14M13 6l6 6-6 6" />

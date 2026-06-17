@@ -64,7 +64,7 @@ export function PlaceCard({ place }: { place: Place }) {
 
         {/* Empfehlungs-Plakette: unsere klare Empfehlung der Kategorie */}
         {isRecommended && (
-          <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-brass-400 px-3 py-1 font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-night shadow-[0_4px_14px_-4px_rgba(0,0,0,0.5)]">
+          <span className="absolute start-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-brass-400 px-3 py-1 font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-night shadow-[0_4px_14px_-4px_rgba(0,0,0,0.5)]">
             <StarIcon className="h-3 w-3 text-night" />
             {s.recommended}
           </span>
@@ -72,14 +72,14 @@ export function PlaceCard({ place }: { place: Place }) {
 
         {/* Aktivitäts-Icon als kleine Plakette auf dem Foto (Erlebnisse) */}
         {hasImage && place.icon && !isRecommended && (
-          <span className="absolute left-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-brass-300/50 bg-night/45 text-brass-300 backdrop-blur-sm transition-transform duration-500 ease-out group-hover:scale-110">
+          <span className="absolute start-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-brass-300/50 bg-night/45 text-brass-300 backdrop-blur-sm transition-transform duration-500 ease-out group-hover:scale-110">
             <PlaceIcon name={place.icon} className="h-[18px] w-[18px]" />
           </span>
         )}
 
         {/* Michelin-Badge */}
         {place.michelin && (
-          <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-brass-300/60 bg-night/45 px-3 py-1 font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-brass-300 backdrop-blur-sm">
+          <span className="absolute end-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-brass-300/60 bg-night/45 px-3 py-1 font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-brass-300 backdrop-blur-sm">
             <StarIcon />
             {s.michelin}
           </span>
@@ -87,14 +87,14 @@ export function PlaceCard({ place }: { place: Place }) {
 
         {/* Tagesausflug-Badge */}
         {isDay && (
-          <span className="absolute left-3 top-3 rounded-full bg-night/55 px-3 py-1 font-body text-[11px] font-medium uppercase tracking-[0.14em] text-cream-100/90 backdrop-blur-sm">
+          <span className="absolute start-3 top-3 rounded-full bg-night/55 px-3 py-1 font-body text-[11px] font-medium uppercase tracking-[0.14em] text-cream-100/90 backdrop-blur-sm">
             {s.dayTrip}
           </span>
         )}
 
         {/* Dezente Foto-Quellenangabe (urheberrechtskonform) */}
         {hasImage && place.imageCredit && (
-          <span className="pointer-events-none absolute bottom-1.5 right-2 font-body text-[9px] tracking-wide text-cream-50/45 [text-shadow:_0_1px_2px_rgba(0,0,0,0.55)]">
+          <span className="pointer-events-none absolute bottom-1.5 end-2 font-body text-[9px] tracking-wide text-cream-50/45 [text-shadow:_0_1px_2px_rgba(0,0,0,0.55)]">
             {s.photo} {place.imageCredit}
           </span>
         )}

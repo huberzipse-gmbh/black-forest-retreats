@@ -50,7 +50,7 @@ export function CategoryAccordion({ categories }: { categories: AccordionCategor
               type="button"
               aria-expanded={isOpen}
               onClick={() => setOpen((cur) => (cur === cat.key ? null : cat.key))}
-              className="group flex w-full items-center gap-5 py-6 text-left transition-colors"
+              className="group flex w-full items-center gap-5 py-6 text-start transition-colors"
             >
               <span className="relative h-16 w-24 shrink-0 overflow-hidden rounded-[5px] sm:h-20 sm:w-32">
                 <Image
@@ -102,7 +102,10 @@ export function CategoryAccordion({ categories }: { categories: AccordionCategor
                       className="inline-flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-[0.18em] text-brass-300 transition-colors hover:text-brass-400"
                     >
                       {a.viewAll(cat.title)}
-                      <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
+                      <span
+                        aria-hidden
+                        className="transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+                      >
                         &rarr;
                       </span>
                     </Link>

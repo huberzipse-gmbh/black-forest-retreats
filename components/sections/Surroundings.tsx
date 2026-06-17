@@ -138,7 +138,7 @@ export function Surroundings() {
                   href={source.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="pointer-events-auto absolute bottom-1.5 right-2.5 z-20 font-body text-[9px] tracking-wide text-cream-50/45 transition-colors [text-shadow:_0_1px_2px_rgba(0,0,0,0.55)] hover:text-cream-50/80"
+                  className="pointer-events-auto absolute bottom-1.5 end-2.5 z-20 font-body text-[9px] tracking-wide text-cream-50/45 transition-colors [text-shadow:_0_1px_2px_rgba(0,0,0,0.55)] hover:text-cream-50/80"
                 >
                   {t.surroundings.card.photo} {source.label}
                 </a>

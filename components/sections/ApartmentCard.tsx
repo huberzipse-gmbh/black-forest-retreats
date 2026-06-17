@@ -132,7 +132,10 @@ export function ApartmentCard({
 
         <span className="mt-6 inline-flex flex-col gap-2">
           <span className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-cream-50">
-            {ctaLabel} &rarr;
+            {ctaLabel}{" "}
+            <span aria-hidden className="inline-block rtl:rotate-180">
+              &rarr;
+            </span>
           </span>
           <span className="h-px w-7 bg-brass-400 transition-all duration-500 group-hover:w-16" />
         </span>

@@ -21,7 +21,10 @@ export function CategoryDetailView({ slug }: { slug: SurroundingCategoryKey }) {
             href="/umgebung"
             className="inline-flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-[0.18em] text-cream-100/70 transition-colors hover:text-cream-50"
           >
-            &larr; {detail.back}
+            <span aria-hidden className="inline-block rtl:rotate-180">
+              &larr;
+            </span>{" "}
+            {detail.back}
           </Link>
 
           <div className="mt-10 max-w-2xl">
