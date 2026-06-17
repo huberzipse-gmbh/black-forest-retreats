@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useStrings } from "@/lib/i18n/useStrings";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { Type } from "@/components/ui/Type";
@@ -78,7 +79,11 @@ export function Surroundings() {
                 delay={(i % 3) * 90}
                 className="w-[78vw] shrink-0 snap-start sm:w-auto"
               >
-                <article className="group relative h-[420px] overflow-hidden rounded-[5px]">
+                <Link
+                  href={`/umgebung/${key}`}
+                  aria-label={cat.title}
+                  className="group relative block h-[420px] overflow-hidden rounded-[5px]"
+                >
                   <Image
                     src={`/images/umgebung/${IMAGE[key]}`}
                     alt=""
@@ -110,12 +115,22 @@ export function Surroundings() {
                     </p>
                     <span className="mt-5 h-px w-8 bg-brass-400 transition-all duration-500 group-hover:w-16" />
                   </div>
-                </article>
+                </Link>
               </Reveal>
             );
           })}
           {/* Innenabstand am Ende des mobilen Scrollers */}
           <div aria-hidden className="w-1 shrink-0 sm:hidden" />
+        </div>
+
+        <div className="mt-12 text-center">
+          <Link
+            href="/umgebung"
+            className="inline-flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-[0.18em] text-brass-300 transition-colors hover:text-brass-400"
+          >
+            {t.surroundings.all}
+            <span aria-hidden>&rarr;</span>
+          </Link>
         </div>
       </div>
     </section>

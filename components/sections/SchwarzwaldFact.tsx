@@ -42,13 +42,22 @@ export function SchwarzwaldFact({
             {eyebrow}
           </Type>
         )}
-        <Type
-          role="h1"
-          as="p"
-          className={dark ? "text-cream-50" : "text-forest-900"}
-        >
-          {quote}
-        </Type>
+        {quote
+          .split(/\n\n+/)
+          .map((para) => para.trim())
+          .filter(Boolean)
+          .map((para, i) => (
+            <Type
+              key={i}
+              role="h1"
+              as="p"
+              className={`${dark ? "text-cream-50" : "text-forest-900"} ${
+                i > 0 ? "mt-5 md:mt-6" : ""
+              }`}
+            >
+              {para}
+            </Type>
+          ))}
         <div className="mx-auto mt-8 h-px w-12 bg-brass-400" />
         <Type
           role="caption"

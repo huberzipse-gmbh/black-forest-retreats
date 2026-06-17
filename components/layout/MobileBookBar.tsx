@@ -22,7 +22,7 @@ export function MobileBookBar() {
 
   return (
     <a
-      href="#apartments"
+      href="/#apartments"
       aria-label={t.booking.bookStay}
       className={`fixed left-1/2 z-40 flex -translate-x-1/2 items-center gap-2.5 rounded-[4px] bg-forest-900 px-9 py-4 font-body text-base font-semibold text-white shadow-[0_16px_36px_-12px_rgba(15,24,19,0.75)] ring-1 ring-white/10 transition-all duration-300 ease-out md:hidden ${
         scrolled ? "bottom-6 scale-[0.75]" : "bottom-[9svh] scale-100"
