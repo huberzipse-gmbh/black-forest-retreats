@@ -3,9 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Type } from "@/components/ui/Type";
-import { de } from "@/lib/strings/de";
-
-const t = de.apartments.detail;
+import { useStrings } from "@/lib/i18n/useStrings";
 
 /** Foto-Galerie als Mosaik (5 Bilder) + aufklappbarer Rest, hält die Seite kurz. */
 export function RetreatGallery({
@@ -15,6 +13,7 @@ export function RetreatGallery({
   images: string[];
   name: string;
 }) {
+  const t = useStrings().apartments.detail;
   const [open, setOpen] = useState(false);
   if (!images.length) return null;
 

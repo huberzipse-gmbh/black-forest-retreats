@@ -1,11 +1,15 @@
+"use client";
+
 import type { ReactNode } from "react";
 import { Type } from "@/components/ui/Type";
 import { Reveal } from "@/components/ui/Reveal";
+import { useStrings } from "@/lib/i18n/useStrings";
 
 interface SchwarzwaldFactProps {
-  quote: string;
-  source: string;
-  eyebrow?: string;
+  /** Welcher Fakt aus den Strings (t.facts.<factKey>). */
+  factKey: "fact1" | "fact2";
+  /** Eyebrow (t.facts.eyebrow) zeigen. */
+  showEyebrow?: boolean;
   tone?: "dark" | "light";
   /** Reduziert den Abstand nach unten — z. B. damit die Wald-Silhouette direkt anschließt. */
   tightBottom?: boolean;
@@ -14,13 +18,16 @@ interface SchwarzwaldFactProps {
 }
 
 export function SchwarzwaldFact({
-  quote,
-  source,
-  eyebrow,
+  factKey,
+  showEyebrow = false,
   tone = "light",
   tightBottom = false,
   decor,
 }: SchwarzwaldFactProps) {
+  const facts = useStrings().facts;
+  const quote = facts[factKey].quote;
+  const source = facts[factKey].source;
+  const eyebrow = showEyebrow ? facts.eyebrow : undefined;
   const dark = tone === "dark";
   const padding = tightBottom
     ? "px-6 pt-24 pb-10 md:pt-32 md:pb-12"

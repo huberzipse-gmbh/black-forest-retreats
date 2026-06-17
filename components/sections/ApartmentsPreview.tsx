@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { retreats } from "@/data/retreats";
 import { useStrings } from "@/lib/i18n/useStrings";

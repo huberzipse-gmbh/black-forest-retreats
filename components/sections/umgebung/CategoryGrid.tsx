@@ -5,10 +5,11 @@ import { Reveal } from "@/components/ui/Reveal";
 import { PlaceCard } from "@/components/sections/umgebung/PlaceCard";
 import { DistanceFilter } from "@/components/sections/umgebung/DistanceFilter";
 import { bandOf, type DistanceBand, type Place } from "@/data/surroundings";
-import { de } from "@/lib/strings/de";
+import { useStrings } from "@/lib/i18n/useStrings";
 
 /** Distanz-Filter + reaktives Karten-Grid für eine Kategorie. */
 export function CategoryGrid({ places }: { places: Place[] }) {
+  const t = useStrings();
   // Welche Bänder kommen in dieser Kategorie vor?
   const available = useMemo(() => {
     const set = new Set<DistanceBand>();
@@ -52,7 +53,7 @@ export function CategoryGrid({ places }: { places: Place[] }) {
         </div>
       ) : (
         <p className="py-16 text-center font-body text-sm text-cream-100/55">
-          {de.surroundings.filter.empty}
+          {t.surroundings.filter.empty}
         </p>
       )}
     </div>

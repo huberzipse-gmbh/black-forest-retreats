@@ -1,3 +1,5 @@
+"use client";
+
 import { useStrings } from "@/lib/i18n/useStrings";
 
 export function SiteFooter() {

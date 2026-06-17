@@ -1,3 +1,5 @@
+"use client";
+
 import type { ReactNode } from "react";
 import { useStrings } from "@/lib/i18n/useStrings";
 

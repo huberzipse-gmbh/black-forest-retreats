@@ -1,3 +1,5 @@
+"use client";
+
 import { useStrings } from "@/lib/i18n/useStrings";
 import { Type } from "@/components/ui/Type";
 import { Reveal } from "@/components/ui/Reveal";

@@ -1,3 +1,5 @@
+"use client";
+
 import { Fragment, type ReactNode } from "react";
 import { useStrings } from "@/lib/i18n/useStrings";
 import { SectionIntro } from "@/components/ui/SectionIntro";
