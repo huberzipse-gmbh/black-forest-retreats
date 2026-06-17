@@ -7,7 +7,7 @@ import { Type } from "@/components/ui/Type";
 import { Reveal } from "@/components/ui/Reveal";
 import { PlaceCard } from "@/components/sections/umgebung/PlaceCard";
 import type { Place, SurroundingCategoryKey } from "@/data/surroundings";
-import { de } from "@/lib/strings/de";
+import { useStrings } from "@/lib/i18n/useStrings";
 
 export interface AccordionCategory {
   key: SurroundingCategoryKey;
@@ -36,7 +36,7 @@ const Chevron = ({ open }: { open: boolean }) => (
 
 /** Aufklappbare Kategorien: pro Welt eine Reihe, beim Öffnen die Orte + Link in die Kategorie. */
 export function CategoryAccordion({ categories }: { categories: AccordionCategory[] }) {
-  const a = de.surroundings.accordion;
+  const a = useStrings().surroundings.accordion;
   // Erste Kategorie standardmäßig offen, damit der Bereich nicht leer wirkt.
   const [open, setOpen] = useState<string | null>(categories[0]?.key ?? null);
 

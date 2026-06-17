@@ -1,10 +1,10 @@
+"use client";
+
 import type { RetreatCard } from "@/data/retreats";
-import { de } from "@/lib/strings/de";
+import { useStrings } from "@/lib/i18n/useStrings";
 import { Type } from "@/components/ui/Type";
 import { Reveal } from "@/components/ui/Reveal";
 import { UspIcon } from "./UspIcons";
-
-const t = de.apartments.detail;
 
 /** Fünf gefüllte Messing-Sterne. */
 export function Stars({ className = "h-3.5 w-3.5" }: { className?: string }) {
@@ -21,6 +21,7 @@ export function Stars({ className = "h-3.5 w-3.5" }: { className?: string }) {
 
 /** USP-Highlight-Leiste: was die Unterkunft besonders macht. */
 export function RetreatHighlights({ usps }: { usps: NonNullable<RetreatCard["usps"]> }) {
+  const t = useStrings().apartments.detail;
   if (!usps?.length) return null;
   return (
     <section className="bg-cream-50 px-6 pt-20 md:px-10 md:pt-28">
@@ -54,6 +55,7 @@ export function RetreatHighlights({ usps }: { usps: NonNullable<RetreatCard["usp
 
 /** Bewertungs-Bereich: Wertungs-Zusammenfassung + Gäste-Stimmen. */
 export function RetreatReviews({ retreat }: { retreat: RetreatCard }) {
+  const t = useStrings().apartments.detail;
   if (!retreat.rating || !retreat.reviews?.length) return null;
   const count = retreat.reviewCount ?? retreat.reviews.length;
 

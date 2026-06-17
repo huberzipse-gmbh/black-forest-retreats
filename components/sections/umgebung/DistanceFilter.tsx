@@ -1,7 +1,7 @@
 "use client";
 
 import type { DistanceBand } from "@/data/surroundings";
-import { de } from "@/lib/strings/de";
+import { useStrings } from "@/lib/i18n/useStrings";
 
 const BAND_ORDER: DistanceBand[] = ["near", "mid", "day"];
 
@@ -14,7 +14,7 @@ interface DistanceFilterProps {
 
 /** Segmentierte Distanz-Chips: „In der Nähe" · „Etwas weiter" · „Tagesausflug". */
 export function DistanceFilter({ available, active, onToggle }: DistanceFilterProps) {
-  const labels = de.surroundings.filter;
+  const labels = useStrings().surroundings.filter;
   const bands = BAND_ORDER.filter((b) => available.includes(b));
   if (bands.length < 2) return null; // Filter nur sinnvoll ab 2 Bändern
 

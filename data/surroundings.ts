@@ -8,6 +8,7 @@
  */
 import type { GradientVariant } from "@/components/ui/GradientPanel";
 import type { PlaceIconKey } from "@/components/sections/umgebung/PlaceIcons";
+import type { Strings } from "@/lib/strings/de";
 
 export type SurroundingCategoryKey =
   | "restaurants"
@@ -20,17 +21,12 @@ export type SurroundingCategoryKey =
 /** Entfernungs-Band ab Neuenbürg: near ≤15 km · mid 16–35 km · day >35 km. */
 export type DistanceBand = "near" | "mid" | "day";
 
-export interface Place {
+/** Strukturelle Felder eines Ortes (sprachunabhängig). */
+export interface PlaceStruct {
   id: string;
   category: SurroundingCategoryKey;
-  name: string;
-  town?: string;
   /** Entfernung ab Neuenbürg in km. Daraus wird das Band abgeleitet. */
   distanceKm: number;
-  /** 1–2 Sätze, kein „—"-Gedankenstrich. */
-  blurb: string;
-  /** Eigenschaften als Chips. */
-  features: string[];
   /** Mockup-Verlauf (bis echtes Foto da ist). */
   variant: GradientVariant;
   /** Monogramm fürs Mockup (Initialen). */
@@ -51,6 +47,14 @@ export interface Place {
   imageCredit?: string;
   /** Inhalt noch in Klärung (Name/Ort/Details), Karte zeigt dezenten Hinweis. */
   tbd?: boolean;
+}
+
+/** Vollständiger Ort (Struktur + lokalisierter Text) — die Form, die Komponenten konsumieren. */
+export interface Place extends PlaceStruct {
+  name: string;
+  town?: string;
+  blurb: string;
+  features: string[];
 }
 
 /** Reihenfolge der Kategorien (Hub + Navigation). */
@@ -76,17 +80,12 @@ export const CATEGORY_META: Record<
   regional: { variant: "bark", layout: "image", monogram: "G" },
 };
 
-export const surroundings: Place[] = [
+export const surroundings: PlaceStruct[] = [
   // ───────────────────────── Restaurants ─────────────────────────
   {
     id: "berlins-krone",
     category: "restaurants",
-    name: "Berlins Krone",
-    town: "Bad Teinach",
     distanceKm: 24,
-    blurb:
-      "Sternegekrönte Küche im Hotel Berlins KroneLamm. Der besondere Abend, wenn es etwas zu feiern gibt.",
-    features: ["Michelin", "Sterneküche", "Fine Dining"],
     variant: "night",
     monogram: "BK",
     michelin: true,
@@ -97,12 +96,7 @@ export const surroundings: Place[] = [
   {
     id: "benders-birkenfeld",
     category: "restaurants",
-    name: "Benders Birkenfeld",
-    town: "Birkenfeld",
     distanceKm: 6,
-    blurb:
-      "Bodenständiger Familienbetrieb mit regionaler Küche, gleich um die Ecke.",
-    features: ["Gutbürgerlich", "Regional", "Familienbetrieb"],
     variant: "night",
     monogram: "BB",
     recommended: true,
@@ -114,11 +108,7 @@ export const surroundings: Place[] = [
   {
     id: "arlinger-gaststaette",
     category: "restaurants",
-    name: "Arlinger Gaststätte",
-    town: "Pforzheim",
     distanceKm: 14,
-    blurb: "Bürgerliche Klassiker und eine schöne Terrasse für den Sommerabend.",
-    features: ["Bürgerlich", "Terrasse"],
     variant: "night",
     monogram: "AG",
     image: "/images/umgebung/restaurants/arlinger.webp",
@@ -127,11 +117,7 @@ export const surroundings: Place[] = [
   {
     id: "seehaus-pforzheim",
     category: "restaurants",
-    name: "Seehaus",
-    town: "Pforzheim",
     distanceKm: 14,
-    blurb: "Ausflugslokal am Wald, ideal nach einem Spaziergang.",
-    features: ["Ausflugslokal", "Am Wald"],
     variant: "night",
     monogram: "SH",
     image: "/images/umgebung/restaurants/seehaus.webp",
@@ -140,11 +126,7 @@ export const surroundings: Place[] = [
   {
     id: "foerstlich-weinbar",
     category: "restaurants",
-    name: "Förstlich Weinbar",
-    town: "Langensteinbach",
     distanceKm: 22,
-    blurb: "Weinbar mit Vesper und regionalen Tropfen für den entspannten Abend.",
-    features: ["Weinbar", "Vesper", "Regionale Weine"],
     variant: "night",
     monogram: "FW",
     image: "/images/umgebung/restaurants/foerstlich.webp",
@@ -153,10 +135,7 @@ export const surroundings: Place[] = [
   {
     id: "muellers-event-alm",
     category: "restaurants",
-    name: "Müllers Eventalm",
     distanceKm: 15,
-    blurb: "Deftige Alm-Stimmung mit großem Biergarten und Eventcharakter.",
-    features: ["Alm", "Biergarten", "Event"],
     variant: "night",
     monogram: "ME",
     image: "/images/umgebung/restaurants/muellers.webp",
@@ -165,12 +144,7 @@ export const surroundings: Place[] = [
   {
     id: "cafe-blaich",
     category: "restaurants",
-    name: "Café Blaich",
-    town: "Höfen a.d. Enz",
     distanceKm: 8,
-    blurb:
-      "Konditorei und Café seit 1954, hausgemachte Kuchen für den süßen Nachmittagsstopp.",
-    features: ["Café", "Konditorei", "Seit 1954"],
     variant: "night",
     monogram: "CB",
     image: "/images/umgebung/restaurants/cafe-blaich.webp",
@@ -181,11 +155,7 @@ export const surroundings: Place[] = [
   {
     id: "alpaka-wanderung",
     category: "experiences",
-    name: "Alpaka-Wanderung",
-    town: "Pforzheim",
     distanceKm: 15,
-    blurb: "Geführte Tour mit den ruhigen Tieren durch Wald und Wiesen.",
-    features: ["Geführt", "Familie", "≈ 2 Std"],
     variant: "moss",
     icon: "alpaca",
     highlight: true,
@@ -195,11 +165,7 @@ export const surroundings: Place[] = [
   {
     id: "wildpark-pforzheim",
     category: "experiences",
-    name: "Wildpark Pforzheim",
-    town: "Pforzheim",
     distanceKm: 14,
-    blurb: "Heimische Tiere hautnah, ein ganzjähriger Ausflug für die ganze Familie.",
-    features: ["Tiere", "Familie", "Ganzjährig"],
     variant: "moss",
     icon: "paw",
     highlight: true,
@@ -210,11 +176,7 @@ export const surroundings: Place[] = [
   {
     id: "kajak-enz",
     category: "experiences",
-    name: "Kajaktour auf der Enz",
-    town: "Enztal",
     distanceKm: 10,
-    blurb: "Aktiv auf dem Wasser durchs Tal. Verleih und Touren im Sommer.",
-    features: ["Aktiv", "Sommer", "Verleih"],
     variant: "moss",
     icon: "kayak",
     highlight: true,
@@ -224,11 +186,7 @@ export const surroundings: Place[] = [
   {
     id: "fliegenfischen",
     category: "experiences",
-    name: "Fliegenfischen",
-    town: "Eyachtal",
     distanceKm: 10,
-    blurb: "Geführte Kurse am klaren Wasser, Ruhe und Konzentration in der Natur.",
-    features: ["Geführt", "Kurs", "Natur"],
     variant: "moss",
     icon: "flyfishing",
     image: "/images/umgebung/experiences/fliegenfischen.webp",
@@ -237,11 +195,7 @@ export const surroundings: Place[] = [
   {
     id: "minigolf",
     category: "experiences",
-    name: "Minigolf Neuenbürg",
-    town: "Neuenbürg",
     distanceKm: 2,
-    blurb: "Der Klassiker für entspannte Stunden an der frischen Luft.",
-    features: ["Familie", "Draußen"],
     variant: "moss",
     icon: "minigolf",
     image: "/images/umgebung/experiences/minigolf.webp",
@@ -250,11 +204,7 @@ export const surroundings: Place[] = [
   {
     id: "freibad",
     category: "experiences",
-    name: "Freibad Neuenbürg",
-    town: "Neuenbürg",
     distanceKm: 2,
-    blurb: "Abkühlung an heißen Tagen, entspannt und familienfreundlich.",
-    features: ["Sommer", "Familie"],
     variant: "moss",
     icon: "swim",
     image: "/images/umgebung/experiences/freibad.webp",
@@ -263,11 +213,7 @@ export const surroundings: Place[] = [
   {
     id: "ziegen-wanderung",
     category: "experiences",
-    name: "Ziegen-Wanderung",
-    town: "Straubenhardt",
     distanceKm: 15,
-    blurb: "Unterwegs mit neugierigen Ziegen, ein Erlebnis besonders für Kinder.",
-    features: ["Geführt", "Für Kinder"],
     variant: "moss",
     icon: "goat",
     image: "/images/umgebung/experiences/ziege.webp",
@@ -278,12 +224,7 @@ export const surroundings: Place[] = [
   {
     id: "nationalpark-schwarzwald",
     category: "nature",
-    name: "Nationalpark Schwarzwald",
-    town: "Ruhestein",
     distanceKm: 50,
-    blurb:
-      "Urwald von morgen: weite Wege, Hochmoore und Gipfelblicke. Ein lohnender Tagesausflug.",
-    features: ["Wandern", "Aussicht", "Tagesausflug"],
     variant: "forest",
     monogram: "NP",
     highlight: true,
@@ -293,11 +234,7 @@ export const surroundings: Place[] = [
   {
     id: "eyachtal",
     category: "nature",
-    name: "Eyachtal",
-    town: "Eyachtal",
     distanceKm: 10,
-    blurb: "Stilles Flusstal zum Wandern und Durchatmen, gleich in der Nähe.",
-    features: ["Wandern", "Fluss", "Ruhig"],
     variant: "forest",
     monogram: "EY",
     image: "/images/umgebung/nature/eyachtal.webp",
@@ -306,12 +243,7 @@ export const surroundings: Place[] = [
   {
     id: "wildline-haengebruecke",
     category: "nature",
-    name: "Wildline-Hängebrücke",
-    town: "Bad Wildbad",
     distanceKm: 12,
-    blurb:
-      "Schwankende Brücke hoch über dem Tal, dazu der Baumwipfelpfad, Aussicht für die ganze Familie.",
-    features: ["Aussicht", "Familie", "Baumwipfelpfad"],
     variant: "forest",
     monogram: "WL",
     recommended: true,
@@ -324,12 +256,7 @@ export const surroundings: Place[] = [
   {
     id: "bergwerk-neuenburg",
     category: "culture",
-    name: "Besucherbergwerk Frischglück",
-    town: "Neuenbürg",
     distanceKm: 2,
-    blurb:
-      "Historisches Schaubergwerk samt Schloss Neuenbürg, mit Führungen und „Theater im Berg“, direkt vor der Haustür.",
-    features: ["Historisch", "Führung", "Theater im Berg"],
     variant: "night",
     monogram: "BF",
     highlight: true,
@@ -341,11 +268,7 @@ export const surroundings: Place[] = [
   {
     id: "gasometer-pforzheim",
     category: "culture",
-    name: "Gasometer Pforzheim",
-    town: "Pforzheim",
     distanceKm: 14,
-    blurb: "Riesiges 360°-Panorama im alten Gasometer, ein Kunsterlebnis der besonderen Art.",
-    features: ["Kunst", "Panorama", "Einzigartig"],
     variant: "night",
     monogram: "GP",
     image: "/images/umgebung/culture/gasometer.webp",
@@ -354,11 +277,7 @@ export const surroundings: Place[] = [
   {
     id: "porsche-museum",
     category: "culture",
-    name: "Porsche Museum",
-    town: "Stuttgart",
     distanceKm: 55,
-    blurb: "Sportwagen-Ikonen und kühne Architektur. Ein Tagesausflug für Technik-Fans.",
-    features: ["Architektur", "Tagesausflug"],
     variant: "night",
     monogram: "PM",
     image: "/images/umgebung/culture/porsche.webp",
@@ -367,11 +286,7 @@ export const surroundings: Place[] = [
   {
     id: "mercedes-museum",
     category: "culture",
-    name: "Mercedes-Benz Museum",
-    town: "Stuttgart",
     distanceKm: 58,
-    blurb: "Über ein Jahrhundert Automobilgeschichte auf einer spiralförmigen Zeitreise.",
-    features: ["Geschichte", "Tagesausflug"],
     variant: "night",
     monogram: "MB",
     image: "/images/umgebung/culture/mercedes.webp",
@@ -380,11 +295,7 @@ export const surroundings: Place[] = [
   {
     id: "wilhelma",
     category: "culture",
-    name: "Wilhelma",
-    town: "Stuttgart",
     distanceKm: 58,
-    blurb: "Zoologisch-botanischer Garten im maurischen Stil. Ein Tag für die ganze Familie.",
-    features: ["Zoo & Botanik", "Familie", "Tagesausflug"],
     variant: "night",
     monogram: "WI",
     image: "/images/umgebung/culture/wilhelma.webp",
@@ -395,12 +306,7 @@ export const surroundings: Place[] = [
   {
     id: "palais-thermal",
     category: "wellness",
-    name: "Palais Thermal",
-    town: "Bad Wildbad",
     distanceKm: 12,
-    blurb:
-      "Historisches Thermalbad im maurischen Stil mit Saunalandschaft, der ruhige Tag ganz in der Nähe.",
-    features: ["Historische Therme", "Sauna"],
     variant: "forest",
     monogram: "PT",
     highlight: true,
@@ -411,11 +317,7 @@ export const surroundings: Place[] = [
   {
     id: "siebentaeler-therme",
     category: "wellness",
-    name: "Siebentäler Therme",
-    town: "Bad Herrenalb",
     distanceKm: 20,
-    blurb: "Warmes Thermalwasser und weite Saunalandschaft zum Loslassen.",
-    features: ["Thermal", "Sauna"],
     variant: "forest",
     monogram: "ST",
     image: "/images/umgebung/wellness/siebentaeler.webp",
@@ -424,11 +326,7 @@ export const surroundings: Place[] = [
   {
     id: "mineraltherme-teinach",
     category: "wellness",
-    name: "Mineraltherme",
-    town: "Bad Teinach",
     distanceKm: 24,
-    blurb: "Heilwasser und Spa in ruhiger Lage, ideal zum Entschleunigen.",
-    features: ["Heilwasser", "Spa"],
     variant: "forest",
     monogram: "MT",
     image: "/images/umgebung/wellness/mineraltherme.webp",
@@ -439,12 +337,7 @@ export const surroundings: Place[] = [
   {
     id: "forellenzucht-zordel",
     category: "regional",
-    name: "Forellenzucht Zordel",
-    town: "Eyachtal",
     distanceKm: 10,
-    blurb:
-      "Frische Forellen direkt vom Erzeuger, geräuchert und zum Mitnehmen. Regional, wie es sein soll.",
-    features: ["Frische Forellen", "Räucherei", "Verkauf"],
     variant: "bark",
     monogram: "FZ",
     highlight: true,
@@ -458,20 +351,32 @@ export const surroundings: Place[] = [
 export const bandOf = (km: number): DistanceBand =>
   km <= 15 ? "near" : km <= 35 ? "mid" : "day";
 
-export const placesByCategory = (key: SurroundingCategoryKey): Place[] =>
+/** Struktur + lokalisierter Text → vollständiger Place. */
+const mergePlace = (p: PlaceStruct, t: Strings): Place => {
+  const c = t.surroundingsContent[p.id];
+  return { ...p, name: c.name, town: c.town, blurb: c.blurb, features: c.features };
+};
+
+export const placesByCategory = (
+  key: SurroundingCategoryKey,
+  t: Strings,
+): Place[] =>
   surroundings
     .filter((p) => p.category === key)
     // Unsere Empfehlung führt die Kategorie an.
-    .sort((a, b) => Number(Boolean(b.recommended)) - Number(Boolean(a.recommended)));
+    .sort((a, b) => Number(Boolean(b.recommended)) - Number(Boolean(a.recommended)))
+    .map((p) => mergePlace(p, t));
 
-export const highlightPlaces = (): Place[] =>
-  surroundings.filter((p) => p.highlight);
+export const highlightPlaces = (t: Strings): Place[] =>
+  surroundings.filter((p) => p.highlight).map((p) => mergePlace(p, t));
 
 /** Unsere Empfehlungen — ein Ort je Kategorie, sortiert nach Kategorie-Reihenfolge. */
-export const recommendedPlaces = (): Place[] =>
+export const recommendedPlaces = (t: Strings): Place[] =>
   CATEGORY_ORDER.map((key) =>
     surroundings.find((p) => p.category === key && p.recommended),
-  ).filter((p): p is Place => Boolean(p));
+  )
+    .filter((p): p is PlaceStruct => Boolean(p))
+    .map((p) => mergePlace(p, t));
 
 export const isCategoryKey = (s: string): s is SurroundingCategoryKey =>
   (CATEGORY_ORDER as string[]).includes(s);

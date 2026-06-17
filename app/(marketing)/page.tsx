@@ -7,28 +7,23 @@ import { GiftVoucher } from "@/components/sections/GiftVoucher";
 import { ApartmentsPreview } from "@/components/sections/ApartmentsPreview";
 import { RegionMap } from "@/components/sections/RegionMap";
 import { ForestSilhouette } from "@/components/sections/ForestSilhouette";
-import { useStrings } from "@/lib/i18n/useStrings";
 
 export default function HomePage() {
-  const t = useStrings();
-
   return (
     <>
       <Hero />
       <ApartmentsShowcase />
       <Surroundings />
       <SchwarzwaldFact
-        quote={t.facts.fact1.quote}
-        source={t.facts.fact1.source}
-        eyebrow={t.facts.eyebrow}
+        factKey="fact1"
+        showEyebrow
         tone="light"
         decor={<FactDecor variant="hutUhr" />}
       />
       <GiftVoucher />
       <ApartmentsPreview />
       <SchwarzwaldFact
-        quote={t.facts.fact2.quote}
-        source={t.facts.fact2.source}
+        factKey="fact2"
         tone="light"
         decor={<FactDecor variant="schinkenTorte" />}
       />

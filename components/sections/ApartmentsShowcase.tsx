@@ -1,13 +1,14 @@
 "use client";
 
 import { useRef } from "react";
-import { retreats } from "@/data/retreats";
+import { localizeRetreats } from "@/data/retreats";
 import { useStrings } from "@/lib/i18n/useStrings";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { ApartmentCard } from "./ApartmentCard";
 
 export function ApartmentsShowcase() {
   const t = useStrings();
+  const retreats = localizeRetreats(t);
   const scroller = useRef<HTMLDivElement>(null);
 
   const scrollByCards = (dir: number) => {

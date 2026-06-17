@@ -2,15 +2,14 @@
 
 import { useState } from "react";
 import { Type } from "@/components/ui/Type";
-import { de } from "@/lib/strings/de";
-
-const t = de.apartments.detail;
+import { useStrings } from "@/lib/i18n/useStrings";
 
 /** Wieviele Ausstattungs-Punkte vor dem Aufklappen sichtbar sind (2 Reihen à 3). */
 const PREVIEW_COUNT = 6;
 
 /** Ausstattung als aufklappbare Liste — hält die Seite kurz, zeigt auf Wunsch alles. */
 export function RetreatAmenities({ amenities }: { amenities: string[] }) {
+  const t = useStrings().apartments.detail;
   const [open, setOpen] = useState(false);
   if (!amenities.length) return null;
 

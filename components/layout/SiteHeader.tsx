@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useStrings } from "@/lib/i18n/useStrings";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 
 // Mit führendem "/" → funktioniert von jeder Unterseite zurück zur Startseite.
 const NAV = [
@@ -139,6 +140,7 @@ export function SiteHeader() {
           <span className="mt-10 font-body text-[0.62rem] font-medium uppercase tracking-[0.34em] text-cream-100/50">
             {t.park.name}
           </span>
+          <LanguageSwitcher className="mt-8 text-center" />
         </nav>
       </div>
     </>

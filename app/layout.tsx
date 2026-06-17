@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { I18nProvider } from "@/lib/i18n/I18nProvider";
+import { getLocale } from "@/lib/i18n/server";
+import { dir } from "@/lib/i18n/config";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -27,17 +30,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
   return (
     <html
-      lang="de"
+      lang={locale}
+      dir={dir(locale)}
       className={`${fraunces.variable} ${jakarta.variable} h-full antialiased`}
     >
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        <I18nProvider locale={locale}>{children}</I18nProvider>
+      </body>
     </html>
   );
 }
