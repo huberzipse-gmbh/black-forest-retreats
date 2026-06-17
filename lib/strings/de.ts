@@ -14,6 +14,8 @@ export const de = {
     location: 'Neuenbürg',
     tagline: 'Der Schwarzwald, aber privat.',
   },
+  // Locale-Formate (z. B. Dezimaltrennzeichen für Bewertungen wie „4,91").
+  formats: { decimal: ',' },
   nav: {
     retreats: 'Unterkünfte',
     surroundings: 'Umgebung',

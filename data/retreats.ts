@@ -182,6 +182,8 @@ function mergeRetreat(r: RetreatStruct, t: Strings): RetreatCard {
   const c = t.retreatsContent[r.id];
   return {
     ...r,
+    // Bewertung mit Locale-Dezimaltrennzeichen (de „4,91" / en „4.91").
+    rating: r.rating ? r.rating.replace(/[.,]/, t.formats.decimal) : r.rating,
     name: c.name,
     highlight: c.highlight,
     tagline: c.tagline,
