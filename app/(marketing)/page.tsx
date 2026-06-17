@@ -6,7 +6,6 @@ import { FactDecor } from "@/components/sections/FactDecor";
 import { GiftVoucher } from "@/components/sections/GiftVoucher";
 import { ApartmentsPreview } from "@/components/sections/ApartmentsPreview";
 import { RegionMap } from "@/components/sections/RegionMap";
-import { ForestSilhouette } from "@/components/sections/ForestSilhouette";
 
 export default function HomePage() {
   return (
@@ -28,7 +27,6 @@ export default function HomePage() {
         decor={<FactDecor variant="schinkenTorte" />}
       />
       <RegionMap />
-      <ForestSilhouette />
     </>
   );
 }

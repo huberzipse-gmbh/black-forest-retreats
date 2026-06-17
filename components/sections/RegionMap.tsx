@@ -15,7 +15,7 @@ const RegionMapLeaflet = dynamic(() => import("./RegionMapLeaflet"), {
   loading: () => (
     <div
       className="h-full w-full animate-pulse"
-      style={{ background: "var(--color-cream-100)" }}
+      style={{ background: "var(--color-forest-900)" }}
     />
   ),
 });
@@ -24,18 +24,18 @@ export function RegionMap() {
   const t = useStrings();
 
   return (
-    <section className="relative bg-cream-50 px-6 py-20 text-forest-900 md:px-10 md:py-28">
+    <section className="relative bg-night px-6 py-20 text-cream-50 md:px-10 md:py-28">
       <Reveal className="relative z-10 mx-auto max-w-7xl">
         <div className="mx-auto mb-10 max-w-2xl text-center md:mb-12">
-          <Type role="eyebrow" className="mb-5 text-brass-600">
+          <Type role="eyebrow" className="mb-5 text-brass-300">
             {t.map.eyebrow}
           </Type>
-          <Type role="h2" as="h2" className="text-forest-900">
+          <Type role="h2" as="h2" className="text-cream-50">
             {t.map.title}
           </Type>
           <Type
             role="caption"
-            className="mt-4 font-medium uppercase tracking-[0.22em] text-forest-700/55"
+            className="mt-4 font-medium uppercase tracking-[0.22em] text-cream-100/55"
           >
             {t.map.subtitle}
           </Type>
