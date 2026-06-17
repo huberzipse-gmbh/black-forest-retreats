@@ -207,6 +207,13 @@ export const de = {
     tagline: 'Der Schwarzwald, aber privat.',
   },
 
+  map: {
+    eyebrow: 'Hier sind wir',
+    title: 'Mitten im Nordschwarzwald',
+    subtitle: 'Nationalpark Nordschwarzwald',
+    marker: 'Neuenbürg',
+  },
+
   footer: {
     tagline: 'Der Schwarzwald, aber privat. Ferienwohnungen in Neuenbürg.',
     discover: {

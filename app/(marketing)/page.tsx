@@ -5,6 +5,7 @@ import { SchwarzwaldFact } from "@/components/sections/SchwarzwaldFact";
 import { FactDecor } from "@/components/sections/FactDecor";
 import { GiftVoucher } from "@/components/sections/GiftVoucher";
 import { ApartmentsPreview } from "@/components/sections/ApartmentsPreview";
+import { RegionMap } from "@/components/sections/RegionMap";
 import { ForestSilhouette } from "@/components/sections/ForestSilhouette";
 import { useStrings } from "@/lib/i18n/useStrings";
 
@@ -29,9 +30,9 @@ export default function HomePage() {
         quote={t.facts.fact2.quote}
         source={t.facts.fact2.source}
         tone="light"
-        tightBottom
         decor={<FactDecor variant="schinkenTorte" />}
       />
+      <RegionMap />
       <ForestSilhouette />
     </>
   );
