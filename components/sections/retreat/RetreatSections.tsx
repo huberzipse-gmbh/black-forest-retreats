@@ -1,7 +1,8 @@
 "use client";
 
 import type { RetreatCard } from "@/data/retreats";
-import { useStrings } from "@/lib/i18n/useStrings";
+import { useLocale, useStrings } from "@/lib/i18n/I18nProvider";
+import { fmtNum } from "@/lib/i18n/format";
 import { Type } from "@/components/ui/Type";
 import { Reveal } from "@/components/ui/Reveal";
 import { UspIcon } from "./UspIcons";
@@ -56,6 +57,7 @@ export function RetreatHighlights({ usps }: { usps: NonNullable<RetreatCard["usp
 /** Bewertungs-Bereich: Wertungs-Zusammenfassung + Gäste-Stimmen. */
 export function RetreatReviews({ retreat }: { retreat: RetreatCard }) {
   const t = useStrings().apartments.detail;
+  const locale = useLocale();
   if (!retreat.rating || !retreat.reviews?.length) return null;
   const count = retreat.reviewCount ?? retreat.reviews.length;
 
@@ -69,12 +71,12 @@ export function RetreatReviews({ retreat }: { retreat: RetreatCard }) {
           </Type>
           <div className="mt-6 flex items-center gap-4">
             <span className="font-display text-[clamp(2.5rem,6vw,4rem)] leading-none text-forest-900">
-              {retreat.rating}
+              {fmtNum(retreat.rating, locale)}
             </span>
             <span className="flex flex-col items-start">
               <Stars className="h-4 w-4" />
               <span className="mt-1 font-body text-sm text-forest-700/80">
-                {t.reviewsCount(count)}
+                {fmtNum(t.reviewsCount(count), locale)}
               </span>
             </span>
           </div>
@@ -98,7 +100,7 @@ export function RetreatReviews({ retreat }: { retreat: RetreatCard }) {
                 </blockquote>
                 <figcaption className="mt-5 font-body text-sm">
                   <span className="font-semibold text-forest-900">{r.author}</span>
-                  <span className="text-forest-700/60"> · {r.date}</span>
+                  <span className="text-forest-700/60"> · {fmtNum(r.date, locale)}</span>
                 </figcaption>
               </figure>
             </Reveal>

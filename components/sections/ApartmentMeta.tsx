@@ -1,7 +1,8 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useStrings } from "@/lib/i18n/useStrings";
+import { useLocale, useStrings } from "@/lib/i18n/I18nProvider";
+import { fmtNum } from "@/lib/i18n/format";
 
 const ICONS: Record<string, ReactNode> = {
   bedrooms: (
@@ -47,6 +48,7 @@ export function ApartmentMeta({
   className = "",
 }: ApartmentMetaProps) {
   const f = useStrings().apartments.facts;
+  const locale = useLocale();
   const items: { key: string; value: number; label: string }[] = [
     { key: "bedrooms", value: bedrooms, label: f.bedrooms },
     { key: "beds", value: beds, label: f.beds },
@@ -73,7 +75,7 @@ export function ApartmentMeta({
             {ICONS[it.key]}
           </svg>
           <span className="font-body text-[0.8rem]">
-            {it.value} {it.label}
+            {fmtNum(it.value, locale)} {it.label}
           </span>
         </span>
       ))}

@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getLocalizedRetreat } from "@/data/retreats";
-import { useStrings } from "@/lib/i18n/useStrings";
+import { useLocale, useStrings } from "@/lib/i18n/I18nProvider";
+import { fmtNum } from "@/lib/i18n/format";
 import { Type } from "@/components/ui/Type";
 import { Reveal } from "@/components/ui/Reveal";
 import { GradientPanel } from "@/components/ui/GradientPanel";
@@ -23,9 +24,12 @@ export function RetreatDetailView({ slug }: { slug: string }) {
   if (!retreat) return null;
 
   const t = strings.apartments;
+  const locale = useLocale();
   const sold = Boolean(retreat.soldOut);
   const untilLabel =
-    sold && retreat.soldOutUntil ? t.soldOut.until(retreat.soldOutUntil) : null;
+    sold && retreat.soldOutUntil
+      ? fmtNum(t.soldOut.until(retreat.soldOutUntil), locale)
+      : null;
   const reviewCount = retreat.reviewCount ?? retreat.reviews?.length ?? 0;
 
   const stats = [
@@ -84,7 +88,7 @@ export function RetreatDetailView({ slug }: { slug: string }) {
               <span className="inline-flex items-center gap-2">
                 <Stars className="h-4 w-4" />
                 <span className="font-body text-sm text-cream-100/90">
-                  {t.detail.ratingLine(retreat.rating, reviewCount)}
+                  {fmtNum(t.detail.ratingLine(retreat.rating, reviewCount), locale)}
                 </span>
               </span>
             )}
@@ -152,7 +156,7 @@ export function RetreatDetailView({ slug }: { slug: string }) {
                     className="rounded-[6px] border border-forest-900/10 bg-cream-100 px-6 py-7 text-center"
                   >
                     <div className="font-display text-3xl leading-none text-forest-900 md:text-4xl">
-                      {s.n}
+                      {fmtNum(s.n, locale)}
                     </div>
                     <div className="mt-2 font-body text-[0.7rem] font-medium uppercase tracking-[0.18em] text-forest-700/70">
                       {s.l}
@@ -180,7 +184,9 @@ export function RetreatDetailView({ slug }: { slug: string }) {
               </Type>
               <div className="mx-auto mt-7 h-px w-14 bg-brass-400" />
               <Type role="lead" className="mx-auto mt-7 max-w-xl text-cream-100/85">
-                {retreat.soldOutUntil ? t.soldOut.detailText(retreat.soldOutUntil) : ""}
+                {retreat.soldOutUntil
+                  ? fmtNum(t.soldOut.detailText(retreat.soldOutUntil), locale)
+                  : ""}
               </Type>
               <div className="mt-10">
                 <Link

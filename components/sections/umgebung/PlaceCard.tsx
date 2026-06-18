@@ -6,7 +6,8 @@ import { Chip } from "@/components/ui/Chip";
 import { GradientPanel } from "@/components/ui/GradientPanel";
 import { PlaceIcon } from "@/components/sections/umgebung/PlaceIcons";
 import { bandOf, type Place } from "@/data/surroundings";
-import { useStrings } from "@/lib/i18n/useStrings";
+import { useLocale, useStrings } from "@/lib/i18n/I18nProvider";
+import { fmtNum } from "@/lib/i18n/format";
 
 const StarIcon = ({ className = "h-3 w-3 text-brass-300" }: { className?: string }) => (
   <svg aria-hidden viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -17,11 +18,14 @@ const StarIcon = ({ className = "h-3 w-3 text-brass-300" }: { className?: string
 /** Eine Karte für einen Ort/ein Erlebnis. Bild-Mockup oder Icon-geführt. */
 export function PlaceCard({ place }: { place: Place }) {
   const s = useStrings().surroundings.card;
+  const locale = useLocale();
   const isDay = bandOf(place.distanceKm) === "day";
   const isIcon = Boolean(place.icon);
   const hasImage = Boolean(place.image);
   const isRecommended = Boolean(place.recommended);
-  const meta = [place.town, `${place.distanceKm} km`].filter(Boolean).join(" · ");
+  const meta = [place.town, `${fmtNum(place.distanceKm, locale)} km`]
+    .filter(Boolean)
+    .join(" · ");
 
   return (
     <article

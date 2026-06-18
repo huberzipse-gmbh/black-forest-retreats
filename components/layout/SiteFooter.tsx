@@ -1,9 +1,11 @@
 "use client";
 
-import { useStrings } from "@/lib/i18n/useStrings";
+import { useLocale, useStrings } from "@/lib/i18n/I18nProvider";
+import { fmtNum } from "@/lib/i18n/format";
 
 export function SiteFooter() {
   const t = useStrings();
+  const locale = useLocale();
   const year = new Date().getFullYear();
 
   return (
@@ -111,7 +113,7 @@ export function SiteFooter() {
             ))}
           </div>
           <p className="font-body text-xs text-cream-100/45">
-            {t.footer.copyright(year)}
+            {fmtNum(t.footer.copyright(year), locale)}
           </p>
         </div>
       </div>

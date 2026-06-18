@@ -2,12 +2,14 @@
 
 import { useRef } from "react";
 import { localizeRetreats } from "@/data/retreats";
-import { useStrings } from "@/lib/i18n/useStrings";
+import { useLocale, useStrings } from "@/lib/i18n/I18nProvider";
+import { fmtNum } from "@/lib/i18n/format";
 import { SectionIntro } from "@/components/ui/SectionIntro";
 import { ApartmentCard } from "./ApartmentCard";
 
 export function ApartmentsShowcase() {
   const t = useStrings();
+  const locale = useLocale();
   const retreats = localizeRetreats(t);
   const scroller = useRef<HTMLDivElement>(null);
 
@@ -62,7 +64,7 @@ export function ApartmentsShowcase() {
               soldOutLabel={t.apartments.soldOut.badge}
               soldOutUntilLabel={
                 r.soldOut && r.soldOutUntil
-                  ? t.apartments.soldOut.until(r.soldOutUntil)
+                  ? fmtNum(t.apartments.soldOut.until(r.soldOutUntil), locale)
                   : undefined
               }
             />
