@@ -1,0 +1,22 @@
+name: Deploy to Coolify
+
+# Löst nach jedem Push auf main einen Deploy in Coolify aus.
+# URL (inkl. App-UUID) und API-Token liegen als verschlüsselte Repo-Secrets.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: coolify-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Coolify deployment
+        run: |
+          curl -fsS -X GET \
+            -H "Authorization: Bearer ${{ secrets.COOLIFY_DEPLOY_TOKEN }}" \
+            "${{ secrets.COOLIFY_DEPLOY_URL }}"
