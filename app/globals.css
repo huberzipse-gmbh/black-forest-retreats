@@ -216,3 +216,16 @@ body {
     transform: none;
   }
 }
+
+/* ------------------- Hero-Video: nie ein nativer Play-Button -------------- */
+/* iOS/Safari blendet bei blockiertem Autoplay ein Start-Playback-Overlay ein.
+   Wir verstecken es hart — das Poster-Overlay in HeroVideo.tsx übernimmt die
+   Darstellung, bis das Video wirklich läuft. */
+video[aria-hidden="true"]::-webkit-media-controls-start-playback-button,
+video[aria-hidden="true"]::-webkit-media-controls-overlay-play-button,
+video[aria-hidden="true"]::-webkit-media-controls {
+  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

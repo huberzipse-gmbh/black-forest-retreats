@@ -8,6 +8,7 @@
  */
 import { useMemo, useRef, useState, useTransition } from "react";
 import Image from "next/image";
+import { toSameOriginStorageUrl } from "@/lib/storage/publicUrl";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -21,6 +22,8 @@ import {
 } from "@/app/admin/actions";
 import type { PriceRule } from "@/lib/booking/types";
 import { dateDe, eur } from "@/lib/admin/format";
+import { DeleteRetreatButton } from "@/components/admin/DeleteRetreatButton";
+import { AdminCalendar } from "@/components/admin/AdminCalendar";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -80,9 +83,12 @@ export function RetreatEditor({ retreat, rules, blocks, exportUrl }: Props) {
       <Link href="/admin/wohnungen" className="font-body text-xs font-semibold uppercase tracking-wider text-forest-700/60 hover:text-forest-900">
         ← Wohnungen
       </Link>
-      <h1 className="mt-3 font-display text-3xl text-forest-900">
-        {isNew ? "Neue Wohnung" : retreat.name_de}
-      </h1>
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-4">
+        <h1 className="font-display text-3xl text-forest-900">
+          {isNew ? "Neue Wohnung" : retreat.name_de}
+        </h1>
+        {!isNew && <DeleteRetreatButton retreatId={retreat.id} name={retreat.name_de} />}
+      </div>
 
       <div className="mt-6 flex flex-wrap gap-2">
         {tabs.map((t) => (
@@ -160,8 +166,10 @@ function MasterDataTab({ retreat, onSaved }: { retreat: any | null; onSaved: (ms
     sold_out: retreat?.sold_out ?? false,
     sold_out_until: retreat?.sold_out_until ?? "",
     accent: retreat?.accent ?? "brass",
-    image: retreat?.image ?? "",
-    gallery: (retreat?.gallery ?? []) as string[],
+    // Alt-Daten können absolute Kong-URLs enthalten → same-origin reparieren;
+    // beim nächsten Speichern landen die reparierten Pfade in der DB.
+    image: toSameOriginStorageUrl(retreat?.image ?? ""),
+    gallery: ((retreat?.gallery ?? []) as string[]).map(toSameOriginStorageUrl),
     base_price_cents: retreat?.base_price_cents ?? 20000,
     cleaning_fee_cents: retreat?.cleaning_fee_cents ?? 0,
     min_nights: retreat?.min_nights ?? 2,
@@ -585,8 +593,8 @@ function retreatToForm(r: any): RetreatFormData {
     sold_out: r.sold_out,
     sold_out_until: r.sold_out_until ?? "",
     accent: r.accent ?? "brass",
-    image: r.image ?? "",
-    gallery: r.gallery ?? [],
+    image: toSameOriginStorageUrl(r.image ?? ""),
+    gallery: ((r.gallery ?? []) as string[]).map(toSameOriginStorageUrl),
     base_price_cents: r.base_price_cents,
     cleaning_fee_cents: r.cleaning_fee_cents,
     min_nights: r.min_nights,
@@ -803,8 +811,32 @@ function CalendarTab({ retreatId, blocks, onChanged }: { retreatId: string; bloc
     });
   };
 
+  const blockRange = (rangeStart: string, rangeEndExclusive: string, rangeNote: string) => {
+    setError(null);
+    startTransition(async () => {
+      const res = await blockDates(retreatId, rangeStart, rangeEndExclusive, rangeNote);
+      if (!res.ok) {
+        setError(res.error ?? "Fehler");
+        return;
+      }
+      onChanged();
+    });
+  };
+
   return (
     <div className="space-y-5">
+      <div className={card}>
+        <h2 className="font-body text-xs font-semibold uppercase tracking-wider text-forest-700/60">
+          Belegungskalender
+        </h2>
+        <p className="mt-1 font-body text-xs text-forest-700/55">
+          Freie Nächte direkt anklicken: erster Klick = Beginn, zweiter Klick = Ende. Geblockte Nächte anklicken zum Freigeben.
+        </p>
+        <div className="mt-4">
+          <AdminCalendar blocks={blocks} isPending={isPending} onBlock={blockRange} onUnblock={unblock} />
+        </div>
+      </div>
+
       <div className={card}>
         <h2 className="font-body text-xs font-semibold uppercase tracking-wider text-forest-700/60">
           Zeitraum manuell blocken

@@ -5,6 +5,7 @@
  * dann arbeitet sie mit dem Service-Role-Client (umgeht RLS).
  */
 import { cookies } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { createAdminClient } from '@/lib/supabase/admin';
@@ -15,6 +16,7 @@ import { getPaymentProvider } from '@/lib/payments';
 import { createStornoInvoice } from '@/lib/invoices/create';
 import { retreatNameOf } from '@/lib/booking/confirm';
 import { runChargeDue, runIcalSync, type CronResult } from '@/lib/booking/cron';
+import { retreatPhotoUrl } from '@/lib/storage/publicUrl';
 
 async function assertAdmin(): Promise<void> {
   const store = await cookies();
@@ -298,8 +300,9 @@ export async function uploadRetreatPhoto(formData: FormData): Promise<{ ok: bool
       contentType: file.type || 'image/jpeg',
     });
   if (error) return { ok: false, error: error.message };
-  const { data } = sb.storage.from('retreat-photos').getPublicUrl(path);
-  return { ok: true, url: data.publicUrl };
+  // KEIN getPublicUrl: das liefert die interne Kong-URL, die der Browser nicht
+  // laden kann (kaputte Bilder). Immer same-origin über die Next-Rewrites.
+  return { ok: true, url: retreatPhotoUrl(path) };
 }
 
 /* ── Cron manuell anstoßen ────────────────────────────────────────────────── */
@@ -312,4 +315,63 @@ export async function runIcalSyncNow(): Promise<CronResult> {
 export async function runChargeDueNow(): Promise<CronResult> {
   await assertAdmin();
   return runChargeDue();
+}
+
+/* ── Wohnung löschen ──────────────────────────────────────────────────────── */
+
+/**
+ * Löscht eine Wohnung endgültig — nur wenn KEINE Buchungen existieren
+ * (GoBD/Rechnungsbezug: Buchungen referenzieren die Wohnung, Rechnungen die
+ * Buchung). Mit Buchungen → Fehler; stattdessen "Nicht buchbar" setzen.
+ * Ohne Buchungen: Preisregeln + Kalender-Blöcke fallen per ON DELETE CASCADE,
+ * Fotos im Bucket retreat-photos/<id>/ werden mitgelöscht.
+ */
+export async function deleteRetreat(retreatId: string): Promise<{ ok: boolean; error?: string }> {
+  await assertAdmin();
+  if (!/^[a-z0-9-]+$/.test(retreatId)) return { ok: false, error: 'Ungültige Wohnungs-ID.' };
+  try {
+    const sb = createAdminClient();
+
+    // GoBD-Guard: Wohnungen mit Buchungen (egal welcher Status — auch stornierte
+    // haben Rechnungsbezug) dürfen nicht hart gelöscht werden.
+    const { count, error: countError } = await sb
+      .from('bookings')
+      .select('id', { count: 'exact', head: true })
+      .eq('retreat_id', retreatId);
+    if (countError) return { ok: false, error: countError.message };
+    if ((count ?? 0) > 0) {
+      return {
+        ok: false,
+        error:
+          'Wohnung hat Buchungen und kann nicht gelöscht werden (GoBD/Rechnungsbezug). Stellen Sie sie stattdessen auf „Nicht buchbar“.',
+      };
+    }
+
+    // Fotos im Storage entfernen (Ordner <retreatId>/, seitenweise).
+    for (;;) {
+      const { data: files, error: listError } = await sb.storage
+        .from('retreat-photos')
+        .list(retreatId, { limit: 100 });
+      if (listError || !files || files.length === 0) break;
+      const { error: removeError } = await sb.storage
+        .from('retreat-photos')
+        .remove(files.map((f) => `${retreatId}/${f.name}`));
+      if (removeError) {
+        console.error('[admin] deleteRetreat storage:', removeError.message);
+        break; // Fotos blockieren das Löschen nicht — Rest wird trotzdem entfernt.
+      }
+      if (files.length < 100) break;
+    }
+
+    // Wohnung löschen — price_rules & availability_blocks fallen per Cascade.
+    const { error } = await sb.from('retreats').delete().eq('id', retreatId);
+    if (error) return { ok: false, error: error.message };
+
+    // Öffentliche Seiten (Startseite, Wohnungsliste, Detailseiten) aktualisieren.
+    revalidatePath('/', 'layout');
+    return { ok: true };
+  } catch (err) {
+    console.error('[admin] deleteRetreat:', err);
+    return { ok: false, error: 'Löschen fehlgeschlagen.' };
+  }
 }

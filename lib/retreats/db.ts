@@ -23,6 +23,7 @@ import type { Strings } from '@/lib/strings/de';
 import { STRINGS } from '@/lib/i18n/strings';
 import { createClient } from '@/lib/supabase/server';
 import { supabaseConfigured } from '@/lib/supabase/env';
+import { toSameOriginStorageUrl } from '@/lib/storage/publicUrl';
 import type { CardAccent } from '@/components/sections/ApartmentCard';
 import type { GradientVariant } from '@/components/ui/GradientPanel';
 import type { UspIconKey } from '@/components/sections/retreat/UspIcons';
@@ -49,8 +50,9 @@ function mapRow(row: any, t: Strings): RetreatCard {
     id: row.id as string,
     slug: row.slug as string,
     year: row.year || undefined,
-    image: row.image ?? '',
-    gallery: (row.gallery ?? []) as string[],
+    // Alt-Daten können noch absolute Kong-URLs enthalten → same-origin reparieren.
+    image: toSameOriginStorageUrl(row.image ?? ''),
+    gallery: ((row.gallery ?? []) as string[]).map(toSameOriginStorageUrl),
     beds: row.beds as number,
     bathrooms: row.bathrooms as number,
     rating: rating || undefined,
@@ -155,7 +157,10 @@ export async function getRetreatCards(t: Strings): Promise<RetreatCard[]> {
   if (!supabaseConfigured()) return localizeRetreats(t);
   const sb = await createClient();
   const rows = await fetchRows(sb);
-  if (!rows || rows.length === 0) return localizeRetreats(t);
+  // Statischer Fallback NUR bei DB-Fehler. Eine leere Tabelle ist ein gültiger
+  // Zustand (z. B. alle Wohnungen im Admin gelöscht) — sonst würden gelöschte
+  // Seed-Wohnungen auf der Website wieder auftauchen.
+  if (!rows) return localizeRetreats(t);
   return rows.map((row) => mapRow(row, t));
 }
 
