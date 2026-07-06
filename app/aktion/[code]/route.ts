@@ -15,7 +15,12 @@ export async function GET(
 ) {
   const { code: rawCode } = await params;
   const code = decodeURIComponent(rawCode).trim().toUpperCase();
-  const home = new URL('/', req.url);
+  // Hinter dem Coolify-Proxy zeigt req.url auf localhost — öffentliche
+  // Ziel-URL daher aus den Forwarded-Headern bauen.
+  const host = req.headers.get('x-forwarded-host') ?? req.headers.get('host');
+  const proto =
+    req.headers.get('x-forwarded-proto') ?? req.nextUrl.protocol.replace(':', '');
+  const home = host ? new URL(`${proto}://${host}/`) : new URL('/', req.url);
 
   if (!supabaseConfigured() || !code || code.length > 40) {
     return NextResponse.redirect(home);
