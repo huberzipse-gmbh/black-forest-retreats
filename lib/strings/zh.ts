@@ -896,6 +896,7 @@ export const zh: Strings = {
       valueLabel: '金额',
       validLabel: '有效期至',
       redeemHint: '使用方式：在 blackforest-retreats.de 预订时于优惠码栏输入礼品码。余额保留在礼品码上。',
+      invoiceNote: '本次购买的发票也已作为 PDF 附上。',
     },
   },
 };

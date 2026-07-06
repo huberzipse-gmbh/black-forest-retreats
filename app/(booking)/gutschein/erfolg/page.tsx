@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getStrings } from "@/lib/i18n/server";
 import { supabaseAdminConfigured } from "@/lib/supabase/env";
 import { getGiftCardByToken } from "@/lib/giftcards/actions";
+import { settleGiftCardIfPaid } from "@/lib/giftcards/confirm";
 import { GiftCardPreview } from "@/components/giftcard/GiftCardPreview";
 import { PendingRefresh } from "@/components/giftcard/PendingRefresh";
 import { NotConfiguredNotice } from "@/components/booking/NotConfiguredNotice";
@@ -19,8 +20,13 @@ export default async function GiftSuccessPage({
 
   const giftId = typeof sp.gift === "string" ? sp.gift : "";
   const token = typeof sp.token === "string" ? sp.token : "";
-  const card = await getGiftCardByToken(giftId, token);
+  let card = await getGiftCardByToken(giftId, token);
   if (!card) notFound();
+
+  // Nicht auf den Webhook warten: PI-Status live prüfen und sofort aktivieren.
+  if (card.status === "pending") {
+    card = await settleGiftCardIfPaid(card);
+  }
 
   // Webhook noch unterwegs → kurzer Warte-Zustand mit Auto-Refresh.
   if (card.status === "pending") {

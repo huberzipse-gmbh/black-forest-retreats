@@ -16,7 +16,7 @@ export default async function AdminInvoiceDetailPage({
   const sb = createAdminClient();
   const { data: inv } = await sb
     .from("invoices")
-    .select("*, bookings(id, booking_number)")
+    .select("*, bookings(id, booking_number), gift_cards(id, code)")
     .eq("id", id)
     .maybeSingle();
   if (!inv) notFound();
@@ -24,6 +24,7 @@ export default async function AdminInvoiceDetailPage({
   const items = inv.line_items as InvoiceLineItem[];
   const recipient = inv.recipient as { name?: string; email?: string };
   const booking = (inv as { bookings?: { id?: string; booking_number?: string } }).bookings;
+  const giftCard = (inv as { gift_cards?: { id?: string; code?: string } }).gift_cards;
 
   return (
     <div className="max-w-2xl">
@@ -51,6 +52,16 @@ export default async function AdminInvoiceDetailPage({
               <dd>
                 <Link href={`/admin/buchungen/${booking.id}`} className="font-medium text-forest-900 underline-offset-2 hover:underline">
                   {booking.booking_number}
+                </Link>
+              </dd>
+            </div>
+          )}
+          {giftCard?.code && (
+            <div className="flex justify-between gap-4">
+              <dt className="text-forest-700/60">Gutschein</dt>
+              <dd>
+                <Link href="/admin/gutscheine" className="font-medium text-forest-900 underline-offset-2 hover:underline">
+                  {giftCard.code}
                 </Link>
               </dd>
             </div>

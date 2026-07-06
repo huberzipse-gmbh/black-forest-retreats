@@ -8,19 +8,25 @@ import 'server-only';
  */
 import { createAdminClient } from '@/lib/supabase/admin';
 import type { Booking, QuoteLine } from '@/lib/booking/types';
+import type { GiftCard } from '@/lib/giftcards/types';
 import { STRINGS } from '@/lib/i18n/strings';
 import { isLocale } from '@/lib/i18n/config';
 import type { InvoiceIssuer, InvoiceLineItem, InvoiceRecord } from './types';
 import { renderInvoicePdf } from './pdf';
 
+const dateDe = (iso: string) =>
+  new Date(iso).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export function mapInvoice(row: any, bookingNumber?: string): InvoiceRecord {
+export function mapInvoice(row: any, bookingNumber?: string, giftCode?: string): InvoiceRecord {
   return {
     id: row.id,
     invoiceNumber: row.invoice_number,
-    bookingId: row.booking_id,
+    bookingId: row.booking_id ?? null,
+    giftCardId: row.gift_card_id ?? null,
     bookingNumber,
+    giftCode,
     kind: row.kind,
     issuedAt: row.issued_at,
     issuer: row.issuer as InvoiceIssuer,
@@ -147,6 +153,114 @@ export async function createInvoiceForBooking(
 
   await storePdf(invoice);
   return invoice;
+}
+
+/**
+ * Rechnung zu einem bezahlten Gutschein (idempotent pro Gutschein).
+ * USt-Behandlung: Mehrzweck-Gutschein (Wertgutschein) — nicht steuerbar beim
+ * Verkauf (§ 3 Abs. 15 UStG), die USt entsteht bei der Einlösung mit der
+ * Beherbergungsrechnung. Daher vat_rate 0, net = gross; das PDF trägt den
+ * passenden rechtlichen Hinweis. Mit Steuerberater abgestimmt zu halten.
+ */
+export async function createInvoiceForGiftCard(card: GiftCard): Promise<InvoiceRecord> {
+  const sb = createAdminClient();
+
+  const { data: existing } = await sb
+    .from('invoices')
+    .select('*')
+    .eq('gift_card_id', card.id)
+    .eq('kind', 'invoice')
+    .maybeSingle();
+  if (existing) return mapInvoice(existing, undefined, card.code);
+
+  const issuer = await loadIssuer();
+  const validity = card.expiresAt ? `, gültig bis ${dateDe(card.expiresAt)}` : '';
+  const payload = {
+    gift_card_id: card.id,
+    kind: 'invoice',
+    issuer,
+    recipient: { name: card.buyerName, email: card.buyerEmail },
+    line_items: [
+      {
+        label: `Wertgutschein ${card.code} (übertragbar${validity})`,
+        quantity: 1,
+        unitCents: card.amountCents,
+        totalCents: card.amountCents,
+      },
+    ],
+    net_cents: card.amountCents,
+    vat_rate: 0,
+    vat_cents: 0,
+    gross_cents: card.amountCents,
+    pdf_locale: 'de',
+  };
+
+  const { data, error } = await sb.rpc('create_invoice', { payload });
+  if (error) throw error;
+  const invoice = mapInvoice(data, undefined, card.code);
+
+  await storePdf(invoice);
+  return invoice;
+}
+
+/** Stornorechnung zu einem Gutschein (Admin-Storno bei unangetastetem Guthaben). */
+export async function createGiftStornoInvoice(
+  card: GiftCard,
+  reason: string,
+): Promise<InvoiceRecord | null> {
+  const sb = createAdminClient();
+  const { data: original } = await sb
+    .from('invoices')
+    .select('*')
+    .eq('gift_card_id', card.id)
+    .eq('kind', 'invoice')
+    .maybeSingle();
+  if (!original) return null; // Nie bezahlt → keine Rechnung → kein Storno nötig.
+
+  const { data: existingStorno } = await sb
+    .from('invoices')
+    .select('*')
+    .eq('gift_card_id', card.id)
+    .eq('kind', 'storno')
+    .maybeSingle();
+  if (existingStorno) return mapInvoice(existingStorno, undefined, card.code);
+
+  const issuer = await loadIssuer();
+  const negatedItems = (original.line_items as InvoiceLineItem[]).map((it) => ({
+    ...it,
+    unitCents: -it.unitCents,
+    totalCents: -it.totalCents,
+  }));
+
+  const payload = {
+    gift_card_id: card.id,
+    kind: 'storno',
+    references_invoice_id: original.id,
+    issuer,
+    recipient: original.recipient,
+    line_items: [
+      {
+        label: `Storno zu Rechnung ${original.invoice_number}${reason ? ` (${reason})` : ''}`,
+        quantity: 1,
+        unitCents: 0,
+        totalCents: 0,
+      },
+      ...negatedItems,
+    ],
+    net_cents: -original.net_cents,
+    vat_rate: Number(original.vat_rate),
+    vat_cents: -original.vat_cents,
+    gross_cents: -original.gross_cents,
+    pdf_locale: 'de',
+  };
+
+  const { data, error } = await sb.rpc('create_invoice', { payload });
+  if (error) throw error;
+  const storno = mapInvoice(data, undefined, card.code);
+  storno.referencesInvoiceNumber = original.invoice_number;
+
+  await storePdf(storno);
+  return storno;
 }
 
 /** Stornorechnung: neue Rechnung mit Negativbeträgen, Original bleibt unberührt. */
