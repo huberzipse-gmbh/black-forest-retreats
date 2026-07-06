@@ -13,6 +13,8 @@ import { createClient } from '@/lib/supabase/server';
 import { supabaseAdminConfigured } from '@/lib/supabase/env';
 import { getLocale } from '@/lib/i18n/server';
 import { computeQuote, PROMO_COOKIE } from './pricing';
+import { GIFT_COOKIE } from '@/lib/giftcards/types';
+import { resolveGiftCard } from '@/lib/giftcards/redeem';
 import { isRangeFree } from './availability';
 import { fetchBlocks, fetchPriceRules, fetchSettings, mapBooking } from './db';
 import { generateBookingNumber } from './bookingNumber';
@@ -94,7 +96,10 @@ export async function createBooking(raw: CreateBookingInput): Promise<CreateBook
     const user = userData?.user ?? null;
 
     // Eingelöster Rabattcode (Cookie) — computeQuote validiert gegen Settings.
-    const promoCode = (await cookies()).get(PROMO_COOKIE)?.value ?? null;
+    const cookieStore = await cookies();
+    const promoCode = cookieStore.get(PROMO_COOKIE)?.value ?? null;
+    // Gutschein: Cookie → serverseitige Saldo-Auflösung (einzige Wahrheit).
+    const giftCard = await resolveGiftCard(cookieStore.get(GIFT_COOKIE)?.value ?? null);
 
     const quote = computeQuote({
       retreat: {
@@ -108,6 +113,7 @@ export async function createBooking(raw: CreateBookingInput): Promise<CreateBook
       checkOut: input.checkOut,
       isRegistered: Boolean(user),
       promoCode,
+      giftCard,
     });
 
     // „Später zahlen" nur, wenn die Anreise weit genug entfernt ist.
@@ -144,6 +150,8 @@ export async function createBooking(raw: CreateBookingInput): Promise<CreateBook
         total_cents: quote.totalCents,
         locale,
         cancellation_days: cancellationDays,
+        gift_card_id: quote.giftCardAppliedCents ? giftCard?.id : null,
+        gift_card_applied_cents: quote.giftCardAppliedCents ?? 0,
         demo: paymentMode() === 'demo',
       })
       .select('*')
@@ -169,7 +177,8 @@ export async function createBooking(raw: CreateBookingInput): Promise<CreateBook
 export interface InitiatePaymentResult {
   ok: boolean;
   error?: string;
-  mode?: 'stripe' | 'demo';
+  /** 'free' = Gutschein deckt den vollen Betrag, keine Zahlung nötig. */
+  mode?: 'stripe' | 'demo' | 'free';
   clientSecret?: string;
   /** 'payment' (Sofort) oder 'setup' (Später zahlen). */
   intentType?: 'payment' | 'setup';
@@ -186,6 +195,14 @@ export async function initiatePayment(bookingId: string): Promise<InitiatePaymen
       { status: booking.status, paymentStatus: booking.paymentStatus },
       { status: 'pending', paymentStatus: 'awaiting_payment' },
     );
+
+    // Gutschein deckt alles → keine Zahlung (Stripe-Minimum 0,50 €), Buchung
+    // direkt bestätigen. Die Gutschein-Einlösung passiert in markBookingPaid.
+    if (booking.totalCents === 0) {
+      await admin.from('bookings').update({ payment_status: 'awaiting_payment' }).eq('id', bookingId);
+      await markBookingPaid(bookingId, { demo: paymentMode() === 'demo' });
+      return { ok: true, mode: 'free' };
+    }
 
     const provider = getPaymentProvider();
     let clientSecret: string;

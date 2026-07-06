@@ -49,6 +49,13 @@ function NavIcon({ name, className }: { name: string; className?: string }) {
           <path d="M4.5 10.5h8M4.5 13.5h8" />
         </svg>
       );
+    case "gutscheine": // Geschenk
+      return (
+        <svg {...common}>
+          <rect x="4" y="9" width="16" height="11" rx="1.5" />
+          <path d="M4 12.5h16M12 9v11M12 9c-2.5 0-4.5-1-4.5-2.75S9 3.5 10 4.5s2 3 2 4.5c0-1.5 1-3.5 2-4.5s2.5.25 2.5 1.75S14.5 9 12 9Z" />
+        </svg>
+      );
     case "emails": // Umschlag
       return (
         <svg {...common}>
@@ -75,6 +82,7 @@ const NAV = [
   { href: "/admin/buchungen", label: "Buchungen", icon: "buchungen" },
   { href: "/admin/wohnungen", label: "Wohnungen", icon: "wohnungen" },
   { href: "/admin/rechnungen", label: "Rechnungen", icon: "rechnungen" },
+  { href: "/admin/gutscheine", label: "Gutscheine", icon: "gutscheine" },
   { href: "/admin/emails", label: "E-Mails", icon: "emails" },
   { href: "/admin/einstellungen", label: "Einstellungen", icon: "einstellungen" },
 ];

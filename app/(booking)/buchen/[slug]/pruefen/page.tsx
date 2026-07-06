@@ -7,6 +7,8 @@ import { supabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 import { fetchPriceRules, fetchSettings } from "@/lib/booking/db";
 import { PROMO_COOKIE } from "@/lib/booking/pricing";
+import { GIFT_COOKIE } from "@/lib/giftcards/types";
+import { resolveGiftCard } from "@/lib/giftcards/redeem";
 import { ReviewView } from "@/components/booking/ReviewView";
 import { NotConfiguredNotice } from "@/components/booking/NotConfiguredNotice";
 
@@ -49,6 +51,7 @@ export default async function BookingReviewPage({
     cookies(),
   ]);
   const promoCode = cookieStore.get(PROMO_COOKIE)?.value ?? null;
+  const giftCard = await resolveGiftCard(cookieStore.get(GIFT_COOKIE)?.value ?? null);
 
   const payLaterPossible =
     differenceInCalendarDays(new Date(checkIn), new Date()) > settings.payLaterWindowDays;
@@ -79,6 +82,7 @@ export default async function BookingReviewPage({
       cancellationDays={cancellationDays}
       initialUser={user?.email ? { email: user.email } : null}
       promoCode={promoCode}
+      giftCard={giftCard ? { code: giftCard.code, balanceCents: giftCard.balanceCents } : null}
     />
   );
 }

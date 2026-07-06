@@ -4,17 +4,7 @@ import { useStrings } from "@/lib/i18n/useStrings";
 import { Type } from "@/components/ui/Type";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-
-// Holz-Maserung als CSS-Muster (vertikale Dielen + feine Maserung + Naht-Linien).
-const woodStyle = {
-  backgroundColor: "#4a3322",
-  backgroundImage: [
-    "repeating-linear-gradient(91deg, rgba(0,0,0,0.10) 0 1px, transparent 1px 5px)",
-    "repeating-linear-gradient(89deg, rgba(255,255,255,0.022) 0 1px, transparent 1px 11px)",
-    "repeating-linear-gradient(90deg, rgba(0,0,0,0.32) 0 2px, transparent 2px 4px, rgba(255,255,255,0.02) 4px 5px, transparent 5px 230px)",
-    "linear-gradient(180deg, #5d4029, #382616)",
-  ].join(", "),
-} as const;
+import { woodStyle } from "@/lib/theme/wood";
 
 export function GiftVoucher() {
   const t = useStrings();
@@ -44,7 +34,7 @@ export function GiftVoucher() {
           {t.gift.text}
         </Type>
         <div className="mt-10">
-          <Button href="#" variant="outlineLight" size="md">
+          <Button href="/gutschein" variant="outlineLight" size="md">
             {t.gift.cta}
           </Button>
         </div>

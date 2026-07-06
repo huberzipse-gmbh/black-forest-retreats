@@ -58,7 +58,9 @@ export function PriceBreakdown({ quote }: { quote: PriceQuote }) {
                   ? t.registered
                   : line.kind === "promo"
                     ? t.promoLine(line.label)
-                    : line.label;
+                    : line.kind === "giftcard"
+                      ? t.giftLine(line.label)
+                      : line.label;
           const isDiscount = line.amountCents < 0;
           return (
             <div key={i} className="flex items-baseline justify-between gap-4">

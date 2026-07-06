@@ -14,6 +14,29 @@ import { getInvoicePdf } from '@/lib/invoices/create';
 import { sendEmail } from '@/lib/email/send';
 import { confirmationEmail, invoiceEmail, paymentFailedEmail } from '@/lib/email/templates';
 
+/**
+ * Gutschein-Guthaben einlösen, sobald die Buchung verbindlich wird (paid ODER
+ * scheduled). Idempotent über den unique constraint (gift_card_id, booking_id)
+ * in der DB-Funktion. Schlägt der Saldo-Guard fehl (Race: zwei fast
+ * gleichzeitige Buchungen mit demselben Code), wird die Buchung trotzdem
+ * bestätigt und der Konflikt geloggt — der Betreiber klärt manuell.
+ */
+async function redeemGiftCardForBooking(booking: Booking): Promise<void> {
+  if (!booking.giftCardId || booking.giftCardAppliedCents <= 0) return;
+  const sb = createAdminClient();
+  const { error } = await sb.rpc('redeem_gift_card', {
+    p_gift_card_id: booking.giftCardId,
+    p_booking_id: booking.id,
+    p_amount_cents: booking.giftCardAppliedCents,
+  });
+  if (error) {
+    console.error(
+      `[booking] Gutschein-Einlösung fehlgeschlagen (Buchung ${booking.bookingNumber}, Karte ${booking.giftCardId}):`,
+      error.message,
+    );
+  }
+}
+
 export async function loadBooking(bookingId: string): Promise<Booking> {
   const sb = createAdminClient();
   const { data, error } = await sb.from('bookings').select('*').eq('id', bookingId).single();
@@ -60,6 +83,8 @@ export async function markBookingPaid(
 
   const updated = await loadBooking(bookingId);
   const retreatName = await retreatNameOf(updated.retreatId);
+
+  await redeemGiftCardForBooking(updated);
 
   // Rechnung (idempotent) + PDF
   const invoice = await createInvoiceForBooking(updated, retreatName);
@@ -125,6 +150,10 @@ export async function markBookingScheduled(
 
   const updated = await loadBooking(bookingId);
   const retreatName = await retreatNameOf(updated.retreatId);
+
+  // Buchung ist ab jetzt verbindlich → Gutschein-Guthaben einlösen.
+  await redeemGiftCardForBooking(updated);
+
   const confirm = confirmationEmail({ booking: updated, retreatName });
   await sendEmail({
     to: updated.guestEmail,
