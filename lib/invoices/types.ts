@@ -20,8 +20,12 @@ export interface InvoiceLineItem {
 export interface InvoiceRecord {
   id: string;
   invoiceNumber: string;
-  bookingId: string;
+  /** Genau eines von beiden ist gesetzt: Buchung ODER Gutschein. */
+  bookingId: string | null;
+  giftCardId?: string | null;
   bookingNumber?: string;
+  /** Gutschein-Code (nur bei Gutschein-Rechnungen, fürs PDF/Meta). */
+  giftCode?: string;
   kind: 'invoice' | 'storno';
   referencesInvoiceNumber?: string;
   issuedAt: string;

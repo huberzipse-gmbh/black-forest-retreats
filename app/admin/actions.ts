@@ -13,7 +13,8 @@ import { ADMIN_COOKIE, createAdminToken, verifyAdminToken } from '@/lib/admin/se
 import { mapBooking } from '@/lib/booking/db';
 import { canTransition } from '@/lib/booking/stateMachine';
 import { getPaymentProvider } from '@/lib/payments';
-import { createStornoInvoice } from '@/lib/invoices/create';
+import { createStornoInvoice, createGiftStornoInvoice } from '@/lib/invoices/create';
+import { loadGiftCard } from '@/lib/giftcards/db';
 import { retreatNameOf } from '@/lib/booking/confirm';
 import { runChargeDue, runIcalSync, type CronResult } from '@/lib/booking/cron';
 import { retreatPhotoUrl } from '@/lib/storage/publicUrl';
@@ -320,6 +321,15 @@ export async function cancelGiftCard(giftCardId: string): Promise<{ ok: boolean;
     .eq('id', giftCardId)
     .eq('balance_cents', row.balance_cents); // Guard gegen parallele Einlösung
   if (error) return { ok: false, error: error.message };
+
+  // GoBD: existiert eine Rechnung (bezahlter Gutschein) → Stornorechnung.
+  try {
+    const card = await loadGiftCard(sb, giftCardId);
+    if (card) await createGiftStornoInvoice(card, 'Storno durch Betreiber');
+  } catch (err) {
+    console.error('[admin] Gutschein-Stornorechnung fehlgeschlagen:', err);
+  }
+
   revalidatePath('/admin/gutscheine');
   return { ok: true };
 }

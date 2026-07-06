@@ -907,6 +907,7 @@ export const de = {
       valueLabel: 'Wert',
       validLabel: 'Gültig bis',
       redeemHint: 'Einlösen: Bei der Buchung auf blackforest-retreats.de den Code ins Codefeld eingeben. Restguthaben bleibt auf dem Code.',
+      invoiceNote: 'Die Rechnung zu deinem Kauf liegt ebenfalls als PDF bei.',
     },
   },
 };

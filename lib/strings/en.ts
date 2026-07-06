@@ -903,6 +903,7 @@ export const en: Strings = {
       valueLabel: 'Value',
       validLabel: 'Valid until',
       redeemHint: 'To redeem: enter the code in the code field when booking on blackforest-retreats.de. Any remaining balance stays on the code.',
+      invoiceNote: 'The invoice for your purchase is also attached as a PDF.',
     },
   },
 };

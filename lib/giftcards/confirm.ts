@@ -18,29 +18,58 @@ import { addYears } from 'date-fns';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { sendEmail } from '@/lib/email/send';
 import { giftCardEmail } from '@/lib/email/templates';
-import { loadGiftCard } from './db';
+import { createInvoiceForGiftCard, getInvoicePdf } from '@/lib/invoices/create';
+import { getStripe } from '@/lib/payments/stripe';
+import { paymentMode } from '@/lib/payments';
+import { loadGiftCard, mapGiftCard } from './db';
 import { renderGiftCardPdf } from './pdf';
-import { GIFT_VALIDITY_YEARS } from './types';
+import { GIFT_VALIDITY_YEARS, type GiftCard } from './types';
+
+/**
+ * Belt & Braces zur Webhook-Latenz: Wenn der Käufer direkt nach der Zahlung
+ * auf der Erfolgsseite landet, den PaymentIntent-Status live bei Stripe
+ * prüfen und die Karte sofort aktivieren — der Webhook läuft dann idempotent
+ * ins Leere. Gibt die (ggf. aktivierte) Karte zurück.
+ */
+export async function settleGiftCardIfPaid(card: GiftCard): Promise<GiftCard> {
+  if (card.status !== 'pending' || !card.stripePaymentIntentId) return card;
+  if (paymentMode() !== 'stripe') return card;
+  try {
+    const pi = await getStripe().paymentIntents.retrieve(card.stripePaymentIntentId);
+    if (pi.status === 'succeeded') {
+      // Rückgabewert nutzen — ein erneutes SELECT würde memoized (stale) sein.
+      const activated = await markGiftCardPaid(card.id, { paymentIntentId: pi.id });
+      return activated ?? card;
+    }
+  } catch (err) {
+    console.error('[giftcard] PI-Status-Check fehlgeschlagen:', err);
+  }
+  return card;
+}
 
 export interface MarkGiftCardPaidOptions {
   paymentIntentId?: string;
   demo?: boolean;
 }
 
+/** Gibt die aktivierte Karte zurück (null, wenn nichts zu tun war). */
 export async function markGiftCardPaid(
   giftCardId: string,
   opts: MarkGiftCardPaidOptions = {},
-): Promise<void> {
+): Promise<GiftCard | null> {
   const admin = createAdminClient();
   const card = await loadGiftCard(admin, giftCardId);
   if (!card) throw new Error(`Gutschein ${giftCardId} nicht gefunden`);
 
   // Idempotenz: Webhook-Retries laufen ins Leere, keine zweite Mail.
-  if (card.status !== 'pending') return;
+  if (card.status !== 'pending') return card.status === 'active' ? card : null;
 
   const paidAt = new Date();
   const expiresAt = addYears(paidAt, GIFT_VALIDITY_YEARS);
-  const { error } = await admin
+  // Aktualisierte Row direkt aus dem UPDATE nehmen — ein erneutes SELECT
+  // würde im Server-Component-Render von Nexts Request-Memoization
+  // dedupliziert und die ALTE (pending-)Row liefern.
+  const { data: updatedRow, error } = await admin
     .from('gift_cards')
     .update({
       status: 'active',
@@ -50,14 +79,29 @@ export async function markGiftCardPaid(
       demo: opts.demo ?? card.demo,
     })
     .eq('id', giftCardId)
-    .eq('status', 'pending'); // Guard gegen parallele Bestätigungen
+    .eq('status', 'pending') // Guard gegen parallele Bestätigungen
+    .select('*')
+    .maybeSingle();
   if (error) throw error;
+  if (!updatedRow) return null; // parallel bereits bestätigt
 
-  const activeCard = await loadGiftCard(admin, giftCardId);
-  if (!activeCard) return;
+  const activeCard = mapGiftCard(updatedRow);
 
-  // Mail mit PDF — Fehler hier dürfen die Zahlung nicht „zurückrollen":
-  // Karte ist aktiv, das PDF ist jederzeit über die Download-Route erreichbar.
+  // Rechnung (GoBD, gleicher Nummernkreis wie Buchungen; idempotent).
+  // Fehler hier dürfen die Aktivierung nicht zurückrollen — Karte ist bezahlt.
+  let invoicePdf: { filename: string; content: Buffer } | null = null;
+  try {
+    const invoice = await createInvoiceForGiftCard(activeCard);
+    invoicePdf = {
+      filename: `${invoice.invoiceNumber}.pdf`,
+      content: await getInvoicePdf(invoice),
+    };
+  } catch (err) {
+    console.error('[giftcard] Rechnungserstellung fehlgeschlagen:', err);
+  }
+
+  // Mail mit Gutschein-PDF + Rechnung — Fehler hier dürfen die Zahlung nicht
+  // „zurückrollen": die PDFs sind jederzeit über Route/Admin erreichbar.
   try {
     const pdf = await renderGiftCardPdf(activeCard);
     const mail = giftCardEmail(activeCard);
@@ -65,9 +109,14 @@ export async function markGiftCardPaid(
       to: activeCard.buyerEmail,
       subject: mail.subject,
       html: mail.html,
-      attachments: [{ filename: `${activeCard.code}.pdf`, content: pdf }],
+      attachments: [
+        { filename: `${activeCard.code}.pdf`, content: pdf },
+        ...(invoicePdf ? [invoicePdf] : []),
+      ],
     });
   } catch (err) {
     console.error('[giftcard] Gutschein-Mail fehlgeschlagen:', err);
   }
+
+  return activeCard;
 }

@@ -146,6 +146,12 @@ function InvoiceDoc({ invoice }: { invoice: InvoiceRecord }) {
               <Text style={s.metaValue}>{invoice.bookingNumber}</Text>
             </View>
           ) : null}
+          {invoice.giftCode ? (
+            <View>
+              <Text style={s.metaLabel}>Gutschein</Text>
+              <Text style={s.metaValue}>{invoice.giftCode}</Text>
+            </View>
+          ) : null}
           {isStorno && invoice.referencesInvoiceNumber ? (
             <View>
               <Text style={s.metaLabel}>Zu Rechnung</Text>
@@ -186,9 +192,11 @@ function InvoiceDoc({ invoice }: { invoice: InvoiceRecord }) {
           </View>
         </View>
 
-        {/* Rechtlicher Hinweis */}
+        {/* Rechtlicher Hinweis (Beherbergung vs. Wertgutschein) */}
         <Text style={s.note}>
-          Beherbergungsleistung, ermäßigter Umsatzsteuersatz gemäß § 12 Abs. 2 Nr. 11 UStG.
+          {invoice.giftCardId
+            ? 'Mehrzweck-Gutschein (Wertgutschein) gemäß § 3 Abs. 15 UStG — die Ausgabe unterliegt nicht der Umsatzsteuer; diese entsteht erst bei Einlösung des Gutscheins.'
+            : 'Beherbergungsleistung, ermäßigter Umsatzsteuersatz gemäß § 12 Abs. 2 Nr. 11 UStG.'}
           {invoice.grossCents >= 0
             ? ' Der Rechnungsbetrag wurde bzw. wird gemäß der gewählten Zahlungsart beglichen.'
             : ' Der Betrag wird erstattet.'}

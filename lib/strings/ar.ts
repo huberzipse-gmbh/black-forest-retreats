@@ -903,6 +903,7 @@ export const ar: Strings = {
       valueLabel: 'القيمة',
       validLabel: 'صالحة حتى',
       redeemHint: 'للاستخدام: أدخل الرمز في حقل الرمز عند الحجز على blackforest-retreats.de. يبقى الرصيد المتبقي على الرمز.',
+      invoiceNote: 'فاتورة شرائك مرفقة أيضًا بصيغة PDF.',
     },
   },
 };

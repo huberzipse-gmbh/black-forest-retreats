@@ -22,7 +22,7 @@ export default async function AdminDashboardPage() {
   const monthAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
   const weekAhead = iso(addDays(new Date(), 7));
 
-  const [paidRes, openRes, arrivalsRes, failedRes, recentRes, cronRes] = await Promise.all([
+  const [paidRes, openRes, arrivalsRes, failedRes, recentRes, cronRes, giftSoldRes, giftOpenRes] = await Promise.all([
     sb
       .from("bookings")
       .select("total_cents")
@@ -50,9 +50,20 @@ export default async function AdminDashboardPage() {
       .order("created_at", { ascending: false })
       .limit(8),
     sb.from("cron_runs").select("*"),
+    // Gutschein-Umsatz (30 Tage): bezahlte Karten, Demo ausgenommen.
+    sb
+      .from("gift_cards")
+      .select("amount_cents")
+      .in("status", ["active", "redeemed"])
+      .eq("demo", false)
+      .gte("paid_at", monthAgo),
+    // Offenes Guthaben: aktive Karten = ausstehende Leistungsverpflichtung.
+    sb.from("gift_cards").select("balance_cents").eq("status", "active").eq("demo", false),
   ]);
 
   const revenue30 = (paidRes.data ?? []).reduce((sum, r) => sum + r.total_cents, 0);
+  const giftRevenue30 = (giftSoldRes.data ?? []).reduce((sum, r) => sum + r.amount_cents, 0);
+  const giftOpenBalance = (giftOpenRes.data ?? []).reduce((sum, r) => sum + r.balance_cents, 0);
   const failedCharges = failedRes.data ?? [];
   const recent = (recentRes.data ?? []).map((row) => ({
     booking: mapBooking(row),
@@ -80,8 +91,10 @@ export default async function AdminDashboardPage() {
       )}
 
       {/* Kennzahlen */}
-      <div className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard label="Umsatz (30 Tage)" valueCents={revenue30} />
+      <div className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-3">
+        <StatCard label="Umsatz Buchungen (30 Tage)" valueCents={revenue30} />
+        <StatCard label="Umsatz Gutscheine (30 Tage)" valueCents={giftRevenue30} />
+        <StatCard label="Offenes Gutschein-Guthaben" valueCents={giftOpenBalance} />
         <StatCard label="Offene Buchungen" value={openRes.count ?? 0} />
         <StatCard label="Anreisen (7 Tage)" value={arrivalsRes.count ?? 0} />
         <StatCard label="Fehlgeschlagene Abbuchungen" value={failedCharges.length} alert={failedCharges.length > 0} />

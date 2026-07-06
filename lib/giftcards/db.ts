@@ -35,14 +35,19 @@ export async function loadGiftCard(sb: SupabaseClient, id: string): Promise<Gift
   return data ? mapGiftCard(data) : null;
 }
 
-/** Karte per Code finden (case-insensitiv, getrimmt). */
+/**
+ * Karte per Code finden — tolerant gegen Tippvarianten: Groß-/Kleinschreibung,
+ * Leerzeichen und fehlende/falsche Bindestriche ("gift fhvt sgcc",
+ * "GIFTFHVTSGCC" → GIFT-FHVT-SGCC).
+ */
 export async function findGiftCardByCode(sb: SupabaseClient, code: string): Promise<GiftCard | null> {
-  const normalized = code.trim().toUpperCase();
-  if (!normalized) return null;
+  const compact = code.toUpperCase().replace(/[^A-Z0-9]/g, '');
+  if (!compact.startsWith('GIFT') || compact.length !== 12) return null;
+  const canonical = `GIFT-${compact.slice(4, 8)}-${compact.slice(8, 12)}`;
   const { data } = await sb
     .from('gift_cards')
     .select('*')
-    .ilike('code', normalized)
+    .eq('code', canonical)
     .maybeSingle();
   return data ? mapGiftCard(data) : null;
 }

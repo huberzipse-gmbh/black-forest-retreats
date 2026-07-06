@@ -9,7 +9,7 @@ export default async function AdminInvoicesPage() {
   const sb = createAdminClient();
   const { data: invoices } = await sb
     .from("invoices")
-    .select("id, invoice_number, kind, gross_cents, issued_at, recipient, bookings(booking_number)")
+    .select("id, invoice_number, kind, gross_cents, issued_at, recipient, bookings(booking_number), gift_cards(code)")
     .order("issued_at", { ascending: false })
     .limit(500);
 
@@ -24,7 +24,7 @@ export default async function AdminInvoicesPage() {
         <table className="w-full min-w-[680px]">
           <thead>
             <tr className="border-b border-forest-900/10">
-              {["Nummer", "Art", "Datum", "Empfänger", "Buchung", "Brutto", ""].map((h) => (
+              {["Nummer", "Art", "Datum", "Empfänger", "Buchung / Gutschein", "Brutto", ""].map((h) => (
                 <th key={h} className="px-4 py-3 text-start font-body text-[0.65rem] font-semibold uppercase tracking-wider text-forest-700/55">
                   {h}
                 </th>
@@ -54,7 +54,9 @@ export default async function AdminInvoicesPage() {
                   {(inv.recipient as { name?: string })?.name ?? ""}
                 </td>
                 <td className="px-4 py-3 font-body text-sm text-forest-700/80">
-                  {(inv as { bookings?: { booking_number?: string } }).bookings?.booking_number ?? ""}
+                  {(inv as { bookings?: { booking_number?: string } }).bookings?.booking_number ??
+                    (inv as { gift_cards?: { code?: string } }).gift_cards?.code ??
+                    ""}
                 </td>
                 <td className="px-4 py-3 font-body text-sm font-semibold text-forest-900">{eur(inv.gross_cents)}</td>
                 <td className="px-4 py-3 text-end">
