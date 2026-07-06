@@ -76,7 +76,7 @@ export interface BookingSettings {
 
 /** Eine Zeile der Preisaufschlüsselung (wie bei Airbnb). */
 export interface QuoteLine {
-  kind: 'nights' | 'discount' | 'promo' | 'cleaning' | 'registered';
+  kind: 'nights' | 'discount' | 'promo' | 'cleaning' | 'registered' | 'giftcard';
   label: string;
   amountCents: number; // Rabatte negativ
 }
@@ -95,6 +95,8 @@ export interface PriceQuote {
   lines: QuoteLine[];
   cleaningFeeCents: number;
   registeredDiscountCents: number;
+  /** Vom Gutschein gedeckter Betrag (0 = kein Gutschein angewendet). */
+  giftCardAppliedCents?: number;
   totalCents: number; // brutto
   vatRate: number;
   netCents: number;
@@ -148,6 +150,9 @@ export interface Booking {
   stripePaymentMethodId: string | null;
   locale: string;
   cancellationDays: number;
+  /** Eingelöster Gutschein (null = keiner). */
+  giftCardId: string | null;
+  giftCardAppliedCents: number;
   demo: boolean;
   createdAt: string;
   confirmedAt: string | null;

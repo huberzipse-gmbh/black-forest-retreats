@@ -33,6 +33,8 @@ interface Props {
   initialUser: { email: string } | null;
   /** Eingelöster Rabattcode aus dem Cookie (Validierung in computeQuote). */
   promoCode: string | null;
+  /** Eingelöster Gutschein (serverseitig via resolveGiftCard aufgelöst). */
+  giftCard: { code: string; balanceCents: number } | null;
 }
 
 type AuthMode = "guest" | "login" | "register";
@@ -50,6 +52,7 @@ export function ReviewView({
   cancellationDays,
   initialUser,
   promoCode,
+  giftCard,
 }: Props) {
   const strings = useStrings();
   const t = strings.bookingFlow;
@@ -80,8 +83,9 @@ export function ReviewView({
         checkOut,
         isRegistered: Boolean(user),
         promoCode,
+        giftCard,
       }),
-    [retreat, rules, settings, checkIn, checkOut, user, promoCode],
+    [retreat, rules, settings, checkIn, checkOut, user, promoCode, giftCard],
   );
 
   const editHref = `/buchen/${retreat.slug}`;

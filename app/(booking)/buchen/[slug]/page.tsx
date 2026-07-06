@@ -8,6 +8,8 @@ import { createClient } from "@/lib/supabase/server";
 import { fetchBlocks, fetchPriceRules, fetchSettings } from "@/lib/booking/db";
 import { blockedNights } from "@/lib/booking/availability";
 import { PROMO_COOKIE } from "@/lib/booking/pricing";
+import { GIFT_COOKIE } from "@/lib/giftcards/types";
+import { resolveGiftCard } from "@/lib/giftcards/redeem";
 import { BookingWidget } from "@/components/booking/BookingWidget";
 import { NotConfiguredNotice } from "@/components/booking/NotConfiguredNotice";
 
@@ -46,6 +48,7 @@ export default async function BookingDatesPage({
     cookies(),
   ]);
   const promoCode = cookieStore.get(PROMO_COOKIE)?.value ?? null;
+  const giftCard = await resolveGiftCard(cookieStore.get(GIFT_COOKIE)?.value ?? null);
 
   return (
     <BookingWidget
@@ -65,6 +68,7 @@ export default async function BookingDatesPage({
       blockedNights={[...blockedNights(blocks)]}
       isRegistered={Boolean(userRes.data?.user)}
       promoCode={promoCode}
+      giftCard={giftCard ? { code: giftCard.code, balanceCents: giftCard.balanceCents } : null}
     />
   );
 }

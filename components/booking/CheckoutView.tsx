@@ -9,12 +9,11 @@
 import { useEffect, useRef, useState, useTransition } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { loadStripe, type Stripe } from "@stripe/stripe-js";
-import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useLocale, useStrings } from "@/lib/i18n/I18nProvider";
 import { fmtDate, fmtEur, fmtNum } from "@/lib/i18n/format";
 import { confirmDemoPayment, initiatePayment } from "@/lib/booking/actions";
 import { Type } from "@/components/ui/Type";
+import { StripePayment } from "./StripePayment";
 
 export interface CheckoutBooking {
   id: string;
@@ -37,6 +36,7 @@ interface Props {
 export function CheckoutView({ booking, publishableKey }: Props) {
   const t = useStrings().bookingFlow;
   const locale = useLocale();
+  const router = useRouter();
 
   const [mode, setMode] = useState<"stripe" | "demo" | null>(null);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
@@ -48,7 +48,12 @@ export function CheckoutView({ booking, publishableKey }: Props) {
     if (initiated.current) return;
     initiated.current = true;
     initiatePayment(booking.id).then((res) => {
-      if (!res.ok || !res.clientSecret || !res.mode) {
+      // Gutschein deckt alles → Buchung ist bereits bestätigt, direkt weiter.
+      if (res.ok && res.mode === "free") {
+        router.push(`/buchung/${booking.bookingNumber}`);
+        return;
+      }
+      if (!res.ok || !res.clientSecret || !res.mode || res.mode === "free") {
         setError(t.errors.generic);
         return;
       }
@@ -120,11 +125,11 @@ export function CheckoutView({ booking, publishableKey }: Props) {
         )}
 
         {mode === "stripe" && clientSecret && publishableKey && (
-          <StripeCheckout
+          <StripePayment
             publishableKey={publishableKey}
             clientSecret={clientSecret}
             intentType={intentType}
-            bookingNumber={booking.bookingNumber}
+            returnPath={`/buchung/${booking.bookingNumber}`}
             onError={(msg) => setError(msg || t.errors.paymentFailed)}
           />
         )}
@@ -187,85 +192,4 @@ function DemoPaymentForm({
   );
 }
 
-/* ── Stripe Payment Element ───────────────────────────────────────────────── */
-
-let stripePromise: Promise<Stripe | null> | null = null;
-
-function StripeCheckout({
-  publishableKey,
-  clientSecret,
-  intentType,
-  bookingNumber,
-  onError,
-}: {
-  publishableKey: string;
-  clientSecret: string;
-  intentType: "payment" | "setup";
-  bookingNumber: string;
-  onError: (msg?: string) => void;
-}) {
-  if (!stripePromise) stripePromise = loadStripe(publishableKey);
-  return (
-    <div className="mt-4">
-      <Elements
-        stripe={stripePromise}
-        options={{
-          clientSecret,
-          appearance: {
-            variables: {
-              colorPrimary: "#1b2a21",
-              colorText: "#1b2a21",
-              borderRadius: "4px",
-            },
-          },
-        }}
-      >
-        <StripeForm intentType={intentType} bookingNumber={bookingNumber} onError={onError} />
-      </Elements>
-    </div>
-  );
-}
-
-function StripeForm({
-  intentType,
-  bookingNumber,
-  onError,
-}: {
-  intentType: "payment" | "setup";
-  bookingNumber: string;
-  onError: (msg?: string) => void;
-}) {
-  const t = useStrings().bookingFlow;
-  const stripe = useStripe();
-  const elements = useElements();
-  const [busy, setBusy] = useState(false);
-
-  const confirm = async () => {
-    if (!stripe || !elements) return;
-    setBusy(true);
-    const returnUrl = `${window.location.origin}/buchung/${bookingNumber}`;
-    const result =
-      intentType === "setup"
-        ? await stripe.confirmSetup({ elements, confirmParams: { return_url: returnUrl } })
-        : await stripe.confirmPayment({ elements, confirmParams: { return_url: returnUrl } });
-    if (result.error) {
-      onError(result.error.message);
-      setBusy(false);
-    }
-    // Ohne Fehler leitet Stripe zur return_url weiter.
-  };
-
-  return (
-    <div>
-      <PaymentElement />
-      <button
-        type="button"
-        onClick={confirm}
-        disabled={busy || !stripe}
-        className="mt-5 w-full rounded-[3px] bg-brass-400 px-8 py-4 font-body text-xs font-semibold uppercase tracking-[0.18em] text-night transition-colors duration-300 hover:bg-brass-300 disabled:opacity-50"
-      >
-        {busy ? t.payment.processing : t.cta.confirmPay}
-      </button>
-    </div>
-  );
-}
+/* Stripe Payment Element: siehe StripePayment.tsx (geteilt mit Gutschein-Kauf). */

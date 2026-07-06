@@ -82,6 +82,13 @@ function lineItemsFromQuote(booking: Booking, retreatName: string): InvoiceLineI
         unitCents: line.amountCents,
         totalCents: line.amountCents,
       });
+    } else if (line.kind === 'giftcard') {
+      items.push({
+        label: `Gutschein: ${line.label}`,
+        quantity: 1,
+        unitCents: line.amountCents,
+        totalCents: line.amountCents,
+      });
     } else if (line.kind === 'cleaning') {
       items.push({
         label: 'Endreinigung',

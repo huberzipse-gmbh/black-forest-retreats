@@ -86,6 +86,11 @@ export interface QuoteInput {
   isRegistered: boolean;
   /** Vom Gast eingelöster Rabattcode (QR/Aufsteller) — Validierung hier. */
   promoCode?: string | null;
+  /**
+   * Eingelöster Gutschein (serverseitig via resolveGiftCard aufgelöst —
+   * der Client rechnet nie selbst am Saldo).
+   */
+  giftCard?: { code: string; balanceCents: number } | null;
 }
 
 /** Cookie-Name des eingelösten Rabattcodes (hier, weil 'use server'-Module nur Funktionen exportieren). */
@@ -99,7 +104,7 @@ export function promoMatches(settings: BookingSettings, code: string | null | un
 }
 
 export function computeQuote(input: QuoteInput): PriceQuote {
-  const { retreat, rules, settings, checkIn, checkOut, isRegistered, promoCode } = input;
+  const { retreat, rules, settings, checkIn, checkOut, isRegistered, promoCode, giftCard } = input;
   const nights = differenceInCalendarDays(new Date(checkOut), new Date(checkIn));
   if (nights <= 0) throw new Error('Ungültiger Zeitraum: checkOut muss nach checkIn liegen.');
 
@@ -149,7 +154,25 @@ export function computeQuote(input: QuoteInput): PriceQuote {
     }
   }
 
+  // Gutschein zuletzt (wirkt wie ein Zahlungsmittel): deckt bis zum Total,
+  // Restguthaben bleibt auf dem Code. USt-Behandlung siehe Hinweis unten.
+  let giftCardAppliedCents = 0;
+  if (giftCard && giftCard.balanceCents > 0) {
+    giftCardAppliedCents = Math.min(total, giftCard.balanceCents);
+    if (giftCardAppliedCents > 0) {
+      lines.push({
+        kind: 'giftcard',
+        label: giftCard.code.trim().toUpperCase(),
+        amountCents: -giftCardAppliedCents,
+      });
+      total -= giftCardAppliedCents;
+    }
+  }
+
   // USt aus dem Bruttobetrag herausrechnen (Beherbergung).
+  // TODO Steuerberater: Gutschein mindert hier das Brutto (pragmatisch).
+  // Da nur Beherbergung (7 %) einlösbar ist, könnte ein Einzweck-Gutschein
+  // (§ 3 Abs. 14 UStG) vorliegen — USt dann bereits beim Verkauf fällig.
   const net = Math.round(total / (1 + settings.vatRate / 100));
   const vat = total - net;
 
@@ -164,6 +187,7 @@ export function computeQuote(input: QuoteInput): PriceQuote {
     lines,
     cleaningFeeCents: cleaning,
     registeredDiscountCents,
+    giftCardAppliedCents,
     totalCents: total,
     vatRate: settings.vatRate,
     netCents: net,

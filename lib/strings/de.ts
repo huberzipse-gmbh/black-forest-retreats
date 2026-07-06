@@ -704,11 +704,15 @@ export const de = {
       goodPrice: 'Guter Preis: Dein Zeitraum liegt im unteren Durchschnitt der letzten 60 Tage.',
       details: 'Preisaufschlüsselung',
       promoLine: (code: string) => `Rabattcode ${code}`,
+      giftLine: (code: string) => `Gutschein ${code}`,
+      giftRemainderNote: 'Restguthaben bleibt auf deinem Gutschein-Code.',
     },
     promo: {
-      title: 'Rabattcode',
+      title: 'Rabatt- oder Gutscheincode',
       placeholder: 'Code eingeben',
       apply: 'Einlösen',
+      giftApplied: (code: string, balance: string) =>
+        `Gutschein ${code} aktiv · Guthaben ${balance}.`,
       applied: (code: string, pct: string) =>
         `Code ${code} aktiv: ${pct} % auf den Übernachtungspreis.`,
       invalid: 'Dieser Code ist leider nicht gültig.',
@@ -819,6 +823,90 @@ export const de = {
       failedIntro: 'die Abbuchung für deine Buchung hat leider nicht geklappt. Bitte melde dich bei uns, dann finden wir eine Lösung.',
       signoff: 'Herzliche Grüße aus dem Schwarzwald',
       teamName: 'Black Forest Retreats',
+    },
+  },
+
+  giftFlow: {
+    steps: {
+      amount: 'Wert',
+      personalize: 'Personalisieren',
+      preview: 'Vorschau',
+      pay: 'Bezahlen',
+    },
+    hero: {
+      eyebrow: 'Gutschein',
+      title: 'Schwarzwald verschenken',
+      intro: 'Wert wählen, Widmung schreiben, fertig. Der Gutschein kommt sofort als PDF per E-Mail.',
+    },
+    amount: {
+      title: 'Wähle den Wert',
+      custom: 'Wunschbetrag',
+      customPlaceholder: 'z. B. 75',
+      customHint: (min: string, max: string) => `Frei wählbar zwischen ${min} und ${max}.`,
+    },
+    personalize: {
+      title: 'Für wen ist er?',
+      forLabel: 'Für',
+      forPlaceholder: 'Name der beschenkten Person',
+      fromLabel: 'Von',
+      fromPlaceholder: 'Dein Name',
+      messageLabel: 'Persönliche Nachricht (optional)',
+      messagePlaceholder: 'Ein paar Zeilen für den Anlass …',
+      emailLabel: 'Deine E-Mail-Adresse',
+      emailHint: 'Dorthin schicken wir den Gutschein als PDF.',
+      iconLabel: 'Motiv',
+      icons: {
+        hut: 'Bollenhut',
+        uhr: 'Kuckucksuhr',
+        kirschtorte: 'Kirschtorte',
+        schinken: 'Schwarzwälder Schinken',
+      },
+    },
+    preview: {
+      title: 'So sieht dein Gutschein aus',
+      note: 'Der Gutschein-Code erscheint nach der Zahlung auf der Karte und im PDF.',
+    },
+    card: {
+      eyebrow: 'Gutschein',
+      forLabel: 'Für',
+      fromLabel: 'Von',
+      codeLabel: 'Code',
+      validity: '3 Jahre gültig',
+      validUntil: (d: string) => `Gültig bis ${d}`,
+      redeemHint: 'Einlösbar bei jeder Buchung auf blackforest-retreats.de',
+    },
+    payment: {
+      title: 'Bezahlen',
+      summaryLabel: 'Gutschein für',
+      valueLabel: 'Wert',
+    },
+    success: {
+      pendingTitle: 'Zahlung wird bestätigt …',
+      pendingText: 'Einen Moment, wir warten auf die Bestätigung deiner Zahlung.',
+      title: 'Danke! Dein Gutschein ist unterwegs.',
+      mailInfo: (email: string) => `Wir haben den Gutschein als PDF an ${email} geschickt.`,
+      codeLabel: 'Dein Gutschein-Code',
+      downloadCta: 'PDF herunterladen & drucken',
+      redeemHint: 'Einlösen: Code bei der Buchung ins Codefeld eingeben, der Wert wird direkt abgezogen. Restguthaben bleibt auf dem Code.',
+    },
+    cta: {
+      back: 'Zurück',
+      next: 'Weiter',
+      toPayment: 'Weiter zur Zahlung',
+    },
+    errors: {
+      invalid: 'Bitte prüfe deine Eingaben.',
+      generic: 'Das hat leider nicht geklappt. Versuch es bitte gleich noch einmal.',
+    },
+    email: {
+      subject: (code: string) => `Dein Gutschein ${code} · Black Forest Retreats`,
+      greeting: (name: string) => `Hallo ${name},`,
+      intro: (recipient: string) =>
+        `dein Gutschein für ${recipient} ist bezahlt und hängt als PDF an dieser E-Mail. Ausdrucken, verschenken, freuen.`,
+      codeLabel: 'Code',
+      valueLabel: 'Wert',
+      validLabel: 'Gültig bis',
+      redeemHint: 'Einlösen: Bei der Buchung auf blackforest-retreats.de den Code ins Codefeld eingeben. Restguthaben bleibt auf dem Code.',
     },
   },
 };

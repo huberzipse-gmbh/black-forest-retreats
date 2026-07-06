@@ -700,11 +700,15 @@ export const en: Strings = {
       goodPrice: 'Good price: your dates sit in the lower average of the last 60 days.',
       details: 'Price breakdown',
       promoLine: (code: string) => `Discount code ${code}`,
+      giftLine: (code: string) => `Gift card ${code}`,
+      giftRemainderNote: 'Any remaining balance stays on your gift code.',
     },
     promo: {
-      title: 'Discount code',
+      title: 'Discount or gift code',
       placeholder: 'Enter code',
       apply: 'Apply',
+      giftApplied: (code: string, balance: string) =>
+        `Gift card ${code} active · balance ${balance}.`,
       applied: (code: string, pct: string) =>
         `Code ${code} active: ${pct}% off the nightly rate.`,
       invalid: 'Sorry, this code is not valid.',
@@ -815,6 +819,90 @@ export const en: Strings = {
       failedIntro: 'unfortunately the charge for your booking did not go through. Please get in touch and we will sort it out.',
       signoff: 'Warm greetings from the Black Forest',
       teamName: 'Black Forest Retreats',
+    },
+  },
+
+  giftFlow: {
+    steps: {
+      amount: 'Value',
+      personalize: 'Personalize',
+      preview: 'Preview',
+      pay: 'Pay',
+    },
+    hero: {
+      eyebrow: 'Gift card',
+      title: 'Gift the Black Forest',
+      intro: 'Pick a value, write a dedication, done. The gift card arrives instantly as a PDF by email.',
+    },
+    amount: {
+      title: 'Choose the value',
+      custom: 'Custom amount',
+      customPlaceholder: 'e.g. 75',
+      customHint: (min: string, max: string) => `Any amount between ${min} and ${max}.`,
+    },
+    personalize: {
+      title: 'Who is it for?',
+      forLabel: 'For',
+      forPlaceholder: 'Name of the lucky one',
+      fromLabel: 'From',
+      fromPlaceholder: 'Your name',
+      messageLabel: 'Personal message (optional)',
+      messagePlaceholder: 'A few lines for the occasion …',
+      emailLabel: 'Your email address',
+      emailHint: 'We will send the gift card PDF there.',
+      iconLabel: 'Motif',
+      icons: {
+        hut: 'Bollenhut hat',
+        uhr: 'Cuckoo clock',
+        kirschtorte: 'Black Forest gateau',
+        schinken: 'Black Forest ham',
+      },
+    },
+    preview: {
+      title: 'This is your gift card',
+      note: 'The gift code appears on the card and PDF after payment.',
+    },
+    card: {
+      eyebrow: 'Gift card',
+      forLabel: 'For',
+      fromLabel: 'From',
+      codeLabel: 'Code',
+      validity: 'Valid for 3 years',
+      validUntil: (d: string) => `Valid until ${d}`,
+      redeemHint: 'Redeemable with any booking on blackforest-retreats.de',
+    },
+    payment: {
+      title: 'Payment',
+      summaryLabel: 'Gift card for',
+      valueLabel: 'Value',
+    },
+    success: {
+      pendingTitle: 'Confirming your payment …',
+      pendingText: 'One moment, we are waiting for your payment confirmation.',
+      title: 'Thank you! Your gift card is on its way.',
+      mailInfo: (email: string) => `We have sent the gift card PDF to ${email}.`,
+      codeLabel: 'Your gift code',
+      downloadCta: 'Download & print PDF',
+      redeemHint: 'To redeem: enter the code in the code field during booking, the value is deducted right away. Any remaining balance stays on the code.',
+    },
+    cta: {
+      back: 'Back',
+      next: 'Continue',
+      toPayment: 'Continue to payment',
+    },
+    errors: {
+      invalid: 'Please check your input.',
+      generic: 'That did not work. Please try again in a moment.',
+    },
+    email: {
+      subject: (code: string) => `Your gift card ${code} · Black Forest Retreats`,
+      greeting: (name: string) => `Hello ${name},`,
+      intro: (recipient: string) =>
+        `your gift card for ${recipient} is paid and attached to this email as a PDF. Print it, gift it, enjoy.`,
+      codeLabel: 'Code',
+      valueLabel: 'Value',
+      validLabel: 'Valid until',
+      redeemHint: 'To redeem: enter the code in the code field when booking on blackforest-retreats.de. Any remaining balance stays on the code.',
     },
   },
 };

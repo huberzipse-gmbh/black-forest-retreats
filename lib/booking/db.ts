@@ -86,6 +86,8 @@ export function mapBooking(b: any): Booking {
     stripePaymentMethodId: b.stripe_payment_method_id,
     locale: b.locale,
     cancellationDays: b.cancellation_days,
+    giftCardId: b.gift_card_id ?? null,
+    giftCardAppliedCents: b.gift_card_applied_cents ?? 0,
     demo: b.demo,
     createdAt: b.created_at,
     confirmedAt: b.confirmed_at,

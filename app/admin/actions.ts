@@ -69,11 +69,15 @@ export async function cancelBooking(bookingId: string, reason: string): Promise<
       return { ok: false, error: `Storno aus Status ${from.status}/${from.paymentStatus} nicht möglich.` };
     }
 
-    // Bezahlt → Erstattung anstoßen
+    // Bezahlt → Erstattung anstoßen. Bei 0 € (Volldeckung durch Gutschein)
+    // gibt es nichts zu erstatten; Guthaben-Rückbuchung ist manuell (Admin).
     let refunded = false;
     if (wasPaid) {
-      const res = await getPaymentProvider().refund(booking);
-      refunded = res.ok;
+      if (booking.totalCents === 0) refunded = true;
+      else {
+        const res = await getPaymentProvider().refund(booking);
+        refunded = res.ok;
+      }
     }
 
     await sb
@@ -287,6 +291,37 @@ export async function saveSettings(raw: SettingsFormData): Promise<{ ok: boolean
     .update({ ...parsed.data, updated_at: new Date().toISOString() })
     .eq('id', 1);
   return error ? { ok: false, error: error.message } : { ok: true };
+}
+
+/* ── Gutscheine ───────────────────────────────────────────────────────────── */
+
+/**
+ * Gutschein stornieren — nur solange das Guthaben unangetastet ist.
+ * Eine evtl. Stripe-Erstattung läuft manuell über das Stripe-Dashboard.
+ */
+export async function cancelGiftCard(giftCardId: string): Promise<{ ok: boolean; error?: string }> {
+  await assertAdmin();
+  const sb = createAdminClient();
+  const { data: row } = await sb
+    .from('gift_cards')
+    .select('status, amount_cents, balance_cents')
+    .eq('id', giftCardId)
+    .maybeSingle();
+  if (!row) return { ok: false, error: 'Gutschein nicht gefunden.' };
+  if (!['pending', 'active'].includes(row.status)) {
+    return { ok: false, error: 'Nur offene oder aktive Gutscheine sind stornierbar.' };
+  }
+  if (row.balance_cents !== row.amount_cents) {
+    return { ok: false, error: 'Guthaben wurde bereits teilweise eingelöst.' };
+  }
+  const { error } = await sb
+    .from('gift_cards')
+    .update({ status: 'cancelled' })
+    .eq('id', giftCardId)
+    .eq('balance_cents', row.balance_cents); // Guard gegen parallele Einlösung
+  if (error) return { ok: false, error: error.message };
+  revalidatePath('/admin/gutscheine');
+  return { ok: true };
 }
 
 /* ── Foto-Upload (Supabase Storage) ───────────────────────────────────────── */

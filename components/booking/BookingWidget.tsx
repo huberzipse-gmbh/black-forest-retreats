@@ -38,9 +38,11 @@ interface Props {
   isRegistered: boolean;
   /** Eingelöster Rabattcode aus dem Cookie (Validierung in computeQuote). */
   promoCode: string | null;
+  /** Eingelöster Gutschein (serverseitig via resolveGiftCard aufgelöst). */
+  giftCard: { code: string; balanceCents: number } | null;
 }
 
-export function BookingWidget({ retreat, rules, settings, blockedNights, isRegistered, promoCode }: Props) {
+export function BookingWidget({ retreat, rules, settings, blockedNights, isRegistered, promoCode, giftCard }: Props) {
   const strings = useStrings();
   const t = strings.bookingFlow;
   const locale = useLocale();
@@ -64,11 +66,12 @@ export function BookingWidget({ retreat, rules, settings, blockedNights, isRegis
         checkOut: selection.checkOut,
         isRegistered,
         promoCode,
+        giftCard,
       });
     } catch {
       return null;
     }
-  }, [selection, retreat, rules, settings, isRegistered, promoCode]);
+  }, [selection, retreat, rules, settings, isRegistered, promoCode, giftCard]);
 
   // Vorschau des Nachtpreises auch ohne Auswahl (heutiger Tag als Referenz).
   const previewQuote = useMemo(() => {
@@ -198,14 +201,14 @@ export function BookingWidget({ retreat, rules, settings, blockedNights, isRegis
             </div>
           )}
 
-          {settings.promo.active && settings.promo.percent > 0 && (
-            <div className="mt-5 border-t border-forest-900/10 pt-5">
-              <PromoCodeField
-                activeCode={promoMatches(settings, promoCode) ? settings.promo.code.toUpperCase() : null}
-                percent={settings.promo.percent}
-              />
-            </div>
-          )}
+          <div className="mt-5 border-t border-forest-900/10 pt-5">
+            <PromoCodeField
+              activeCode={promoMatches(settings, promoCode) ? settings.promo.code.toUpperCase() : null}
+              percent={settings.promo.percent}
+              promoAvailable={settings.promo.active && settings.promo.percent > 0}
+              activeGift={giftCard}
+            />
+          </div>
 
           <button
             type="button"

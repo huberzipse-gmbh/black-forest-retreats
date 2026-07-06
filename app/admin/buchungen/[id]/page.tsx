@@ -96,7 +96,9 @@ export default async function AdminBookingDetailPage({
                       ? "Registrierten-Rabatt"
                       : line.kind === "promo"
                         ? `Rabattcode ${line.label}`
-                        : line.label}
+                        : line.kind === "giftcard"
+                          ? `Gutschein ${line.label}`
+                          : line.label}
               </span>
               <span className={line.amountCents < 0 ? "text-forest-500" : "text-forest-900"}>{eur(line.amountCents)}</span>
             </div>

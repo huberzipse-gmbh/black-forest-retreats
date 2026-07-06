@@ -8,6 +8,7 @@ import { STRINGS } from '@/lib/i18n/strings';
 import { isLocale, type Locale } from '@/lib/i18n/config';
 import { fmtDate, fmtEur, fmtNum } from '@/lib/i18n/format';
 import type { Booking } from '@/lib/booking/types';
+import type { GiftCard } from '@/lib/giftcards/types';
 
 const COLORS = {
   night: '#0f1813',
@@ -113,6 +114,28 @@ export function invoiceEmail({ booking, retreatName }: BookingEmailContext): {
     subject: t.email.invoiceSubject(booking.bookingNumber),
     html: shell(locale, inner),
   };
+}
+
+/** Gutschein-Mail an den Käufer (PDF im Anhang). */
+export function giftCardEmail(card: GiftCard): { subject: string; html: string } {
+  const locale: Locale = isLocale(card.locale) ? card.locale : 'de';
+  const t = STRINGS[locale].giftFlow.email;
+  const tb = STRINGS[locale].bookingFlow.email;
+
+  const rows = [
+    detailRow(t.codeLabel, card.code),
+    detailRow(t.valueLabel, fmtNum(fmtEur(card.amountCents, locale), locale)),
+    card.expiresAt ? detailRow(t.validLabel, fmtDate(card.expiresAt, locale)) : '',
+  ].join('');
+
+  const inner = `
+    <p style="margin:0;">${t.greeting(card.buyerName)}</p>
+    <p style="margin:12px 0 24px;">${t.intro(card.recipientName)}</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${rows}</table>
+    <p style="margin:18px 0 0;padding:12px 16px;background:rgba(201,169,106,.15);border-radius:4px;">${t.redeemHint}</p>
+    <p style="margin:28px 0 0;">${tb.signoff}<br/><strong>${tb.teamName}</strong></p>`;
+
+  return { subject: t.subject(card.code), html: shell(locale, inner) };
 }
 
 /** Hinweis bei fehlgeschlagener Abbuchung („Später zahlen"). */

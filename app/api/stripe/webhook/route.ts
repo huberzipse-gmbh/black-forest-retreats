@@ -14,6 +14,7 @@ import {
   markBookingScheduled,
   markPaymentFailed,
 } from '@/lib/booking/confirm';
+import { markGiftCardPaid } from '@/lib/giftcards/confirm';
 
 export async function POST(request: Request) {
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -36,13 +37,17 @@ export async function POST(request: Request) {
     switch (event.type) {
       case 'payment_intent.succeeded': {
         const pi = event.data.object;
-        const bookingId = pi.metadata?.booking_id;
-        if (bookingId) await markBookingPaid(bookingId, { paymentIntentId: pi.id });
+        if (pi.metadata?.gift_card_id) {
+          await markGiftCardPaid(pi.metadata.gift_card_id, { paymentIntentId: pi.id });
+        } else if (pi.metadata?.booking_id) {
+          await markBookingPaid(pi.metadata.booking_id, { paymentIntentId: pi.id });
+        }
         break;
       }
       case 'payment_intent.payment_failed': {
         const pi = event.data.object;
         const bookingId = pi.metadata?.booking_id;
+        // Gutschein bleibt bei Fehlschlag pending — erneuter Zahlversuch möglich.
         if (bookingId) await markPaymentFailed(bookingId);
         break;
       }
