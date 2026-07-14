@@ -9,8 +9,11 @@ export default async function AdminSettingsPage() {
   const { data } = await sb.from("settings").select("*").eq("id", 1).single();
 
   return (
-    <div className="max-w-3xl">
+    <div className="max-w-4xl">
       <h1 className="font-display text-3xl text-forest-900">Einstellungen</h1>
+      <p className="mt-2 font-body text-sm text-forest-700/70">
+        Buchungsregeln, Rabatte und die Rechnungsdaten. Änderungen gelten sofort für neue Buchungen.
+      </p>
       <SettingsForm
         initial={{
           cancellation_days: data.cancellation_days,
