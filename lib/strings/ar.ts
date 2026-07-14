@@ -927,6 +927,8 @@ export const ar: Strings = {
       greeting: (name: string) => `مرحبًا ${name}،`,
       intro: (recipient: string) =>
         `تم دفع بطاقة الهدية الخاصة بـ ${recipient} وهي مرفقة بهذه الرسالة كملف PDF. اطبعها وأهدِها واستمتع.`,
+      issuedIntro: (recipient: string) =>
+        `بطاقة الهدية الخاصة بـ ${recipient} جاهزة ومرفقة بهذه الرسالة كملف PDF. اطبعها وأهدِها واستمتع.`,
       codeLabel: 'الرمز',
       valueLabel: 'القيمة',
       validLabel: 'صالحة حتى',

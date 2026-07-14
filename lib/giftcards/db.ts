@@ -22,6 +22,7 @@ export function mapGiftCard(g: any): GiftCard {
     stripePaymentIntentId: g.stripe_payment_intent_id,
     downloadToken: g.download_token,
     elementIcon: g.element_icon,
+    source: g.source ?? 'purchase',
     locale: g.locale,
     demo: g.demo,
     createdAt: g.created_at,

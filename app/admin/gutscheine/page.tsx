@@ -3,6 +3,7 @@ import { supabaseAdminConfigured } from "@/lib/supabase/env";
 import { dateDe, eur } from "@/lib/admin/format";
 import { AdminNotConfigured } from "@/components/admin/AdminNotConfigured";
 import { GiftCardCancelButton } from "@/components/admin/GiftCardCancelButton";
+import { GiftCardCreateForm } from "@/components/admin/GiftCardCreateForm";
 
 const STATUS_LABEL: Record<string, string> = {
   pending: "Offen (unbezahlt)",
@@ -33,9 +34,11 @@ export default async function AdminGiftCardsPage() {
     <div>
       <h1 className="font-display text-3xl text-forest-900">Gutscheine</h1>
       <p className="mt-2 font-body text-sm text-forest-700/70">
-        Wertgutscheine aus dem Kaufflow. Restguthaben bleibt auf dem Code; Storno nur bei
-        unangetastetem Guthaben (Stripe-Erstattung manuell im Dashboard).
+        Wertgutscheine aus dem Kaufflow und selbst ausgestellte Gutscheine. Restguthaben bleibt auf
+        dem Code; Storno nur bei unangetastetem Guthaben (Stripe-Erstattung manuell im Dashboard).
       </p>
+
+      <GiftCardCreateForm />
 
       <div className="mt-6 overflow-x-auto rounded-[8px] border border-forest-900/10 bg-white">
         <table className="w-full min-w-[900px]">
@@ -63,6 +66,11 @@ export default async function AdminGiftCardsPage() {
                   {c.demo && (
                     <span className="ms-2 rounded-[3px] bg-cream-100 px-1.5 py-0.5 font-body text-[0.6rem] font-semibold uppercase text-forest-700/60">
                       Demo
+                    </span>
+                  )}
+                  {c.source === "admin" && (
+                    <span className="ms-2 rounded-[3px] bg-brass-400/15 px-1.5 py-0.5 font-body text-[0.6rem] font-semibold uppercase text-brass-600">
+                      Manuell
                     </span>
                   )}
                 </td>

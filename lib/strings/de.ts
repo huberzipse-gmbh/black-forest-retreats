@@ -931,6 +931,8 @@ export const de = {
       greeting: (name: string) => `Hallo ${name},`,
       intro: (recipient: string) =>
         `dein Gutschein für ${recipient} ist bezahlt und hängt als PDF an dieser E-Mail. Ausdrucken, verschenken, freuen.`,
+      issuedIntro: (recipient: string) =>
+        `dein Gutschein für ${recipient} ist da und hängt als PDF an dieser E-Mail. Ausdrucken, verschenken, freuen.`,
       codeLabel: 'Code',
       valueLabel: 'Wert',
       validLabel: 'Gültig bis',

@@ -7,9 +7,22 @@
 import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { addYears } from 'date-fns';
 import { z } from 'zod';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { ADMIN_COOKIE, createAdminToken, verifyAdminToken } from '@/lib/admin/session';
+import { sendEmail } from '@/lib/email/send';
+import { giftCardEmail } from '@/lib/email/templates';
+import { generateGiftCode } from '@/lib/giftcards/code';
+import { mapGiftCard } from '@/lib/giftcards/db';
+import { renderGiftCardPdf } from '@/lib/giftcards/pdf';
+import {
+  GIFT_MAX_CENTS,
+  GIFT_MESSAGE_MAX,
+  GIFT_MIN_CENTS,
+  GIFT_VALIDITY_YEARS,
+  type GiftCard,
+} from '@/lib/giftcards/types';
 import { mapBooking } from '@/lib/booking/db';
 import { canTransition } from '@/lib/booking/stateMachine';
 import { getPaymentProvider } from '@/lib/payments';
@@ -332,6 +345,101 @@ export async function cancelGiftCard(giftCardId: string): Promise<{ ok: boolean;
 
   revalidatePath('/admin/gutscheine');
   return { ok: true };
+}
+
+/**
+ * Gutschein manuell ausstellen (Geschenk, Kulanz, Gewinnspiel). Kein Stripe,
+ * kein Geldeingang — daher bewusst OHNE Rechnung (der GoBD-Nummernkreis bleibt
+ * den bezahlten Käufen vorbehalten). Die Karte ist sofort aktiv, drei Jahre
+ * gültig und liegt als PDF vor; der Mailversand ist optional.
+ */
+const manualGiftSchema = z.object({
+  amountCents: z.number().int().min(GIFT_MIN_CENTS).max(GIFT_MAX_CENTS),
+  recipientName: z.string().trim().min(2).max(80),
+  buyerName: z.string().trim().min(2).max(80),
+  buyerEmail: z.string().trim().email().max(200).optional().or(z.literal('')),
+  message: z.string().trim().max(GIFT_MESSAGE_MAX).optional().default(''),
+  elementIcon: z.enum(['hut', 'uhr', 'kirschtorte', 'schinken']),
+  sendEmail: z.boolean(),
+});
+
+export type ManualGiftInput = z.input<typeof manualGiftSchema>;
+
+export async function createGiftCardManually(
+  raw: ManualGiftInput,
+): Promise<{ ok: boolean; error?: string; code?: string; emailSent?: boolean }> {
+  await assertAdmin();
+
+  const parsed = manualGiftSchema.safeParse(raw);
+  if (!parsed.success) return { ok: false, error: 'Bitte Eingaben prüfen.' };
+  const input = parsed.data;
+  const email = input.buyerEmail?.trim() ?? '';
+  if (input.sendEmail && !email) {
+    return { ok: false, error: 'Für den Mailversand wird eine E-Mail-Adresse gebraucht.' };
+  }
+
+  const sb = createAdminClient();
+  const now = new Date();
+  const expiresAt = addYears(now, GIFT_VALIDITY_YEARS);
+
+  let card: GiftCard | null = null;
+  try {
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const { data, error } = await sb
+        .from('gift_cards')
+        .insert({
+          code: generateGiftCode(),
+          amount_cents: input.amountCents,
+          balance_cents: input.amountCents,
+          buyer_name: input.buyerName,
+          // Ohne Käufer-Mail steht hier ein Platzhalter: buyer_email ist NOT NULL
+          // und dient bei manuellen Karten nur als Notiz, nicht als Versandweg.
+          buyer_email: email || 'kein-versand@blackforest-retreats.de',
+          recipient_name: input.recipientName,
+          message: input.message || null,
+          element_icon: input.elementIcon,
+          status: 'active',
+          source: 'admin',
+          paid_at: now.toISOString(),
+          expires_at: expiresAt.toISOString(),
+          locale: 'de',
+          demo: false,
+        })
+        .select('*')
+        .single();
+      if (!error) {
+        card = mapGiftCard(data);
+        break;
+      }
+      if (error.code !== '23505') throw error; // nur Code-Kollision retryen
+    }
+    if (!card) throw new Error('Code-Generierung: drei Kollisionen in Folge');
+  } catch (err) {
+    console.error('[admin] Gutschein-Ausstellung fehlgeschlagen:', err);
+    return { ok: false, error: 'Gutschein konnte nicht angelegt werden.' };
+  }
+
+  // Mailversand darf die schon ausgestellte Karte nicht zurückrollen — das PDF
+  // ist jederzeit über die Liste erreichbar.
+  let emailSent = false;
+  if (input.sendEmail && email) {
+    try {
+      const pdf = await renderGiftCardPdf(card);
+      const mail = giftCardEmail(card, { issued: true });
+      await sendEmail({
+        to: email,
+        subject: mail.subject,
+        html: mail.html,
+        attachments: [{ filename: `${card.code}.pdf`, content: pdf }],
+      });
+      emailSent = true;
+    } catch (err) {
+      console.error('[admin] Gutschein-Mail fehlgeschlagen:', err);
+    }
+  }
+
+  revalidatePath('/admin/gutscheine');
+  return { ok: true, code: card.code, emailSent };
 }
 
 /* ── Foto-Upload (Supabase Storage) ───────────────────────────────────────── */
