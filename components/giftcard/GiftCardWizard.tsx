@@ -28,6 +28,19 @@ const input =
   "w-full rounded-[4px] border border-forest-900/20 bg-white px-4 py-3 font-body text-sm text-forest-900 outline-none transition-colors focus:border-forest-900";
 const label = "mb-1.5 block font-body text-xs font-semibold text-forest-900";
 
+/**
+ * Gemeinsame Basis der beiden Navigations-Buttons: gleiche Höhe (min-h statt
+ * unterschiedlicher py-Werte), zentrierter Text, auf Mobil volle Breite. Vorher
+ * war der goldene Button höher als „Zurück" und rutschte bei zweizeiligem Text
+ * optisch aus der Reihe.
+ */
+const navBtn =
+  "flex min-h-[3.25rem] items-center justify-center rounded-[3px] px-4 text-center font-body text-xs font-semibold uppercase leading-tight tracking-[0.1em] transition-colors duration-300 sm:px-8 sm:tracking-[0.18em]";
+/** Der Primär-Button trägt den längeren Text („Weiter zur Zahlung") und bekommt
+ *  auf Mobil daher mehr Breite als „Zurück" — sonst bricht er dreizeilig um. */
+const navBtnPrimary =
+  "flex-[1.6] bg-brass-400 text-night hover:bg-brass-300 disabled:cursor-not-allowed disabled:opacity-40 sm:flex-none";
+
 type Step = 0 | 1 | 2;
 
 export function GiftCardWizard() {
@@ -260,25 +273,26 @@ export function GiftCardWizard() {
           <p className="mt-5 text-center font-body text-sm text-red-300">{error}</p>
         )}
 
-        {/* Navigation */}
-        <div className="mt-8 flex items-center justify-between">
+        {/* Navigation — beide Buttons gleich hoch und auf Mobil gleich breit;
+            der Text darf umbrechen, ohne die Höhe der Reihe zu sprengen. */}
+        <div className="mt-8 flex items-stretch justify-between gap-3 sm:gap-4">
           {step > 0 ? (
             <button
               type="button"
               onClick={() => setStep((s) => (s - 1) as Step)}
-              className="rounded-[3px] border border-cream-100/40 px-6 py-3.5 font-body text-xs font-semibold uppercase tracking-[0.18em] text-cream-50 transition-colors hover:border-cream-100"
+              className={`${navBtn} flex-1 border border-cream-100/40 text-cream-50 hover:border-cream-100 sm:flex-none`}
             >
               {t.cta.back}
             </button>
           ) : (
-            <span />
+            <span className="hidden sm:block" />
           )}
           {step < 2 ? (
             <button
               type="button"
               disabled={step === 0 ? !amountValid : !personalizeValid}
               onClick={() => setStep((s) => (s + 1) as Step)}
-              className="rounded-[3px] bg-brass-400 px-8 py-4 font-body text-xs font-semibold uppercase tracking-[0.18em] text-night transition-colors duration-300 hover:bg-brass-300 disabled:cursor-not-allowed disabled:opacity-40"
+              className={`${navBtn} ${navBtnPrimary}`}
             >
               {t.cta.next}
             </button>
@@ -287,7 +301,7 @@ export function GiftCardWizard() {
               type="button"
               disabled={isPending || !amountValid || !personalizeValid}
               onClick={toPayment}
-              className="rounded-[3px] bg-brass-400 px-8 py-4 font-body text-xs font-semibold uppercase tracking-[0.18em] text-night transition-colors duration-300 hover:bg-brass-300 disabled:cursor-not-allowed disabled:opacity-40"
+              className={`${navBtn} ${navBtnPrimary}`}
             >
               {t.cta.toPayment}
             </button>

@@ -927,6 +927,8 @@ export const en: Strings = {
       greeting: (name: string) => `Hello ${name},`,
       intro: (recipient: string) =>
         `your gift card for ${recipient} is paid and attached to this email as a PDF. Print it, gift it, enjoy.`,
+      issuedIntro: (recipient: string) =>
+        `your gift card for ${recipient} is ready and attached to this email as a PDF. Print it, gift it, enjoy.`,
       codeLabel: 'Code',
       valueLabel: 'Value',
       validLabel: 'Valid until',

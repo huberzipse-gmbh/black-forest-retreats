@@ -920,6 +920,8 @@ export const zh: Strings = {
       greeting: (name: string) => `${name}，您好，`,
       intro: (recipient: string) =>
         `您为 ${recipient} 购买的礼品卡已支付成功，PDF 版本已附在本邮件中。打印、赠送、享受。`,
+      issuedIntro: (recipient: string) =>
+        `您为 ${recipient} 准备的礼品卡已开好，PDF 版本已附在本邮件中。打印、赠送、享受。`,
       codeLabel: '礼品码',
       valueLabel: '金额',
       validLabel: '有效期至',

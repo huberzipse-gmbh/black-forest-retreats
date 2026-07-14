@@ -117,7 +117,14 @@ export function invoiceEmail({ booking, retreatName }: BookingEmailContext): {
 }
 
 /** Gutschein-Mail an den Käufer (PDF im Anhang). */
-export function giftCardEmail(card: GiftCard): { subject: string; html: string } {
+/**
+ * Gutschein-Mail. `issued` = im Admin ausgestellter Geschenk-Gutschein: keine
+ * Zahlung, also weder „ist bezahlt" noch Rechnungshinweis.
+ */
+export function giftCardEmail(
+  card: GiftCard,
+  opts: { issued?: boolean } = {},
+): { subject: string; html: string } {
   const locale: Locale = isLocale(card.locale) ? card.locale : 'de';
   const t = STRINGS[locale].giftFlow.email;
   const tb = STRINGS[locale].bookingFlow.email;
@@ -130,10 +137,10 @@ export function giftCardEmail(card: GiftCard): { subject: string; html: string }
 
   const inner = `
     <p style="margin:0;">${t.greeting(card.buyerName)}</p>
-    <p style="margin:12px 0 24px;">${t.intro(card.recipientName)}</p>
+    <p style="margin:12px 0 24px;">${opts.issued ? t.issuedIntro(card.recipientName) : t.intro(card.recipientName)}</p>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${rows}</table>
     <p style="margin:18px 0 0;padding:12px 16px;background:rgba(201,169,106,.15);border-radius:4px;">${t.redeemHint}</p>
-    <p style="margin:14px 0 0;font-size:13px;opacity:.8;">${t.invoiceNote}</p>
+    ${opts.issued ? '' : `<p style="margin:14px 0 0;font-size:13px;opacity:.8;">${t.invoiceNote}</p>`}
     <p style="margin:28px 0 0;">${tb.signoff}<br/><strong>${tb.teamName}</strong></p>`;
 
   return { subject: t.subject(card.code), html: shell(locale, inner) };

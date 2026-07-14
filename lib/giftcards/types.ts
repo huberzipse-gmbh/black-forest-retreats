@@ -7,6 +7,9 @@ export type GiftCardStatus = 'pending' | 'active' | 'redeemed' | 'expired' | 'ca
 
 export type GiftElementIcon = 'hut' | 'uhr' | 'kirschtorte' | 'schinken';
 
+/** Regulärer Kauf im Shop vs. manuell im Admin ausgestellt (ohne Zahlung). */
+export type GiftCardSource = 'purchase' | 'admin';
+
 export interface GiftCard {
   id: string;
   code: string;
@@ -21,6 +24,7 @@ export interface GiftCard {
   stripePaymentIntentId: string | null;
   downloadToken: string;
   elementIcon: GiftElementIcon;
+  source: GiftCardSource;
   locale: string;
   demo: boolean;
   createdAt: string;
