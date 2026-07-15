@@ -849,6 +849,8 @@ export const de = {
       scheduledNote: (date: string) => `Abgebucht wird am ${date}.`,
       backHome: 'Zur Startseite',
       viewAccount: 'Zu deinen Buchungen',
+      adjustBooking: 'Buchung anpassen',
+      adjustSubject: (nr: string) => `Buchung ${nr}: Anpassung`,
     },
     account: {
       title: 'Dein Konto',

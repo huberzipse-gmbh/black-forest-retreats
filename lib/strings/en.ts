@@ -845,6 +845,8 @@ export const en: Strings = {
       scheduledNote: (date: string) => `Your card will be charged on ${date}.`,
       backHome: 'Back to home',
       viewAccount: 'View your bookings',
+      adjustBooking: 'Adjust booking',
+      adjustSubject: (nr) => `Booking ${nr}: change request`,
     },
     account: {
       title: 'Your account',

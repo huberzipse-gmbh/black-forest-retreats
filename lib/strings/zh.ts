@@ -835,6 +835,8 @@ export const zh: Strings = {
       scheduledNote: (date: string) => `将于 ${date} 扣款。`,
       backHome: '返回首页',
       viewAccount: '查看我的预订',
+      adjustBooking: '修改预订',
+      adjustSubject: (nr) => `预订 ${nr}：修改请求`,
     },
     account: {
       title: '我的账户',

@@ -842,6 +842,8 @@ export const ar: Strings = {
       scheduledNote: (date: string) => `سيُخصم المبلغ في ${date}.`,
       backHome: 'إلى الصفحة الرئيسية',
       viewAccount: 'إلى حجوزاتك',
+      adjustBooking: 'تعديل الحجز',
+      adjustSubject: (nr) => `الحجز ${nr}: طلب تعديل`,
     },
     account: {
       title: 'حسابك',
