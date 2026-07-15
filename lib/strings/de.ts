@@ -276,7 +276,7 @@ export const de = {
     contact: {
       title: 'Kontakt',
       location: 'Neuenbürg · Nationalpark Nordschwarzwald',
-      email: 'hallo@blackforestretreats.de',
+      email: 'blackforestretreats@gmail.com',
       newsletterTitle: 'Newsletter',
       newsletterText: 'Ab und zu Post aus dem Schwarzwald: neue Wohnungen und leise Angebote. Nicht mehr.',
       newsletterPlaceholder: 'Deine E-Mail',
@@ -353,7 +353,7 @@ export const de = {
       ],
       reviews: [
         { text: 'Der Blick aufs Schloss vom Bett aus ist unbezahlbar. Alles sehr sauber, der Check-in über die Schlüsselbox total unkompliziert.' },
-        { text: 'Tom ist ein super Gastgeber, schnelle Antworten und tolle Tipps für die Gegend. Die Terrasse am Abend ein Traum.' },
+        { text: 'Rundum gepflegt und geschmackvoll eingerichtet, hier stimmt jedes Detail. In der Umgebung gibt es viel zu erleben, und die Terrasse am Abend ist ein Traum.' },
         { text: 'Stilvoll eingerichtet, ruhig und trotzdem zentral. Parkplatz direkt da. Wir kommen wieder!' },
       ],
       amenities: [

@@ -272,7 +272,7 @@ export const zh: Strings = {
     contact: {
       title: '联系我们',
       location: '诺因比格 · 北黑森林国家公园',
-      email: 'hallo@blackforestretreats.de',
+      email: 'blackforestretreats@gmail.com',
       newsletterTitle: '订阅通讯',
       newsletterText: '偶尔捎来黑森林的消息：新公寓与悄悄话般的优惠。仅此而已。',
       newsletterPlaceholder: '你的邮箱',
@@ -345,7 +345,7 @@ export const zh: Strings = {
       ],
       reviews: [
         { text: '躺在床上就能望见城堡，这份景致无价。处处一尘不染，密码箱入住毫不费事。' },
-        { text: 'Tom 是位超棒的房东，回复很快，还给了不少周边的好建议。傍晚的露台简直如梦。' },
+        { text: '处处打理得当，布置也很有品味，每个细节都到位。周边有很多可玩的，傍晚的露台简直如梦。' },
         { text: '布置得很有格调，安静又不偏僻。停车就在门口。我们还会再来！' },
       ],
       amenities: [
