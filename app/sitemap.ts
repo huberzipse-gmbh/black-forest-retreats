@@ -35,10 +35,22 @@ const ROUTES = [
   { path: '/widerruf', priority: 0.2, changeFrequency: 'yearly' as const },
 ];
 
+/**
+ * Rein deutschsprachige Ortsseiten (lokale Longtails). Kommen nur als deutsche
+ * URL in die Sitemap - keine hreflang-Alternates, weil es keine Übersetzungen
+ * gibt und lokale Ortssuchen ohnehin deutschsprachig sind.
+ */
+const GERMAN_ONLY_ROUTES = [
+  { path: '/ferienwohnung-neuenbuerg', priority: 0.9, changeFrequency: 'monthly' as const },
+  { path: '/urlaub-enztal', priority: 0.8, changeFrequency: 'monthly' as const },
+  { path: '/ferienwohnung-bad-wildbad', priority: 0.8, changeFrequency: 'monthly' as const },
+  { path: '/anreise', priority: 0.5, changeFrequency: 'yearly' as const },
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
-  return ROUTES.flatMap((route) =>
+  const multilingual = ROUTES.flatMap((route) =>
     locales.map((locale) => ({
       url: `${SITE_URL}${localeHref(route.path, locale)}`,
       lastModified,
@@ -51,4 +63,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     })),
   );
+
+  const germanOnly = GERMAN_ONLY_ROUTES.map((route) => ({
+    url: `${SITE_URL}${route.path}`,
+    lastModified,
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
+  }));
+
+  return [...multilingual, ...germanOnly];
 }

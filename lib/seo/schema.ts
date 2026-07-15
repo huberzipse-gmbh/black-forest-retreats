@@ -125,6 +125,28 @@ export function breadcrumbSchema(crumbs: Crumb[]): Json {
   };
 }
 
+export interface FaqEntry {
+  q: string;
+  a: string;
+}
+
+/**
+ * FAQPage-Schema. Liefert seit Mai 2026 kein Google-Rich-Result mehr, bleibt
+ * aber wertvoll: Sprachmodelle extrahieren die Frage-Antwort-Paare als
+ * zitierbare Fakten. Antworten daher knapp und eigenständig halten.
+ */
+export function faqSchema(entries: FaqEntry[]): Json {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: entries.map((e) => ({
+      '@type': 'Question',
+      name: e.q,
+      acceptedAnswer: { '@type': 'Answer', text: e.a },
+    })),
+  };
+}
+
 /**
  * Region/Ort als TouristDestination — verknüpft die Marke mit den Entitäten,
  * nach denen tatsächlich gesucht wird (Nationalpark, Thermen, Baumwipfelpfad).

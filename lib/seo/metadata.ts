@@ -35,6 +35,13 @@ export interface PageMetaInput {
   description: string;
   /** Pfade relativ zur Domain; erstes Bild wird zur Social-Vorschau. */
   images?: string[];
+  /**
+   * Nur Deutsch: für rein deutschsprachige Seiten (lokale Ortsseiten). Canonical
+   * und hreflang zeigen dann ausschließlich auf die deutsche URL, damit eine
+   * versehentlich unter /en erreichbare Variante nicht als Duplikat indexiert
+   * wird und keine nicht existierende Übersetzung annonciert wird.
+   */
+  germanOnly?: boolean;
 }
 
 export function buildMetadata({
@@ -43,12 +50,13 @@ export function buildMetadata({
   title,
   description,
   images = [DEFAULT_OG_IMAGE],
+  germanOnly = false,
 }: PageMetaInput): Metadata {
-  const canonical = localeHref(path, locale);
+  const canonical = germanOnly ? localeHref(path, defaultLocale) : localeHref(path, locale);
 
-  const languages: Record<string, string> = Object.fromEntries(
-    locales.map((l) => [hreflang[l], localeHref(path, l)]),
-  );
+  const languages: Record<string, string> = germanOnly
+    ? { [hreflang[defaultLocale]]: localeHref(path, defaultLocale) }
+    : Object.fromEntries(locales.map((l) => [hreflang[l], localeHref(path, l)]));
   // Für Sucher ohne passende Sprachfassung: die deutsche Hauptseite.
   languages['x-default'] = localeHref(path, defaultLocale);
 
