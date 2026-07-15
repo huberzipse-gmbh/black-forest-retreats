@@ -28,6 +28,10 @@ interface LegalLayoutProps {
   /** Stand der Fassung, z. B. „Juni 2026". */
   updated: string;
   backLabel?: string;
+  /** Kicker über dem Titel. Default Deutsch (die meisten Rechtsseiten sind DE). */
+  eyebrow?: string;
+  /** Label vor dem Datum, z. B. „Stand" / „Last updated". */
+  updatedLabel?: string;
   children: ReactNode;
 }
 
@@ -35,6 +39,8 @@ export async function LegalLayout({
   title,
   updated,
   backLabel = "Zur Startseite",
+  eyebrow = "Rechtliches",
+  updatedLabel = "Stand",
   children,
 }: LegalLayoutProps) {
   // Server-Komponente: Sprache kommt aus der URL (Middleware-Header), damit der
@@ -56,13 +62,13 @@ export async function LegalLayout({
             {backLabel}
           </Link>
           <Type role="eyebrow" className="mt-8 text-brass-300">
-            Rechtliches
+            {eyebrow}
           </Type>
           <Type role="display" as="h1" className="mt-4 text-cream-50">
             {title}
           </Type>
           <p className="mt-5 font-body text-xs uppercase tracking-[0.18em] text-cream-100/55">
-            Stand: {updated}
+            {updatedLabel}: {updated}
           </p>
         </div>
       </header>
