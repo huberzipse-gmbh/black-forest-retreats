@@ -10,7 +10,7 @@ export default async function AdminRetreatsPage() {
   const sb = createAdminClient();
   const { data: retreats } = await sb
     .from("retreats")
-    .select("id, name_de, highlight_de, image, base_price_cents, min_nights, max_guests, bookable, sold_out, sold_out_until")
+    .select("id, name_de, highlight_de, image, base_price_cents, min_nights, max_guests, bookable, sold_out, sold_out_until, hidden")
     .order("sort_order");
 
   return (
@@ -46,7 +46,12 @@ export default async function AdminRetreatsPage() {
                   {r.name_de.charAt(0)}
                 </div>
               )}
-              <div className="absolute start-3 top-3 flex gap-2">
+              <div className="absolute start-3 top-3 flex flex-wrap gap-2">
+                {r.hidden && (
+                  <span className="rounded-full bg-bark-700/85 px-3 py-1 font-body text-[0.6rem] font-semibold uppercase tracking-wider text-cream-50">
+                    Ausgeblendet
+                  </span>
+                )}
                 {r.sold_out ? (
                   <span className="rounded-full bg-night/70 px-3 py-1 font-body text-[0.6rem] font-semibold uppercase tracking-wider text-cream-50">
                     Ausgebucht {r.sold_out_until ? `bis ${r.sold_out_until}` : ""}

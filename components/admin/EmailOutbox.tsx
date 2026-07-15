@@ -1,8 +1,9 @@
 "use client";
 
 /** E-Mail-Log mit aufklappbarer HTML-Vorschau (iframe srcdoc, sandboxed). */
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { dateTimeDe } from "@/lib/admin/format";
+import { resendLoggedEmail } from "@/app/admin/actions";
 
 interface EmailRow {
   id: string;
@@ -15,6 +16,20 @@ interface EmailRow {
 
 export function EmailOutbox({ emails }: { emails: EmailRow[] }) {
   const [openId, setOpenId] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+  const [feedback, setFeedback] = useState<{ id: string; text: string; ok: boolean } | null>(null);
+
+  const resend = (mail: EmailRow) => {
+    setFeedback(null);
+    startTransition(async () => {
+      const res = await resendLoggedEmail(mail.id);
+      setFeedback(
+        res.ok
+          ? { id: mail.id, text: `Erneut an ${mail.to} gesendet.`, ok: true }
+          : { id: mail.id, text: res.error ?? "Versand fehlgeschlagen.", ok: false },
+      );
+    });
+  };
 
   if (emails.length === 0) {
     return (
@@ -49,6 +64,28 @@ export function EmailOutbox({ emails }: { emails: EmailRow[] }) {
           </button>
           {openId === mail.id && (
             <div className="border-t border-forest-900/10 p-4">
+              <div className="mb-3 flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => resend(mail)}
+                  disabled={isPending}
+                  className="rounded-[3px] bg-forest-900 px-4 py-2 font-body text-xs font-semibold uppercase tracking-wider text-cream-50 transition-colors hover:bg-forest-800 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {isPending ? "Wird gesendet …" : "Erneut senden"}
+                </button>
+                {feedback?.id === mail.id && (
+                  <span
+                    className={`font-body text-xs ${
+                      feedback.ok ? "text-forest-700" : "text-red-700"
+                    }`}
+                  >
+                    {feedback.text}
+                  </span>
+                )}
+                <span className="font-body text-xs text-forest-700/50">
+                  Etwaige PDF-Anhänge werden nicht erneut mitgeschickt.
+                </span>
+              </div>
               <iframe
                 title={mail.subject}
                 srcDoc={mail.html}

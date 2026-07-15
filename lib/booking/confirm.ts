@@ -164,8 +164,16 @@ export async function markBookingScheduled(
   return updated;
 }
 
-/** Fehlgeschlagene Zahlung/Abbuchung protokollieren + Gast informieren. */
-export async function markPaymentFailed(bookingId: string): Promise<void> {
+/**
+ * Fehlgeschlagene Zahlung/Abbuchung protokollieren + Gast informieren.
+ * `notify: false` unterdrückt die Fehler-Mail (der Cron schickt sie nur beim
+ * ERSTEN Fehlversuch, um Mail-Spam bei dauerhaft abgelehnten Karten zu vermeiden).
+ */
+export async function markPaymentFailed(
+  bookingId: string,
+  opts: { notify?: boolean } = {},
+): Promise<void> {
+  const notify = opts.notify ?? true;
   const sb = createAdminClient();
   const booking = await loadBooking(bookingId);
   const from = { status: booking.status, paymentStatus: booking.paymentStatus };
@@ -174,8 +182,8 @@ export async function markPaymentFailed(bookingId: string): Promise<void> {
 
   await sb.from('bookings').update({ payment_status: 'failed' }).eq('id', bookingId);
 
-  // Beim „Später zahlen"-Fehlschlag den Gast aktiv informieren.
-  if (booking.status === 'confirmed') {
+  // Beim „Später zahlen"-Fehlschlag den Gast aktiv informieren (nur einmal).
+  if (notify && booking.status === 'confirmed') {
     const retreatName = await retreatNameOf(booking.retreatId);
     const failed = paymentFailedEmail({ booking, retreatName });
     await sendEmail({

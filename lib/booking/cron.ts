@@ -15,6 +15,11 @@ import { markBookingPaid, markPaymentFailed } from './confirm';
 
 const iso = (d: Date) => format(d, 'yyyy-MM-dd');
 
+// Nach so vielen fehlgeschlagenen Abbuchungsversuchen zieht der Cron eine
+// Buchung nicht mehr — danach klärt der Betreiber manuell (kein Endlos-Retry,
+// kein Mail-Spam). Der Gast wurde beim ersten Fehlversuch bereits informiert.
+const MAX_CHARGE_ATTEMPTS = 3;
+
 export interface CronResult {
   job: 'sync-ical' | 'charge-due';
   processed: number;
@@ -95,27 +100,36 @@ export async function runChargeDue(): Promise<CronResult> {
     .select('*')
     .eq('status', 'confirmed')
     .in('payment_status', ['scheduled', 'failed'])
-    .lte('charge_due_date', today);
+    .lte('charge_due_date', today)
+    .lt('payment_attempts', MAX_CHARGE_ATTEMPTS);
 
   const provider = getPaymentProvider();
 
   for (const row of rows ?? []) {
     const booking = mapBooking(row);
+    const attempt = (row.payment_attempts ?? 0) + 1;
     try {
-      // scheduled → charge_due (Zwischenschritt der State Machine)
+      // Versuch zählen + scheduled → charge_due (Zwischenschritt der State Machine).
+      const patch: Record<string, unknown> = { payment_attempts: attempt };
       if (booking.paymentStatus === 'scheduled') {
-        await sb.from('bookings').update({ payment_status: 'charge_due' }).eq('id', booking.id);
+        patch.payment_status = 'charge_due';
         booking.paymentStatus = 'charge_due';
       }
+      await sb.from('bookings').update(patch).eq('id', booking.id);
+
       const charge = await provider.chargeSavedMethod(booking);
       if (charge.ok) {
         await markBookingPaid(booking.id, { paymentIntentId: charge.paymentIntentId });
         processed++;
         details.push(`${booking.bookingNumber}: abgebucht`);
       } else {
-        await markPaymentFailed(booking.id);
+        // Gast nur beim ERSTEN Fehlversuch benachrichtigen (kein Spam bei Retry).
+        await markPaymentFailed(booking.id, { notify: attempt === 1 });
         failed++;
-        details.push(`${booking.bookingNumber}: FEHLGESCHLAGEN (${charge.error ?? '?'})`);
+        const last = attempt >= MAX_CHARGE_ATTEMPTS ? ', letzter Versuch' : '';
+        details.push(
+          `${booking.bookingNumber}: FEHLGESCHLAGEN (Versuch ${attempt}${last}, ${charge.error ?? '?'})`,
+        );
       }
     } catch (err) {
       failed++;
