@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useStrings } from "@/lib/i18n/useStrings";
+import { useLocaleHref } from "@/lib/i18n/I18nProvider";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { HashLink } from "@/components/layout/HashLink";
 
@@ -18,6 +19,8 @@ const NAV = [
 
 export function SiteHeader() {
   const t = useStrings();
+  // Interne Links tragen die Sprache im Pfad (/en#apartments statt /#apartments).
+  const href = useLocaleHref();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -90,7 +93,7 @@ export function SiteHeader() {
 
           {/* Mitte: Logo (flex-zentriert zwischen Menü-Button und Slider) */}
           <Link
-            href="/"
+            href={href("/")}
             onClick={() => setOpen(false)}
             className="flex min-w-0 flex-col items-center justify-self-center px-1 text-center"
           >
@@ -114,7 +117,7 @@ export function SiteHeader() {
           <div className="flex items-center justify-end justify-self-end gap-2 md:gap-3">
             <LanguageSwitcher compact showLabel={false} />
             <HashLink
-              href="/#apartments"
+              href={href("/#apartments")}
               className="hidden rounded-[3px] border border-forest-900 bg-forest-900 px-4 py-2.5 font-body text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:bg-white hover:text-forest-900 md:inline-flex md:px-6 md:text-xs"
             >
               {t.nav.book}
@@ -133,7 +136,7 @@ export function SiteHeader() {
           {NAV.map((item, i) => (
             <HashLink
               key={item.key}
-              href={item.href}
+              href={href(item.href)}
               onClick={() => setOpen(false)}
               className="font-display text-3xl text-cream-50 transition-colors duration-300 hover:text-brass-300 md:text-5xl"
               style={{ transitionDelay: open ? `${120 + i * 60}ms` : "0ms" }}
@@ -142,7 +145,7 @@ export function SiteHeader() {
             </HashLink>
           ))}
           <HashLink
-            href="/#kontakt"
+            href={href("/#kontakt")}
             onClick={() => setOpen(false)}
             className="mt-6 font-body text-xs font-medium uppercase tracking-[0.28em] text-cream-100/70 transition-colors duration-300 hover:text-brass-300"
             style={{ transitionDelay: open ? `${120 + NAV.length * 60}ms` : "0ms" }}

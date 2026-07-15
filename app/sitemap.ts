@@ -32,6 +32,7 @@ const ROUTES = [
   { path: '/impressum', priority: 0.2, changeFrequency: 'yearly' as const },
   { path: '/datenschutz', priority: 0.2, changeFrequency: 'yearly' as const },
   { path: '/agb', priority: 0.2, changeFrequency: 'yearly' as const },
+  { path: '/widerruf', priority: 0.2, changeFrequency: 'yearly' as const },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

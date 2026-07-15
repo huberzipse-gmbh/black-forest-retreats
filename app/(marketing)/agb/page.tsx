@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/sections/legal/LegalLayout";
+import { getLocale } from "@/lib/i18n/server";
+import { buildMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
-  title: "AGB · Black Forest Retreats",
-  description:
-    "Allgemeine Geschäftsbedingungen der Axiecentro Germany GmbH für die Vermietung von Ferienunterkünften und die Nutzung der Website.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return buildMetadata({
+    path: "/agb",
+    locale: await getLocale(),
+    title: "AGB",
+    description:
+      "Allgemeine Geschäftsbedingungen der Axiecentro Germany GmbH für die Vermietung von Ferienunterkünften und die Nutzung der Website.",
+  });
+}
 
 // HINWEIS: Die in § 5 und § 6 genannten Prozentsätze/Fristen (Anzahlung,
 // Restzahlung, Stornostaffel) sind kaufmännische Festlegungen und können an

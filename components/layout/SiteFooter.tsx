@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useLocale, useStrings } from "@/lib/i18n/I18nProvider";
+import { useLocale, useLocaleHref, useStrings } from "@/lib/i18n/I18nProvider";
 import { fmtNum } from "@/lib/i18n/format";
 import { HashLink } from "@/components/layout/HashLink";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
@@ -23,6 +23,8 @@ const DISCOVER_HREFS = [
 export function SiteFooter() {
   const t = useStrings();
   const locale = useLocale();
+  // Interne Links tragen die Sprache im Pfad (/en/umgebung, /en#gutschein).
+  const href = useLocaleHref();
   const year = new Date().getFullYear();
 
   return (
@@ -49,7 +51,7 @@ export function SiteFooter() {
               {t.footer.discover.links.map((link, i) => (
                 <li key={link}>
                   <HashLink
-                    href={DISCOVER_HREFS[i] ?? "/"}
+                    href={href(DISCOVER_HREFS[i] ?? "/")}
                     className="font-body text-sm text-cream-100/80 transition-colors hover:text-brass-300"
                   >
                     {link}
@@ -90,7 +92,7 @@ export function SiteFooter() {
             {t.footer.legal.map((item, i) => (
               <Link
                 key={item}
-                href={LEGAL_HREFS[i] ?? "#"}
+                href={href(LEGAL_HREFS[i] ?? "#")}
                 className="font-body text-xs text-cream-100/55 transition-colors hover:text-brass-300"
               >
                 {item}
