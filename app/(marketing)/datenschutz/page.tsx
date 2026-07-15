@@ -7,14 +7,12 @@ export const metadata: Metadata = {
     "Informationen zur Verarbeitung personenbezogener Daten gemäß Art. 13 DSGVO.",
 };
 
-// HINWEIS: Platzhalter [ ... ] vor dem Live-Gang ersetzen (Kontaktdaten,
-// Hosting-Anbieter). Abschnitte zu Direktbuchung/Zahlung/Newsletter sind
-// bewusst konditional formuliert und gelten erst, sobald diese Funktionen
-// auf der Website tatsächlich angeboten werden.
+// Kontaktdaten des Verantwortlichen sind identisch zum Impressum — beide Stellen
+// bei einer Änderung gemeinsam pflegen.
 
 export default function DatenschutzPage() {
   return (
-    <LegalLayout title="Datenschutzerklärung" updated="Juni 2026">
+    <LegalLayout title="Datenschutzerklärung" updated="Juli 2026">
       <p>
         Der Schutz Ihrer personenbezogenen Daten ist uns ein wichtiges Anliegen.
         Wir verarbeiten Ihre Daten ausschließlich auf Grundlage der gesetzlichen
@@ -38,9 +36,12 @@ export default function DatenschutzPage() {
         <br />
         Deutschland
         <br />
-        Telefon: [BITTE TELEFONNUMMER EINTRAGEN]
+        Telefon: <a href="tel:+491603756052">+49 160 3756052</a>
         <br />
-        E-Mail: [BITTE E-MAIL-ADRESSE EINTRAGEN]
+        E-Mail:{" "}
+        <a href="mailto:blackforestretreats@gmail.com">
+          blackforestretreats@gmail.com
+        </a>
       </p>
       <p>
         Eine gesetzliche Pflicht zur Benennung einer/eines Datenschutzbeauftragten
@@ -195,7 +196,7 @@ export default function DatenschutzPage() {
         Dritte übermittelt.
       </p>
 
-      <h2>8. Kontaktaufnahme</h2>
+      <h2>8. Kontaktaufnahme und Kontaktformular</h2>
       <p>
         Wenn Sie mit uns per E-Mail oder Telefon Kontakt aufnehmen, werden Ihre
         Angaben (z. B. Name, E-Mail-Adresse, Telefonnummer sowie der Inhalt Ihrer
@@ -206,17 +207,48 @@ export default function DatenschutzPage() {
         Anfragen). Die Daten werden gelöscht, sobald Ihre Anfrage abschließend
         bearbeitet ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
       </p>
+      <p>
+        Über das Kontaktformular auf unserer Website übermittelte Angaben (Name,
+        E-Mail-Adresse, optional Telefonnummer und Ihre Nachricht) werden per E-Mail
+        an unser Postfach zugestellt und dort bearbeitet. Pflichtangaben sind Name,
+        E-Mail-Adresse und Nachricht; ohne diese können wir Ihre Anfrage nicht
+        beantworten.
+      </p>
+      <h3>E-Mail-Versanddienstleister</h3>
+      <p>
+        Für den Versand von E-Mails (Kontaktanfragen, Buchungsbestätigungen,
+        Newsletter) setzen wir den Dienst Resend ein (Resend, Inc., 2261 Market
+        Street, San Francisco, CA 94114, USA). Dabei werden die für den Versand
+        erforderlichen Daten (insbesondere E-Mail-Adresse und Inhalt der Nachricht)
+        an Resend übermittelt und dort verarbeitet. Rechtsgrundlage ist Art. 6 Abs. 1
+        lit. b DSGVO beziehungsweise Art. 6 Abs. 1 lit. f DSGVO (berechtigtes
+        Interesse an einem zuverlässigen E-Mail-Versand), beim Newsletter Art. 6 Abs.
+        1 lit. a DSGVO. Mit Resend besteht ein Vertrag über die Auftragsverarbeitung
+        nach Art. 28 DSGVO; die Übermittlung in die USA ist durch
+        Standardvertragsklauseln abgesichert.
+      </p>
 
       <h2>9. Newsletter</h2>
       <p>
-        Sofern wir auf unserer Website die Möglichkeit zur Anmeldung für einen
-        Newsletter anbieten und Sie diese nutzen, verarbeiten wir Ihre E-Mail-Adresse
-        zum Versand des Newsletters. Die Anmeldung erfolgt im sogenannten
-        Double-Opt-in-Verfahren, das heißt, Sie erhalten nach der Anmeldung eine
-        E-Mail, in der Sie die Anmeldung bestätigen. Rechtsgrundlage ist Ihre
-        Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Sie können den Newsletter
-        jederzeit abbestellen und Ihre Einwilligung mit Wirkung für die Zukunft
-        widerrufen, etwa über den Abmeldelink in jedem Newsletter.
+        Für die Anmeldung zu unserem Newsletter benötigen wir Ihre E-Mail-Adresse.
+        Die Anmeldung erfolgt im Double-Opt-in-Verfahren: Nach Eingabe Ihrer Adresse
+        senden wir Ihnen eine E-Mail mit einem Bestätigungslink. Erst wenn Sie diesen
+        Link anklicken, ist Ihre Anmeldung wirksam und Sie erhalten den Newsletter.
+        Bestätigen Sie nicht, versenden wir keine Newsletter an Sie.
+      </p>
+      <p>
+        Gespeichert werden Ihre E-Mail-Adresse, die gewählte Sprache, der Status Ihrer
+        Anmeldung sowie der Zeitpunkt der Anmeldung und der Bestätigung. Die
+        Speicherung der Bestätigung dient dem Nachweis der Einwilligung. Die
+        Speicherung erfolgt in unserer Datenbank (siehe Abschnitt 10,
+        Backend-Infrastruktur), der Versand über Resend (siehe Abschnitt 8).
+      </p>
+      <p>
+        Rechtsgrundlage ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO. Sie
+        können den Newsletter jederzeit abbestellen und Ihre Einwilligung mit Wirkung
+        für die Zukunft widerrufen, etwa über den Abmeldelink in jeder
+        Newsletter-E-Mail. Nach der Abmeldung wird Ihre Adresse gelöscht oder,
+        soweit zum Nachweis der ursprünglichen Einwilligung erforderlich, gesperrt.
       </p>
 
       <h2>10. Buchung und Zahlungsabwicklung</h2>

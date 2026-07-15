@@ -100,7 +100,6 @@ export function RetreatReviews({ retreat }: { retreat: RetreatCard }) {
                 </blockquote>
                 <figcaption className="mt-5 font-body text-sm">
                   <span className="font-semibold text-forest-900">{r.author}</span>
-                  <span className="text-forest-700/60"> · {fmtNum(r.date, locale)}</span>
                 </figcaption>
               </figure>
             </Reveal>

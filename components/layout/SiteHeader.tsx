@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useStrings } from "@/lib/i18n/useStrings";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
+import { HashLink } from "@/components/layout/HashLink";
 
 // Mit führendem "/" → funktioniert von jeder Unterseite zurück zur Startseite.
 const NAV = [
@@ -11,8 +12,8 @@ const NAV = [
   { key: "retreats", href: "/#apartments" },
   { key: "surroundings", href: "/#umgebung" },
   { key: "gift", href: "/#gutschein" },
-  // „Buchen" vorläufig auf die Startseite, bis die Buchungsseite existiert.
-  { key: "book", href: "/" },
+  // „Buchen" führt zur Wohnungs-Übersicht — dort startet jede Buchung.
+  { key: "book", href: "/#apartments" },
 ] as const;
 
 export function SiteHeader() {
@@ -112,12 +113,12 @@ export function SiteHeader() {
           {/* Rechts: Sprache (mobil ausklappbar) + Buchen (Desktop; mobil übernimmt die Bottom-Bar) */}
           <div className="flex items-center justify-end justify-self-end gap-2 md:gap-3">
             <LanguageSwitcher compact showLabel={false} />
-            <Link
+            <HashLink
               href="/#apartments"
               className="hidden rounded-[3px] border border-forest-900 bg-forest-900 px-4 py-2.5 font-body text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:bg-white hover:text-forest-900 md:inline-flex md:px-6 md:text-xs"
             >
               {t.nav.book}
-            </Link>
+            </HashLink>
           </div>
         </div>
       </header>
@@ -130,7 +131,7 @@ export function SiteHeader() {
       >
         <nav className="flex h-full flex-col items-center justify-center gap-3 px-6">
           {NAV.map((item, i) => (
-            <a
+            <HashLink
               key={item.key}
               href={item.href}
               onClick={() => setOpen(false)}
@@ -138,16 +139,16 @@ export function SiteHeader() {
               style={{ transitionDelay: open ? `${120 + i * 60}ms` : "0ms" }}
             >
               {t.nav[item.key]}
-            </a>
+            </HashLink>
           ))}
-          <a
+          <HashLink
             href="/#kontakt"
             onClick={() => setOpen(false)}
             className="mt-6 font-body text-xs font-medium uppercase tracking-[0.28em] text-cream-100/70 transition-colors duration-300 hover:text-brass-300"
             style={{ transitionDelay: open ? `${120 + NAV.length * 60}ms` : "0ms" }}
           >
             {t.nav.contact}
-          </a>
+          </HashLink>
           <span className="mt-10 font-body text-[0.62rem] font-medium uppercase tracking-[0.34em] text-cream-100/50">
             {t.park.name}
           </span>

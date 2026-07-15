@@ -3,15 +3,22 @@
 import Link from "next/link";
 import { useLocale, useStrings } from "@/lib/i18n/I18nProvider";
 import { fmtNum } from "@/lib/i18n/format";
+import { HashLink } from "@/components/layout/HashLink";
+import { NewsletterForm } from "@/components/layout/NewsletterForm";
 
-// Reihenfolge identisch zu t.footer.legal (= Impressum, Datenschutz, AGB).
+// Reihenfolge identisch zu t.footer.legal (= Impressum, Datenschutz, AGB, Widerruf).
 // Rechtstexte sind rechtlich maßgeblich deutsch; in jeder UI-Sprache gleiches Ziel.
-const LEGAL_HREFS = ["/impressum", "/datenschutz", "/agb"] as const;
+const LEGAL_HREFS = ["/impressum", "/datenschutz", "/agb", "/widerruf"] as const;
 
 // Reihenfolge identisch zu t.footer.discover.links
 // (= Unterkünfte, Umgebung, Gutschein, Buchen).
-// „Buchen" führt vorläufig auf die Startseite, bis die Buchungsseite existiert.
-const DISCOVER_HREFS = ["/#apartments", "/umgebung", "/#gutschein", "/"] as const;
+// „Buchen" führt zur Wohnungs-Übersicht — dort startet jede Buchung.
+const DISCOVER_HREFS = [
+  "/#apartments",
+  "/umgebung",
+  "/#gutschein",
+  "/#apartments",
+] as const;
 
 export function SiteFooter() {
   const t = useStrings();
@@ -41,12 +48,12 @@ export function SiteFooter() {
             <ul className="mt-5 grid max-w-xs grid-cols-2 gap-x-8 gap-y-3">
               {t.footer.discover.links.map((link, i) => (
                 <li key={link}>
-                  <Link
-                    href={DISCOVER_HREFS[i] ?? "#"}
+                  <HashLink
+                    href={DISCOVER_HREFS[i] ?? "/"}
                     className="font-body text-sm text-cream-100/80 transition-colors hover:text-brass-300"
                   >
                     {link}
-                  </Link>
+                  </HashLink>
                 </li>
               ))}
             </ul>
@@ -73,20 +80,7 @@ export function SiteFooter() {
             <p className="mt-3 max-w-xs font-body text-sm text-cream-100/65">
               {t.footer.contact.newsletterText}
             </p>
-            <form className="mt-4 flex max-w-sm gap-2" aria-label={t.footer.contact.newsletterTitle}>
-              <input
-                type="email"
-                required
-                placeholder={t.footer.contact.newsletterPlaceholder}
-                className="min-w-0 flex-1 border border-cream-50/20 bg-transparent px-4 py-3 font-body text-sm text-cream-50 placeholder:text-cream-100/40 focus:border-brass-300 focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="rounded-[3px] bg-brass-400 px-5 py-3 font-body text-xs font-semibold uppercase tracking-[0.16em] text-night transition-colors hover:bg-brass-300"
-              >
-                {t.footer.contact.newsletterCta}
-              </button>
-            </form>
+            <NewsletterForm />
           </div>
         </div>
 

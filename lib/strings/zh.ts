@@ -95,6 +95,10 @@ export const zh: Strings = {
       showAllPhotos: '查看所有照片',
       showAllAmenities: '显示全部设施',
       showLess: '收起',
+      openPhoto: '全屏查看照片',
+      prevPhoto: '上一张',
+      nextPhoto: '下一张',
+      close: '关闭',
       reviewsTitle: '房客这样说',
       reviewsCount: (n: number) => `${n} 条评价`,
       ratingLine: (rating: string, n: number) => `${rating} · ${n} 条评价`,
@@ -274,9 +278,38 @@ export const zh: Strings = {
       newsletterPlaceholder: '你的邮箱',
       newsletterCta: '订阅',
     },
-    legal: ['法律声明', '隐私政策', '条款'],
+    legal: ['法律声明', '隐私政策', '条款', '撤销权'],
     copyright: (year: number) => `© ${year} Black Forest Retreats`,
     credit: '网站制作',
+  },
+
+  newsletter: {
+    sending: '请稍候',
+    success: '就差一步：我们已向您发送邮件，请在邮件中确认订阅。',
+    error: '刚才没有成功，请稍后再试。',
+    privacy: '订阅即表示您同意我们的',
+    privacyLink: '隐私政策',
+    privacyAfter: '。您可以随时取消订阅。',
+    mail: {
+      subject: '请确认您的订阅',
+      intro: '很高兴您愿意加入。请点击下方按钮确认订阅我们的邮件。',
+      cta: '确认订阅',
+      note: '如果您并未订阅，请忽略此邮件。未经确认，我们不会向您发送任何内容。',
+    },
+    confirm: {
+      title: '订阅已确认',
+      text: '谢谢！您已在订阅名单中，我们会不时寄来黑森林的消息。',
+      invalidTitle: '链接无效',
+      invalidText: '此确认链接无效或已过期，请重新订阅。',
+      cta: '返回首页',
+    },
+    unsubscribe: {
+      title: '已取消订阅',
+      text: '您将不再收到我们的邮件。',
+      invalidTitle: '链接无效',
+      invalidText: '此取消订阅链接无效或已过期。',
+      cta: '返回首页',
+    },
   },
 
   langSwitcher: {
@@ -311,9 +344,9 @@ export const zh: Strings = {
         { title: '一尘不染', text: '房客一次次特别称赞的地方。' },
       ],
       reviews: [
-        { date: '2025年5月', text: '躺在床上就能望见城堡，这份景致无价。处处一尘不染，密码箱入住毫不费事。' },
-        { date: '2025年4月', text: 'Tom 是位超棒的房东，回复很快，还给了不少周边的好建议。傍晚的露台简直如梦。' },
-        { date: '2025年3月', text: '布置得很有格调，安静又不偏僻。停车就在门口。我们还会再来！' },
+        { text: '躺在床上就能望见城堡，这份景致无价。处处一尘不染，密码箱入住毫不费事。' },
+        { text: 'Tom 是位超棒的房东，回复很快，还给了不少周边的好建议。傍晚的露台简直如梦。' },
+        { text: '布置得很有格调，安静又不偏僻。停车就在门口。我们还会再来！' },
       ],
       amenities: [
         '大露台',
@@ -341,9 +374,9 @@ export const zh: Strings = {
         { title: '高速 WiFi', text: '办公或追剧都游刃有余。' },
       ],
       reviews: [
-        { date: '2025年5月', text: '老梁架的木筋结构太有韵味了。屋顶露台还能望见城堡，真是地道的度假。' },
-        { date: '2025年4月', text: '布置得用心，干净得很，位置又安静。在黑森林过个周末再合适不过。' },
-        { date: '2025年2月', text: '沟通很亲切，一切都顺顺利利。强烈推荐。' },
+        { text: '老梁架的木筋结构太有韵味了。屋顶露台还能望见城堡，真是地道的度假。' },
+        { text: '布置得用心，干净得很，位置又安静。在黑森林过个周末再合适不过。' },
+        { text: '沟通很亲切，一切都顺顺利利。强烈推荐。' },
       ],
       amenities: [
         '屋顶露台',
@@ -369,8 +402,9 @@ export const zh: Strings = {
         { title: '高速 WiFi', text: '覆盖全屋，临水办公也没问题。' },
       ],
       reviews: [
-        { date: '2024年8月', text: '伴着水声入睡太惬意了。全家人都有充足的空间。' },
-        { date: '2024年7月', text: '宽敞、明亮，临河的景致独一无二。随时还想再来。' },
+        { text: '伴着水声入睡太惬意了。全家人都有充足的空间。' },
+        { text: '宽敞、明亮，临河的景致独一无二。随时还想再来。' },
+        { text: '清晨在露台上喝咖啡，恩茨河就在脚下流淌。孩子们在花园里待到不肯走。' },
       ],
       amenities: [
         '临河而居',
@@ -396,8 +430,9 @@ export const zh: Strings = {
         { title: '免费 WiFi', text: '全屋快速又稳定。' },
       ],
       reviews: [
-        { date: '2024年10月', text: '就在老城中心，迷人的城中宅邸上下数层。我们一进门就觉得自在。' },
-        { date: '2024年9月', text: '位置绝佳，处处都能步行抵达。漂亮又布置得用心。' },
+        { text: '就在老城中心，迷人的城中宅邸上下数层。我们一进门就觉得自在。' },
+        { text: '位置绝佳，处处都能步行抵达。漂亮又布置得用心。' },
+        { text: '三层楼都很安静，可两分钟就能走到集市广场。入住手续也毫不费事。' },
       ],
       amenities: [
         '就在老城中心',
@@ -422,8 +457,9 @@ export const zh: Strings = {
         { title: '宽敞的公共区域', text: '一起下厨、用餐、共度时光。' },
       ],
       reviews: [
-        { date: '2024年11月', text: '多特别的一座房子！天花板高、空间大，正适合我们这一大群人。' },
-        { date: '2024年9月', text: '触手可及的历史，加上真正充裕的空间。是一次难得的体验。' },
+        { text: '多特别的一座房子！天花板高、空间大，正适合我们这一大群人。' },
+        { text: '触手可及的历史，加上真正充裕的空间。是一次难得的体验。' },
+        { text: '作为昔日的邮局，这房子很有性格。我们八个人住，每人都还有自己的角落。' },
       ],
       amenities: [
         '历史邮局',
@@ -449,8 +485,9 @@ export const zh: Strings = {
         { title: '免费 WiFi', text: '全屋快速又稳定。' },
       ],
       reviews: [
-        { date: '2024年11月', text: '老城里真正的瑰宝。这只「醉狐」一下子就把我们迷住了。' },
-        { date: '2024年9月', text: '迷人、安静，处处都能步行抵达。我们还会再来。' },
+        { text: '老城里真正的瑰宝。这只「醉狐」一下子就把我们迷住了。' },
+        { text: '迷人、安静，处处都能步行抵达。我们还会再来。' },
+        { text: '小巧精致，处处见细节上的用心。街角的面包房是我们每天早上的第一站。' },
       ],
       amenities: [
         '就在历史老城中心',
@@ -469,7 +506,7 @@ export const zh: Strings = {
       shortDescription: string;
       description: string;
       usps: { title: string; text: string }[];
-      reviews: { date: string; text: string }[];
+      reviews: { text: string }[];
       amenities: string[];
     }
   >,
