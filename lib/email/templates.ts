@@ -146,6 +146,28 @@ export function giftCardEmail(
   return { subject: t.subject(card.code), html: shell(locale, inner) };
 }
 
+/** Passwort zurücksetzen: Link zur Neuvergabe (30 Minuten gültig). */
+export function passwordResetEmail(
+  rawLocale: string,
+  resetUrl: string,
+): { subject: string; html: string } {
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : 'de';
+  const t = STRINGS[locale].bookingFlow.account.resetEmail;
+  const tb = STRINGS[locale].bookingFlow.email;
+  const inner = `
+    <p style="margin:0;">${t.greeting}</p>
+    <p style="margin:12px 0 24px;">${t.intro}</p>
+    <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
+      <tr><td style="border-radius:3px;background:${COLORS.brass};">
+        <a href="${resetUrl}" style="display:inline-block;padding:14px 28px;color:${COLORS.night};font-size:13px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;font-weight:bold;">${t.cta}</a>
+      </td></tr>
+    </table>
+    <p style="margin:22px 0 0;font-size:13px;opacity:.8;">${t.expiry}</p>
+    <p style="margin:6px 0 0;font-size:13px;opacity:.8;">${t.ignore}</p>
+    <p style="margin:28px 0 0;">${tb.signoff}<br/><strong>${tb.teamName}</strong></p>`;
+  return { subject: t.subject, html: shell(locale, inner) };
+}
+
 /** Hinweis bei fehlgeschlagener Abbuchung („Später zahlen"). */
 export function paymentFailedEmail({ booking, retreatName }: BookingEmailContext): {
   subject: string;
