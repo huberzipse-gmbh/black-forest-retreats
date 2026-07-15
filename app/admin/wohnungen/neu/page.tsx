@@ -4,5 +4,5 @@ import { RetreatEditor } from "@/components/admin/RetreatEditor";
 
 export default function AdminNewRetreatPage() {
   if (!supabaseAdminConfigured()) return <AdminNotConfigured />;
-  return <RetreatEditor retreat={null} rules={[]} blocks={[]} exportUrl={null} />;
+  return <RetreatEditor retreat={null} rules={[]} blocks={[]} conflictNights={[]} exportUrl={null} />;
 }

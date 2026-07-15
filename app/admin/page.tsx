@@ -3,10 +3,12 @@ import { addDays, format } from "date-fns";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { supabaseAdminConfigured } from "@/lib/supabase/env";
 import { runIfStale } from "@/lib/booking/cron";
-import { mapBooking } from "@/lib/booking/db";
+import { fetchOccupancy, mapBooking } from "@/lib/booking/db";
+import { findConflicts } from "@/lib/booking/conflicts";
 import { AdminNotConfigured } from "@/components/admin/AdminNotConfigured";
 import { StatCard } from "@/components/admin/StatCard";
 import { BookingTable } from "@/components/admin/BookingTable";
+import { ConflictWarning } from "@/components/admin/ConflictWarning";
 import { CronPanel } from "@/components/admin/CronPanel";
 
 const iso = (d: Date) => format(d, "yyyy-MM-dd");
@@ -22,7 +24,7 @@ export default async function AdminDashboardPage() {
   const monthAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
   const weekAhead = iso(addDays(new Date(), 7));
 
-  const [paidRes, openRes, arrivalsRes, failedRes, recentRes, cronRes, giftSoldRes, giftOpenRes] = await Promise.all([
+  const [paidRes, openRes, arrivalsRes, failedRes, recentRes, cronRes, giftSoldRes, giftOpenRes, occupancy, retreatsRes] = await Promise.all([
     sb
       .from("bookings")
       .select("total_cents")
@@ -59,7 +61,15 @@ export default async function AdminDashboardPage() {
       .gte("paid_at", monthAgo),
     // Offenes Guthaben: aktive Karten = ausstehende Leistungsverpflichtung.
     sb.from("gift_cards").select("balance_cents").eq("status", "active").eq("demo", false),
+    // Belegungen aller Wohnungen → Doppelbelegungs-Prüfung.
+    fetchOccupancy(sb),
+    sb.from("retreats").select("id, name_de"),
   ]);
+
+  const conflicts = findConflicts(occupancy);
+  const retreatNames = new Map<string, string>(
+    (retreatsRes.data ?? []).map((r) => [r.id, r.name_de]),
+  );
 
   const revenue30 = (paidRes.data ?? []).reduce((sum, r) => sum + r.total_cents, 0);
   const giftRevenue30 = (giftSoldRes.data ?? []).reduce((sum, r) => sum + r.amount_cents, 0);
@@ -75,6 +85,8 @@ export default async function AdminDashboardPage() {
       <h1 className="font-display text-3xl text-forest-900">Dashboard</h1>
 
       {/* Warnungen */}
+      <ConflictWarning conflicts={conflicts} retreatNames={retreatNames} />
+
       {failedCharges.length > 0 && (
         <div className="mt-6 rounded-[6px] border border-red-800/25 bg-red-50 px-5 py-4">
           <div className="font-body text-sm font-bold text-red-900">
@@ -98,6 +110,7 @@ export default async function AdminDashboardPage() {
         <StatCard label="Offene Buchungen" value={openRes.count ?? 0} />
         <StatCard label="Anreisen (7 Tage)" value={arrivalsRes.count ?? 0} />
         <StatCard label="Fehlgeschlagene Abbuchungen" value={failedCharges.length} alert={failedCharges.length > 0} />
+        <StatCard label="Doppelbelegungen" value={conflicts.length} alert={conflicts.length > 0} />
       </div>
 
       {/* Cron / Sync */}

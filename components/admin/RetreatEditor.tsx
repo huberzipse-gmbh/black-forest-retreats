@@ -52,6 +52,8 @@ interface Props {
   retreat: any | null; // DB-Row (snake_case) oder null = neu anlegen
   rules: PriceRule[];
   blocks: EditorBlock[];
+  /** Doppelt vergebene Nächte (ISO) — im Kalender rot markiert. */
+  conflictNights: string[];
   exportUrl: string | null;
 }
 
@@ -66,7 +68,7 @@ const primaryBtn =
 const outlineBtn =
   "rounded-[3px] border border-forest-900/25 px-4 py-2.5 font-body text-xs font-semibold uppercase tracking-wider text-forest-900 transition-colors hover:border-forest-900";
 
-export function RetreatEditor({ retreat, rules, blocks, exportUrl }: Props) {
+export function RetreatEditor({ retreat, rules, blocks, conflictNights, exportUrl }: Props) {
   const router = useRouter();
   const isNew = !retreat;
   const [tab, setTab] = useState<Tab>("stammdaten");
@@ -128,7 +130,7 @@ export function RetreatEditor({ retreat, rules, blocks, exportUrl }: Props) {
           <PricingTab retreat={retreat} rules={rules} onSaved={(msg) => { setMessage(msg); router.refresh(); }} />
         )}
         {tab === "kalender" && retreat && (
-          <CalendarTab retreatId={retreat.id} blocks={blocks} onChanged={() => router.refresh()} />
+          <CalendarTab retreatId={retreat.id} blocks={blocks} conflictNights={conflictNights} onChanged={() => router.refresh()} />
         )}
         {tab === "ical" && retreat && (
           <IcalTab retreat={retreat} exportUrl={exportUrl} onSaved={(msg) => { setMessage(msg); router.refresh(); }} />
@@ -777,7 +779,7 @@ function PriceRuleEditor({ retreatId, rules, onSaved }: { retreatId: string; rul
 
 /* ── Tab 3: Kalender ──────────────────────────────────────────────────────── */
 
-function CalendarTab({ retreatId, blocks, onChanged }: { retreatId: string; blocks: EditorBlock[]; onChanged: () => void }) {
+function CalendarTab({ retreatId, blocks, conflictNights, onChanged }: { retreatId: string; blocks: EditorBlock[]; conflictNights: string[]; onChanged: () => void }) {
   const [isPending, startTransition] = useTransition();
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
@@ -841,7 +843,7 @@ function CalendarTab({ retreatId, blocks, onChanged }: { retreatId: string; bloc
           Freie Nächte direkt anklicken: erster Klick = Beginn, zweiter Klick = Ende. Geblockte Nächte anklicken zum Freigeben.
         </p>
         <div className="mt-4">
-          <AdminCalendar blocks={blocks} isPending={isPending} onBlock={blockRange} onUnblock={unblock} />
+          <AdminCalendar blocks={blocks} conflictNights={conflictNights} isPending={isPending} onBlock={blockRange} onUnblock={unblock} />
         </div>
       </div>
 

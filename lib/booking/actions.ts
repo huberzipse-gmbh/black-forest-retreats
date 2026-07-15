@@ -159,13 +159,23 @@ export async function createBooking(raw: CreateBookingInput): Promise<CreateBook
     if (bookingError) throw bookingError;
 
     // Provisorischer Block (verfällt nach 30 min, siehe fetchBlocks).
-    await admin.from('availability_blocks').insert({
-      retreat_id: input.retreatId,
-      start_date: input.checkIn,
-      end_date: input.checkOut,
-      source: 'booking',
-      booking_id: bookingRow.id,
+    // create_booking_block prüft Belegung und legt den Block unter Advisory
+    // Lock in EINER Transaktion an. Der Check oben ist nur die schnelle
+    // Vorab-Antwort — hier entscheidet sich das Rennen zweier gleichzeitiger
+    // Buchungsversuche auf denselben Zeitraum.
+    const { data: blockId, error: blockError } = await admin.rpc('create_booking_block', {
+      p_retreat_id: input.retreatId,
+      p_booking_id: bookingRow.id,
+      p_start: input.checkIn,
+      p_end: input.checkOut,
     });
+    if (blockError) throw blockError;
+    if (!blockId) {
+      // Jemand war schneller. Die eben angelegte Buchung ist unbezahlt und
+      // von nichts referenziert → wieder entfernen.
+      await admin.from('bookings').delete().eq('id', bookingRow.id);
+      return { ok: false, error: 'unavailable' };
+    }
 
     return { ok: true, bookingId: bookingRow.id, bookingNumber: bookingRow.booking_number };
   } catch (err) {

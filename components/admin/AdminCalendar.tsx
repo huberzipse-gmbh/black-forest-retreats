@@ -29,19 +29,22 @@ const WEEKDAYS = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
 interface Props {
   blocks: EditorBlock[];
+  /** Doppelt vergebene Nächte (ISO) — rot markiert, siehe lib/booking/conflicts. */
+  conflictNights: string[];
   isPending: boolean;
   /** endExclusive = Checkout-Tag (frei), wie blockDates es erwartet. */
   onBlock: (start: string, endExclusive: string, note: string) => void;
   onUnblock: (blockId: string) => void;
 }
 
-export function AdminCalendar({ blocks, isPending, onBlock, onUnblock }: Props) {
+export function AdminCalendar({ blocks, conflictNights, isPending, onBlock, onUnblock }: Props) {
   const today = startOfToday();
   const [viewMonth, setViewMonth] = useState(startOfMonth(today));
   const [anchor, setAnchor] = useState<string | null>(null);
   const [rangeEnd, setRangeEnd] = useState<string | null>(null);
   const [note, setNote] = useState("");
   const [selectedBlock, setSelectedBlock] = useState<EditorBlock | null>(null);
+  const conflicts = useMemo(() => new Set(conflictNights), [conflictNights]);
 
   /** Nacht (ISO) → Block, der sie belegt. Blöcke sind [start, end). */
   const nightBlock = useMemo(() => {
@@ -156,11 +159,14 @@ export function AdminCalendar({ blocks, isPending, onBlock, onUnblock }: Props) 
                   const inSelection = anchor && last && dayIso >= anchor && dayIso <= last;
                   const isEdge = dayIso === anchor || dayIso === rangeEnd;
                   const inSelectedBlock = selectedBlock && b?.id === selectedBlock.id;
+                  const conflicted = !past && conflicts.has(dayIso);
 
                   const base =
                     "relative mx-auto flex h-10 w-10 items-center justify-center rounded-full font-body text-sm transition-colors";
                   let cls: string;
                   if (past) cls = "text-forest-700/20";
+                  // Doppelbelegung sticht alles: die Nacht ist zweimal vergeben.
+                  else if (conflicted) cls = "bg-red-100 font-bold text-red-900 ring-2 ring-red-700";
                   else if (isEdge || (inSelection && !b)) cls = isEdge ? "bg-forest-900 text-cream-50" : "bg-forest-900/10 text-forest-900";
                   else if (b?.source === "booking") cls = `bg-brass-400/30 text-brass-700 ${inSelectedBlock ? "ring-2 ring-brass-500" : ""}`;
                   else if (b?.source === "airbnb-ical") cls = `bg-bark-100 text-bark-700 ${inSelectedBlock ? "ring-2 ring-bark-400" : ""}`;
@@ -173,7 +179,14 @@ export function AdminCalendar({ blocks, isPending, onBlock, onUnblock }: Props) 
                       type="button"
                       disabled={past || isPending}
                       onClick={() => clickDay(dayIso)}
-                      title={b ? `${sourceLabel[b.source]}${b.note ? ` · ${b.note}` : ""}` : undefined}
+                      title={
+                        [
+                          conflicted ? "Doppelbelegung — im Dashboard prüfen" : null,
+                          b ? `${sourceLabel[b.source]}${b.note ? ` · ${b.note}` : ""}` : null,
+                        ]
+                          .filter(Boolean)
+                          .join(" · ") || undefined
+                      }
                       className={`${base} ${cls}`}
                     >
                       {format(day, "d")}
@@ -200,6 +213,11 @@ export function AdminCalendar({ blocks, isPending, onBlock, onUnblock }: Props) 
         <span className="inline-flex items-center gap-2">
           <span className="inline-block h-3 w-3 rounded-full border border-forest-900/20" /> Frei (anklicken zum Blocken)
         </span>
+        {conflicts.size > 0 && (
+          <span className="inline-flex items-center gap-2 font-semibold text-red-900">
+            <span className="inline-block h-3 w-3 rounded-full bg-red-100 ring-2 ring-red-700" /> Doppelbelegung
+          </span>
+        )}
       </div>
 
       {/* Aktionsleiste: Auswahl blocken */}
