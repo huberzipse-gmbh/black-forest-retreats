@@ -273,7 +273,7 @@ export const en: Strings = {
     contact: {
       title: 'Contact',
       location: 'Neuenbürg · Nationalpark Nordschwarzwald',
-      email: 'hallo@blackforestretreats.de',
+      email: 'blackforestretreats@gmail.com',
       newsletterTitle: 'Newsletter',
       newsletterText: 'Now and then a note from the Black Forest: new homes and quiet offers. Nothing more.',
       newsletterPlaceholder: 'Your email',
@@ -349,7 +349,7 @@ export const en: Strings = {
       ],
       reviews: [
         { text: 'The view of the castle from the bed is priceless. Everything spotless, and check-in via the key box was completely effortless.' },
-        { text: 'Tom is a great host, quick to reply and full of tips for the area. The terrace in the evening was a dream.' },
+        { text: 'Beautifully kept and tastefully furnished, every detail is right. There is plenty to do in the area, and the terrace in the evening is a dream.' },
         { text: 'Stylishly furnished, quiet and still central. Parking right there. We will be back!' },
       ],
       amenities: [
