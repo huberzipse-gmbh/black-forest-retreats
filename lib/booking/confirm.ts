@@ -37,6 +37,41 @@ async function redeemGiftCardForBooking(booking: Booking): Promise<void> {
   }
 }
 
+/**
+ * Sperre der Buchung sicherstellen, bevor sie verbindlich wird.
+ *
+ * Die 30-Minuten-Reservierung kann abgelaufen und der Block freigegeben worden
+ * sein, während die Zahlung noch lief (langsamer 3DS-Flow, später Webhook).
+ * Ohne Block stünde der Zeitraum trotz bestätigter Buchung wieder als frei im
+ * Kalender und wäre ein zweites Mal buchbar.
+ *
+ * Ist der Zeitraum inzwischen anderweitig vergeben, wird die Buchung trotzdem
+ * bestätigt — der Gast hat bezahlt, das lässt sich hier nicht rückabwickeln.
+ * Die Doppelbelegung meldet der Admin-Bereich: die Konfliktprüfung liest die
+ * Buchungen selbst, nicht nur die Blöcke, und sieht sie deshalb auch ohne Block.
+ */
+async function ensureBookingBlock(booking: Booking): Promise<void> {
+  const sb = createAdminClient();
+  const { count } = await sb
+    .from('availability_blocks')
+    .select('id', { count: 'exact', head: true })
+    .eq('booking_id', booking.id);
+  if ((count ?? 0) > 0) return;
+
+  const { data, error } = await sb.rpc('create_booking_block', {
+    p_retreat_id: booking.retreatId,
+    p_booking_id: booking.id,
+    p_start: booking.checkIn,
+    p_end: booking.checkOut,
+  });
+  if (error || !data) {
+    console.error(
+      `[booking] Zeitraum für ${booking.bookingNumber} konnte nicht gesperrt werden ` +
+        `(${error?.message ?? 'bereits belegt'}) — mögliche Doppelbelegung, im Admin prüfen.`,
+    );
+  }
+}
+
 export async function loadBooking(bookingId: string): Promise<Booking> {
   const sb = createAdminClient();
   const { data, error } = await sb.from('bookings').select('*').eq('id', bookingId).single();
@@ -84,6 +119,7 @@ export async function markBookingPaid(
   const updated = await loadBooking(bookingId);
   const retreatName = await retreatNameOf(updated.retreatId);
 
+  await ensureBookingBlock(updated);
   await redeemGiftCardForBooking(updated);
 
   // Rechnung (idempotent) + PDF
@@ -151,7 +187,8 @@ export async function markBookingScheduled(
   const updated = await loadBooking(bookingId);
   const retreatName = await retreatNameOf(updated.retreatId);
 
-  // Buchung ist ab jetzt verbindlich → Gutschein-Guthaben einlösen.
+  // Buchung ist ab jetzt verbindlich → Zeitraum sperren, Gutschein einlösen.
+  await ensureBookingBlock(updated);
   await redeemGiftCardForBooking(updated);
 
   const confirm = confirmationEmail({ booking: updated, retreatName });

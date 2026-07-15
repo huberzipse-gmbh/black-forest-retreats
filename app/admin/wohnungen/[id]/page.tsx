@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { supabaseAdminConfigured } from "@/lib/supabase/env";
-import { mapPriceRule } from "@/lib/booking/db";
+import { fetchOccupancy, mapPriceRule } from "@/lib/booking/db";
+import { conflictNights, findConflicts } from "@/lib/booking/conflicts";
 import { AdminNotConfigured } from "@/components/admin/AdminNotConfigured";
 import { RetreatEditor, type EditorBlock } from "@/components/admin/RetreatEditor";
 
@@ -14,7 +15,7 @@ export default async function AdminRetreatEditPage({
   const { id } = await params;
 
   const sb = createAdminClient();
-  const [{ data: retreat }, { data: rules }, { data: blocks }] = await Promise.all([
+  const [{ data: retreat }, { data: rules }, { data: blocks }, occupancy] = await Promise.all([
     sb.from("retreats").select("*").eq("id", id).maybeSingle(),
     sb.from("price_rules").select("*").eq("retreat_id", id).order("created_at"),
     sb
@@ -22,6 +23,7 @@ export default async function AdminRetreatEditPage({
       .select("*, bookings(booking_number, status, guest_name)")
       .eq("retreat_id", id)
       .gte("end_date", new Date().toISOString().slice(0, 10)),
+    fetchOccupancy(sb, id),
   ]);
   if (!retreat) notFound();
 
@@ -49,6 +51,7 @@ export default async function AdminRetreatEditPage({
       retreat={retreat}
       rules={(rules ?? []).map(mapPriceRule)}
       blocks={editorBlocks}
+      conflictNights={[...conflictNights(findConflicts(occupancy))]}
       exportUrl={exportUrl}
     />
   );

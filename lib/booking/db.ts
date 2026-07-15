@@ -3,6 +3,7 @@
  * Schreibzugriffe laufen ausschließlich über Server Actions (Service-Role).
  */
 import type { SupabaseClient } from '@supabase/supabase-js';
+import type { Occupancy } from './conflicts';
 import type {
   AvailabilityBlock,
   Booking,
@@ -113,6 +114,30 @@ export async function fetchPriceRules(sb: SupabaseClient, retreatId: string): Pr
   return (data ?? []).map(mapPriceRule);
 }
 
+/** Reservierungsfenster einer unbezahlten pending-Buchung. */
+export const HOLD_MINUTES = 30;
+
+/**
+ * Hält diese Buchung ihren Zeitraum noch? Storniert = nein; unbezahlt und
+ * älter als das Reservierungsfenster = nein (der Zeitraum wird wieder frei).
+ * Spiegelbild von `release_expired_blocks()` in Migration 0015 — beide Seiten
+ * müssen dieselbe Regel anwenden, sonst blockiert die DB Buchungen, die die
+ * App für frei hält.
+ */
+export function bookingHoldsSlot(
+  bk: { status: string; payment_status: string; created_at: string },
+  now: number = Date.now(),
+): boolean {
+  if (bk.status === 'cancelled') return false;
+  if (
+    bk.status === 'pending' &&
+    ['unpaid', 'awaiting_payment', 'failed'].includes(bk.payment_status)
+  ) {
+    return new Date(bk.created_at).getTime() > now - HOLD_MINUTES * 60 * 1000;
+  }
+  return true;
+}
+
 /**
  * Relevante Sperrzeiten einer Wohnung (ab heute). Verfallene pending-Buchungen
  * (unbezahlt, älter als 30 min) blockieren NICHT mehr.
@@ -126,20 +151,63 @@ export async function fetchBlocks(sb: SupabaseClient, retreatId: string): Promis
     .gte('end_date', today);
   if (error) throw error;
 
-  const cutoff = Date.now() - 30 * 60 * 1000;
   return (data ?? [])
-    .filter((b: any) => {
-      if (b.source !== 'booking' || !b.bookings) return true;
-      const bk = b.bookings;
-      if (bk.status === 'cancelled') return false;
-      // Unbezahlte pending-Buchung: nur 30 min reservieren.
-      if (
-        bk.status === 'pending' &&
-        ['unpaid', 'awaiting_payment', 'failed'].includes(bk.payment_status)
-      ) {
-        return new Date(bk.created_at).getTime() > cutoff;
-      }
-      return true;
-    })
+    .filter((b: any) => b.source !== 'booking' || !b.bookings || bookingHoldsSlot(b.bookings))
     .map(mapBlock);
+}
+
+/**
+ * Alle aktiven Belegungen ab heute — Grundlage der Doppelbelegungs-Prüfung.
+ *
+ * Bewusst NICHT aus `availability_blocks` allein: eine bestätigte Buchung ist
+ * auch dann vergeben, wenn ihr Block fehlt (z. B. weil eine späte Zahlung nach
+ * Ablauf der Reservierung eintraf). Deshalb sind Buchungen hier die Quelle für
+ * sich selbst; aus den Blöcken kommen nur Airbnb und manuelle Sperren.
+ */
+export async function fetchOccupancy(
+  sb: SupabaseClient,
+  retreatId?: string,
+): Promise<Occupancy[]> {
+  const today = new Date().toISOString().slice(0, 10);
+
+  const bookingQuery = sb
+    .from('bookings')
+    .select('id, retreat_id, booking_number, guest_name, check_in, check_out, status, payment_status, created_at')
+    .neq('status', 'cancelled')
+    .gte('check_out', today);
+  const blockQuery = sb
+    .from('availability_blocks')
+    .select('id, retreat_id, start_date, end_date, source, note')
+    .in('source', ['airbnb-ical', 'manual'])
+    .gte('end_date', today);
+  if (retreatId) {
+    bookingQuery.eq('retreat_id', retreatId);
+    blockQuery.eq('retreat_id', retreatId);
+  }
+
+  const [bookings, blocks] = await Promise.all([bookingQuery, blockQuery]);
+  if (bookings.error) throw bookings.error;
+  if (blocks.error) throw blocks.error;
+
+  const fromBookings: Occupancy[] = (bookings.data ?? [])
+    .filter((b: any) => bookingHoldsSlot(b))
+    .map((b: any) => ({
+      retreatId: b.retreat_id,
+      start: b.check_in,
+      end: b.check_out,
+      kind: 'booking' as const,
+      label: `${b.booking_number} · ${b.guest_name}`,
+      bookingId: b.id,
+    }));
+
+  const fromBlocks: Occupancy[] = (blocks.data ?? []).map((b: any) => ({
+    retreatId: b.retreat_id,
+    start: b.start_date,
+    end: b.end_date,
+    kind: b.source,
+    label: b.note || (b.source === 'airbnb-ical' ? 'Airbnb-Belegung' : 'Gesperrt'),
+    blockId: b.id,
+  }));
+
+  return [...fromBookings, ...fromBlocks];
 }

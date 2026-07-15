@@ -274,7 +274,12 @@ export async function blockDates(
     source: 'manual',
     note,
   });
-  return error ? { ok: false, error: error.message } : { ok: true };
+  if (!error) return { ok: true };
+  // 23P01 = exclusion_violation: der Überbuchungs-Constraint aus Migration 0015.
+  if (error.code === '23P01') {
+    return { ok: false, error: 'Der Zeitraum überschneidet sich mit einer bestehenden Belegung.' };
+  }
+  return { ok: false, error: error.message };
 }
 
 export async function unblockDates(blockId: string): Promise<{ ok: boolean; error?: string }> {
