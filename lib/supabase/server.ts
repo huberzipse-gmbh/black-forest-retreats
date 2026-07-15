@@ -4,6 +4,7 @@
  */
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
+import { AUTH_COOKIE_NAME } from './env';
 
 export async function createClient() {
   const cookieStore = await cookies();
@@ -14,6 +15,9 @@ export async function createClient() {
     process.env.SUPABASE_INTERNAL_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
+      // Muss zum Browser-Client passen (client.ts), sonst wird die Sitzung
+      // unter einem anderen Cookie-Namen gesucht und nie gefunden.
+      cookieOptions: { name: AUTH_COOKIE_NAME },
       cookies: {
         getAll() {
           return cookieStore.getAll();

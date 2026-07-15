@@ -267,7 +267,7 @@ export const de = {
     tagline: 'Der Schwarzwald, aber privat. Ferienwohnungen in Neuenbürg.',
     discover: {
       title: 'Entdecken',
-      links: ['Unterkünfte', 'Umgebung', 'Gutschein', 'Buchen'],
+      links: ['Unterkünfte', 'Umgebung', 'Gutschein', 'Buchen', 'Konto'],
     },
     service: {
       title: 'Service',

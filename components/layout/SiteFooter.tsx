@@ -18,6 +18,7 @@ const DISCOVER_HREFS = [
   "/umgebung",
   "/#gutschein",
   "/#apartments",
+  "/konto",
 ] as const;
 
 export function SiteFooter() {
