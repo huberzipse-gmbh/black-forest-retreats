@@ -263,7 +263,7 @@ export const zh: Strings = {
     tagline: '黑森林，专属于你。诺因比格的度假公寓。',
     discover: {
       title: '探索',
-      links: ['住宿', '周边', '礼券', '预订'],
+      links: ['住宿', '周边', '礼券', '预订', '账户'],
     },
     service: {
       title: '服务',
