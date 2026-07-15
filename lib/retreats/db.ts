@@ -72,6 +72,7 @@ function mapRow(row: any, t: Strings): RetreatCard {
     cleaningFeeCents: row.cleaning_fee_cents as number,
     minNights: row.min_nights as number,
     bookable: Boolean(row.bookable) && !row.sold_out,
+    hidden: row.hidden || undefined,
     images: [] as string[],
     // Bewusst KEIN airbnbUrl-Feld: Die Website verweist nirgends auf Airbnb —
     // die URL bleibt reine Admin-/Sync-Information (RetreatEditor lädt die Row
@@ -162,7 +163,8 @@ export async function getRetreatCards(t: Strings): Promise<RetreatCard[]> {
   // Zustand (z. B. alle Wohnungen im Admin gelöscht) — sonst würden gelöschte
   // Seed-Wohnungen auf der Website wieder auftauchen.
   if (!rows) return localizeRetreats(t);
-  return rows.map((row) => mapRow(row, t));
+  // Ausgeblendete Wohnungen erscheinen nicht öffentlich (bleiben aber in der DB).
+  return rows.filter((row) => !row.hidden).map((row) => mapRow(row, t));
 }
 
 /** Eine Unterkunft per Slug (DB, sonst statischer Fallback). */
@@ -181,6 +183,7 @@ export async function getRetreatCardBySlug(
     console.error('[retreats/db] Supabase-Fehler, statischer Fallback:', error.message);
     return getLocalizedRetreat(slug, t);
   }
-  if (!data) return undefined;
+  // Ausgeblendet → für die Öffentlichkeit nicht vorhanden (Detailseite 404).
+  if (!data || data.hidden) return undefined;
   return mapRow(data, t);
 }

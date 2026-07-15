@@ -152,6 +152,7 @@ const retreatSchema = z.object({
   airbnb_url: z.string().trim(),
   airbnb_ical_url: z.string().trim(),
   bookable: z.boolean(),
+  hidden: z.boolean(),
   sort_order: z.number().int(),
 });
 
@@ -533,5 +534,44 @@ export async function deleteRetreat(retreatId: string): Promise<{ ok: boolean; e
   } catch (err) {
     console.error('[admin] deleteRetreat:', err);
     return { ok: false, error: 'Löschen fehlgeschlagen.' };
+  }
+}
+
+/* ── E-Mail erneut senden ─────────────────────────────────────────────────── */
+
+/**
+ * Verschickt eine bereits protokollierte E-Mail erneut an denselben Empfänger —
+ * für den Fall, dass der Gast sie nicht erhalten hat. Es wird der gespeicherte
+ * HTML-Body 1:1 erneut gesendet; der erneute Versand wird selbst wieder in
+ * email_log protokolliert (Audit-Spur). Hinweis: eventuelle Original-Anhänge
+ * (z. B. Rechnungs-PDF) sind nicht Teil des Logs und werden nicht mitgeschickt.
+ */
+export async function resendLoggedEmail(
+  logId: string,
+): Promise<{ ok: boolean; error?: string }> {
+  await assertAdmin();
+  try {
+    const sb = createAdminClient();
+    const { data, error } = await sb
+      .from('email_log')
+      .select('to_email, subject, html, booking_id')
+      .eq('id', logId)
+      .maybeSingle();
+    if (error) return { ok: false, error: error.message };
+    if (!data) return { ok: false, error: 'E-Mail nicht gefunden.' };
+
+    const res = await sendEmail({
+      to: data.to_email,
+      subject: data.subject,
+      html: data.html,
+      bookingId: data.booking_id ?? null,
+    });
+    if (!res.ok) return { ok: false, error: res.error ?? 'Versand fehlgeschlagen.' };
+
+    revalidatePath('/admin/emails');
+    return { ok: true };
+  } catch (err) {
+    console.error('[admin] resendLoggedEmail:', err);
+    return { ok: false, error: 'Erneuter Versand fehlgeschlagen.' };
   }
 }

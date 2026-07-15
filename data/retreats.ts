@@ -25,6 +25,8 @@ export interface RetreatStruct
   minNights?: number;
   /** Direkt buchbar über unser Portal (DB-gepflegt). */
   bookable?: boolean;
+  /** Vorübergehend ausgeblendet: nicht auf der Website, aber nicht gelöscht. */
+  hidden?: boolean;
   image: string;        // Cover-Foto ('' → Mockup-Verlauf, bis ein Foto da ist)
   gallery: string[];    // Galerie für die Detailseite
   beds: number;
@@ -84,7 +86,7 @@ export const retreats: RetreatStruct[] = [
     exclusive: true,
     accent: 'brass',
     rating: '4,89',
-    reviewCount: 100,
+    reviewCount: 24,
     superhost: true,
     guestFavorite: true,
     usps: [{ icon: 'castle' }, { icon: 'key' }, { icon: 'parking' }, { icon: 'sparkle' }],
@@ -107,7 +109,7 @@ export const retreats: RetreatStruct[] = [
     exclusive: true,
     accent: 'bark',
     rating: '4,87',
-    reviewCount: 52,
+    reviewCount: 21,
     superhost: true,
     usps: [{ icon: 'castle' }, { icon: 'beams' }, { icon: 'bath' }, { icon: 'wifi' }],
     reviews: [{ author: 'Lena' }, { author: 'Daniel' }, { author: 'Christine' }],
@@ -133,7 +135,7 @@ export const retreats: RetreatStruct[] = [
     soldOutUntil: '2027',
     accent: 'forest',
     rating: '4,88',
-    reviewCount: 38,
+    reviewCount: 18,
     usps: [{ icon: 'waves' }, { icon: 'group' }, { icon: 'kitchen' }, { icon: 'wifi' }],
     reviews: [{ author: 'Familie K.' }, { author: 'Andreas' }, { author: 'Miriam' }],
     maxGuests: 10,
@@ -156,7 +158,7 @@ export const retreats: RetreatStruct[] = [
     heritage: true,
     accent: 'caramel',
     rating: '4,82',
-    reviewCount: 44,
+    reviewCount: 16,
     usps: [{ icon: 'location' }, { icon: 'stairs' }, { icon: 'kitchen' }, { icon: 'wifi' }],
     reviews: [{ author: 'Petra' }, { author: 'Thomas' }, { author: 'Yannick' }],
     maxGuests: 6,
@@ -179,7 +181,7 @@ export const retreats: RetreatStruct[] = [
     heritage: true,
     accent: 'gold',
     rating: '4,86',
-    reviewCount: 26,
+    reviewCount: 13,
     usps: [{ icon: 'building' }, { icon: 'group' }, { icon: 'arch' }, { icon: 'kitchen' }],
     reviews: [{ author: 'Markus' }, { author: 'Verein H.' }, { author: 'Katrin' }],
     maxGuests: 20,
@@ -202,7 +204,7 @@ export const retreats: RetreatStruct[] = [
     heritage: true,
     accent: 'forest',
     rating: '4,74',
-    reviewCount: 19,
+    reviewCount: 11,
     usps: [{ icon: 'location' }, { icon: 'beams' }, { icon: 'kitchen' }, { icon: 'wifi' }],
     reviews: [{ author: 'Nicolas' }, { author: 'Sophie' }, { author: 'Bernd' }],
     maxGuests: 5,

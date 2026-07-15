@@ -177,6 +177,7 @@ function MasterDataTab({ retreat, onSaved }: { retreat: any | null; onSaved: (ms
     airbnb_url: retreat?.airbnb_url ?? "",
     airbnb_ical_url: retreat?.airbnb_ical_url ?? "",
     bookable: retreat?.bookable ?? true,
+    hidden: retreat?.hidden ?? false,
     sort_order: retreat?.sort_order ?? 100,
   }));
 
@@ -309,6 +310,7 @@ function MasterDataTab({ retreat, onSaved }: { retreat: any | null; onSaved: (ms
               ["Denkmalgeschützt", "heritage"],
               ["Buchbar", "bookable"],
               ["Ausgebucht", "sold_out"],
+              ["Ausgeblendet (nicht auf der Website)", "hidden"],
             ] as const
           ).map(([lbl, key]) => (
             <label key={key} className="flex cursor-pointer items-center gap-2 font-body text-sm text-forest-900">
@@ -602,6 +604,7 @@ function retreatToForm(r: any): RetreatFormData {
     airbnb_url: r.airbnb_url ?? "",
     airbnb_ical_url: r.airbnb_ical_url ?? "",
     bookable: r.bookable,
+    hidden: r.hidden ?? false,
     sort_order: r.sort_order ?? 100,
   };
 }
