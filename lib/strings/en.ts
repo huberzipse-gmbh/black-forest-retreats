@@ -264,7 +264,7 @@ export const en: Strings = {
     tagline: 'The Black Forest, but private. Holiday homes in Neuenbürg.',
     discover: {
       title: 'Discover',
-      links: ['Stays', 'Surroundings', 'Gift card', 'Book'],
+      links: ['Stays', 'Surroundings', 'Gift card', 'Book', 'Account'],
     },
     service: {
       title: 'Service',
