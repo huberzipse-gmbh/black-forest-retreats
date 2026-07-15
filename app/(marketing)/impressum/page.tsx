@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/sections/legal/LegalLayout";
+import { getLocale } from "@/lib/i18n/server";
+import { buildMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
-  title: "Impressum · Black Forest Retreats",
-  description:
-    "Impressum und Anbieterkennzeichnung der Axiecentro Germany GmbH gemäß § 5 DDG.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return buildMetadata({
+    path: "/impressum",
+    locale: await getLocale(),
+    title: "Impressum",
+    description:
+      "Impressum und Anbieterkennzeichnung der Axiecentro Germany GmbH gemäß § 5 DDG.",
+  });
+}
 
 // HINWEIS: Vor dem Live-Gang die mit [ ... ] markierten Pflichtangaben durch
 // die echten Daten ersetzen (USt-IdNr, ggf. weitere Geschäftsführer).

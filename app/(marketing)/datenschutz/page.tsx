@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/sections/legal/LegalLayout";
+import { getLocale } from "@/lib/i18n/server";
+import { buildMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
-  title: "Datenschutzerklärung · Black Forest Retreats",
-  description:
-    "Informationen zur Verarbeitung personenbezogener Daten gemäß Art. 13 DSGVO.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return buildMetadata({
+    path: "/datenschutz",
+    locale: await getLocale(),
+    title: "Datenschutzerklärung",
+    description:
+      "Informationen zur Verarbeitung personenbezogener Daten gemäß Art. 13 DSGVO.",
+  });
+}
 
 // Kontaktdaten des Verantwortlichen sind identisch zum Impressum — beide Stellen
 // bei einer Änderung gemeinsam pflegen.
