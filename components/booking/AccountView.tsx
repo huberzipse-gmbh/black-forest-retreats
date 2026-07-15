@@ -11,6 +11,7 @@ import { useStrings } from "@/lib/i18n/I18nProvider";
 import { fmtDateShort, fmtEur, fmtNum } from "@/lib/i18n/format";
 import type { Locale } from "@/lib/i18n/config";
 import { createClient } from "@/lib/supabase/client";
+import { requestPasswordReset } from "@/lib/account/actions";
 import { Type } from "@/components/ui/Type";
 
 export interface AccountBooking {
@@ -33,12 +34,20 @@ interface Props {
 export function AccountView({ userEmail, bookings, registeredDiscountPercent, locale }: Props) {
   const t = useStrings().bookingFlow;
   const router = useRouter();
-  const [mode, setMode] = useState<"login" | "register">("login");
+  const [mode, setModeState] = useState<"login" | "register" | "forgot">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  // Beim Moduswechsel Meldungen zurücksetzen — sonst blieb z. B. der
+  // Login-Fehler beim Wechsel auf „Konto anlegen" stehen.
+  const setMode = (m: "login" | "register" | "forgot") => {
+    setModeState(m);
+    setError(null);
+    setNotice(null);
+  };
 
   const pct = fmtNum(
     String(registeredDiscountPercent).replace(".", locale === "de" ? "," : "."),
@@ -86,6 +95,21 @@ export function AccountView({ userEmail, bookings, registeredDiscountPercent, lo
     }
   };
 
+  const doReset = async () => {
+    if (busy || !email) return;
+    setBusy(true);
+    setError(null);
+    setNotice(null);
+    try {
+      await requestPasswordReset(email);
+    } catch {
+      // Ergebnis wird bewusst nicht verraten (kein Konto-Leak).
+    }
+    // Immer dieselbe neutrale Rückmeldung.
+    setNotice(t.account.resetSent);
+    setBusy(false);
+  };
+
   const logout = async () => {
     const sb = createClient();
     await sb.auth.signOut();
@@ -116,64 +140,118 @@ export function AccountView({ userEmail, bookings, registeredDiscountPercent, lo
 
       {!userEmail ? (
         <div className="mt-8 rounded-[8px] border border-forest-900/10 bg-white p-6">
-          <div className="flex gap-2">
-            {(["login", "register"] as const).map((m) => (
-              <button
-                key={m}
-                type="button"
-                onClick={() => setMode(m)}
-                className={`rounded-full px-4 py-2 font-body text-xs font-semibold transition-colors ${
-                  mode === m
-                    ? "bg-forest-900 text-cream-50"
-                    : "border border-forest-900/15 text-forest-900 hover:border-forest-900/40"
-                }`}
-              >
-                {m === "login" ? t.account.login : t.account.register}
-              </button>
-            ))}
-          </div>
-          <form
-            className="mt-5 space-y-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              doAuth();
-            }}
-          >
-            <div>
-              <label className="mb-1.5 block font-body text-xs font-semibold text-forest-900">
-                {t.account.emailLabel}
-              </label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={input} autoComplete="email" required />
-            </div>
-            <div>
-              <label className="mb-1.5 block font-body text-xs font-semibold text-forest-900">
-                {t.account.passwordLabel}
-              </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className={input}
-                autoComplete={mode === "login" ? "current-password" : "new-password"}
-                minLength={6}
-                required
-              />
-              <p className="mt-1.5 font-body text-xs text-forest-700/55">{t.account.passwordHint}</p>
-            </div>
-            {error && <p className="font-body text-sm text-red-800">{error}</p>}
-            {notice && <p className="font-body text-sm text-forest-700/80">{notice}</p>}
-            <button
-              type="submit"
-              disabled={busy || !email || password.length < 6}
-              className="rounded-[3px] bg-brass-400 px-8 py-4 font-body text-xs font-semibold uppercase tracking-[0.18em] text-night transition-colors hover:bg-brass-300 disabled:cursor-not-allowed disabled:opacity-40"
+          {mode === "forgot" ? (
+            /* Passwort vergessen: nur E-Mail, dann Reset-Link per Mail. */
+            <form
+              className="space-y-4"
+              onSubmit={(e) => {
+                e.preventDefault();
+                doReset();
+              }}
             >
-              {busy
-                ? t.account.working
-                : mode === "login"
-                  ? t.account.login
-                  : t.account.register}
-            </button>
-          </form>
+              <div>
+                <Type role="h3" as="h2" className="text-forest-900">
+                  {t.account.forgotTitle}
+                </Type>
+                <p className="mt-2 font-body text-sm text-forest-700/75">{t.account.forgotIntro}</p>
+              </div>
+              <div>
+                <label className="mb-1.5 block font-body text-xs font-semibold text-forest-900">
+                  {t.account.emailLabel}
+                </label>
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={input} autoComplete="email" required />
+              </div>
+              {notice && <p className="font-body text-sm text-forest-700/80">{notice}</p>}
+              <div className="flex flex-wrap items-center gap-4">
+                <button
+                  type="submit"
+                  disabled={busy || !email}
+                  className="rounded-[3px] bg-brass-400 px-8 py-4 font-body text-xs font-semibold uppercase tracking-[0.18em] text-night transition-colors hover:bg-brass-300 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  {busy ? t.account.working : t.account.forgotSubmit}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMode("login")}
+                  className="font-body text-xs font-semibold uppercase tracking-wider text-forest-700/70 hover:text-forest-900"
+                >
+                  {t.account.backToLogin}
+                </button>
+              </div>
+            </form>
+          ) : (
+            <>
+              <div className="flex gap-2">
+                {(["login", "register"] as const).map((m) => (
+                  <button
+                    key={m}
+                    type="button"
+                    onClick={() => setMode(m)}
+                    className={`rounded-full px-4 py-2 font-body text-xs font-semibold transition-colors ${
+                      mode === m
+                        ? "bg-forest-900 text-cream-50"
+                        : "border border-forest-900/15 text-forest-900 hover:border-forest-900/40"
+                    }`}
+                  >
+                    {m === "login" ? t.account.login : t.account.register}
+                  </button>
+                ))}
+              </div>
+              <form
+                className="mt-5 space-y-4"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  doAuth();
+                }}
+              >
+                <div>
+                  <label className="mb-1.5 block font-body text-xs font-semibold text-forest-900">
+                    {t.account.emailLabel}
+                  </label>
+                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={input} autoComplete="email" required />
+                </div>
+                <div>
+                  <div className="mb-1.5 flex items-baseline justify-between gap-2">
+                    <label className="block font-body text-xs font-semibold text-forest-900">
+                      {t.account.passwordLabel}
+                    </label>
+                    {mode === "login" && (
+                      <button
+                        type="button"
+                        onClick={() => setMode("forgot")}
+                        className="font-body text-xs font-semibold text-brass-600 underline-offset-2 hover:underline"
+                      >
+                        {t.account.forgotLink}
+                      </button>
+                    )}
+                  </div>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className={input}
+                    autoComplete={mode === "login" ? "current-password" : "new-password"}
+                    minLength={6}
+                    required
+                  />
+                  <p className="mt-1.5 font-body text-xs text-forest-700/55">{t.account.passwordHint}</p>
+                </div>
+                {error && <p className="font-body text-sm text-red-800">{error}</p>}
+                {notice && <p className="font-body text-sm text-forest-700/80">{notice}</p>}
+                <button
+                  type="submit"
+                  disabled={busy || !email || password.length < 6}
+                  className="rounded-[3px] bg-brass-400 px-8 py-4 font-body text-xs font-semibold uppercase tracking-[0.18em] text-night transition-colors hover:bg-brass-300 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  {busy
+                    ? t.account.working
+                    : mode === "login"
+                      ? t.account.login
+                      : t.account.register}
+                </button>
+              </form>
+            </>
+          )}
         </div>
       ) : (
         <>
