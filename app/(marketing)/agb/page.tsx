@@ -17,7 +17,7 @@ export default function AgbPage() {
   return (
     <LegalLayout
       title="Allgemeine Geschäftsbedingungen"
-      updated="Juni 2026"
+      updated="Juli 2026"
     >
       <h2>§ 1 Geltungsbereich, Vertragspartner</h2>
       <p>
@@ -155,12 +155,18 @@ export default function AgbPage() {
         Vermieterin den Rücktrittsgrund nicht zu vertreten hat.
       </p>
 
-      <h2>§ 8 Kein Widerrufsrecht</h2>
+      <h2>§ 8 Widerrufsrecht</h2>
       <p>
-        Bei Verträgen über die Bereitstellung von Beherbergungsleistungen zu einem
+        (1) Bei Verträgen über die Bereitstellung von Beherbergungsleistungen zu einem
         bestimmten Termin oder Zeitraum besteht gemäß § 312g Abs. 2 Nr. 9 BGB kein
-        gesetzliches Widerrufsrecht. Es gelten ausschließlich die
+        gesetzliches Widerrufsrecht. Für Buchungen gelten ausschließlich die
         Stornierungsregelungen nach § 6 dieser AGB.
+      </p>
+      <p>
+        (2) Beim Kauf von Gutscheinen (§ 16) steht Verbrauchern dagegen ein
+        gesetzliches Widerrufsrecht von vierzehn Tagen zu. Einzelheiten und das
+        Muster-Widerrufsformular finden Sie in unserer{" "}
+        <a href="/widerruf">Widerrufsbelehrung</a>.
       </p>
 
       <h2>§ 9 An- und Abreise, Schlüssel</h2>
@@ -262,7 +268,36 @@ export default function AgbPage() {
         <a href="/datenschutz">Datenschutzerklärung</a>.
       </p>
 
-      <h2>§ 16 Schlussbestimmungen</h2>
+      <h2>§ 16 Gutscheine</h2>
+      <p>
+        (1) Über die Website können Gutscheine über einen frei wählbaren Betrag
+        erworben werden. Der Vertrag über den Kauf eines Gutscheins kommt mit der
+        Bestätigung der Vermieterin in Textform zustande; der Gutschein wird nach
+        vollständigem Zahlungseingang ausgestellt und per E-Mail zugestellt.
+      </p>
+      <p>
+        (2) Gutscheine sind drei Jahre ab Ausstellung gültig. Die Frist beginnt mit
+        dem Tag der Zahlung. Nach Ablauf der Gültigkeit kann der Gutschein nicht mehr
+        eingelöst werden; gesetzliche Ansprüche des Inhabers bleiben unberührt.
+      </p>
+      <p>
+        (3) Gutscheine sind übertragbar und werden auf den Preis einer Buchung
+        angerechnet. Eine Barauszahlung des Gutscheinwerts oder eines Restbetrags ist
+        ausgeschlossen. Übersteigt der Buchungsbetrag den Gutscheinwert, ist die
+        Differenz vom Gast zu zahlen.
+      </p>
+      <p>
+        (4) Ein Gutschein begründet keinen Anspruch auf Verfügbarkeit einer bestimmten
+        Unterkunft zu einem bestimmten Zeitraum. Die Einlösung setzt eine reguläre
+        Buchung nach diesen AGB voraus.
+      </p>
+      <p>
+        (5) Verbraucher haben beim Kauf eines Gutscheins ein vierzehntägiges
+        Widerrufsrecht nach § 8 Abs. 2 dieser AGB. Näheres regelt die{" "}
+        <a href="/widerruf">Widerrufsbelehrung</a>.
+      </p>
+
+      <h2>§ 17 Schlussbestimmungen</h2>
       <p>
         (1) Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des
         UN-Kaufrechts (CISG). Zwingende verbraucherschützende Vorschriften des

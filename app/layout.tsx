@@ -22,7 +22,9 @@ export const metadata: Metadata = {
   title: "Black Forest Retreats · Exklusive Apartments in Neuenbürg",
   description:
     "Hochwertige Apartments im Herzen des Schwarzwalds. Direkt buchen, ankommen, durchatmen.",
-  metadataBase: new URL("http://localhost:3030"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3030",
+  ),
   openGraph: {
     title: "Black Forest Retreats",
     description: "Exklusive Apartments im Schwarzwald, Neuenbürg.",

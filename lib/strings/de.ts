@@ -98,6 +98,10 @@ export const de = {
       showAllPhotos: 'Alle Fotos ansehen',
       showAllAmenities: 'Gesamte Ausstattung anzeigen',
       showLess: 'Weniger anzeigen',
+      openPhoto: 'Foto im Vollbild öffnen',
+      prevPhoto: 'Vorheriges Foto',
+      nextPhoto: 'Nächstes Foto',
+      close: 'Schließen',
       reviewsTitle: 'Das sagen Gäste',
       reviewsCount: (n: number) => `${n} Bewertungen`,
       ratingLine: (rating: string, n: number) => `${rating} · ${n} Bewertungen`,
@@ -278,9 +282,41 @@ export const de = {
       newsletterPlaceholder: 'Deine E-Mail',
       newsletterCta: 'Abonnieren',
     },
-    legal: ['Impressum', 'Datenschutz', 'AGB'],
+    legal: ['Impressum', 'Datenschutz', 'AGB', 'Widerruf'],
     copyright: (year: number) => `© ${year} Black Forest Retreats`,
     credit: 'Website erstellt von',
+  },
+
+  newsletter: {
+    sending: 'Moment',
+    success:
+      'Fast geschafft: Wir haben dir eine E-Mail geschickt. Bitte bestätige darin deine Anmeldung.',
+    error: 'Das hat gerade nicht geklappt. Bitte versuche es später noch einmal.',
+    privacy: 'Mit der Anmeldung stimmst du unserer',
+    privacyLink: 'Datenschutzerklärung',
+    privacyAfter: ' zu. Abmeldung jederzeit möglich.',
+    mail: {
+      subject: 'Bitte bestätige deine Newsletter-Anmeldung',
+      intro:
+        'Schön, dass du dabei sein möchtest. Bitte bestätige deine Anmeldung zum Newsletter mit einem Klick.',
+      cta: 'Anmeldung bestätigen',
+      note: 'Wenn du dich nicht angemeldet hast, ignoriere diese E-Mail einfach. Ohne Bestätigung schicken wir dir nichts.',
+    },
+    confirm: {
+      title: 'Anmeldung bestätigt',
+      text: 'Danke! Du stehst jetzt auf der Liste und bekommst ab und zu Post aus dem Schwarzwald.',
+      invalidTitle: 'Link nicht gültig',
+      invalidText:
+        'Dieser Bestätigungslink ist ungültig oder nicht mehr aktuell. Melde dich einfach noch einmal an.',
+      cta: 'Zur Startseite',
+    },
+    unsubscribe: {
+      title: 'Abgemeldet',
+      text: 'Du bekommst keine weiteren Newsletter von uns.',
+      invalidTitle: 'Link nicht gültig',
+      invalidText: 'Dieser Abmeldelink ist ungültig oder nicht mehr aktuell.',
+      cta: 'Zur Startseite',
+    },
   },
 
   langSwitcher: {
@@ -316,9 +352,9 @@ export const de = {
         { title: 'Sehr sauber', text: 'Von Gästen immer wieder besonders gelobt.' },
       ],
       reviews: [
-        { date: 'Mai 2025', text: 'Der Blick aufs Schloss vom Bett aus ist unbezahlbar. Alles sehr sauber, der Check-in über die Schlüsselbox total unkompliziert.' },
-        { date: 'April 2025', text: 'Tom ist ein super Gastgeber, schnelle Antworten und tolle Tipps für die Gegend. Die Terrasse am Abend ein Traum.' },
-        { date: 'März 2025', text: 'Stilvoll eingerichtet, ruhig und trotzdem zentral. Parkplatz direkt da. Wir kommen wieder!' },
+        { text: 'Der Blick aufs Schloss vom Bett aus ist unbezahlbar. Alles sehr sauber, der Check-in über die Schlüsselbox total unkompliziert.' },
+        { text: 'Tom ist ein super Gastgeber, schnelle Antworten und tolle Tipps für die Gegend. Die Terrasse am Abend ein Traum.' },
+        { text: 'Stilvoll eingerichtet, ruhig und trotzdem zentral. Parkplatz direkt da. Wir kommen wieder!' },
       ],
       amenities: [
         'Große Terrasse',
@@ -346,9 +382,9 @@ export const de = {
         { title: 'Schnelles WLAN', text: 'Auch zum Arbeiten oder Streamen bestens geeignet.' },
       ],
       reviews: [
-        { date: 'Mai 2025', text: 'Das Fachwerk mit den alten Balken hat so viel Charme. Dachterrasse mit Schlossblick, einfach Urlaub pur.' },
-        { date: 'April 2025', text: 'Liebevoll eingerichtet, super sauber und ruhig gelegen. Perfekt für ein Wochenende im Schwarzwald.' },
-        { date: 'Februar 2025', text: 'Sehr persönlicher Kontakt, alles hat reibungslos geklappt. Absolute Empfehlung.' },
+        { text: 'Das Fachwerk mit den alten Balken hat so viel Charme. Dachterrasse mit Schlossblick, einfach Urlaub pur.' },
+        { text: 'Liebevoll eingerichtet, super sauber und ruhig gelegen. Perfekt für ein Wochenende im Schwarzwald.' },
+        { text: 'Sehr persönlicher Kontakt, alles hat reibungslos geklappt. Absolute Empfehlung.' },
       ],
       amenities: [
         'Dachterrasse',
@@ -374,8 +410,9 @@ export const de = {
         { title: 'Schnelles WLAN', text: 'Im ganzen Haus, auch fürs Homeoffice am See.' },
       ],
       reviews: [
-        { date: 'August 2024', text: 'Direkt am Wasser einzuschlafen war herrlich. Viel Platz für die ganze Familie.' },
-        { date: 'Juli 2024', text: 'Großzügig, hell und der Flussblick ist einmalig. Jederzeit wieder.' },
+        { text: 'Direkt am Wasser einzuschlafen war herrlich. Viel Platz für die ganze Familie.' },
+        { text: 'Großzügig, hell und der Flussblick ist einmalig. Jederzeit wieder.' },
+        { text: 'Morgens Kaffee auf der Terrasse, das Rauschen der Enz im Ohr. Die Kinder wollten gar nicht mehr aus dem Garten.' },
       ],
       amenities: [
         'Direkt am Fluss',
@@ -401,8 +438,9 @@ export const de = {
         { title: 'Kostenfreies WLAN', text: 'Schnell und stabil im ganzen Haus.' },
       ],
       reviews: [
-        { date: 'Oktober 2024', text: 'Mitten in der Altstadt, charmantes Stadthaus über mehrere Etagen. Wir haben uns sofort wohlgefühlt.' },
-        { date: 'September 2024', text: 'Perfekte Lage, alles fußläufig erreichbar. Schön und mit Liebe eingerichtet.' },
+        { text: 'Mitten in der Altstadt, charmantes Stadthaus über mehrere Etagen. Wir haben uns sofort wohlgefühlt.' },
+        { text: 'Perfekte Lage, alles fußläufig erreichbar. Schön und mit Liebe eingerichtet.' },
+        { text: 'Über drei Etagen viel Ruhe, und trotzdem steht man in zwei Minuten am Marktplatz. Check-in völlig unkompliziert.' },
       ],
       amenities: [
         'Mitten in der Altstadt',
@@ -427,8 +465,9 @@ export const de = {
         { title: 'Großer Gemeinschaftsbereich', text: 'Zum gemeinsamen Kochen, Essen und Beisammensein.' },
       ],
       reviews: [
-        { date: 'November 2024', text: 'Was für ein besonderes Haus! Hohe Decken, viel Platz, ideal für unsere große Gruppe.' },
-        { date: 'September 2024', text: 'Geschichte zum Anfassen und richtig viel Raum. Ein echtes Erlebnis.' },
+        { text: 'Was für ein besonderes Haus! Hohe Decken, viel Platz, ideal für unsere große Gruppe.' },
+        { text: 'Geschichte zum Anfassen und richtig viel Raum. Ein echtes Erlebnis.' },
+        { text: 'Als alte Post hat das Haus richtig Charakter. Wir waren zu acht und jeder hatte trotzdem seine Ecke.' },
       ],
       amenities: [
         'Historisches Postamt',
@@ -454,8 +493,9 @@ export const de = {
         { title: 'Kostenfreies WLAN', text: 'Schnell und stabil im ganzen Haus.' },
       ],
       reviews: [
-        { date: 'November 2024', text: 'Ein echtes Schmuckstück in der Altstadt. Der „betrunkene Fuchs" hat uns sofort verzaubert.' },
-        { date: 'September 2024', text: 'Charmant, ruhig und alles fußläufig erreichbar. Wir kommen wieder.' },
+        { text: 'Ein echtes Schmuckstück in der Altstadt. Der „betrunkene Fuchs" hat uns sofort verzaubert.' },
+        { text: 'Charmant, ruhig und alles fußläufig erreichbar. Wir kommen wieder.' },
+        { text: 'Klein, fein und mit viel Liebe zum Detail. Der Bäcker um die Ecke war jeden Morgen unser erster Weg.' },
       ],
       amenities: [
         'Mitten in der historischen Altstadt',
@@ -474,7 +514,7 @@ export const de = {
       shortDescription: string;
       description: string;
       usps: { title: string; text: string }[];
-      reviews: { date: string; text: string }[];
+      reviews: { text: string }[];
       amenities: string[];
     }
   >,

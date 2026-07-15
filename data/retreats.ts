@@ -39,7 +39,7 @@ export interface RetreatStruct
   accent?: CardAccent;
   /** USP-Highlights: nur das Icon ist strukturell, Titel/Text aus den Strings. */
   usps?: { icon: UspIconKey }[];
-  /** Gäste-Stimmen: nur der Name ist strukturell, Datum/Text aus den Strings. */
+  /** Gäste-Stimmen: nur der Name ist strukturell, der Text kommt aus den Strings. */
   reviews?: { author: string }[];
   exclusive?: boolean;
   /** Ausgebucht-Unterkunft: blurred Bild + „Ausgebucht bis <Jahr>". */
@@ -61,7 +61,7 @@ export interface RetreatCard extends RetreatStruct {
   shortDescription: string;
   description: string;
   usps?: { icon: UspIconKey; title: string; text?: string }[];
-  reviews?: { author: string; date: string; text: string }[];
+  reviews?: { author: string; text: string }[];
   amenities: string[];
 }
 
@@ -135,7 +135,7 @@ export const retreats: RetreatStruct[] = [
     rating: '4,88',
     reviewCount: 38,
     usps: [{ icon: 'waves' }, { icon: 'group' }, { icon: 'kitchen' }, { icon: 'wifi' }],
-    reviews: [{ author: 'Familie K.' }, { author: 'Andreas' }],
+    reviews: [{ author: 'Familie K.' }, { author: 'Andreas' }, { author: 'Miriam' }],
     maxGuests: 10,
     bedrooms: 8,
     beds: 8,
@@ -158,7 +158,7 @@ export const retreats: RetreatStruct[] = [
     rating: '4,82',
     reviewCount: 44,
     usps: [{ icon: 'location' }, { icon: 'stairs' }, { icon: 'kitchen' }, { icon: 'wifi' }],
-    reviews: [{ author: 'Petra' }, { author: 'Thomas' }],
+    reviews: [{ author: 'Petra' }, { author: 'Thomas' }, { author: 'Yannick' }],
     maxGuests: 6,
     bedrooms: 4,
     beds: 5,
@@ -181,7 +181,7 @@ export const retreats: RetreatStruct[] = [
     rating: '4,86',
     reviewCount: 26,
     usps: [{ icon: 'building' }, { icon: 'group' }, { icon: 'arch' }, { icon: 'kitchen' }],
-    reviews: [{ author: 'Markus' }, { author: 'Verein H.' }],
+    reviews: [{ author: 'Markus' }, { author: 'Verein H.' }, { author: 'Katrin' }],
     maxGuests: 20,
     bedrooms: 10,
     beds: 15,
@@ -204,7 +204,7 @@ export const retreats: RetreatStruct[] = [
     rating: '4,74',
     reviewCount: 19,
     usps: [{ icon: 'location' }, { icon: 'beams' }, { icon: 'kitchen' }, { icon: 'wifi' }],
-    reviews: [{ author: 'Nicolas' }, { author: 'Sophie' }],
+    reviews: [{ author: 'Nicolas' }, { author: 'Sophie' }, { author: 'Bernd' }],
     maxGuests: 5,
     bedrooms: 3,
     beds: 4,
@@ -235,11 +235,11 @@ function mergeRetreat(r: RetreatStruct, t: Strings): RetreatCard {
       title: c.usps[i]?.title ?? '',
       text: c.usps[i]?.text,
     })),
-    reviews: r.reviews?.map((rv, i) => ({
-      author: rv.author,
-      date: c.reviews[i]?.date ?? '',
-      text: c.reviews[i]?.text ?? '',
-    })),
+    // Autor (strukturell) + Text (lokalisiert) über den Index verbunden. Ohne Text
+    // gäbe es ein leeres Zitat — solche Einträge fallen raus.
+    reviews: r.reviews
+      ?.map((rv, i) => ({ author: rv.author, text: c.reviews[i]?.text ?? '' }))
+      .filter((rv) => rv.text),
     amenities: c.amenities,
   };
 }

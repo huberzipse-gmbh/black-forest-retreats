@@ -95,6 +95,10 @@ export const en: Strings = {
       showAllPhotos: 'See all photos',
       showAllAmenities: 'Show all amenities',
       showLess: 'Show less',
+      openPhoto: 'Open photo full screen',
+      prevPhoto: 'Previous photo',
+      nextPhoto: 'Next photo',
+      close: 'Close',
       reviewsTitle: 'What guests say',
       reviewsCount: (n: number) => `${n} reviews`,
       ratingLine: (rating: string, n: number) => `${rating} · ${n} reviews`,
@@ -275,9 +279,41 @@ export const en: Strings = {
       newsletterPlaceholder: 'Your email',
       newsletterCta: 'Subscribe',
     },
-    legal: ['Imprint', 'Privacy', 'Terms'],
+    legal: ['Imprint', 'Privacy', 'Terms', 'Right of withdrawal'],
     copyright: (year: number) => `© ${year} Black Forest Retreats`,
     credit: 'Website created by',
+  },
+
+  newsletter: {
+    sending: 'One moment',
+    success:
+      'Almost done: we have sent you an email. Please confirm your subscription in it.',
+    error: 'That did not work just now. Please try again later.',
+    privacy: 'By subscribing you agree to our',
+    privacyLink: 'privacy policy',
+    privacyAfter: '. You can unsubscribe at any time.',
+    mail: {
+      subject: 'Please confirm your newsletter subscription',
+      intro:
+        'Glad to have you on board. Please confirm your newsletter subscription with one click.',
+      cta: 'Confirm subscription',
+      note: 'If you did not sign up, simply ignore this email. Without confirmation we will not send you anything.',
+    },
+    confirm: {
+      title: 'Subscription confirmed',
+      text: 'Thank you! You are on the list and will hear from the Black Forest now and then.',
+      invalidTitle: 'Link not valid',
+      invalidText:
+        'This confirmation link is invalid or out of date. Please simply sign up again.',
+      cta: 'Back to home',
+    },
+    unsubscribe: {
+      title: 'Unsubscribed',
+      text: 'You will not receive any further newsletters from us.',
+      invalidTitle: 'Link not valid',
+      invalidText: 'This unsubscribe link is invalid or out of date.',
+      cta: 'Back to home',
+    },
   },
 
   langSwitcher: {
@@ -312,9 +348,9 @@ export const en: Strings = {
         { title: 'Spotlessly clean', text: 'Praised again and again by our guests.' },
       ],
       reviews: [
-        { date: 'May 2025', text: 'The view of the castle from the bed is priceless. Everything spotless, and check-in via the key box was completely effortless.' },
-        { date: 'April 2025', text: 'Tom is a great host, quick to reply and full of tips for the area. The terrace in the evening was a dream.' },
-        { date: 'March 2025', text: 'Stylishly furnished, quiet and still central. Parking right there. We will be back!' },
+        { text: 'The view of the castle from the bed is priceless. Everything spotless, and check-in via the key box was completely effortless.' },
+        { text: 'Tom is a great host, quick to reply and full of tips for the area. The terrace in the evening was a dream.' },
+        { text: 'Stylishly furnished, quiet and still central. Parking right there. We will be back!' },
       ],
       amenities: [
         'Large terrace',
@@ -342,9 +378,9 @@ export const en: Strings = {
         { title: 'Fast Wi-Fi', text: 'Great for working or streaming too.' },
       ],
       reviews: [
-        { date: 'May 2025', text: 'The timber frame with its old beams has so much charm. Roof terrace with a castle view, simply a proper holiday.' },
-        { date: 'April 2025', text: 'Lovingly furnished, super clean and in a quiet spot. Perfect for a weekend in the Black Forest.' },
-        { date: 'February 2025', text: 'Very personal contact, everything went smoothly. Highly recommended.' },
+        { text: 'The timber frame with its old beams has so much charm. Roof terrace with a castle view, simply a proper holiday.' },
+        { text: 'Lovingly furnished, super clean and in a quiet spot. Perfect for a weekend in the Black Forest.' },
+        { text: 'Very personal contact, everything went smoothly. Highly recommended.' },
       ],
       amenities: [
         'Roof terrace',
@@ -370,8 +406,9 @@ export const en: Strings = {
         { title: 'Fast Wi-Fi', text: 'Throughout the house, even for working by the water.' },
       ],
       reviews: [
-        { date: 'August 2024', text: 'Falling asleep right by the water was wonderful. Plenty of room for the whole family.' },
-        { date: 'July 2024', text: 'Spacious, bright and the river view is one of a kind. Any time again.' },
+        { text: 'Falling asleep right by the water was wonderful. Plenty of room for the whole family.' },
+        { text: 'Spacious, bright and the river view is one of a kind. Any time again.' },
+        { text: 'Coffee on the terrace in the morning with the Enz rushing below. The kids did not want to leave the garden.' },
       ],
       amenities: [
         'Right by the river',
@@ -397,8 +434,9 @@ export const en: Strings = {
         { title: 'Free Wi-Fi', text: 'Fast and stable throughout the house.' },
       ],
       reviews: [
-        { date: 'October 2024', text: 'Right in the old town, a charming town house over several floors. We felt at home straight away.' },
-        { date: 'September 2024', text: 'Perfect location, everything within walking distance. Beautiful and furnished with love.' },
+        { text: 'Right in the old town, a charming town house over several floors. We felt at home straight away.' },
+        { text: 'Perfect location, everything within walking distance. Beautiful and furnished with love.' },
+        { text: 'Plenty of quiet across three floors, yet the market square is two minutes away. Check-in could not have been simpler.' },
       ],
       amenities: [
         'Right in the old town',
@@ -423,8 +461,9 @@ export const en: Strings = {
         { title: 'Large shared area', text: 'For cooking, eating and being together.' },
       ],
       reviews: [
-        { date: 'November 2024', text: 'What a special house! High ceilings, lots of space, ideal for our large group.' },
-        { date: 'September 2024', text: 'History you can touch and really plenty of room. A genuine highlight.' },
+        { text: 'What a special house! High ceilings, lots of space, ideal for our large group.' },
+        { text: 'History you can touch and really plenty of room. A genuine highlight.' },
+        { text: 'As a former post office the house has real character. There were eight of us and everyone still had their own corner.' },
       ],
       amenities: [
         'Historic post office',
@@ -450,8 +489,9 @@ export const en: Strings = {
         { title: 'Free Wi-Fi', text: 'Fast and stable throughout the house.' },
       ],
       reviews: [
-        { date: 'November 2024', text: 'A real gem in the old town. The "drunken fox" won us over straight away.' },
-        { date: 'September 2024', text: 'Charming, quiet and everything within walking distance. We will be back.' },
+        { text: 'A real gem in the old town. The "drunken fox" won us over straight away.' },
+        { text: 'Charming, quiet and everything within walking distance. We will be back.' },
+        { text: 'Small, refined and full of care for the details. The bakery round the corner was our first stop every morning.' },
       ],
       amenities: [
         'Right in the historic old town',
@@ -470,7 +510,7 @@ export const en: Strings = {
       shortDescription: string;
       description: string;
       usps: { title: string; text: string }[];
-      reviews: { date: string; text: string }[];
+      reviews: { text: string }[];
       amenities: string[];
     }
   >,

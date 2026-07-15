@@ -111,11 +111,12 @@ function mapRow(row: any, t: Strings): RetreatCard {
           text: edited ? u.text_de : (seededContent.usps[i]?.text ?? u.text_de),
         };
       }),
-      reviews: staticStruct?.reviews?.map((rv, i) => ({
-        author: rv.author,
-        date: seededContent.reviews[i]?.date ?? '',
-        text: seededContent.reviews[i]?.text ?? '',
-      })),
+      reviews: staticStruct?.reviews
+        ?.map((rv, i) => ({
+          author: rv.author,
+          text: seededContent.reviews[i]?.text ?? '',
+        }))
+        .filter((rv) => rv.text),
       amenities: amenitiesEdited
         ? ((row.amenities_de ?? []) as string[])
         : seededContent.amenities,

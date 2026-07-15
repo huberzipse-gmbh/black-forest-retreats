@@ -38,7 +38,9 @@
 
 /* ------------------------------ Base ------------------------------------- */
 html {
-  scroll-behavior: smooth;
+  /* Bewusst KEIN globales `scroll-behavior: smooth`: auf dieser sehr langen,
+     animationsreichen Seite brach eine weiche Scroll-Animation ab und ließ jeden
+     Anker-Sprung (Buchen-Links) ins Leere laufen. Anker springen jetzt direkt. */
   scroll-padding-top: 5rem; /* Offset für fixen Header bei Anchor-Sprüngen */
 }
 
