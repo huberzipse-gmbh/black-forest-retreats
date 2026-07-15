@@ -1,6 +1,7 @@
 import { getLocale, getStrings } from "@/lib/i18n/server";
-import { supabaseConfigured } from "@/lib/supabase/env";
+import { supabaseAdminConfigured, supabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { mapBooking } from "@/lib/booking/db";
 import { NotConfiguredNotice } from "@/components/booking/NotConfiguredNotice";
 import { AccountView, type AccountBooking } from "@/components/booking/AccountView";
@@ -15,14 +16,29 @@ export default async function AccountPage() {
   const { data: userData } = await sb.auth.getUser();
   const user = userData?.user ?? null;
 
-  // Eigene Buchungen über den eingeloggten Client (RLS „own bookings"), NICHT
-  // über den Service-Role-Admin. So hängt die Kontoseite nicht am Service-Key,
-  // und ein Ladefehler darf hier nie die ganze Seite crashen — im Zweifel
-  // bleibt die Buchungsliste leer und der Login-Zustand wird trotzdem gezeigt.
+  // Buchungen laden. Ein Ladefehler darf die Seite NIE zur leeren Seite
+  // crashen (der Login-Zustand soll immer sichtbar bleiben), daher try/catch.
   let bookings: AccountBooking[] = [];
   if (user) {
     try {
-      const { data } = await sb
+      const email = user.email ?? "";
+      // Gast-Buchungen (ohne Konto) mit derselben E-Mail nachträglich diesem
+      // Konto zuordnen — der Gast hatte beim Buchen noch kein Login. Braucht den
+      // Service-Role-Client, weil RLS fremde/ungebundene Zeilen nicht sieht.
+      if (supabaseAdminConfigured() && email) {
+        const admin = createAdminClient();
+        await admin
+          .from("bookings")
+          .update({ user_id: user.id })
+          .is("user_id", null)
+          .ilike("guest_email", email);
+      }
+
+      // Danach eigene Buchungen laden (jetzt inkl. der eben verknüpften).
+      // Bevorzugt über den Admin-Client (sieht die frisch verknüpften Zeilen
+      // ohne Cache-Umweg); ohne Service-Key Fallback auf den RLS-Client.
+      const reader = supabaseAdminConfigured() ? createAdminClient() : sb;
+      const { data } = await reader
         .from("bookings")
         .select("*, retreats(name_de)")
         .eq("user_id", user.id)

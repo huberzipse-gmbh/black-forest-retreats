@@ -62,18 +62,28 @@ export default async function BookingConfirmationPage({
         </p>
       </div>
 
+      {/* Buchung anpassen: Mail an die im Impressum genannte Adresse, mit
+          Buchungsnummer im Betreff. Änderungen laufen persönlich per Mail. */}
       <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-        <Link
-          href="/"
+        <a
+          href={`mailto:blackforestretreats@gmail.com?subject=${encodeURIComponent(
+            t.confirmation.adjustSubject(booking.bookingNumber),
+          )}`}
           className="inline-flex items-center justify-center rounded-[3px] bg-brass-400 px-8 py-4 font-body text-xs font-semibold uppercase tracking-[0.18em] text-night transition-colors hover:bg-brass-300"
         >
-          {t.confirmation.backHome}
-        </Link>
+          {t.confirmation.adjustBooking}
+        </a>
         <Link
           href="/konto"
           className="inline-flex items-center justify-center rounded-[3px] border border-forest-900/25 px-8 py-4 font-body text-xs font-semibold uppercase tracking-[0.18em] text-forest-900 transition-colors hover:border-forest-900"
         >
           {t.confirmation.viewAccount}
+        </Link>
+        <Link
+          href="/"
+          className="inline-flex items-center justify-center rounded-[3px] border border-forest-900/25 px-8 py-4 font-body text-xs font-semibold uppercase tracking-[0.18em] text-forest-900 transition-colors hover:border-forest-900"
+        >
+          {t.confirmation.backHome}
         </Link>
       </div>
     </div>
