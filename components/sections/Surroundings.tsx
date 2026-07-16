@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useStrings } from "@/lib/i18n/useStrings";
@@ -73,6 +73,50 @@ export function Surroundings() {
   const t = useStrings();
   // Interne Links tragen die Sprache im Pfad (/en/umgebung statt /umgebung).
   const href = useLocaleHref();
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
+  // Mobiler Karussell-Autoplay: blättert alle paar Sekunden eine Karte weiter.
+  // Pausiert, sobald der Gast anfasst, und läuft nur, wenn die Sektion sichtbar
+  // ist. Kein Autoplay bei reduzierter Bewegung.
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const mobile = window.matchMedia("(max-width: 639px)");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduced.matches) return;
+
+    let paused = false;
+    let idleTimer: ReturnType<typeof setTimeout> | undefined;
+    const pause = () => {
+      paused = true;
+      clearTimeout(idleTimer);
+      // Nach der Interaktion wieder von selbst weiterlaufen.
+      idleTimer = setTimeout(() => {
+        paused = false;
+      }, 8000);
+    };
+    el.addEventListener("touchstart", pause, { passive: true });
+    el.addEventListener("pointerdown", pause);
+
+    const interval = setInterval(() => {
+      if (paused || !mobile.matches || document.hidden) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+      const card = el.firstElementChild as HTMLElement | null;
+      if (!card) return;
+      const step = card.clientWidth + 16; // Kartenbreite + gap-4
+      const max = el.scrollWidth - el.clientWidth;
+      const next = el.scrollLeft + step;
+      el.scrollTo({ left: next > max + 8 ? 0 : next, behavior: "smooth" });
+    }, 4500);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(idleTimer);
+      el.removeEventListener("touchstart", pause);
+      el.removeEventListener("pointerdown", pause);
+    };
+  }, []);
 
   return (
     <section
@@ -88,7 +132,14 @@ export function Surroundings() {
           tone="light"
         />
 
-        <div className="mt-16 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:pb-0 lg:grid-cols-3">
+        {/* snap-proximity statt -mandatory: mandatory fängt auf iOS diagonale
+            Gesten ein — die Karte klebt am Finger und die Seite lässt sich
+            nicht mehr vertikal scrollen. Proximity snapt weiter sauber auf
+            Karten, gibt vertikale Wischer aber sofort an die Seite ab. */}
+        <div
+          ref={scrollerRef}
+          className="mt-16 flex snap-x snap-proximity gap-4 overflow-x-auto overscroll-x-contain pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [touch-action:pan-x_pan-y] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:pb-0 lg:grid-cols-3"
+        >
           {ORDER.map((key, i) => {
             const cat = t.surroundings.categories[key];
             const source = SOURCE[key];

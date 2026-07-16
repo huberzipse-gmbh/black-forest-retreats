@@ -8,7 +8,7 @@
  * zusätzlich in email_log protokolliert (auch im Demo-Modus einsehbar).
  */
 import { z } from 'zod';
-import { sendEmail } from '@/lib/email/send';
+import { ownerRecipients, sendEmail } from '@/lib/email/send';
 
 const contactSchema = z.object({
   name: z.string().trim().min(1).max(120),
@@ -106,11 +106,7 @@ export async function sendContactMessage(
     return { ok: true };
   }
 
-  const to = process.env.CONTACT_TO || process.env.EMAIL_FROM;
-  if (!to) {
-    console.error('[contact] Kein Empfänger konfiguriert (CONTACT_TO/EMAIL_FROM).');
-    return { ok: false, error: 'no-recipient' };
-  }
+  const to = ownerRecipients();
 
   const res = await sendEmail({
     to,

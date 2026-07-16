@@ -35,9 +35,9 @@ export default function ImpressumPage() {
 
       <h3>Kontakt</h3>
       <p>
-        Telefon: +49 160 3756052
+        Telefon: +49 7082 944 39 73
         <br />
-        E-Mail: blackforestretreats@gmail.com
+        E-Mail: blackforestretreats@axiecentro.de
       </p>
 
       <h3>Registereintrag</h3>
