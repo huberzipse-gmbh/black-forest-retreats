@@ -11,8 +11,24 @@ import { assertTransition, canTransition } from './stateMachine';
 import type { Booking } from './types';
 import { createInvoiceForBooking } from '@/lib/invoices/create';
 import { getInvoicePdf } from '@/lib/invoices/create';
-import { sendEmail } from '@/lib/email/send';
-import { confirmationEmail, invoiceEmail, paymentFailedEmail } from '@/lib/email/templates';
+import { ownerRecipients, sendEmail } from '@/lib/email/send';
+import {
+  confirmationEmail,
+  invoiceEmail,
+  ownerBookingEmail,
+  paymentFailedEmail,
+} from '@/lib/email/templates';
+
+/** Betreiber intern benachrichtigen, sobald eine Buchung verbindlich wird. */
+async function notifyOwners(booking: Booking, retreatName: string): Promise<void> {
+  const mail = ownerBookingEmail({ booking, retreatName });
+  await sendEmail({
+    to: ownerRecipients(),
+    subject: mail.subject,
+    html: mail.html,
+    bookingId: booking.id,
+  });
+}
 
 /**
  * Gutschein-Guthaben einlösen, sobald die Buchung verbindlich wird (paid ODER
@@ -90,7 +106,8 @@ export async function markBookingPaid(
   const invoice = await createInvoiceForBooking(updated, retreatName);
   const pdf = await getInvoicePdf(invoice);
 
-  // Bestätigung nur, wenn sie nicht schon bei „Später zahlen" rausging.
+  // Bestätigung nur, wenn sie nicht schon bei „Später zahlen" rausging —
+  // gleiches gilt für die interne Betreiber-Benachrichtigung.
   if (!wasScheduled) {
     const confirm = confirmationEmail({ booking: updated, retreatName });
     await sendEmail({
@@ -99,6 +116,7 @@ export async function markBookingPaid(
       html: confirm.html,
       bookingId: updated.id,
     });
+    await notifyOwners(updated, retreatName);
   }
   const inv = invoiceEmail({ booking: updated, retreatName });
   await sendEmail({
@@ -161,6 +179,7 @@ export async function markBookingScheduled(
     html: confirm.html,
     bookingId: updated.id,
   });
+  await notifyOwners(updated, retreatName);
   return updated;
 }
 

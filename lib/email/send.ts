@@ -9,7 +9,7 @@ import { Resend } from 'resend';
 import { createAdminClient } from '@/lib/supabase/admin';
 
 export interface SendEmailInput {
-  to: string;
+  to: string | string[];
   subject: string;
   html: string;
   bookingId?: string | null;
@@ -20,6 +20,20 @@ export interface SendEmailInput {
 
 export function emailMode(): 'resend' | 'demo' {
   return process.env.RESEND_API_KEY ? 'resend' : 'demo';
+}
+
+/**
+ * Interne Empfänger für Betreiber-Benachrichtigungen (Kontaktformular,
+ * neue Buchungen): CONTACT_TO (kommagetrennt), sonst fester Fallback.
+ */
+export function ownerRecipients(): string[] {
+  const fromEnv = (process.env.CONTACT_TO ?? '')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
+  return fromEnv.length > 0
+    ? fromEnv
+    : ['blackforestretreats@axiecentro.de', 'jasin@huber-zipse.de'];
 }
 
 export async function sendEmail(input: SendEmailInput): Promise<{ ok: boolean; error?: string }> {
@@ -53,7 +67,7 @@ export async function sendEmail(input: SendEmailInput): Promise<{ ok: boolean; e
     const sb = createAdminClient();
     await sb.from('email_log').insert({
       booking_id: input.bookingId ?? null,
-      to_email: input.to,
+      to_email: Array.isArray(input.to) ? input.to.join(', ') : input.to,
       subject: input.subject,
       html: input.html,
       provider: mode,

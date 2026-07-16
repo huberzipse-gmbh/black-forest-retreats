@@ -22,8 +22,8 @@ export const LEGAL_ENTITY = {
   postalCode: '68723',
   city: 'Oftersheim',
   country: 'DE',
-  email: 'blackforestretreats@gmail.com',
-  telephone: '+49 160 3756052',
+  email: 'blackforestretreats@axiecentro.de',
+  telephone: '+49 7082 944 39 73',
 } as const;
 
 /** Standort der Unterkünfte (nicht der Firmensitz) — Basis für LocalBusiness/Geo. */

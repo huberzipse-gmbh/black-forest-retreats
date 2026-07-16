@@ -97,6 +97,37 @@ export function confirmationEmail({ booking, retreatName }: BookingEmailContext)
   };
 }
 
+/** Interne Benachrichtigung an die Betreiber: neue verbindliche Buchung. */
+export function ownerBookingEmail({ booking, retreatName }: BookingEmailContext): {
+  subject: string;
+  html: string;
+} {
+  const guests = booking.adults + booking.children;
+  const dates = `${fmtDate(booking.checkIn, 'de')} → ${fmtDate(booking.checkOut, 'de')}`;
+  const payment =
+    booking.paymentStatus === 'paid'
+      ? 'Bezahlt'
+      : `Abbuchung geplant${booking.chargeDueDate ? ` (${fmtDate(booking.chargeDueDate, 'de')})` : ''}`;
+
+  const inner = `
+    <p style="margin:0 0 24px;">Neue Buchung über die Website:</p>
+    <h2 style="margin:0 0 6px;color:${COLORS.forest};font-size:20px;">${retreatName}</h2>
+    <div style="color:${COLORS.brass};font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Buchungsnummer: ${booking.bookingNumber}</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      ${detailRow('Zeitraum', dates)}
+      ${detailRow('Gäste', String(guests))}
+      ${detailRow('Gast', booking.guestName)}
+      ${detailRow('E-Mail', booking.guestEmail)}
+      ${detailRow('Summe', fmtEur(booking.totalCents, 'de'))}
+      ${detailRow('Zahlung', payment)}
+    </table>`;
+
+  return {
+    subject: `Neue Buchung ${booking.bookingNumber} · ${retreatName}`,
+    html: shell('de', inner),
+  };
+}
+
 /** Rechnungs-Mail (PDF im Anhang). */
 export function invoiceEmail({ booking, retreatName }: BookingEmailContext): {
   subject: string;

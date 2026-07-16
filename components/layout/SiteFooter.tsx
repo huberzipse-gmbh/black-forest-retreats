@@ -76,6 +76,13 @@ export function SiteFooter() {
             >
               {t.footer.contact.email}
             </a>
+            <br />
+            <a
+              href={`tel:${t.footer.contact.phone.replace(/\s/g, "")}`}
+              className="font-body text-sm text-cream-100/80 transition-colors hover:text-brass-300"
+            >
+              {t.footer.contact.phone}
+            </a>
 
             <p className="mt-8 font-body text-xs font-semibold uppercase tracking-[0.2em] text-cream-50/50">
               {t.footer.contact.newsletterTitle}

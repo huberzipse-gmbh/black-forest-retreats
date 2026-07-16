@@ -42,11 +42,11 @@ export default function DatenschutzPage() {
         <br />
         Deutschland
         <br />
-        Telefon: <a href="tel:+491603756052">+49 160 3756052</a>
+        Telefon: <a href="tel:+491603756052">+49 7082 944 39 73</a>
         <br />
         E-Mail:{" "}
-        <a href="mailto:blackforestretreats@gmail.com">
-          blackforestretreats@gmail.com
+        <a href="mailto:blackforestretreats@axiecentro.de">
+          blackforestretreats@axiecentro.de
         </a>
       </p>
       <p>
