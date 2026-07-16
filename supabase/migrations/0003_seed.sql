@@ -23,7 +23,7 @@ insert into retreats (
     {"icon":"key","title_de":"Check-in per Schlüsselbox","text_de":"Komm an, wann du willst, ganz ohne Übergabe."},
     {"icon":"parking","title_de":"Kostenlose Parkplätze","text_de":"Eine Seltenheit in der Gegend, bei uns inklusive."},
     {"icon":"sparkle","title_de":"Sehr sauber","text_de":"Von Gästen immer wieder besonders gelobt."}]'::jsonb,
-  4, 2, 2, 1, '1900', '4,89', 100,
+  4, 2, 2, 1, '1870', '4,89', 100,
   true, true, true, 'brass',
   '/images/wohnungen/penthouse/01.jpg',
   array['/images/wohnungen/penthouse/01.jpg','/images/wohnungen/penthouse/02.jpg','/images/wohnungen/penthouse/03.jpg','/images/wohnungen/penthouse/04.jpg','/images/wohnungen/penthouse/05.jpg','/images/wohnungen/penthouse/06.jpg','/images/wohnungen/penthouse/07.jpg','/images/wohnungen/penthouse/08.jpg','/images/wohnungen/penthouse/09.jpg'],
@@ -46,7 +46,7 @@ insert into retreats (
     {"icon":"beams","title_de":"Echtes Fachwerk","text_de":"Sichtbares Gebälk, Natursteinwände, warmes Holz."},
     {"icon":"bath","title_de":"Privates Badezimmer","text_de":"Ganz für dich, modern ausgestattet."},
     {"icon":"wifi","title_de":"Schnelles WLAN","text_de":"Auch zum Arbeiten oder Streamen bestens geeignet."}]'::jsonb,
-  4, 2, 2, 1, '1750', '4,87', 52,
+  4, 2, 2, 1, '1870', '4,87', 52,
   true, true, 'bark',
   '/images/wohnungen/fachwerk/01.jpg',
   array['/images/wohnungen/fachwerk/01.jpg','/images/wohnungen/fachwerk/02.jpg','/images/wohnungen/fachwerk/03.jpg','/images/wohnungen/fachwerk/04.jpg','/images/wohnungen/fachwerk/05.jpg','/images/wohnungen/fachwerk/06.jpg','/images/wohnungen/fachwerk/07.jpg','/images/wohnungen/fachwerk/08.jpg','/images/wohnungen/fachwerk/09.jpg'],
@@ -70,7 +70,7 @@ insert into retreats (
     {"icon":"group","title_de":"Platz für 10 Gäste","text_de":"Acht Schlafzimmer, ideal für Familien und Gruppen."},
     {"icon":"kitchen","title_de":"Großer Essbereich","text_de":"Voll ausgestattete Küche und Tafel für alle."},
     {"icon":"wifi","title_de":"Schnelles WLAN","text_de":"Im ganzen Haus, auch fürs Homeoffice am See."}]'::jsonb,
-  10, 8, 8, 3, '1920', '4,88', 38,
+  10, 8, 8, 3, '1840', '4,88', 38,
   true, '2027', false, false, 'forest', 'moss', '/images/wohnungen/riverhouse/01.webp',
   false, true, 30
 ),
@@ -84,7 +84,7 @@ insert into retreats (
     {"icon":"stairs","title_de":"Über mehrere Etagen","text_de":"Viel Charakter und Raum in einem historischen Stadthaus."},
     {"icon":"kitchen","title_de":"Voll ausgestattete Küche","text_de":"Zum Kochen wie zu Hause."},
     {"icon":"wifi","title_de":"Kostenfreies WLAN","text_de":"Schnell und stabil im ganzen Haus."}]'::jsonb,
-  6, 4, 5, 2, '1820', '4,82', 44,
+  6, 4, 5, 2, '1740', '4,82', 44,
   true, '2027', true, false, 'caramel', 'bark', '/images/wohnungen/raccoon-house/01.webp',
   false, true, 40
 ),
@@ -98,7 +98,7 @@ insert into retreats (
     {"icon":"group","title_de":"Bis zu 20 Gäste","text_de":"Zehn Schlafzimmer für große Gruppen und Feiern."},
     {"icon":"arch","title_de":"Hohe Decken & weite Räume","text_de":"Großzügig wie kaum eine andere Unterkunft."},
     {"icon":"kitchen","title_de":"Großer Gemeinschaftsbereich","text_de":"Zum gemeinsamen Kochen, Essen und Beisammensein."}]'::jsonb,
-  20, 10, 15, 5, '1895', '4,86', 26,
+  20, 10, 15, 5, '1902', '4,86', 26,
   true, '2028', true, true, 'gold', 'night', '/images/wohnungen/postal-office/01.webp',
   false, true, 50
 ),
@@ -112,15 +112,10 @@ insert into retreats (
     {"icon":"beams","title_de":"Viel Charakter","text_de":"Warmes Holz und dicke Mauern in einem historischen Stadthaus."},
     {"icon":"kitchen","title_de":"Voll ausgestattete Küche","text_de":"Zum Kochen wie zu Hause."},
     {"icon":"wifi","title_de":"Kostenfreies WLAN","text_de":"Schnell und stabil im ganzen Haus."}]'::jsonb,
-  5, 3, 4, 2, '1850', '4,74', 19,
+  5, 3, 4, 2, '1540', '4,74', 19,
   true, '2028', true, false, 'forest', 'moss', '',
   false, true, 60
 ) on conflict (id) do nothing;
 
--- ── Eröffnungsrabatt: −50 €/Nacht, unbefristet, für beide Live-Wohnungen ────
-insert into price_rules (retreat_id, name, discount_amount_cents)
-select id, 'Eröffnungsrabatt', 5000
-from retreats where id in ('black-forest-penthouse', 'fachwerk-apartment')
-and not exists (
-  select 1 from price_rules pr where pr.retreat_id = retreats.id and pr.name = 'Eröffnungsrabatt'
-);
+-- Eröffnungsrabatt (−50 €/Nacht) wurde am 2026-07-16 auf Kundenwunsch entfernt —
+-- neue Umgebungen starten ohne Rabatt-Preisregel.
