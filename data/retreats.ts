@@ -31,7 +31,7 @@ export interface RetreatStruct
   gallery: string[];    // Galerie für die Detailseite
   beds: number;
   bathrooms: number;
-  /** Geschätztes Baujahr (vorläufig, bis die genauen Zahlen vorliegen). */
+  /** Baujahr laut Inseraten. */
   year?: string;
   rating?: string;      // z. B. "4,91"
   reviewCount?: number; // Anzahl Bewertungen
@@ -80,7 +80,7 @@ export const retreats: RetreatStruct[] = [
   {
     id: 'black-forest-penthouse',
     slug: 'black-forest-penthouse',
-    year: '1900',
+    year: '1870',
     image: penthouseGallery[0],
     gallery: penthouseGallery,
     exclusive: true,
@@ -103,7 +103,7 @@ export const retreats: RetreatStruct[] = [
   {
     id: 'fachwerk-apartment',
     slug: 'fachwerk-apartment',
-    year: '1750',
+    year: '1870',
     image: fachwerkGallery[0],
     gallery: fachwerkGallery,
     exclusive: true,
@@ -127,7 +127,7 @@ export const retreats: RetreatStruct[] = [
   {
     id: 'riverhouse',
     slug: 'riverhouse',
-    year: '1920',
+    year: '1840',
     image: '/images/wohnungen/riverhouse/01.webp',
     gallery: [],
     variant: 'moss',
@@ -149,7 +149,7 @@ export const retreats: RetreatStruct[] = [
   {
     id: 'the-raccoon-house',
     slug: 'the-raccoon-house',
-    year: '1820',
+    year: '1740',
     image: '/images/wohnungen/raccoon-house/01.webp',
     gallery: [],
     variant: 'bark',
@@ -172,7 +172,7 @@ export const retreats: RetreatStruct[] = [
   {
     id: 'the-postal-office',
     slug: 'the-postal-office',
-    year: '1895',
+    year: '1902',
     image: '/images/wohnungen/postal-office/01.webp',
     gallery: [],
     variant: 'night',
@@ -195,7 +195,7 @@ export const retreats: RetreatStruct[] = [
   {
     id: 'grey-fox',
     slug: 'grey-fox',
-    year: '1850',
+    year: '1540',
     image: '',
     gallery: [],
     variant: 'moss',
