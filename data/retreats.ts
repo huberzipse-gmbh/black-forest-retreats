@@ -149,7 +149,7 @@ export const retreats: RetreatStruct[] = [
   {
     id: 'the-raccoon-house',
     slug: 'the-raccoon-house',
-    year: '1740',
+    year: '1782',
     image: '/images/wohnungen/raccoon-house/01.webp',
     gallery: [],
     variant: 'bark',
@@ -195,7 +195,7 @@ export const retreats: RetreatStruct[] = [
   {
     id: 'grey-fox',
     slug: 'grey-fox',
-    year: '1540',
+    year: '1499',
     image: '/images/wohnungen/grey-fox/01.webp',
     gallery: [],
     variant: 'moss',
