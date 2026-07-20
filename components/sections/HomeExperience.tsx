@@ -5,6 +5,7 @@ import { Surroundings } from "@/components/sections/Surroundings";
 import { SchwarzwaldFact } from "@/components/sections/SchwarzwaldFact";
 import { FactDecor } from "@/components/sections/FactDecor";
 import { GiftVoucher } from "@/components/sections/GiftVoucher";
+import { EventLocationTeaser } from "@/components/sections/EventLocationTeaser";
 import { ApartmentsPreview } from "@/components/sections/ApartmentsPreview";
 import { RegionMap } from "@/components/sections/RegionMap";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -74,6 +75,8 @@ export async function HomeExperience({ heroHeading }: { heroHeading?: string }) 
         decor={<FactDecor variant="hutUhr" />}
       />
       <GiftVoucher />
+      {/* Marktstraße 25 als kommende Event-Location — bewusst geblurrter Teaser. */}
+      <EventLocationTeaser />
       <ApartmentsPreview />
       <SchwarzwaldFact factKey="fact2" bgImage="/images/elemente/mischwald.jpg" nowrapFirst />
       <ContactForm />

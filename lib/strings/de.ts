@@ -213,6 +213,74 @@ export const de = {
     trust: 'Sofort per E-Mail · 3 Jahre gültig · frei wählbarer Wert',
   },
 
+  eventLocation: {
+    teaser: {
+      badge: 'Bald buchbar',
+      eyebrow: 'Marktstraße 25 · Altstadt Neuenbürg',
+      title: 'Jetzt auch als Event-Location',
+      text: 'Unser Stadthaus in der Altstadt bekommt eine zweite Rolle: Raum für Feiern, Firmenevents und Retreats. Die ersten Bilder entstehen gerade.',
+      cta: 'Mehr erfahren',
+    },
+    page: {
+      badge: 'Bald buchbar',
+      eyebrow: 'Event-Location · Marktstraße 25',
+      title: 'Ein Stadthaus wird Bühne',
+      intro:
+        'Dicke Mauern, knarrende Dielen, mehrere Etagen mitten in der Altstadt von Neuenbürg. Das Stadthaus in der Marktstraße 25 bleibt Ferienwohnung und öffnet sich zusätzlich für Veranstaltungen. Der Marktplatz liegt zwei Minuten entfernt, das Schloss grüßt vom Hügel.',
+      heroCta: 'Jetzt anfragen',
+      occasionsEyebrow: 'Die Möglichkeiten',
+      occasionsTitle: 'Was hier stattfinden wird',
+      occasions: [
+        {
+          title: 'Private Feiern',
+          text: 'Geburtstag, Taufe, kleine Hochzeit: eine lange Tafel unterm alten Gebälk, Kerzen an, Gläser hoch. Deine Gäste schlafen auf Wunsch gleich im Haus.',
+        },
+        {
+          title: 'Firmenevents',
+          text: 'Vormittags Workshop, zwischendurch klare Köpfe beim Gang hoch zum Schloss, abends gemeinsames Kochen in der großen Küche. Kurze Wege, keine Hotellobby.',
+        },
+        {
+          title: 'Retreats',
+          text: 'Yoga auf alten Dielen, Stille hinter dicken Mauern, mittags raus ins Enztal. Das Haus trägt kleine Gruppen, die zur Ruhe kommen wollen.',
+        },
+      ],
+      comingSoon: {
+        title: 'Bilder und Preise folgen',
+        text: 'Wir richten die Räume gerade für Veranstaltungen her. Fotos und Preise erscheinen in den nächsten Wochen genau hier. Wer jetzt anfragt, erfährt es zuerst und hat freie Terminwahl.',
+      },
+      form: {
+        eyebrow: 'Anfrage',
+        title: 'Sichere dir deinen Termin',
+        text: 'Erzähl uns kurz, was du vorhast. Wir melden uns mit allen Details, meist noch am selben Tag.',
+        name: 'Name',
+        namePlaceholder: 'Wie dürfen wir dich nennen?',
+        email: 'E-Mail',
+        emailPlaceholder: 'name@beispiel.de',
+        phone: 'Telefon',
+        optional: 'optional',
+        phonePlaceholder: 'Für den kurzen Draht',
+        date: 'Wunschzeitraum',
+        datePlaceholder: 'z. B. Mai 2027 oder ein festes Datum',
+        occasion: 'Anlass',
+        occasionPlaceholder: 'z. B. Geburtstag, Team-Workshop',
+        guests: 'Personenzahl',
+        guestsPlaceholder: 'z. B. 20',
+        message: 'Nachricht',
+        messagePlaceholder: 'Was sollen wir noch wissen?',
+        submit: 'Anfrage senden',
+        sending: 'Wird gesendet …',
+      },
+      success: {
+        title: 'Angekommen.',
+        text: 'Danke für deine Anfrage. Wir melden uns mit allen Details, meist noch am selben Tag.',
+      },
+      error: 'Das hat nicht geklappt. Versuch es gleich noch einmal oder schreib uns direkt eine E-Mail.',
+      seoTitle: 'Event-Location in Neuenbürg · Marktstraße 25',
+      seoDescription:
+        'Feiern, Firmenevents und Retreats im historischen Stadthaus in der Neuenbürger Altstadt. Bilder und Preise folgen in Kürze, Anfragen sind schon jetzt möglich.',
+    },
+  },
+
   contact: {
     eyebrow: 'Schreib uns',
     title: 'Ein Wort genügt',

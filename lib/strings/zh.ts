@@ -210,6 +210,74 @@ export const zh: Strings = {
     trust: '邮件即时送达 · 有效期 3 年 · 金额自定',
   },
 
+  eventLocation: {
+    teaser: {
+      badge: '即将开放预订',
+      eyebrow: '市集街 25 号 · 诺因比格老城',
+      title: '现在也是活动场地',
+      text: '我们在老城的这栋老宅有了第二重身份：为庆典、企业活动和静修营提供空间。首批照片正在拍摄中。',
+      cta: '了解更多',
+    },
+    page: {
+      badge: '即将开放预订',
+      eyebrow: '活动场地 · 市集街 25 号',
+      title: '一栋老宅登上舞台',
+      intro:
+        '厚实的墙体，踩上去吱呀作响的木地板，数层空间就在诺因比格老城中心。市集街 25 号这栋老宅仍是度假公寓，如今也向各类活动敞开大门。集市广场步行两分钟即到，城堡在山丘上遥遥相望。',
+      heroCta: '立即咨询',
+      occasionsEyebrow: '可能性',
+      occasionsTitle: '这里将上演什么',
+      occasions: [
+        {
+          title: '私人庆典',
+          text: '生日、洗礼、小型婚礼：老木梁下摆开一张长桌，点上蜡烛，举杯畅饮。你的宾客还可以直接住在这栋房子里。',
+        },
+        {
+          title: '企业活动',
+          text: '上午开工作坊，午后漫步上山到城堡让头脑放空，晚上在大厨房里一起做饭。路程近，没有酒店大堂的喧嚣。',
+        },
+        {
+          title: '静修营',
+          text: '在老木地板上练瑜伽，在厚墙之内享受安静，中午去恩茨河谷走走。这栋房子适合想慢下来的小团体。',
+        },
+      ],
+      comingSoon: {
+        title: '照片与价格即将公布',
+        text: '我们正在为活动布置各个房间。照片和价格将在未来几周于此处公布。现在咨询的人会最先得到消息，并可优先挑选日期。',
+      },
+      form: {
+        eyebrow: '咨询',
+        title: '预定你的日期',
+        text: '简单说说你的计划。我们会带着所有细节回复你，通常当天。',
+        name: '姓名',
+        namePlaceholder: '怎么称呼你？',
+        email: '邮箱',
+        emailPlaceholder: 'name@example.com',
+        phone: '电话',
+        optional: '选填',
+        phonePlaceholder: '方便时快速联系',
+        date: '期望时间',
+        datePlaceholder: '例如 2027 年 5 月或某个确定日期',
+        occasion: '活动类型',
+        occasionPlaceholder: '例如生日、团队工作坊',
+        guests: '人数',
+        guestsPlaceholder: '例如 20',
+        message: '留言',
+        messagePlaceholder: '还有什么想让我们知道的？',
+        submit: '发送咨询',
+        sending: '发送中 …',
+      },
+      success: {
+        title: '已收到。',
+        text: '感谢你的咨询。我们会带着所有细节尽快回复，通常当天。',
+      },
+      error: '发送未成功。请稍后再试，或直接给我们发邮件。',
+      seoTitle: '诺因比格活动场地 · 市集街 25 号',
+      seoDescription:
+        '在诺因比格老城的历史老宅里举办庆典、企业活动和静修营。照片与价格即将公布，现已开放咨询。',
+    },
+  },
+
   contact: {
     eyebrow: '来说声你好',
     title: '一句话就够',

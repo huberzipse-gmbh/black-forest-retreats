@@ -83,7 +83,7 @@ export function ExportMenu({ endpoint }: { endpoint: string }) {
       </button>
 
       {open && (
-        <div className="absolute end-0 z-20 mt-2 w-72 rounded-[8px] border border-forest-900/10 bg-white p-4 shadow-[0_20px_50px_-18px_rgba(15,24,19,0.4)]">
+        <div className="absolute start-0 z-20 mt-2 w-72 max-w-[calc(100vw-2.5rem)] rounded-[8px] border border-forest-900/10 bg-white p-4 shadow-[0_20px_50px_-18px_rgba(15,24,19,0.4)] sm:start-auto sm:end-0">
           <p className="font-body text-sm font-semibold text-forest-900">Zeitraum wählen</p>
           <p className="mt-0.5 font-body text-xs text-forest-700/60">
             Alle Dokumente im Zeitraum als ZIP.

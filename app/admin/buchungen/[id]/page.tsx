@@ -146,7 +146,7 @@ function Row({ k, v }: { k: string; v: string }) {
   return (
     <div className="flex justify-between gap-4">
       <dt className="text-forest-700/60">{k}</dt>
-      <dd className="text-end font-medium text-forest-900">{v}</dd>
+      <dd className="min-w-0 break-words text-end font-medium text-forest-900">{v}</dd>
     </div>
   );
 }

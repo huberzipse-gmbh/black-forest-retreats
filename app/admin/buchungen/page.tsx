@@ -57,7 +57,7 @@ export default async function AdminBookingsPage({
   return (
     <div>
       <h1 className="font-display text-3xl text-forest-900">Buchungen</h1>
-      <div className="mt-6 flex gap-2">
+      <div className="mt-6 flex flex-wrap gap-2">
         {FILTERS.map((f) => (
           <Link
             key={f.key}

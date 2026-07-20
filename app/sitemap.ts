@@ -19,6 +19,7 @@ import { SITE_URL } from '@/lib/seo/config';
 const ROUTES = [
   { path: '/', priority: 1, changeFrequency: 'weekly' as const },
   { path: '/umgebung', priority: 0.8, changeFrequency: 'monthly' as const },
+  { path: '/event-location', priority: 0.6, changeFrequency: 'weekly' as const },
   ...CATEGORY_ORDER.map((key) => ({
     path: `/umgebung/${key}`,
     priority: 0.6,
