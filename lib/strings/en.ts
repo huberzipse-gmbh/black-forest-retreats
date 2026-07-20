@@ -210,6 +210,74 @@ export const en: Strings = {
     trust: 'Instant by email · valid for 3 years · free choice of value',
   },
 
+  eventLocation: {
+    teaser: {
+      badge: 'Booking opens soon',
+      eyebrow: 'Marktstraße 25 · Neuenbürg old town',
+      title: 'Now also an event location',
+      text: 'Our town house in the old town takes on a second role: space for celebrations, company events and retreats. The first pictures are being taken right now.',
+      cta: 'Learn more',
+    },
+    page: {
+      badge: 'Booking opens soon',
+      eyebrow: 'Event location · Marktstraße 25',
+      title: 'A town house becomes a stage',
+      intro:
+        'Thick walls, creaking floorboards, several storeys right in the old town of Neuenbürg. The town house at Marktstraße 25 remains a holiday home and now opens up for events as well. The market square is two minutes away, the castle greets you from the hill.',
+      heroCta: 'Send an inquiry',
+      occasionsEyebrow: 'The possibilities',
+      occasionsTitle: 'What will take place here',
+      occasions: [
+        {
+          title: 'Private celebrations',
+          text: 'A birthday, a christening, a small wedding: one long table under old beams, candles lit, glasses raised. Your guests can stay overnight right in the house.',
+        },
+        {
+          title: 'Company events',
+          text: 'A workshop in the morning, clear heads on the walk up to the castle, cooking together in the big kitchen at night. Short distances, no hotel lobby.',
+        },
+        {
+          title: 'Retreats',
+          text: 'Yoga on old floorboards, quiet behind thick walls, a midday break down in the Enz valley. The house carries small groups that want to slow down.',
+        },
+      ],
+      comingSoon: {
+        title: 'Pictures and prices are coming',
+        text: 'We are preparing the rooms for events right now. Photos and prices will appear right here over the next weeks. Ask today and you will hear first, with first pick of dates.',
+      },
+      form: {
+        eyebrow: 'Inquiry',
+        title: 'Secure your date',
+        text: 'Tell us briefly what you are planning. We will get back to you with all the details, usually the same day.',
+        name: 'Name',
+        namePlaceholder: 'What should we call you?',
+        email: 'Email',
+        emailPlaceholder: 'name@example.com',
+        phone: 'Phone',
+        optional: 'optional',
+        phonePlaceholder: 'For a quick call',
+        date: 'Preferred dates',
+        datePlaceholder: 'e.g. May 2027 or a fixed date',
+        occasion: 'Occasion',
+        occasionPlaceholder: 'e.g. birthday, team workshop',
+        guests: 'Number of guests',
+        guestsPlaceholder: 'e.g. 20',
+        message: 'Message',
+        messagePlaceholder: 'What else should we know?',
+        submit: 'Send inquiry',
+        sending: 'Sending …',
+      },
+      success: {
+        title: 'Received.',
+        text: 'Thank you for your inquiry. We will get back to you with all the details, usually the same day.',
+      },
+      error: 'That did not go through. Please try again in a moment or email us directly.',
+      seoTitle: 'Event location in Neuenbürg · Marktstraße 25',
+      seoDescription:
+        'Celebrations, company events and retreats in a historic town house in the old town of Neuenbürg. Pictures and prices are coming soon, inquiries are already open.',
+    },
+  },
+
   contact: {
     eyebrow: 'Say hello',
     title: 'One word is enough',

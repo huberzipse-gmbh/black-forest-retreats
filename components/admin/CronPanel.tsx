@@ -51,7 +51,7 @@ export function CronPanel({ runs }: { runs: Run[] }) {
             );
           })}
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <button
             type="button"
             disabled={isPending}

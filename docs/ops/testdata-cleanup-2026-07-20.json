@@ -1,0 +1,2602 @@
+{
+  "_meta": {
+    "created_at": "2026-07-20T11:40:10.777Z",
+    "reason": "Backup vor Testdaten-Bereinigung der BFR-Live-DB (Kundenauftrag 20.07.2026). Alle Buchungen/Rechnungen/Gutscheine waren Testdaten (Inhaber-/Demo-Tests, keine echten Gäste). airbnb-ical- und manuelle availability_blocks wurden NICHT gelöscht.",
+    "supabase_service": "supabase-blackforestretreats (k12b6cugac8arbboouml6sz0, hz-hetzner)"
+  },
+  "bookings": [
+    {
+      "id": "9117c6b8-5d85-4454-9947-f1089a070ac1",
+      "booking_number": "BF-UYEZER",
+      "retreat_id": "black-forest-penthouse",
+      "user_id": null,
+      "guest_email": "max.testgast@example.com",
+      "guest_name": "Max Testgast",
+      "check_in": "2026-07-10",
+      "check_out": "2026-07-13",
+      "adults": 2,
+      "children": 0,
+      "infants": 0,
+      "status": "confirmed",
+      "payment_status": "paid",
+      "payment_timing": "now",
+      "charge_due_date": null,
+      "quote": {
+        "lines": [
+          {
+            "kind": "nights",
+            "label": "",
+            "amountCents": 60000
+          },
+          {
+            "kind": "discount",
+            "label": "Eröffnungsrabatt",
+            "amountCents": -15000
+          }
+        ],
+        "nights": 3,
+        "checkIn": "2026-07-10",
+        "vatRate": 7,
+        "checkOut": "2026-07-13",
+        "currency": "EUR",
+        "netCents": 42056,
+        "vatCents": 2944,
+        "goodPrice": true,
+        "retreatId": "black-forest-penthouse",
+        "totalCents": 45000,
+        "cleaningFeeCents": 0,
+        "avgNightlyBaseCents": 20000,
+        "registeredDiscountCents": 0,
+        "avgNightlyEffectiveCents": 15000,
+        "preDiscountSubtotalCents": 60000
+      },
+      "total_cents": 45000,
+      "stripe_payment_intent_id": "demo_pi_9117c6b8-5d85-4454-9947-f1089a070ac1",
+      "stripe_setup_intent_id": null,
+      "stripe_customer_id": null,
+      "stripe_payment_method_id": null,
+      "locale": "de",
+      "cancellation_days": 10,
+      "demo": true,
+      "created_at": "2026-07-03T13:30:33.911466+00:00",
+      "confirmed_at": "2026-07-03T13:31:06.684+00:00",
+      "cancelled_at": null,
+      "gift_card_id": null,
+      "gift_card_applied_cents": 0,
+      "payment_attempts": 0
+    },
+    {
+      "id": "2a867a1b-764f-45b8-b254-b50938d70c27",
+      "booking_number": "BF-9DEXTE",
+      "retreat_id": "black-forest-penthouse",
+      "user_id": null,
+      "guest_email": "test@gmail.com",
+      "guest_name": "Test",
+      "check_in": "2026-07-15",
+      "check_out": "2026-07-25",
+      "adults": 2,
+      "children": 0,
+      "infants": 0,
+      "status": "pending",
+      "payment_status": "awaiting_payment",
+      "payment_timing": "now",
+      "charge_due_date": null,
+      "quote": {
+        "lines": [
+          {
+            "kind": "nights",
+            "label": "",
+            "amountCents": 200000
+          },
+          {
+            "kind": "discount",
+            "label": "Eröffnungsrabatt",
+            "amountCents": -50000
+          }
+        ],
+        "nights": 10,
+        "checkIn": "2026-07-15",
+        "vatRate": 7,
+        "checkOut": "2026-07-25",
+        "currency": "EUR",
+        "netCents": 140187,
+        "vatCents": 9813,
+        "goodPrice": true,
+        "retreatId": "black-forest-penthouse",
+        "totalCents": 150000,
+        "cleaningFeeCents": 0,
+        "avgNightlyBaseCents": 20000,
+        "registeredDiscountCents": 0,
+        "avgNightlyEffectiveCents": 15000,
+        "preDiscountSubtotalCents": 200000
+      },
+      "total_cents": 150000,
+      "stripe_payment_intent_id": "demo_pi_2a867a1b-764f-45b8-b254-b50938d70c27",
+      "stripe_setup_intent_id": null,
+      "stripe_customer_id": null,
+      "stripe_payment_method_id": null,
+      "locale": "de",
+      "cancellation_days": 10,
+      "demo": true,
+      "created_at": "2026-07-03T13:40:11.470937+00:00",
+      "confirmed_at": null,
+      "cancelled_at": null,
+      "gift_card_id": null,
+      "gift_card_applied_cents": 0,
+      "payment_attempts": 0
+    },
+    {
+      "id": "e931939c-7a51-4e5b-9c1b-28d9730eefa7",
+      "booking_number": "BF-3Y73V4",
+      "retreat_id": "fachwerk-apartment",
+      "user_id": null,
+      "guest_email": "jasin@huber-zipse.de",
+      "guest_name": "Jasin Huber",
+      "check_in": "2026-08-14",
+      "check_out": "2026-08-17",
+      "adults": 2,
+      "children": 0,
+      "infants": 0,
+      "status": "cancelled",
+      "payment_status": "refunded",
+      "payment_timing": "now",
+      "charge_due_date": null,
+      "quote": {
+        "lines": [
+          {
+            "kind": "nights",
+            "label": "",
+            "amountCents": 60000
+          },
+          {
+            "kind": "discount",
+            "label": "Eröffnungsrabatt",
+            "amountCents": -15000
+          }
+        ],
+        "nights": 3,
+        "checkIn": "2026-08-14",
+        "vatRate": 7,
+        "checkOut": "2026-08-17",
+        "currency": "EUR",
+        "netCents": 42056,
+        "vatCents": 2944,
+        "goodPrice": true,
+        "retreatId": "fachwerk-apartment",
+        "totalCents": 45000,
+        "cleaningFeeCents": 0,
+        "avgNightlyBaseCents": 20000,
+        "registeredDiscountCents": 0,
+        "avgNightlyEffectiveCents": 15000,
+        "preDiscountSubtotalCents": 60000
+      },
+      "total_cents": 45000,
+      "stripe_payment_intent_id": "demo_pi_e931939c-7a51-4e5b-9c1b-28d9730eefa7",
+      "stripe_setup_intent_id": null,
+      "stripe_customer_id": null,
+      "stripe_payment_method_id": null,
+      "locale": "de",
+      "cancellation_days": 10,
+      "demo": true,
+      "created_at": "2026-07-03T13:46:58.518686+00:00",
+      "confirmed_at": "2026-07-03T13:47:23.478+00:00",
+      "cancelled_at": "2026-07-16T13:45:10.243008+00:00",
+      "gift_card_id": null,
+      "gift_card_applied_cents": 0,
+      "payment_attempts": 0
+    },
+    {
+      "id": "fa25684b-705a-4838-8bf1-1b3570acf37f",
+      "booking_number": "BF-2GTYCP",
+      "retreat_id": "black-forest-penthouse",
+      "user_id": null,
+      "guest_email": "jasin@huber-zipse.de",
+      "guest_name": "Jasin Huber",
+      "check_in": "2026-09-10",
+      "check_out": "2026-09-13",
+      "adults": 2,
+      "children": 0,
+      "infants": 0,
+      "status": "pending",
+      "payment_status": "awaiting_payment",
+      "payment_timing": "now",
+      "charge_due_date": null,
+      "quote": {
+        "lines": [
+          {
+            "kind": "nights",
+            "label": "",
+            "amountCents": 60000
+          },
+          {
+            "kind": "discount",
+            "label": "Eröffnungsrabatt",
+            "amountCents": -15000
+          }
+        ],
+        "nights": 3,
+        "checkIn": "2026-09-10",
+        "vatRate": 7,
+        "checkOut": "2026-09-13",
+        "currency": "EUR",
+        "netCents": 42056,
+        "vatCents": 2944,
+        "goodPrice": true,
+        "retreatId": "black-forest-penthouse",
+        "totalCents": 45000,
+        "cleaningFeeCents": 0,
+        "avgNightlyBaseCents": 20000,
+        "registeredDiscountCents": 0,
+        "avgNightlyEffectiveCents": 15000,
+        "preDiscountSubtotalCents": 60000
+      },
+      "total_cents": 45000,
+      "stripe_payment_intent_id": "pi_3Tp7hA2LlJ4MmAGt0MqYuLx7",
+      "stripe_setup_intent_id": null,
+      "stripe_customer_id": "cus_UolDggibbOpiJz",
+      "stripe_payment_method_id": null,
+      "locale": "de",
+      "cancellation_days": 10,
+      "demo": false,
+      "created_at": "2026-07-03T14:03:52.522409+00:00",
+      "confirmed_at": null,
+      "cancelled_at": null,
+      "gift_card_id": null,
+      "gift_card_applied_cents": 0,
+      "payment_attempts": 0
+    },
+    {
+      "id": "e1dbd0cf-8db6-4c2e-9ed4-c3f71d506da2",
+      "booking_number": "BF-64KKYK",
+      "retreat_id": "black-forest-penthouse",
+      "user_id": null,
+      "guest_email": "jasin@huber-zipse.de",
+      "guest_name": "Jasin Huber",
+      "check_in": "2026-10-08",
+      "check_out": "2026-10-11",
+      "adults": 2,
+      "children": 0,
+      "infants": 0,
+      "status": "confirmed",
+      "payment_status": "paid",
+      "payment_timing": "now",
+      "charge_due_date": null,
+      "quote": {
+        "lines": [
+          {
+            "kind": "nights",
+            "label": "",
+            "amountCents": 60000
+          },
+          {
+            "kind": "discount",
+            "label": "Eröffnungsrabatt",
+            "amountCents": -15000
+          }
+        ],
+        "nights": 3,
+        "checkIn": "2026-10-08",
+        "vatRate": 7,
+        "checkOut": "2026-10-11",
+        "currency": "EUR",
+        "netCents": 42056,
+        "vatCents": 2944,
+        "goodPrice": true,
+        "retreatId": "black-forest-penthouse",
+        "totalCents": 45000,
+        "cleaningFeeCents": 0,
+        "avgNightlyBaseCents": 20000,
+        "registeredDiscountCents": 0,
+        "avgNightlyEffectiveCents": 15000,
+        "preDiscountSubtotalCents": 60000
+      },
+      "total_cents": 45000,
+      "stripe_payment_intent_id": "pi_3Tp7iv2LlJ4MmAGt0Y4xBcwl",
+      "stripe_setup_intent_id": null,
+      "stripe_customer_id": "cus_UolFNHI50PUcqT",
+      "stripe_payment_method_id": null,
+      "locale": "de",
+      "cancellation_days": 10,
+      "demo": false,
+      "created_at": "2026-07-03T14:05:42.129382+00:00",
+      "confirmed_at": "2026-07-03T14:06:23.12+00:00",
+      "cancelled_at": null,
+      "gift_card_id": null,
+      "gift_card_applied_cents": 0,
+      "payment_attempts": 0
+    },
+    {
+      "id": "fbaf2ee4-12cf-4990-bd51-53e466ba5501",
+      "booking_number": "BF-GDRDM9",
+      "retreat_id": "black-forest-penthouse",
+      "user_id": null,
+      "guest_email": "jasinhuber@gmail.com",
+      "guest_name": "Jasin Huber",
+      "check_in": "2026-08-11",
+      "check_out": "2026-08-15",
+      "adults": 2,
+      "children": 0,
+      "infants": 0,
+      "status": "pending",
+      "payment_status": "failed",
+      "payment_timing": "now",
+      "charge_due_date": null,
+      "quote": {
+        "lines": [
+          {
+            "kind": "nights",
+            "label": "",
+            "amountCents": 80000
+          },
+          {
+            "kind": "discount",
+            "label": "Eröffnungsrabatt",
+            "amountCents": -20000
+          }
+        ],
+        "nights": 4,
+        "checkIn": "2026-08-11",
+        "vatRate": 7,
+        "checkOut": "2026-08-15",
+        "currency": "EUR",
+        "netCents": 56075,
+        "vatCents": 3925,
+        "goodPrice": true,
+        "retreatId": "black-forest-penthouse",
+        "totalCents": 60000,
+        "cleaningFeeCents": 0,
+        "avgNightlyBaseCents": 20000,
+        "registeredDiscountCents": 0,
+        "avgNightlyEffectiveCents": 15000,
+        "preDiscountSubtotalCents": 80000
+      },
+      "total_cents": 60000,
+      "stripe_payment_intent_id": "pi_3Tp8Qu2LlJ4MmAGt04GiuY5i",
+      "stripe_setup_intent_id": null,
+      "stripe_customer_id": "cus_UolyJEdoEn6Xhd",
+      "stripe_payment_method_id": null,
+      "locale": "de",
+      "cancellation_days": 10,
+      "demo": false,
+      "created_at": "2026-07-03T14:51:11.784421+00:00",
+      "confirmed_at": null,
+      "cancelled_at": null,
+      "gift_card_id": null,
+      "gift_card_applied_cents": 0,
+      "payment_attempts": 0
+    },
+    {
+      "id": "e8087102-665f-4adb-ba0b-f48c2f1eddb9",
+      "booking_number": "BF-ZNPXXX",
+      "retreat_id": "black-forest-penthouse",
+      "user_id": null,
+      "guest_email": "jasinhuber@gmail.com",
+      "guest_name": "Jasin Huber",
+      "check_in": "2026-08-19",
+      "check_out": "2026-08-22",
+      "adults": 2,
+      "children": 0,
+      "infants": 0,
+      "status": "pending",
+      "payment_status": "awaiting_payment",
+      "payment_timing": "now",
+      "charge_due_date": null,
+      "quote": {
+        "lines": [
+          {
+            "kind": "nights",
+            "label": "",
+            "amountCents": 60000
+          },
+          {
+            "kind": "discount",
+            "label": "Eröffnungsrabatt",
+            "amountCents": -15000
+          }
+        ],
+        "nights": 3,
+        "checkIn": "2026-08-19",
+        "vatRate": 7,
+        "checkOut": "2026-08-22",
+        "currency": "EUR",
+        "netCents": 42056,
+        "vatCents": 2944,
+        "goodPrice": true,
+        "retreatId": "black-forest-penthouse",
+        "totalCents": 45000,
+        "cleaningFeeCents": 0,
+        "avgNightlyBaseCents": 20000,
+        "registeredDiscountCents": 0,
+        "avgNightlyEffectiveCents": 15000,
+        "preDiscountSubtotalCents": 60000
+      },
+      "total_cents": 45000,
+      "stripe_payment_intent_id": "pi_3Tp9Bm2LlJ4MmAGt1bCZPztT",
+      "stripe_setup_intent_id": null,
+      "stripe_customer_id": "cus_UomlaJbcnjSmdY",
+      "stripe_payment_method_id": null,
+      "locale": "de",
+      "cancellation_days": 10,
+      "demo": false,
+      "created_at": "2026-07-03T15:39:37.301132+00:00",
+      "confirmed_at": null,
+      "cancelled_at": null,
+      "gift_card_id": null,
+      "gift_card_applied_cents": 0,
+      "payment_attempts": 0
+    },
+    {
+      "id": "aec25842-6699-406a-a38f-0a56aa7c897e",
+      "booking_number": "BF-Z2ZJ3Y",
+      "retreat_id": "fachwerk-apartment",
+      "user_id": null,
+      "guest_email": "jasin@huber-zipse.de",
+      "guest_name": "Test Gutschein",
+      "check_in": "2026-07-27",
+      "check_out": "2026-07-29",
+      "adults": 2,
+      "children": 0,
+      "infants": 0,
+      "status": "cancelled",
+      "payment_status": "refunded",
+      "payment_timing": "now",
+      "charge_due_date": null,
+      "quote": {
+        "lines": [
+          {
+            "kind": "nights",
+            "label": "",
+            "amountCents": 40000
+          },
+          {
+            "kind": "discount",
+            "label": "Eröffnungsrabatt",
+            "amountCents": -10000
+          },
+          {
+            "kind": "promo",
+            "label": "BFR10",
+            "amountCents": -3000
+          },
+          {
+            "kind": "giftcard",
+            "label": "GIFT-WEAV-M2CZ",
+            "amountCents": -5000
+          }
+        ],
+        "nights": 2,
+        "checkIn": "2026-07-27",
+        "vatRate": 7,
+        "checkOut": "2026-07-29",
+        "currency": "EUR",
+        "netCents": 20561,
+        "vatCents": 1439,
+        "goodPrice": true,
+        "retreatId": "fachwerk-apartment",
+        "totalCents": 22000,
+        "cleaningFeeCents": 0,
+        "avgNightlyBaseCents": 20000,
+        "giftCardAppliedCents": 5000,
+        "registeredDiscountCents": 0,
+        "avgNightlyEffectiveCents": 13500,
+        "preDiscountSubtotalCents": 40000
+      },
+      "total_cents": 22000,
+      "stripe_payment_intent_id": "pi_3TqBj32LlJ4MmAGt1BzMHL9X",
+      "stripe_setup_intent_id": null,
+      "stripe_customer_id": "cus_UprRCWhR2lQJ9K",
+      "stripe_payment_method_id": null,
+      "locale": "de",
+      "cancellation_days": 10,
+      "demo": false,
+      "created_at": "2026-07-06T12:34:15.813969+00:00",
+      "confirmed_at": "2026-07-06T12:35:09.725+00:00",
+      "cancelled_at": "2026-07-06T12:38:41.716+00:00",
+      "gift_card_id": "e3a03765-60ec-4c1a-b673-4a3a167ec1ff",
+      "gift_card_applied_cents": 5000,
+      "payment_attempts": 0
+    },
+    {
+      "id": "6ff77dc3-2351-4f12-ae22-fbe11a734e7b",
+      "booking_number": "BF-FGTWRT",
+      "retreat_id": "fachwerk-apartment",
+      "user_id": null,
+      "guest_email": "jasin@huber-zipse.de",
+      "guest_name": "Test Volldeckung",
+      "check_in": "2026-07-27",
+      "check_out": "2026-07-29",
+      "adults": 2,
+      "children": 0,
+      "infants": 0,
+      "status": "cancelled",
+      "payment_status": "refunded",
+      "payment_timing": "now",
+      "charge_due_date": null,
+      "quote": {
+        "lines": [
+          {
+            "kind": "nights",
+            "label": "",
+            "amountCents": 40000
+          },
+          {
+            "kind": "discount",
+            "label": "Eröffnungsrabatt",
+            "amountCents": -10000
+          },
+          {
+            "kind": "promo",
+            "label": "BFR10",
+            "amountCents": -3000
+          },
+          {
+            "kind": "giftcard",
+            "label": "GIFT-6NUU-N2NU",
+            "amountCents": -27000
+          }
+        ],
+        "nights": 2,
+        "checkIn": "2026-07-27",
+        "vatRate": 7,
+        "checkOut": "2026-07-29",
+        "currency": "EUR",
+        "netCents": 0,
+        "vatCents": 0,
+        "goodPrice": true,
+        "retreatId": "fachwerk-apartment",
+        "totalCents": 0,
+        "cleaningFeeCents": 0,
+        "avgNightlyBaseCents": 20000,
+        "giftCardAppliedCents": 27000,
+        "registeredDiscountCents": 0,
+        "avgNightlyEffectiveCents": 13500,
+        "preDiscountSubtotalCents": 40000
+      },
+      "total_cents": 0,
+      "stripe_payment_intent_id": null,
+      "stripe_setup_intent_id": null,
+      "stripe_customer_id": null,
+      "stripe_payment_method_id": null,
+      "locale": "de",
+      "cancellation_days": 10,
+      "demo": false,
+      "created_at": "2026-07-06T12:43:25.375297+00:00",
+      "confirmed_at": "2026-07-06T12:43:25.849+00:00",
+      "cancelled_at": "2026-07-06T12:45:02.12+00:00",
+      "gift_card_id": "ddf58d5c-88bc-4dcc-9f8f-19e9e8f8f3c3",
+      "gift_card_applied_cents": 27000,
+      "payment_attempts": 0
+    },
+    {
+      "id": "f93dad79-4b50-45b9-a295-72034bef812e",
+      "booking_number": "BF-TVQE6R",
+      "retreat_id": "black-forest-penthouse",
+      "user_id": null,
+      "guest_email": "jasinhuber@gmail.com",
+      "guest_name": "Jasin Huber",
+      "check_in": "2026-08-22",
+      "check_out": "2026-08-24",
+      "adults": 2,
+      "children": 0,
+      "infants": 0,
+      "status": "pending",
+      "payment_status": "failed",
+      "payment_timing": "now",
+      "charge_due_date": null,
+      "quote": {
+        "lines": [
+          {
+            "kind": "nights",
+            "label": "",
+            "amountCents": 40000
+          },
+          {
+            "kind": "discount",
+            "label": "Eröffnungsrabatt",
+            "amountCents": -10000
+          }
+        ],
+        "nights": 2,
+        "checkIn": "2026-08-22",
+        "vatRate": 7,
+        "checkOut": "2026-08-24",
+        "currency": "EUR",
+        "netCents": 28037,
+        "vatCents": 1963,
+        "goodPrice": true,
+        "retreatId": "black-forest-penthouse",
+        "totalCents": 30000,
+        "cleaningFeeCents": 0,
+        "avgNightlyBaseCents": 20000,
+        "giftCardAppliedCents": 0,
+        "registeredDiscountCents": 0,
+        "avgNightlyEffectiveCents": 15000,
+        "preDiscountSubtotalCents": 40000
+      },
+      "total_cents": 30000,
+      "stripe_payment_intent_id": "pi_3TqE2NRvEbtv67pL0zF39xrw",
+      "stripe_setup_intent_id": null,
+      "stripe_customer_id": "cus_UptqK1KlGpKqvn",
+      "stripe_payment_method_id": null,
+      "locale": "en",
+      "cancellation_days": 10,
+      "demo": false,
+      "created_at": "2026-07-06T15:02:23.108719+00:00",
+      "confirmed_at": null,
+      "cancelled_at": null,
+      "gift_card_id": null,
+      "gift_card_applied_cents": 0,
+      "payment_attempts": 0
+    },
+    {
+      "id": "0c94a023-7e59-486d-83e9-3c1247f62e84",
+      "booking_number": "BF-6PWR6Q",
+      "retreat_id": "fachwerk-apartment",
+      "user_id": null,
+      "guest_email": "jasinhuber@gmail.com",
+      "guest_name": "Jasin Huber",
+      "check_in": "2026-08-18",
+      "check_out": "2026-08-21",
+      "adults": 2,
+      "children": 0,
+      "infants": 0,
+      "status": "pending",
+      "payment_status": "failed",
+      "payment_timing": "now",
+      "charge_due_date": null,
+      "quote": {
+        "lines": [
+          {
+            "kind": "nights",
+            "label": "",
+            "amountCents": 60000
+          },
+          {
+            "kind": "discount",
+            "label": "Eröffnungsrabatt",
+            "amountCents": -15000
+          },
+          {
+            "kind": "promo",
+            "label": "BFR10",
+            "amountCents": -4500
+          }
+        ],
+        "nights": 3,
+        "checkIn": "2026-08-18",
+        "vatRate": 7,
+        "checkOut": "2026-08-21",
+        "currency": "EUR",
+        "netCents": 37850,
+        "vatCents": 2650,
+        "goodPrice": true,
+        "retreatId": "fachwerk-apartment",
+        "totalCents": 40500,
+        "cleaningFeeCents": 0,
+        "avgNightlyBaseCents": 20000,
+        "giftCardAppliedCents": 0,
+        "registeredDiscountCents": 0,
+        "avgNightlyEffectiveCents": 13500,
+        "preDiscountSubtotalCents": 60000
+      },
+      "total_cents": 40500,
+      "stripe_payment_intent_id": "pi_3TqE5MRvEbtv67pL1Ev72y7L",
+      "stripe_setup_intent_id": null,
+      "stripe_customer_id": "cus_UpttAuiiW2S26M",
+      "stripe_payment_method_id": null,
+      "locale": "en",
+      "cancellation_days": 10,
+      "demo": false,
+      "created_at": "2026-07-06T15:05:28.308838+00:00",
+      "confirmed_at": null,
+      "cancelled_at": null,
+      "gift_card_id": null,
+      "gift_card_applied_cents": 0,
+      "payment_attempts": 0
+    },
+    {
+      "id": "bf6a78ba-1ec7-4bd9-a246-a96a98a4f6a7",
+      "booking_number": "BF-YCUM27",
+      "retreat_id": "black-forest-penthouse",
+      "user_id": "3d0f83a2-eadc-4993-b9c9-5b40f6f22cc2",
+      "guest_email": "nico@huber-zipse.de",
+      "guest_name": "Nico Zipse",
+      "check_in": "2026-08-25",
+      "check_out": "2026-08-27",
+      "adults": 2,
+      "children": 0,
+      "infants": 0,
+      "status": "cancelled",
+      "payment_status": "refunded",
+      "payment_timing": "now",
+      "charge_due_date": null,
+      "quote": {
+        "lines": [
+          {
+            "kind": "nights",
+            "label": "",
+            "amountCents": 40000
+          },
+          {
+            "kind": "discount",
+            "label": "Eröffnungsrabatt",
+            "amountCents": -10000
+          },
+          {
+            "kind": "giftcard",
+            "label": "GIFT-CEP4-X5G9",
+            "amountCents": -29900
+          }
+        ],
+        "nights": 2,
+        "checkIn": "2026-08-25",
+        "vatRate": 7,
+        "checkOut": "2026-08-27",
+        "currency": "EUR",
+        "netCents": 93,
+        "vatCents": 7,
+        "goodPrice": true,
+        "retreatId": "black-forest-penthouse",
+        "totalCents": 100,
+        "cleaningFeeCents": 0,
+        "avgNightlyBaseCents": 20000,
+        "giftCardAppliedCents": 29900,
+        "registeredDiscountCents": 0,
+        "avgNightlyEffectiveCents": 15000,
+        "preDiscountSubtotalCents": 40000
+      },
+      "total_cents": 100,
+      "stripe_payment_intent_id": "pi_3TtNj8RvEbtv67pL0dvLdcz1",
+      "stripe_setup_intent_id": null,
+      "stripe_customer_id": "cus_UtA3gbncrRPVlE",
+      "stripe_payment_method_id": null,
+      "locale": "de",
+      "cancellation_days": 10,
+      "demo": false,
+      "created_at": "2026-07-15T07:59:33.579358+00:00",
+      "confirmed_at": "2026-07-15T08:00:15.541+00:00",
+      "cancelled_at": "2026-07-16T13:45:10.243008+00:00",
+      "gift_card_id": "f50651cc-b7d3-4213-b95a-d367350887c6",
+      "gift_card_applied_cents": 29900,
+      "payment_attempts": 0
+    },
+    {
+      "id": "45585e15-5ac0-4487-8a85-ca64aff0531c",
+      "booking_number": "BF-9MFXKK",
+      "retreat_id": "black-forest-penthouse",
+      "user_id": "3d0f83a2-eadc-4993-b9c9-5b40f6f22cc2",
+      "guest_email": "nico@huber-zipse.de",
+      "guest_name": "Jasin Huber",
+      "check_in": "2026-09-22",
+      "check_out": "2026-09-25",
+      "adults": 2,
+      "children": 0,
+      "infants": 0,
+      "status": "pending",
+      "payment_status": "awaiting_payment",
+      "payment_timing": "later",
+      "charge_due_date": "2026-09-12",
+      "quote": {
+        "lines": [
+          {
+            "kind": "nights",
+            "label": "",
+            "amountCents": 45000
+          },
+          {
+            "kind": "registered",
+            "label": "",
+            "amountCents": -2250
+          }
+        ],
+        "nights": 3,
+        "checkIn": "2026-09-22",
+        "vatRate": 7,
+        "checkOut": "2026-09-25",
+        "currency": "EUR",
+        "netCents": 39953,
+        "vatCents": 2797,
+        "goodPrice": true,
+        "retreatId": "black-forest-penthouse",
+        "totalCents": 42750,
+        "cleaningFeeCents": 0,
+        "avgNightlyBaseCents": 15000,
+        "giftCardAppliedCents": 0,
+        "registeredDiscountCents": 2250,
+        "avgNightlyEffectiveCents": 15000,
+        "preDiscountSubtotalCents": 45000
+      },
+      "total_cents": 42750,
+      "stripe_payment_intent_id": null,
+      "stripe_setup_intent_id": "seti_1TvE7SRvEbtv67pLv7a1W5YR",
+      "stripe_customer_id": "cus_Uv4FxtQnYJ2m3T",
+      "stripe_payment_method_id": null,
+      "locale": "de",
+      "cancellation_days": 10,
+      "demo": false,
+      "created_at": "2026-07-20T10:08:17.837185+00:00",
+      "confirmed_at": null,
+      "cancelled_at": null,
+      "gift_card_id": null,
+      "gift_card_applied_cents": 0,
+      "payment_attempts": 0
+    }
+  ],
+  "invoices": [
+    {
+      "id": "61fe6c0e-a83d-436d-9867-9b51d7bf9031",
+      "invoice_number": "BFR-2026-0001",
+      "booking_id": "9117c6b8-5d85-4454-9947-f1089a070ac1",
+      "kind": "invoice",
+      "references_invoice_id": null,
+      "issued_at": "2026-07-03T13:31:07.079165+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Max Testgast",
+        "email": "max.testgast@example.com"
+      },
+      "line_items": [
+        {
+          "label": "Übernachtung Black Forest Penthouse, 3 Nächte (2026-07-10 bis 2026-07-13)",
+          "quantity": 3,
+          "unitCents": 20000,
+          "totalCents": 60000
+        },
+        {
+          "label": "Rabatt: Eröffnungsrabatt",
+          "quantity": 1,
+          "unitCents": -15000,
+          "totalCents": -15000
+        }
+      ],
+      "net_cents": 42056,
+      "vat_rate": 7,
+      "vat_cents": 2944,
+      "gross_cents": 45000,
+      "service_from": "2026-07-10",
+      "service_to": "2026-07-13",
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0001.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": null
+    },
+    {
+      "id": "a1a14a46-ace6-40c7-80ef-b1e47563c86e",
+      "invoice_number": "BFR-2026-0002",
+      "booking_id": "e931939c-7a51-4e5b-9c1b-28d9730eefa7",
+      "kind": "invoice",
+      "references_invoice_id": null,
+      "issued_at": "2026-07-03T13:47:23.827136+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Jasin Huber",
+        "email": "jasin@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Übernachtung Fachwerk-Apartment, 3 Nächte (2026-08-14 bis 2026-08-17)",
+          "quantity": 3,
+          "unitCents": 20000,
+          "totalCents": 60000
+        },
+        {
+          "label": "Rabatt: Eröffnungsrabatt",
+          "quantity": 1,
+          "unitCents": -15000,
+          "totalCents": -15000
+        }
+      ],
+      "net_cents": 42056,
+      "vat_rate": 7,
+      "vat_cents": 2944,
+      "gross_cents": 45000,
+      "service_from": "2026-08-14",
+      "service_to": "2026-08-17",
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0002.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": null
+    },
+    {
+      "id": "57f411e4-0f29-42b1-9b3d-5c43fde73ff4",
+      "invoice_number": "BFR-2026-0003",
+      "booking_id": "e1dbd0cf-8db6-4c2e-9ed4-c3f71d506da2",
+      "kind": "invoice",
+      "references_invoice_id": null,
+      "issued_at": "2026-07-03T14:06:23.592307+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Jasin Huber",
+        "email": "jasin@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Übernachtung Black Forest Penthouse, 3 Nächte (2026-10-08 bis 2026-10-11)",
+          "quantity": 3,
+          "unitCents": 20000,
+          "totalCents": 60000
+        },
+        {
+          "label": "Rabatt: Eröffnungsrabatt",
+          "quantity": 1,
+          "unitCents": -15000,
+          "totalCents": -15000
+        }
+      ],
+      "net_cents": 42056,
+      "vat_rate": 7,
+      "vat_cents": 2944,
+      "gross_cents": 45000,
+      "service_from": "2026-10-08",
+      "service_to": "2026-10-11",
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0003.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": null
+    },
+    {
+      "id": "ee390fa8-88ba-4bc9-8708-0e2079923688",
+      "invoice_number": "BFR-2026-0004",
+      "booking_id": "aec25842-6699-406a-a38f-0a56aa7c897e",
+      "kind": "invoice",
+      "references_invoice_id": null,
+      "issued_at": "2026-07-06T12:35:10.103034+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Test Gutschein",
+        "email": "jasin@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Übernachtung Fachwerk-Apartment, 2 Nächte (2026-07-27 bis 2026-07-29)",
+          "quantity": 2,
+          "unitCents": 20000,
+          "totalCents": 40000
+        },
+        {
+          "label": "Rabatt: Eröffnungsrabatt",
+          "quantity": 1,
+          "unitCents": -10000,
+          "totalCents": -10000
+        },
+        {
+          "label": "Rabatt: Code BFR10",
+          "quantity": 1,
+          "unitCents": -3000,
+          "totalCents": -3000
+        },
+        {
+          "label": "Gutschein: GIFT-WEAV-M2CZ",
+          "quantity": 1,
+          "unitCents": -5000,
+          "totalCents": -5000
+        }
+      ],
+      "net_cents": 20561,
+      "vat_rate": 7,
+      "vat_cents": 1439,
+      "gross_cents": 22000,
+      "service_from": "2026-07-27",
+      "service_to": "2026-07-29",
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0004.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": null
+    },
+    {
+      "id": "3c8462d4-a95a-4515-8044-10a5b4966284",
+      "invoice_number": "BFR-2026-0005",
+      "booking_id": "aec25842-6699-406a-a38f-0a56aa7c897e",
+      "kind": "storno",
+      "references_invoice_id": "ee390fa8-88ba-4bc9-8708-0e2079923688",
+      "issued_at": "2026-07-06T12:38:42.152314+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Test Gutschein",
+        "email": "jasin@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Storno zu Rechnung BFR-2026-0004 (Interner Test der Gutschein-Funktion) · Fachwerk-Apartment",
+          "quantity": 1,
+          "unitCents": 0,
+          "totalCents": 0
+        },
+        {
+          "label": "Übernachtung Fachwerk-Apartment, 2 Nächte (2026-07-27 bis 2026-07-29)",
+          "quantity": 2,
+          "unitCents": -20000,
+          "totalCents": -40000
+        },
+        {
+          "label": "Rabatt: Eröffnungsrabatt",
+          "quantity": 1,
+          "unitCents": 10000,
+          "totalCents": 10000
+        },
+        {
+          "label": "Rabatt: Code BFR10",
+          "quantity": 1,
+          "unitCents": 3000,
+          "totalCents": 3000
+        },
+        {
+          "label": "Gutschein: GIFT-WEAV-M2CZ",
+          "quantity": 1,
+          "unitCents": 5000,
+          "totalCents": 5000
+        }
+      ],
+      "net_cents": -20561,
+      "vat_rate": 7,
+      "vat_cents": -1439,
+      "gross_cents": -22000,
+      "service_from": "2026-07-27",
+      "service_to": "2026-07-29",
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0005.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": null
+    },
+    {
+      "id": "d8d46ce4-0924-414c-a64e-a27670b13bcb",
+      "invoice_number": "BFR-2026-0006",
+      "booking_id": "6ff77dc3-2351-4f12-ae22-fbe11a734e7b",
+      "kind": "invoice",
+      "references_invoice_id": null,
+      "issued_at": "2026-07-06T12:43:26.219764+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Test Volldeckung",
+        "email": "jasin@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Übernachtung Fachwerk-Apartment, 2 Nächte (2026-07-27 bis 2026-07-29)",
+          "quantity": 2,
+          "unitCents": 20000,
+          "totalCents": 40000
+        },
+        {
+          "label": "Rabatt: Eröffnungsrabatt",
+          "quantity": 1,
+          "unitCents": -10000,
+          "totalCents": -10000
+        },
+        {
+          "label": "Rabatt: Code BFR10",
+          "quantity": 1,
+          "unitCents": -3000,
+          "totalCents": -3000
+        },
+        {
+          "label": "Gutschein: GIFT-6NUU-N2NU",
+          "quantity": 1,
+          "unitCents": -27000,
+          "totalCents": -27000
+        }
+      ],
+      "net_cents": 0,
+      "vat_rate": 7,
+      "vat_cents": 0,
+      "gross_cents": 0,
+      "service_from": "2026-07-27",
+      "service_to": "2026-07-29",
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0006.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": null
+    },
+    {
+      "id": "a1ad6a03-641d-4ee8-99d6-2081ef57cb18",
+      "invoice_number": "BFR-2026-0007",
+      "booking_id": "6ff77dc3-2351-4f12-ae22-fbe11a734e7b",
+      "kind": "storno",
+      "references_invoice_id": "d8d46ce4-0924-414c-a64e-a27670b13bcb",
+      "issued_at": "2026-07-06T12:45:02.795796+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Test Volldeckung",
+        "email": "jasin@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Storno zu Rechnung BFR-2026-0006 (Interner Test der Gutschein-Funktion) · Fachwerk-Apartment",
+          "quantity": 1,
+          "unitCents": 0,
+          "totalCents": 0
+        },
+        {
+          "label": "Übernachtung Fachwerk-Apartment, 2 Nächte (2026-07-27 bis 2026-07-29)",
+          "quantity": 2,
+          "unitCents": -20000,
+          "totalCents": -40000
+        },
+        {
+          "label": "Rabatt: Eröffnungsrabatt",
+          "quantity": 1,
+          "unitCents": 10000,
+          "totalCents": 10000
+        },
+        {
+          "label": "Rabatt: Code BFR10",
+          "quantity": 1,
+          "unitCents": 3000,
+          "totalCents": 3000
+        },
+        {
+          "label": "Gutschein: GIFT-6NUU-N2NU",
+          "quantity": 1,
+          "unitCents": 27000,
+          "totalCents": 27000
+        }
+      ],
+      "net_cents": 0,
+      "vat_rate": 7,
+      "vat_cents": 0,
+      "gross_cents": 0,
+      "service_from": "2026-07-27",
+      "service_to": "2026-07-29",
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0007.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": null
+    },
+    {
+      "id": "84de2129-778f-4a09-853c-653754d89602",
+      "invoice_number": "BFR-2026-0008",
+      "booking_id": null,
+      "kind": "invoice",
+      "references_invoice_id": null,
+      "issued_at": "2026-07-06T16:02:16.473778+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Jasin Huber",
+        "email": "jasin@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Wertgutschein GIFT-WNDE-ZDCR (übertragbar)",
+          "quantity": 1,
+          "unitCents": 100,
+          "totalCents": 100
+        }
+      ],
+      "net_cents": 100,
+      "vat_rate": 0,
+      "vat_cents": 0,
+      "gross_cents": 100,
+      "service_from": null,
+      "service_to": null,
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0008.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": "c8e6fd6b-ce23-4bbd-b274-4e8e82bc4a11"
+    },
+    {
+      "id": "31421363-e898-4eed-a136-3a8e0c7b41fe",
+      "invoice_number": "BFR-2026-0009",
+      "booking_id": null,
+      "kind": "invoice",
+      "references_invoice_id": null,
+      "issued_at": "2026-07-06T16:15:47.213573+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Jasin Huber",
+        "email": "jasin@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Wertgutschein GIFT-UKBB-QEZK (übertragbar)",
+          "quantity": 1,
+          "unitCents": 100,
+          "totalCents": 100
+        }
+      ],
+      "net_cents": 100,
+      "vat_rate": 0,
+      "vat_cents": 0,
+      "gross_cents": 100,
+      "service_from": null,
+      "service_to": null,
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0009.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": "40a3ebbf-7d3d-4b70-a8bf-5ffe2da20657"
+    },
+    {
+      "id": "2fbf6869-b69b-4a41-b205-17a8091a2f3e",
+      "invoice_number": "BFR-2026-0010",
+      "booking_id": null,
+      "kind": "invoice",
+      "references_invoice_id": null,
+      "issued_at": "2026-07-06T16:21:05.568858+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Jasin Huber",
+        "email": "jasin@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Wertgutschein GIFT-NB84-6A8K (übertragbar)",
+          "quantity": 1,
+          "unitCents": 100,
+          "totalCents": 100
+        }
+      ],
+      "net_cents": 100,
+      "vat_rate": 0,
+      "vat_cents": 0,
+      "gross_cents": 100,
+      "service_from": null,
+      "service_to": null,
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0010.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": "2dba95c5-db6d-4be0-b4ef-55eab47a9c34"
+    },
+    {
+      "id": "5e8aba0c-f9e4-4533-b110-0d18a97ea651",
+      "invoice_number": "BFR-2026-0011",
+      "booking_id": null,
+      "kind": "invoice",
+      "references_invoice_id": null,
+      "issued_at": "2026-07-06T16:27:37.066867+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Jasin Huber",
+        "email": "jasin@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Wertgutschein GIFT-UQ5Y-ETX9 (übertragbar, gültig bis 06.07.2029)",
+          "quantity": 1,
+          "unitCents": 100,
+          "totalCents": 100
+        }
+      ],
+      "net_cents": 100,
+      "vat_rate": 0,
+      "vat_cents": 0,
+      "gross_cents": 100,
+      "service_from": null,
+      "service_to": null,
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0011.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": "0d185075-4ed6-40b2-9de8-2a06beda0b23"
+    },
+    {
+      "id": "3ca70818-6a2a-4a31-9b57-473a7a0dfa67",
+      "invoice_number": "BFR-2026-0012",
+      "booking_id": null,
+      "kind": "storno",
+      "references_invoice_id": "5e8aba0c-f9e4-4533-b110-0d18a97ea651",
+      "issued_at": "2026-07-06T16:45:31.129825+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Jasin Huber",
+        "email": "jasin@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Storno zu Rechnung BFR-2026-0011 (Storno durch Betreiber)",
+          "quantity": 1,
+          "unitCents": 0,
+          "totalCents": 0
+        },
+        {
+          "label": "Wertgutschein GIFT-UQ5Y-ETX9 (übertragbar, gültig bis 06.07.2029)",
+          "quantity": 1,
+          "unitCents": -100,
+          "totalCents": -100
+        }
+      ],
+      "net_cents": -100,
+      "vat_rate": 0,
+      "vat_cents": 0,
+      "gross_cents": -100,
+      "service_from": null,
+      "service_to": null,
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0012.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": "0d185075-4ed6-40b2-9de8-2a06beda0b23"
+    },
+    {
+      "id": "8f8dbdfb-752b-4bdf-91f8-7cfa38400f94",
+      "invoice_number": "BFR-2026-0013",
+      "booking_id": null,
+      "kind": "storno",
+      "references_invoice_id": "2fbf6869-b69b-4a41-b205-17a8091a2f3e",
+      "issued_at": "2026-07-06T16:45:31.995711+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Jasin Huber",
+        "email": "jasin@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Storno zu Rechnung BFR-2026-0010 (Storno durch Betreiber)",
+          "quantity": 1,
+          "unitCents": 0,
+          "totalCents": 0
+        },
+        {
+          "label": "Wertgutschein GIFT-NB84-6A8K (übertragbar)",
+          "quantity": 1,
+          "unitCents": -100,
+          "totalCents": -100
+        }
+      ],
+      "net_cents": -100,
+      "vat_rate": 0,
+      "vat_cents": 0,
+      "gross_cents": -100,
+      "service_from": null,
+      "service_to": null,
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0013.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": "2dba95c5-db6d-4be0-b4ef-55eab47a9c34"
+    },
+    {
+      "id": "4e1424bd-a9ba-46c7-93ca-30029d46080f",
+      "invoice_number": "BFR-2026-0014",
+      "booking_id": null,
+      "kind": "storno",
+      "references_invoice_id": "31421363-e898-4eed-a136-3a8e0c7b41fe",
+      "issued_at": "2026-07-06T16:45:32.95301+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Jasin Huber",
+        "email": "jasin@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Storno zu Rechnung BFR-2026-0009 (Storno durch Betreiber)",
+          "quantity": 1,
+          "unitCents": 0,
+          "totalCents": 0
+        },
+        {
+          "label": "Wertgutschein GIFT-UKBB-QEZK (übertragbar)",
+          "quantity": 1,
+          "unitCents": -100,
+          "totalCents": -100
+        }
+      ],
+      "net_cents": -100,
+      "vat_rate": 0,
+      "vat_cents": 0,
+      "gross_cents": -100,
+      "service_from": null,
+      "service_to": null,
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0014.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": "40a3ebbf-7d3d-4b70-a8bf-5ffe2da20657"
+    },
+    {
+      "id": "086a1925-3b68-4c76-b270-c6f5b48806fb",
+      "invoice_number": "BFR-2026-0015",
+      "booking_id": null,
+      "kind": "storno",
+      "references_invoice_id": "84de2129-778f-4a09-853c-653754d89602",
+      "issued_at": "2026-07-06T16:45:34.187631+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Jasin Huber",
+        "email": "jasin@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Storno zu Rechnung BFR-2026-0008 (Storno durch Betreiber)",
+          "quantity": 1,
+          "unitCents": 0,
+          "totalCents": 0
+        },
+        {
+          "label": "Wertgutschein GIFT-WNDE-ZDCR (übertragbar)",
+          "quantity": 1,
+          "unitCents": -100,
+          "totalCents": -100
+        }
+      ],
+      "net_cents": -100,
+      "vat_rate": 0,
+      "vat_cents": 0,
+      "gross_cents": -100,
+      "service_from": null,
+      "service_to": null,
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0015.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": "c8e6fd6b-ce23-4bbd-b274-4e8e82bc4a11"
+    },
+    {
+      "id": "bf20a6ff-5e5d-46ff-9cd3-262a38a46bc2",
+      "invoice_number": "BFR-2026-0016",
+      "booking_id": null,
+      "kind": "invoice",
+      "references_invoice_id": null,
+      "issued_at": "2026-07-15T07:53:12.940874+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Nico Zipse",
+        "email": "nico@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Wertgutschein GIFT-W9MQ-PR4K (übertragbar, gültig bis 15.07.2029)",
+          "quantity": 1,
+          "unitCents": 100,
+          "totalCents": 100
+        }
+      ],
+      "net_cents": 100,
+      "vat_rate": 0,
+      "vat_cents": 0,
+      "gross_cents": 100,
+      "service_from": null,
+      "service_to": null,
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0016.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": "b1adeb2c-3656-4be7-94db-68e5782a6aca"
+    },
+    {
+      "id": "f07e4c21-83a4-417a-8dde-96d84d026ccd",
+      "invoice_number": "BFR-2026-0017",
+      "booking_id": "bf6a78ba-1ec7-4bd9-a246-a96a98a4f6a7",
+      "kind": "invoice",
+      "references_invoice_id": null,
+      "issued_at": "2026-07-15T08:00:15.585297+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "",
+        "phone": "",
+        "vatId": "",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Nico Zipse",
+        "email": "nico@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Übernachtung Black Forest Penthouse, 2 Nächte (2026-08-25 bis 2026-08-27)",
+          "quantity": 2,
+          "unitCents": 20000,
+          "totalCents": 40000
+        },
+        {
+          "label": "Rabatt: Eröffnungsrabatt",
+          "quantity": 1,
+          "unitCents": -10000,
+          "totalCents": -10000
+        },
+        {
+          "label": "Gutschein: GIFT-CEP4-X5G9",
+          "quantity": 1,
+          "unitCents": -29900,
+          "totalCents": -29900
+        }
+      ],
+      "net_cents": 93,
+      "vat_rate": 7,
+      "vat_cents": 7,
+      "gross_cents": 100,
+      "service_from": "2026-08-25",
+      "service_to": "2026-08-27",
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0017.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": null
+    },
+    {
+      "id": "6319e2e8-7dd1-4f57-b4fa-68b36ebf09b3",
+      "invoice_number": "BFR-2026-0018",
+      "booking_id": null,
+      "kind": "invoice",
+      "references_invoice_id": null,
+      "issued_at": "2026-07-20T10:10:39.090904+00:00",
+      "issuer": {
+        "name": "Axiecentro Germany GmbH",
+        "email": "rentals@axiecentro.de",
+        "phone": "+49 7082 944 39 73",
+        "vatId": "DE259102969",
+        "address": "Hockenheimer Straße 6\n68723 Oftersheim\nDeutschland",
+        "register": "Amtsgericht Mannheim, HRB 719866",
+        "managingDirector": "Tom Thiel"
+      },
+      "recipient": {
+        "name": "Huber",
+        "email": "jasin@huber-zipse.de"
+      },
+      "line_items": [
+        {
+          "label": "Wertgutschein GIFT-2KJW-WQXN (übertragbar, gültig bis 20.07.2029)",
+          "quantity": 1,
+          "unitCents": 100,
+          "totalCents": 100
+        }
+      ],
+      "net_cents": 100,
+      "vat_rate": 0,
+      "vat_cents": 0,
+      "gross_cents": 100,
+      "service_from": null,
+      "service_to": null,
+      "pdf_locale": "de",
+      "pdf_path": "BFR-2026-0018.pdf",
+      "voided": false,
+      "void_reason": "",
+      "gift_card_id": "d01856de-6049-4598-b0c8-10ba1d0d479d"
+    }
+  ],
+  "gift_cards": [
+    {
+      "id": "e3a03765-60ec-4c1a-b673-4a3a167ec1ff",
+      "code": "GIFT-WEAV-M2CZ",
+      "amount_cents": 5000,
+      "balance_cents": 0,
+      "currency": "EUR",
+      "buyer_name": "Jasin Huber",
+      "buyer_email": "jasin@huber-zipse.de",
+      "recipient_name": "Anna Beispiel",
+      "message": "Ein Wochenende Tannen statt Termine. Alles Gute zum Geburtstag!",
+      "status": "redeemed",
+      "stripe_payment_intent_id": "pi_3TqBdh2LlJ4MmAGt1yefVFqr",
+      "download_token": "82d577ed-53ff-4002-bec4-6a20c4d16066",
+      "element_icon": "hut",
+      "locale": "de",
+      "demo": false,
+      "created_at": "2026-07-06T12:28:43.802088+00:00",
+      "paid_at": "2026-07-06T12:31:06.422+00:00",
+      "expires_at": "2029-07-06T12:31:06.422+00:00",
+      "source": "purchase"
+    },
+    {
+      "id": "ddf58d5c-88bc-4dcc-9f8f-19e9e8f8f3c3",
+      "code": "GIFT-6NUU-N2NU",
+      "amount_cents": 50000,
+      "balance_cents": 0,
+      "currency": "EUR",
+      "buyer_name": "Jasin Huber",
+      "buyer_email": "jasin@huber-zipse.de",
+      "recipient_name": "Volldeckung Test",
+      "message": null,
+      "status": "cancelled",
+      "stripe_payment_intent_id": "pi_3TqBpd2LlJ4MmAGt0BTwPUWp",
+      "download_token": "15c114db-f006-49ea-adf6-c086f45f306a",
+      "element_icon": "hut",
+      "locale": "de",
+      "demo": false,
+      "created_at": "2026-07-06T12:41:05.145835+00:00",
+      "paid_at": "2026-07-06T12:41:43.124+00:00",
+      "expires_at": "2029-07-06T12:41:43.124+00:00",
+      "source": "purchase"
+    },
+    {
+      "id": "89455fd8-07ce-4aaf-bfb0-e1c02bfd5680",
+      "code": "GIFT-N8VT-Z7UD",
+      "amount_cents": 5000,
+      "balance_cents": 5000,
+      "currency": "EUR",
+      "buyer_name": "Jasin Huber",
+      "buyer_email": "jasinhuber@gmail.com",
+      "recipient_name": "Mark Gössel",
+      "message": "Liebe Grüsse aus dem Schwarzwald",
+      "status": "pending",
+      "stripe_payment_intent_id": "pi_3TqE3vRvEbtv67pL1agBqKRi",
+      "download_token": "72a3ebde-6493-46c4-8ce1-0e9db63ffbb7",
+      "element_icon": "uhr",
+      "locale": "en",
+      "demo": false,
+      "created_at": "2026-07-06T15:03:58.752642+00:00",
+      "paid_at": null,
+      "expires_at": null,
+      "source": "purchase"
+    },
+    {
+      "id": "14d5f6e5-212a-404f-b6e8-06f10457c646",
+      "code": "GIFT-FHVT-SGCC",
+      "amount_cents": 100,
+      "balance_cents": 100,
+      "currency": "EUR",
+      "buyer_name": "Jasin Hüber",
+      "buyer_email": "jasinhuber@gmail.com",
+      "recipient_name": "Nicolos Zipsi",
+      "message": "LG aus dem Schwarzwald",
+      "status": "active",
+      "stripe_payment_intent_id": "pi_3TqEFnRvEbtv67pL09mR9C4E",
+      "download_token": "2c7fc3a7-0f4c-4b50-9deb-b783eba6d916",
+      "element_icon": "kirschtorte",
+      "locale": "de",
+      "demo": false,
+      "created_at": "2026-07-06T15:16:15.148252+00:00",
+      "paid_at": "2026-07-06T15:17:07.588+00:00",
+      "expires_at": "2029-07-06T15:17:07.588+00:00",
+      "source": "purchase"
+    },
+    {
+      "id": "c8e6fd6b-ce23-4bbd-b274-4e8e82bc4a11",
+      "code": "GIFT-WNDE-ZDCR",
+      "amount_cents": 100,
+      "balance_cents": 100,
+      "currency": "EUR",
+      "buyer_name": "Jasin Huber",
+      "buyer_email": "jasin@huber-zipse.de",
+      "recipient_name": "Rechnung Test",
+      "message": null,
+      "status": "cancelled",
+      "stripe_payment_intent_id": "pi_3TqEv72LlJ4MmAGt1ILGbKbS",
+      "download_token": "de9e7c3f-80a8-408d-b9d9-1d3f79a7e937",
+      "element_icon": "hut",
+      "locale": "de",
+      "demo": false,
+      "created_at": "2026-07-06T15:58:57.012684+00:00",
+      "paid_at": "2026-07-06T16:02:15.492+00:00",
+      "expires_at": "2029-07-06T16:02:15.492+00:00",
+      "source": "purchase"
+    },
+    {
+      "id": "40a3ebbf-7d3d-4b70-a8bf-5ffe2da20657",
+      "code": "GIFT-UKBB-QEZK",
+      "amount_cents": 100,
+      "balance_cents": 100,
+      "currency": "EUR",
+      "buyer_name": "Jasin Huber",
+      "buyer_email": "jasin@huber-zipse.de",
+      "recipient_name": "Verify Zwei",
+      "message": null,
+      "status": "cancelled",
+      "stripe_payment_intent_id": "pi_3TqF9O2LlJ4MmAGt1V1flgKe",
+      "download_token": "975a851b-a419-418e-9204-6b702d0916d1",
+      "element_icon": "hut",
+      "locale": "de",
+      "demo": false,
+      "created_at": "2026-07-06T16:13:39.764227+00:00",
+      "paid_at": "2026-07-06T16:15:46.273+00:00",
+      "expires_at": "2029-07-06T16:15:46.273+00:00",
+      "source": "purchase"
+    },
+    {
+      "id": "2dba95c5-db6d-4be0-b4ef-55eab47a9c34",
+      "code": "GIFT-NB84-6A8K",
+      "amount_cents": 100,
+      "balance_cents": 100,
+      "currency": "EUR",
+      "buyer_name": "Jasin Huber",
+      "buyer_email": "jasin@huber-zipse.de",
+      "recipient_name": "Verify Drei",
+      "message": null,
+      "status": "cancelled",
+      "stripe_payment_intent_id": "pi_3TqFFb2LlJ4MmAGt1JtyB1Lp",
+      "download_token": "5ad68003-c3ac-4bef-9a88-9f2d5cff56a1",
+      "element_icon": "hut",
+      "locale": "de",
+      "demo": false,
+      "created_at": "2026-07-06T16:20:06.248078+00:00",
+      "paid_at": "2026-07-06T16:21:04.565+00:00",
+      "expires_at": "2029-07-06T16:21:04.565+00:00",
+      "source": "purchase"
+    },
+    {
+      "id": "0d185075-4ed6-40b2-9de8-2a06beda0b23",
+      "code": "GIFT-UQ5Y-ETX9",
+      "amount_cents": 100,
+      "balance_cents": 100,
+      "currency": "EUR",
+      "buyer_name": "Jasin Huber",
+      "buyer_email": "jasin@huber-zipse.de",
+      "recipient_name": "Verify Vier",
+      "message": null,
+      "status": "cancelled",
+      "stripe_payment_intent_id": "pi_3TqFLF2LlJ4MmAGt0IHevVpy",
+      "download_token": "ecf9ffcf-3fd3-4fbd-a88a-b7ef6416d8ec",
+      "element_icon": "hut",
+      "locale": "de",
+      "demo": false,
+      "created_at": "2026-07-06T16:25:56.660226+00:00",
+      "paid_at": "2026-07-06T16:27:36.34+00:00",
+      "expires_at": "2029-07-06T16:27:36.34+00:00",
+      "source": "purchase"
+    },
+    {
+      "id": "469fa779-f18b-4d63-9c38-35e4086c3ec0",
+      "code": "GIFT-UNF3-Q2JW",
+      "amount_cents": 100,
+      "balance_cents": 100,
+      "currency": "EUR",
+      "buyer_name": "Nico Zipse",
+      "buyer_email": "nico@huber-zipse.de",
+      "recipient_name": "Jasin Huber",
+      "message": null,
+      "status": "pending",
+      "stripe_payment_intent_id": "pi_3Tt7j8RvEbtv67pL1Worj7Km",
+      "download_token": "63df18ef-2e73-4bab-a876-7364fe703cc9",
+      "element_icon": "hut",
+      "locale": "de",
+      "demo": false,
+      "created_at": "2026-07-14T14:54:29.987645+00:00",
+      "paid_at": null,
+      "expires_at": null,
+      "source": "purchase"
+    },
+    {
+      "id": "b1adeb2c-3656-4be7-94db-68e5782a6aca",
+      "code": "GIFT-W9MQ-PR4K",
+      "amount_cents": 100,
+      "balance_cents": 100,
+      "currency": "EUR",
+      "buyer_name": "Nico Zipse",
+      "buyer_email": "nico@huber-zipse.de",
+      "recipient_name": "Jasin Huber",
+      "message": "Test",
+      "status": "active",
+      "stripe_payment_intent_id": "pi_3TtNchRvEbtv67pL0QUEdbfs",
+      "download_token": "3430aca9-6116-4aa3-a5db-5619aef472ad",
+      "element_icon": "hut",
+      "locale": "de",
+      "demo": false,
+      "created_at": "2026-07-15T07:52:54.918443+00:00",
+      "paid_at": "2026-07-15T07:53:12.908+00:00",
+      "expires_at": "2029-07-15T07:53:12.908+00:00",
+      "source": "purchase"
+    },
+    {
+      "id": "0e05ebeb-bdb1-49f8-b42e-fdca57c30051",
+      "code": "GIFT-NHEE-E9B2",
+      "amount_cents": 29900,
+      "balance_cents": 29900,
+      "currency": "EUR",
+      "buyer_name": "Black Forest Retreats",
+      "buyer_email": "kein-versand@blackforest-retreats.de",
+      "recipient_name": "Nico Zipse",
+      "message": null,
+      "status": "cancelled",
+      "stripe_payment_intent_id": null,
+      "download_token": "8b06a4c6-fa07-4fd5-a0af-e86ffe887b91",
+      "element_icon": "uhr",
+      "locale": "de",
+      "demo": false,
+      "created_at": "2026-07-15T07:57:37.574309+00:00",
+      "paid_at": "2026-07-15T07:57:37.191+00:00",
+      "expires_at": "2029-07-15T07:57:37.191+00:00",
+      "source": "admin"
+    },
+    {
+      "id": "f50651cc-b7d3-4213-b95a-d367350887c6",
+      "code": "GIFT-CEP4-X5G9",
+      "amount_cents": 29900,
+      "balance_cents": 0,
+      "currency": "EUR",
+      "buyer_name": "Black Forest Retreats",
+      "buyer_email": "nico@huber-zipse.de",
+      "recipient_name": "test",
+      "message": null,
+      "status": "redeemed",
+      "stripe_payment_intent_id": null,
+      "download_token": "ae8bc13c-49fb-4b7e-bb36-e9c116027057",
+      "element_icon": "uhr",
+      "locale": "de",
+      "demo": false,
+      "created_at": "2026-07-15T07:57:59.181714+00:00",
+      "paid_at": "2026-07-15T07:57:59.168+00:00",
+      "expires_at": "2029-07-15T07:57:59.168+00:00",
+      "source": "admin"
+    },
+    {
+      "id": "d01856de-6049-4598-b0c8-10ba1d0d479d",
+      "code": "GIFT-2KJW-WQXN",
+      "amount_cents": 100,
+      "balance_cents": 100,
+      "currency": "EUR",
+      "buyer_name": "Huber",
+      "buyer_email": "jasin@huber-zipse.de",
+      "recipient_name": "Jasin",
+      "message": "Für Jasin von Huber",
+      "status": "active",
+      "stripe_payment_intent_id": "pi_3TvE8eRvEbtv67pL0YS2br9g",
+      "download_token": "bbe303d2-ef1f-4e54-8215-4d274b94e3d3",
+      "element_icon": "schinken",
+      "locale": "de",
+      "demo": false,
+      "created_at": "2026-07-20T10:09:31.758501+00:00",
+      "paid_at": "2026-07-20T10:10:39.027+00:00",
+      "expires_at": "2029-07-20T10:10:39.027+00:00",
+      "source": "purchase"
+    }
+  ],
+  "gift_card_redemptions": [
+    {
+      "id": "c5e69ac3-3066-4d82-abe8-0749c2e9818d",
+      "gift_card_id": "e3a03765-60ec-4c1a-b673-4a3a167ec1ff",
+      "booking_id": "aec25842-6699-406a-a38f-0a56aa7c897e",
+      "amount_cents": 5000,
+      "created_at": "2026-07-06T12:35:09.967814+00:00"
+    },
+    {
+      "id": "ef309d6d-2f0f-4d4a-9284-7971072a1995",
+      "gift_card_id": "ddf58d5c-88bc-4dcc-9f8f-19e9e8f8f3c3",
+      "booking_id": "6ff77dc3-2351-4f12-ae22-fbe11a734e7b",
+      "amount_cents": 27000,
+      "created_at": "2026-07-06T12:43:26.048314+00:00"
+    },
+    {
+      "id": "a89e0aa2-8ae1-46e0-8109-1cbb2e7d6c65",
+      "gift_card_id": "f50651cc-b7d3-4213-b95a-d367350887c6",
+      "booking_id": "bf6a78ba-1ec7-4bd9-a246-a96a98a4f6a7",
+      "amount_cents": 29900,
+      "created_at": "2026-07-15T08:00:15.567875+00:00"
+    }
+  ],
+  "availability_blocks_booking": [
+    {
+      "id": "dbdc3b86-1282-4f40-863d-2e60eb91129d",
+      "retreat_id": "black-forest-penthouse",
+      "start_date": "2026-07-10",
+      "end_date": "2026-07-13",
+      "source": "booking",
+      "booking_id": "9117c6b8-5d85-4454-9947-f1089a070ac1",
+      "external_uid": null,
+      "note": "",
+      "created_at": "2026-07-03T13:30:33.961874+00:00"
+    },
+    {
+      "id": "34e6af1a-48d4-479b-a9e8-2f8fade3696d",
+      "retreat_id": "black-forest-penthouse",
+      "start_date": "2026-07-15",
+      "end_date": "2026-07-25",
+      "source": "booking",
+      "booking_id": "2a867a1b-764f-45b8-b254-b50938d70c27",
+      "external_uid": null,
+      "note": "",
+      "created_at": "2026-07-03T13:40:11.590156+00:00"
+    },
+    {
+      "id": "2427c580-064d-4303-b542-06795988c162",
+      "retreat_id": "black-forest-penthouse",
+      "start_date": "2026-08-11",
+      "end_date": "2026-08-15",
+      "source": "booking",
+      "booking_id": "fbaf2ee4-12cf-4990-bd51-53e466ba5501",
+      "external_uid": null,
+      "note": "",
+      "created_at": "2026-07-03T14:51:11.792561+00:00"
+    },
+    {
+      "id": "a0e3c922-2560-46cc-8f62-3dd6950d5c60",
+      "retreat_id": "fachwerk-apartment",
+      "start_date": "2026-08-18",
+      "end_date": "2026-08-21",
+      "source": "booking",
+      "booking_id": "0c94a023-7e59-486d-83e9-3c1247f62e84",
+      "external_uid": null,
+      "note": "",
+      "created_at": "2026-07-06T15:05:28.31617+00:00"
+    },
+    {
+      "id": "412546f1-379d-401c-8e65-01ed94fd609f",
+      "retreat_id": "black-forest-penthouse",
+      "start_date": "2026-08-19",
+      "end_date": "2026-08-22",
+      "source": "booking",
+      "booking_id": "e8087102-665f-4adb-ba0b-f48c2f1eddb9",
+      "external_uid": null,
+      "note": "",
+      "created_at": "2026-07-03T15:39:37.306489+00:00"
+    },
+    {
+      "id": "66058425-dfc3-45ec-9033-c3726f0b0134",
+      "retreat_id": "black-forest-penthouse",
+      "start_date": "2026-08-22",
+      "end_date": "2026-08-24",
+      "source": "booking",
+      "booking_id": "f93dad79-4b50-45b9-a295-72034bef812e",
+      "external_uid": null,
+      "note": "",
+      "created_at": "2026-07-06T15:02:23.116057+00:00"
+    },
+    {
+      "id": "6c385270-1e26-4005-a33a-77784b5d2e7b",
+      "retreat_id": "black-forest-penthouse",
+      "start_date": "2026-09-10",
+      "end_date": "2026-09-13",
+      "source": "booking",
+      "booking_id": "fa25684b-705a-4838-8bf1-1b3570acf37f",
+      "external_uid": null,
+      "note": "",
+      "created_at": "2026-07-03T14:03:52.581527+00:00"
+    },
+    {
+      "id": "d1d2ffea-a710-474d-8bd8-afa1cbb89a34",
+      "retreat_id": "black-forest-penthouse",
+      "start_date": "2026-09-22",
+      "end_date": "2026-09-25",
+      "source": "booking",
+      "booking_id": "45585e15-5ac0-4487-8a85-ca64aff0531c",
+      "external_uid": null,
+      "note": "",
+      "created_at": "2026-07-20T10:08:17.843849+00:00"
+    },
+    {
+      "id": "f45cddf0-ffce-4ace-b2ca-9f78be0267ff",
+      "retreat_id": "black-forest-penthouse",
+      "start_date": "2026-10-08",
+      "end_date": "2026-10-11",
+      "source": "booking",
+      "booking_id": "e1dbd0cf-8db6-4c2e-9ed4-c3f71d506da2",
+      "external_uid": null,
+      "note": "",
+      "created_at": "2026-07-03T14:05:42.206735+00:00"
+    }
+  ],
+  "email_log_booking_and_gift": [
+    {
+      "id": "bc36f5f2-0123-4cb1-87f6-8f2d50dc45d1",
+      "booking_id": "9117c6b8-5d85-4454-9947-f1089a070ac1",
+      "to_email": "max.testgast@example.com",
+      "subject": "Deine Buchung BF-UYEZER ist bestätigt",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Max Testgast,</p>\n    <p style=\"margin:12px 0 24px;\">schön, dass du direkt bei uns buchst. Hier ist alles auf einen Blick:</p>\n    <h2 style=\"margin:0 0 6px;color:#1b2a21;font-size:20px;\">Black Forest Penthouse</h2>\n    <div style=\"color:#c9a96a;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;\">Buchungsnummer: BF-UYEZER</div>\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Zeitraum</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">10. Juli 2026 → 13. Juli 2026</td>\n  </tr>\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gäste</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">2 Gäste</td>\n  </tr>\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gesamtbetrag</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">450 €</td>\n  </tr>\n    </table>\n    \n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "demo",
+      "provider_id": "",
+      "created_at": "2026-07-03T13:31:07.617174+00:00"
+    },
+    {
+      "id": "1cc329c5-a679-43d9-9ff9-21196358884c",
+      "booking_id": "9117c6b8-5d85-4454-9947-f1089a070ac1",
+      "to_email": "max.testgast@example.com",
+      "subject": "Deine Rechnung zur Buchung BF-UYEZER",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Max Testgast,</p>\n    <p style=\"margin:12px 0 24px;\">anbei findest du deine Rechnung als PDF. Danke für deine Buchung.</p>\n    <h2 style=\"margin:0 0 6px;color:#1b2a21;font-size:20px;\">Black Forest Penthouse</h2>\n    <div style=\"color:#c9a96a;font-size:12px;letter-spacing:2px;text-transform:uppercase;\">Buchungsnummer: BF-UYEZER</div>\n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "demo",
+      "provider_id": "",
+      "created_at": "2026-07-03T13:31:07.675076+00:00"
+    },
+    {
+      "id": "be6c3fd1-f1ca-4c83-b986-78afc61f75bd",
+      "booking_id": "e931939c-7a51-4e5b-9c1b-28d9730eefa7",
+      "to_email": "jasin@huber-zipse.de",
+      "subject": "Deine Buchung BF-3Y73V4 ist bestätigt",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Jasin Huber,</p>\n    <p style=\"margin:12px 0 24px;\">schön, dass du direkt bei uns buchst. Hier ist alles auf einen Blick:</p>\n    <h2 style=\"margin:0 0 6px;color:#1b2a21;font-size:20px;\">Fachwerk-Apartment</h2>\n    <div style=\"color:#c9a96a;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;\">Buchungsnummer: BF-3Y73V4</div>\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Zeitraum</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">14. August 2026 → 17. August 2026</td>\n  </tr>\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gäste</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">2 Gäste</td>\n  </tr>\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gesamtbetrag</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">450 €</td>\n  </tr>\n    </table>\n    \n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "047bef47-4929-4160-8800-1dd05267bfbc",
+      "created_at": "2026-07-03T13:47:24.607458+00:00"
+    },
+    {
+      "id": "41f7fed1-f456-40bd-9fc6-2cb98c1c7f69",
+      "booking_id": "e931939c-7a51-4e5b-9c1b-28d9730eefa7",
+      "to_email": "jasin@huber-zipse.de",
+      "subject": "Deine Rechnung zur Buchung BF-3Y73V4",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Jasin Huber,</p>\n    <p style=\"margin:12px 0 24px;\">anbei findest du deine Rechnung als PDF. Danke für deine Buchung.</p>\n    <h2 style=\"margin:0 0 6px;color:#1b2a21;font-size:20px;\">Fachwerk-Apartment</h2>\n    <div style=\"color:#c9a96a;font-size:12px;letter-spacing:2px;text-transform:uppercase;\">Buchungsnummer: BF-3Y73V4</div>\n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "043c6323-aaed-4b5e-a034-232d89a210b1",
+      "created_at": "2026-07-03T13:47:24.89005+00:00"
+    },
+    {
+      "id": "2c60d622-fa53-4726-8798-60444b6f1b3b",
+      "booking_id": "e1dbd0cf-8db6-4c2e-9ed4-c3f71d506da2",
+      "to_email": "jasin@huber-zipse.de",
+      "subject": "Deine Buchung BF-64KKYK ist bestätigt",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Jasin Huber,</p>\n    <p style=\"margin:12px 0 24px;\">schön, dass du direkt bei uns buchst. Hier ist alles auf einen Blick:</p>\n    <h2 style=\"margin:0 0 6px;color:#1b2a21;font-size:20px;\">Black Forest Penthouse</h2>\n    <div style=\"color:#c9a96a;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;\">Buchungsnummer: BF-64KKYK</div>\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Zeitraum</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">8. Oktober 2026 → 11. Oktober 2026</td>\n  </tr>\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gäste</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">2 Gäste</td>\n  </tr>\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gesamtbetrag</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">450 €</td>\n  </tr>\n    </table>\n    \n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "a0696330-d49a-4950-b145-b6b0ee53a356",
+      "created_at": "2026-07-03T14:06:24.7589+00:00"
+    },
+    {
+      "id": "e365cb01-772b-4632-bca9-9d972f238005",
+      "booking_id": "e1dbd0cf-8db6-4c2e-9ed4-c3f71d506da2",
+      "to_email": "jasin@huber-zipse.de",
+      "subject": "Deine Rechnung zur Buchung BF-64KKYK",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Jasin Huber,</p>\n    <p style=\"margin:12px 0 24px;\">anbei findest du deine Rechnung als PDF. Danke für deine Buchung.</p>\n    <h2 style=\"margin:0 0 6px;color:#1b2a21;font-size:20px;\">Black Forest Penthouse</h2>\n    <div style=\"color:#c9a96a;font-size:12px;letter-spacing:2px;text-transform:uppercase;\">Buchungsnummer: BF-64KKYK</div>\n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "b411577e-86e9-4f70-8653-cea6364a1e64",
+      "created_at": "2026-07-03T14:06:25.077639+00:00"
+    },
+    {
+      "id": "eaba0e70-3f9d-4ccd-89a7-95559ec9e747",
+      "booking_id": null,
+      "to_email": "jasin@huber-zipse.de",
+      "subject": "Dein Gutschein GIFT-WEAV-M2CZ · Black Forest Retreats",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Jasin Huber,</p>\n    <p style=\"margin:12px 0 24px;\">dein Gutschein für Anna Beispiel ist bezahlt und hängt als PDF an dieser E-Mail. Ausdrucken, verschenken, freuen.</p>\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Code</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">GIFT-WEAV-M2CZ</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Wert</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">50 €</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gültig bis</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">6. Juli 2029</td>\n  </tr></table>\n    <p style=\"margin:18px 0 0;padding:12px 16px;background:rgba(201,169,106,.15);border-radius:4px;\">Einlösen: Bei der Buchung auf blackforest-retreats.de den Code ins Codefeld eingeben. Restguthaben bleibt auf dem Code.</p>\n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "21822c70-fe75-4701-8e6d-7192867922d8",
+      "created_at": "2026-07-06T12:31:07.587319+00:00"
+    },
+    {
+      "id": "bf28044b-bd29-4ccb-a876-7822878dfe49",
+      "booking_id": "aec25842-6699-406a-a38f-0a56aa7c897e",
+      "to_email": "jasin@huber-zipse.de",
+      "subject": "Deine Buchung BF-Z2ZJ3Y ist bestätigt",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Test Gutschein,</p>\n    <p style=\"margin:12px 0 24px;\">schön, dass du direkt bei uns buchst. Hier ist alles auf einen Blick:</p>\n    <h2 style=\"margin:0 0 6px;color:#1b2a21;font-size:20px;\">Fachwerk-Apartment</h2>\n    <div style=\"color:#c9a96a;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;\">Buchungsnummer: BF-Z2ZJ3Y</div>\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Zeitraum</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">27. Juli 2026 → 29. Juli 2026</td>\n  </tr>\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gäste</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">2 Gäste</td>\n  </tr>\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gesamtbetrag</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">220 €</td>\n  </tr>\n    </table>\n    \n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "62113c3b-f41e-40dd-ad9a-10d27f779668",
+      "created_at": "2026-07-06T12:35:11.027515+00:00"
+    },
+    {
+      "id": "55248f22-e20f-4174-9ad6-745dfb5cc502",
+      "booking_id": "aec25842-6699-406a-a38f-0a56aa7c897e",
+      "to_email": "jasin@huber-zipse.de",
+      "subject": "Deine Rechnung zur Buchung BF-Z2ZJ3Y",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Test Gutschein,</p>\n    <p style=\"margin:12px 0 24px;\">anbei findest du deine Rechnung als PDF. Danke für deine Buchung.</p>\n    <h2 style=\"margin:0 0 6px;color:#1b2a21;font-size:20px;\">Fachwerk-Apartment</h2>\n    <div style=\"color:#c9a96a;font-size:12px;letter-spacing:2px;text-transform:uppercase;\">Buchungsnummer: BF-Z2ZJ3Y</div>\n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "37f2aa4a-c7c0-446d-9d90-58757a85b968",
+      "created_at": "2026-07-06T12:35:11.315231+00:00"
+    },
+    {
+      "id": "f3830e38-0fac-4d50-b5c3-3d83b7052c74",
+      "booking_id": null,
+      "to_email": "jasin@huber-zipse.de",
+      "subject": "Dein Gutschein GIFT-6NUU-N2NU · Black Forest Retreats",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Jasin Huber,</p>\n    <p style=\"margin:12px 0 24px;\">dein Gutschein für Volldeckung Test ist bezahlt und hängt als PDF an dieser E-Mail. Ausdrucken, verschenken, freuen.</p>\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Code</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">GIFT-6NUU-N2NU</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Wert</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">500 €</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gültig bis</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">6. Juli 2029</td>\n  </tr></table>\n    <p style=\"margin:18px 0 0;padding:12px 16px;background:rgba(201,169,106,.15);border-radius:4px;\">Einlösen: Bei der Buchung auf blackforest-retreats.de den Code ins Codefeld eingeben. Restguthaben bleibt auf dem Code.</p>\n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "d2745a84-7b89-499e-a69e-a1fd0f09ff97",
+      "created_at": "2026-07-06T12:41:44.140846+00:00"
+    },
+    {
+      "id": "bb8c814c-87e8-4ebb-87bc-5fb8028d627d",
+      "booking_id": "6ff77dc3-2351-4f12-ae22-fbe11a734e7b",
+      "to_email": "jasin@huber-zipse.de",
+      "subject": "Deine Buchung BF-FGTWRT ist bestätigt",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Test Volldeckung,</p>\n    <p style=\"margin:12px 0 24px;\">schön, dass du direkt bei uns buchst. Hier ist alles auf einen Blick:</p>\n    <h2 style=\"margin:0 0 6px;color:#1b2a21;font-size:20px;\">Fachwerk-Apartment</h2>\n    <div style=\"color:#c9a96a;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;\">Buchungsnummer: BF-FGTWRT</div>\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Zeitraum</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">27. Juli 2026 → 29. Juli 2026</td>\n  </tr>\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gäste</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">2 Gäste</td>\n  </tr>\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gesamtbetrag</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">0 €</td>\n  </tr>\n    </table>\n    \n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "49df4679-3037-4769-b508-8f8b3d26c1e3",
+      "created_at": "2026-07-06T12:43:27.021226+00:00"
+    },
+    {
+      "id": "357da70b-ff6a-4235-bdf7-57bd33c548df",
+      "booking_id": "6ff77dc3-2351-4f12-ae22-fbe11a734e7b",
+      "to_email": "jasin@huber-zipse.de",
+      "subject": "Deine Rechnung zur Buchung BF-FGTWRT",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Test Volldeckung,</p>\n    <p style=\"margin:12px 0 24px;\">anbei findest du deine Rechnung als PDF. Danke für deine Buchung.</p>\n    <h2 style=\"margin:0 0 6px;color:#1b2a21;font-size:20px;\">Fachwerk-Apartment</h2>\n    <div style=\"color:#c9a96a;font-size:12px;letter-spacing:2px;text-transform:uppercase;\">Buchungsnummer: BF-FGTWRT</div>\n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "259c6b11-3bb9-46e0-8137-dc071828a339",
+      "created_at": "2026-07-06T12:43:27.311551+00:00"
+    },
+    {
+      "id": "71064188-9d1c-41f3-8cfd-f78d59bbd681",
+      "booking_id": null,
+      "to_email": "jasinhuber@gmail.com",
+      "subject": "Dein Gutschein GIFT-FHVT-SGCC · Black Forest Retreats",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Jasin Hüber,</p>\n    <p style=\"margin:12px 0 24px;\">dein Gutschein für Nicolos Zipsi ist bezahlt und hängt als PDF an dieser E-Mail. Ausdrucken, verschenken, freuen.</p>\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Code</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">GIFT-FHVT-SGCC</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Wert</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">1 €</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gültig bis</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">6. Juli 2029</td>\n  </tr></table>\n    <p style=\"margin:18px 0 0;padding:12px 16px;background:rgba(201,169,106,.15);border-radius:4px;\">Einlösen: Bei der Buchung auf blackforest-retreats.de den Code ins Codefeld eingeben. Restguthaben bleibt auf dem Code.</p>\n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "7cef74a2-05b4-4c4f-81df-af34ad722e13",
+      "created_at": "2026-07-06T15:17:08.533515+00:00"
+    },
+    {
+      "id": "3560a6eb-a1cc-43a9-9908-e10d6d50bcab",
+      "booking_id": null,
+      "to_email": "jasin@huber-zipse.de",
+      "subject": "Dein Gutschein GIFT-WNDE-ZDCR · Black Forest Retreats",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Jasin Huber,</p>\n    <p style=\"margin:12px 0 24px;\">dein Gutschein für Rechnung Test ist bezahlt und hängt als PDF an dieser E-Mail. Ausdrucken, verschenken, freuen.</p>\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Code</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">GIFT-WNDE-ZDCR</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Wert</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">1 €</td>\n  </tr></table>\n    <p style=\"margin:18px 0 0;padding:12px 16px;background:rgba(201,169,106,.15);border-radius:4px;\">Einlösen: Bei der Buchung auf blackforest-retreats.de den Code ins Codefeld eingeben. Restguthaben bleibt auf dem Code.</p>\n    <p style=\"margin:14px 0 0;font-size:13px;opacity:.8;\">Die Rechnung zu deinem Kauf liegt ebenfalls als PDF bei.</p>\n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "bad1f5c5-71ad-44fc-992d-ca25170cf419",
+      "created_at": "2026-07-06T16:02:21.494811+00:00"
+    },
+    {
+      "id": "123c9899-4091-4fa5-b621-b5dee48d3f15",
+      "booking_id": null,
+      "to_email": "jasin@huber-zipse.de",
+      "subject": "Dein Gutschein GIFT-UKBB-QEZK · Black Forest Retreats",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Jasin Huber,</p>\n    <p style=\"margin:12px 0 24px;\">dein Gutschein für Verify Zwei ist bezahlt und hängt als PDF an dieser E-Mail. Ausdrucken, verschenken, freuen.</p>\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Code</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">GIFT-UKBB-QEZK</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Wert</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">1 €</td>\n  </tr></table>\n    <p style=\"margin:18px 0 0;padding:12px 16px;background:rgba(201,169,106,.15);border-radius:4px;\">Einlösen: Bei der Buchung auf blackforest-retreats.de den Code ins Codefeld eingeben. Restguthaben bleibt auf dem Code.</p>\n    <p style=\"margin:14px 0 0;font-size:13px;opacity:.8;\">Die Rechnung zu deinem Kauf liegt ebenfalls als PDF bei.</p>\n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "cd57b608-0fc6-46ba-bd23-b41e862097a1",
+      "created_at": "2026-07-06T16:15:53.930983+00:00"
+    },
+    {
+      "id": "2eeaef1b-7ec9-4b51-ba53-c25ff8fee7a3",
+      "booking_id": null,
+      "to_email": "jasin@huber-zipse.de",
+      "subject": "Dein Gutschein GIFT-NB84-6A8K · Black Forest Retreats",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Jasin Huber,</p>\n    <p style=\"margin:12px 0 24px;\">dein Gutschein für Verify Drei ist bezahlt und hängt als PDF an dieser E-Mail. Ausdrucken, verschenken, freuen.</p>\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Code</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">GIFT-NB84-6A8K</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Wert</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">1 €</td>\n  </tr></table>\n    <p style=\"margin:18px 0 0;padding:12px 16px;background:rgba(201,169,106,.15);border-radius:4px;\">Einlösen: Bei der Buchung auf blackforest-retreats.de den Code ins Codefeld eingeben. Restguthaben bleibt auf dem Code.</p>\n    <p style=\"margin:14px 0 0;font-size:13px;opacity:.8;\">Die Rechnung zu deinem Kauf liegt ebenfalls als PDF bei.</p>\n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "67537694-eb74-44ff-85f5-a96506a46b88",
+      "created_at": "2026-07-06T16:21:10.048494+00:00"
+    },
+    {
+      "id": "85361443-9f6e-4c6d-b2d9-9f854a6de4ef",
+      "booking_id": null,
+      "to_email": "jasin@huber-zipse.de",
+      "subject": "Dein Gutschein GIFT-UQ5Y-ETX9 · Black Forest Retreats",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Jasin Huber,</p>\n    <p style=\"margin:12px 0 24px;\">dein Gutschein für Verify Vier ist bezahlt und hängt als PDF an dieser E-Mail. Ausdrucken, verschenken, freuen.</p>\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Code</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">GIFT-UQ5Y-ETX9</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Wert</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">1 €</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gültig bis</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">6. Juli 2029</td>\n  </tr></table>\n    <p style=\"margin:18px 0 0;padding:12px 16px;background:rgba(201,169,106,.15);border-radius:4px;\">Einlösen: Bei der Buchung auf blackforest-retreats.de den Code ins Codefeld eingeben. Restguthaben bleibt auf dem Code.</p>\n    <p style=\"margin:14px 0 0;font-size:13px;opacity:.8;\">Die Rechnung zu deinem Kauf liegt ebenfalls als PDF bei.</p>\n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "5de05cce-874c-4c9d-b7ee-97587b9b3b1c",
+      "created_at": "2026-07-06T16:27:39.660184+00:00"
+    },
+    {
+      "id": "6053fe39-1a94-4543-b487-f934ff788d5a",
+      "booking_id": null,
+      "to_email": "nico@huber-zipse.de",
+      "subject": "Dein Gutschein GIFT-W9MQ-PR4K · Black Forest Retreats",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Nico Zipse,</p>\n    <p style=\"margin:12px 0 24px;\">dein Gutschein für Jasin Huber ist bezahlt und hängt als PDF an dieser E-Mail. Ausdrucken, verschenken, freuen.</p>\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Code</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">GIFT-W9MQ-PR4K</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Wert</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">1 €</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gültig bis</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">15. Juli 2029</td>\n  </tr></table>\n    <p style=\"margin:18px 0 0;padding:12px 16px;background:rgba(201,169,106,.15);border-radius:4px;\">Einlösen: Bei der Buchung auf blackforest-retreats.de den Code ins Codefeld eingeben. Restguthaben bleibt auf dem Code.</p>\n    <p style=\"margin:14px 0 0;font-size:13px;opacity:.8;\">Die Rechnung zu deinem Kauf liegt ebenfalls als PDF bei.</p>\n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "ac267bf5-219c-4a0b-917e-0638dd9a0fbf",
+      "created_at": "2026-07-15T07:53:13.894679+00:00"
+    },
+    {
+      "id": "1bbf134a-fbc7-41fb-88d2-9f093e7268ae",
+      "booking_id": null,
+      "to_email": "nico@huber-zipse.de",
+      "subject": "Dein Gutschein GIFT-CEP4-X5G9 · Black Forest Retreats",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Black Forest Retreats,</p>\n    <p style=\"margin:12px 0 24px;\">dein Gutschein für test ist da und hängt als PDF an dieser E-Mail. Ausdrucken, verschenken, freuen.</p>\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Code</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">GIFT-CEP4-X5G9</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Wert</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">299 €</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gültig bis</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">15. Juli 2029</td>\n  </tr></table>\n    <p style=\"margin:18px 0 0;padding:12px 16px;background:rgba(201,169,106,.15);border-radius:4px;\">Einlösen: Bei der Buchung auf blackforest-retreats.de den Code ins Codefeld eingeben. Restguthaben bleibt auf dem Code.</p>\n    \n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "d449db93-da72-4589-b2e0-0e1ace9eae77",
+      "created_at": "2026-07-15T07:57:59.805254+00:00"
+    },
+    {
+      "id": "50a6698f-463f-4ee1-b5f0-50cf342b9d46",
+      "booking_id": "bf6a78ba-1ec7-4bd9-a246-a96a98a4f6a7",
+      "to_email": "nico@huber-zipse.de",
+      "subject": "Deine Buchung BF-YCUM27 ist bestätigt",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Nico Zipse,</p>\n    <p style=\"margin:12px 0 24px;\">schön, dass du direkt bei uns buchst. Hier ist alles auf einen Blick:</p>\n    <h2 style=\"margin:0 0 6px;color:#1b2a21;font-size:20px;\">Black Forest Penthouse</h2>\n    <div style=\"color:#c9a96a;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;\">Buchungsnummer: BF-YCUM27</div>\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Zeitraum</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">25. August 2026 → 27. August 2026</td>\n  </tr>\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gäste</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">2 Gäste</td>\n  </tr>\n      <tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gesamtbetrag</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">1 €</td>\n  </tr>\n    </table>\n    \n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "0d057582-cf63-4652-9080-986052aeae0c",
+      "created_at": "2026-07-15T08:00:16.120985+00:00"
+    },
+    {
+      "id": "0dfb3255-eed3-451e-987d-6207eb905861",
+      "booking_id": "bf6a78ba-1ec7-4bd9-a246-a96a98a4f6a7",
+      "to_email": "nico@huber-zipse.de",
+      "subject": "Deine Rechnung zur Buchung BF-YCUM27",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Nico Zipse,</p>\n    <p style=\"margin:12px 0 24px;\">anbei findest du deine Rechnung als PDF. Danke für deine Buchung.</p>\n    <h2 style=\"margin:0 0 6px;color:#1b2a21;font-size:20px;\">Black Forest Penthouse</h2>\n    <div style=\"color:#c9a96a;font-size:12px;letter-spacing:2px;text-transform:uppercase;\">Buchungsnummer: BF-YCUM27</div>\n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "3f652d4c-b74c-4bf3-98fb-961450f0cd6d",
+      "created_at": "2026-07-15T08:00:16.358161+00:00"
+    },
+    {
+      "id": "f102865c-8609-40d4-b500-3258e83209c7",
+      "booking_id": null,
+      "to_email": "jasin@huber-zipse.de",
+      "subject": "Dein Gutschein GIFT-2KJW-WQXN · Black Forest Retreats",
+      "html": "<!doctype html>\n<html dir=\"ltr\">\n<body style=\"margin:0;padding:0;background:#f3ede2;font-family:Georgia,'Times New Roman',serif;\">\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f3ede2;padding:24px 0;\">\n    <tr><td align=\"center\">\n      <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#faf7f1;border-radius:6px;overflow:hidden;\">\n        <tr>\n          <td style=\"background:#0f1813;padding:28px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:22px;letter-spacing:1px;\">Black Forest Retreats</div>\n            <div style=\"color:#c9a96a;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-top:6px;\">Neuenbürg</div>\n          </td>\n        </tr>\n        <tr><td style=\"padding:36px 32px;color:#2a3e31;font-size:15px;line-height:1.6;\">\n    <p style=\"margin:0;\">Hallo Huber,</p>\n    <p style=\"margin:12px 0 24px;\">dein Gutschein für Jasin ist bezahlt und hängt als PDF an dieser E-Mail. Ausdrucken, verschenken, freuen.</p>\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Code</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">GIFT-2KJW-WQXN</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Wert</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">1 €</td>\n  </tr><tr>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#1b2a21;opacity:.7;\">Gültig bis</td>\n    <td style=\"padding:10px 0;border-bottom:1px solid rgba(27,42,33,.12);text-align:end;font-weight:bold;color:#1b2a21;\">20. Juli 2029</td>\n  </tr></table>\n    <p style=\"margin:18px 0 0;padding:12px 16px;background:rgba(201,169,106,.15);border-radius:4px;\">Einlösen: Bei der Buchung auf blackforest-retreats.de den Code ins Codefeld eingeben. Restguthaben bleibt auf dem Code.</p>\n    <p style=\"margin:14px 0 0;font-size:13px;opacity:.8;\">Die Rechnung zu deinem Kauf liegt ebenfalls als PDF bei.</p>\n    <p style=\"margin:28px 0 0;\">Herzliche Grüße aus dem Schwarzwald<br/><strong>Black Forest Retreats</strong></p></td></tr>\n        <tr>\n          <td style=\"background:#1b2a21;padding:20px 32px;text-align:center;\">\n            <div style=\"color:#faf7f1;font-size:12px;opacity:.8;\">Black Forest Retreats · Neuenbürg</div>\n          </td>\n        </tr>\n      </table>\n    </td></tr>\n  </table>\n</body>\n</html>",
+      "provider": "resend",
+      "provider_id": "da999453-58a3-4d57-8531-1a4075034174",
+      "created_at": "2026-07-20T10:10:40.040247+00:00"
+    }
+  ],
+  "invoice_counters": [
+    {
+      "year": 2026,
+      "last_value": 18
+    }
+  ],
+  "storage_invoices_objects": [
+    {
+      "name": "BFR-2026-0001.pdf",
+      "id": "67c8e346-f276-47a2-ae49-5ac196a7f606",
+      "updated_at": "2026-07-03T13:31:07.430Z",
+      "created_at": "2026-07-03T13:31:07.430Z",
+      "last_accessed_at": "2026-07-03T13:31:07.430Z",
+      "metadata": {
+        "eTag": "\"91be836989bcf64f1f7e0e6c9b029a8f\"",
+        "size": 4257,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-03T13:31:07.000Z",
+        "contentLength": 4257,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0002.pdf",
+      "id": "c1c03aad-15c5-4c85-8d70-2ca551b6a962",
+      "updated_at": "2026-07-03T13:47:24.128Z",
+      "created_at": "2026-07-03T13:47:24.128Z",
+      "last_accessed_at": "2026-07-03T13:47:24.128Z",
+      "metadata": {
+        "eTag": "\"e40e1f269132dda9fca975866ab333d7\"",
+        "size": 4265,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-03T13:47:24.000Z",
+        "contentLength": 4265,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0003.pdf",
+      "id": "118b90ab-be95-40e0-8127-44df2253d09c",
+      "updated_at": "2026-07-03T14:06:24.086Z",
+      "created_at": "2026-07-03T14:06:24.086Z",
+      "last_accessed_at": "2026-07-03T14:06:24.086Z",
+      "metadata": {
+        "eTag": "\"b4d3b9fba373d6ac7e4b57fd4aa29ed8\"",
+        "size": 4267,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-03T14:06:24.000Z",
+        "contentLength": 4267,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0004.pdf",
+      "id": "d9e5c43e-a592-42bb-9c1a-e52fd36a336e",
+      "updated_at": "2026-07-06T12:35:10.439Z",
+      "created_at": "2026-07-06T12:35:10.439Z",
+      "last_accessed_at": "2026-07-06T12:35:10.439Z",
+      "metadata": {
+        "eTag": "\"2de2f511ca4b8548baaf8a2c932b1c0f\"",
+        "size": 4485,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-06T12:35:10.000Z",
+        "contentLength": 4485,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0005.pdf",
+      "id": "0e8f2072-3daf-44fa-8b20-935eff08aa62",
+      "updated_at": "2026-07-06T12:38:42.337Z",
+      "created_at": "2026-07-06T12:38:42.337Z",
+      "last_accessed_at": "2026-07-06T12:38:42.337Z",
+      "metadata": {
+        "eTag": "\"90e1a9c34d29cb1c093aaa92160f41ce\"",
+        "size": 4626,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-06T12:38:42.000Z",
+        "contentLength": 4626,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0006.pdf",
+      "id": "379b4dbe-c38a-497f-95ee-0a3c6e2282d1",
+      "updated_at": "2026-07-06T12:43:26.385Z",
+      "created_at": "2026-07-06T12:43:26.385Z",
+      "last_accessed_at": "2026-07-06T12:43:26.385Z",
+      "metadata": {
+        "eTag": "\"911f22073c2ac5b0f3220db78f40120e\"",
+        "size": 4475,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-06T12:43:26.000Z",
+        "contentLength": 4475,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0007.pdf",
+      "id": "f8496aee-c35a-47b2-8ff0-da31085931ea",
+      "updated_at": "2026-07-06T12:45:02.984Z",
+      "created_at": "2026-07-06T12:45:02.984Z",
+      "last_accessed_at": "2026-07-06T12:45:02.984Z",
+      "metadata": {
+        "eTag": "\"57aa8dd103fa6154b610191805bc332b\"",
+        "size": 4684,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-06T12:45:02.000Z",
+        "contentLength": 4684,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0008.pdf",
+      "id": "f9489f07-845d-4c4a-ac28-15c3af9007ab",
+      "updated_at": "2026-07-06T16:02:17.082Z",
+      "created_at": "2026-07-06T16:02:17.082Z",
+      "last_accessed_at": "2026-07-06T16:02:17.082Z",
+      "metadata": {
+        "eTag": "\"0f9c35637b9f65ea54557499665a9adf\"",
+        "size": 4074,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-06T16:02:17.000Z",
+        "contentLength": 4074,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0009.pdf",
+      "id": "ecaba39c-13dd-48eb-a880-8f78c1dde5b8",
+      "updated_at": "2026-07-06T16:15:47.787Z",
+      "created_at": "2026-07-06T16:15:47.787Z",
+      "last_accessed_at": "2026-07-06T16:15:47.787Z",
+      "metadata": {
+        "eTag": "\"08a719fad20853abfbafea720befae4c\"",
+        "size": 4076,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-06T16:15:47.000Z",
+        "contentLength": 4076,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0010.pdf",
+      "id": "be9c2e77-eaf5-4a2c-8605-626905f82ba5",
+      "updated_at": "2026-07-06T16:21:07.224Z",
+      "created_at": "2026-07-06T16:21:07.224Z",
+      "last_accessed_at": "2026-07-06T16:21:07.224Z",
+      "metadata": {
+        "eTag": "\"2d014fbd32a156ad0298edb1ece62476\"",
+        "size": 4079,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-06T16:21:07.000Z",
+        "contentLength": 4079,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0011.pdf",
+      "id": "eaebbfca-54ec-4127-9b45-2af91d6b8cfb",
+      "updated_at": "2026-07-06T16:27:37.308Z",
+      "created_at": "2026-07-06T16:27:37.308Z",
+      "last_accessed_at": "2026-07-06T16:27:37.308Z",
+      "metadata": {
+        "eTag": "\"5d9ee461b330604729292cf923f1dbcb\"",
+        "size": 4120,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-06T16:27:37.000Z",
+        "contentLength": 4120,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0012.pdf",
+      "id": "e5fae571-9920-4d32-8e1a-ab41b9972137",
+      "updated_at": "2026-07-06T16:45:31.380Z",
+      "created_at": "2026-07-06T16:45:31.380Z",
+      "last_accessed_at": "2026-07-06T16:45:31.380Z",
+      "metadata": {
+        "eTag": "\"97b015e90818fc7384c09bb54df7274b\"",
+        "size": 4275,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-06T16:45:31.000Z",
+        "contentLength": 4275,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0013.pdf",
+      "id": "d1e5cede-2515-4208-9efb-2bac10398199",
+      "updated_at": "2026-07-06T16:45:32.144Z",
+      "created_at": "2026-07-06T16:45:32.144Z",
+      "last_accessed_at": "2026-07-06T16:45:32.144Z",
+      "metadata": {
+        "eTag": "\"92438a2b7b881c3ec5eb6689a6aa2d2e\"",
+        "size": 4250,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-06T16:45:32.000Z",
+        "contentLength": 4250,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0014.pdf",
+      "id": "a6f64f33-1563-4aa8-992f-96585eb30851",
+      "updated_at": "2026-07-06T16:45:33.129Z",
+      "created_at": "2026-07-06T16:45:33.129Z",
+      "last_accessed_at": "2026-07-06T16:45:33.129Z",
+      "metadata": {
+        "eTag": "\"db2360fd5c26f7dbb61ad28eed8e2a0c\"",
+        "size": 4245,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-06T16:45:33.000Z",
+        "contentLength": 4245,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0015.pdf",
+      "id": "d164fa7a-1f97-4674-9e02-d83daa4d2a40",
+      "updated_at": "2026-07-06T16:45:34.456Z",
+      "created_at": "2026-07-06T16:45:34.456Z",
+      "last_accessed_at": "2026-07-06T16:45:34.456Z",
+      "metadata": {
+        "eTag": "\"a9e4d34287805f20f9640337f3f88f91\"",
+        "size": 4249,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-06T16:45:34.000Z",
+        "contentLength": 4249,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0016.pdf",
+      "id": "7665c86f-5305-4a7e-b1ed-8428be13e10d",
+      "updated_at": "2026-07-15T07:53:13.298Z",
+      "created_at": "2026-07-15T07:53:13.298Z",
+      "last_accessed_at": "2026-07-15T07:53:13.298Z",
+      "metadata": {
+        "eTag": "\"41e32fff3f849fc5993ffd1454eac6b3\"",
+        "size": 4156,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-15T07:53:13.000Z",
+        "contentLength": 4156,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0017.pdf",
+      "id": "4e9638e5-033b-4856-b15a-c1e519cfb347",
+      "updated_at": "2026-07-15T08:00:15.713Z",
+      "created_at": "2026-07-15T08:00:15.713Z",
+      "last_accessed_at": "2026-07-15T08:00:15.713Z",
+      "metadata": {
+        "eTag": "\"3853e1f4083162999fa8a13962e3dccc\"",
+        "size": 4408,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-15T08:00:15.000Z",
+        "contentLength": 4408,
+        "httpStatusCode": 200
+      }
+    },
+    {
+      "name": "BFR-2026-0018.pdf",
+      "id": "16a43724-2f7e-4639-92be-e32f897b38ad",
+      "updated_at": "2026-07-20T10:10:39.422Z",
+      "created_at": "2026-07-20T10:10:39.422Z",
+      "last_accessed_at": "2026-07-20T10:10:39.422Z",
+      "metadata": {
+        "eTag": "\"393cca91f7a9f83eea52eaf04c231f50\"",
+        "size": 4315,
+        "mimetype": "application/pdf",
+        "cacheControl": "max-age=3600",
+        "lastModified": "2026-07-20T10:10:39.000Z",
+        "contentLength": 4315,
+        "httpStatusCode": 200
+      }
+    }
+  ]
+}

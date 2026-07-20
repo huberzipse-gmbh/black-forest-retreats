@@ -4,11 +4,31 @@ import { addDays, format } from "date-fns";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { supabaseAdminConfigured } from "@/lib/supabase/env";
 import { runIfStale } from "@/lib/booking/cron";
-import { mapBooking } from "@/lib/booking/db";
+import { mapBooking, mapPriceRule } from "@/lib/booking/db";
 import { AdminNotConfigured } from "@/components/admin/AdminNotConfigured";
 import { StatCard } from "@/components/admin/StatCard";
 import { BookingTable } from "@/components/admin/BookingTable";
 import { CronPanel } from "@/components/admin/CronPanel";
+import { OccupancyCalendar, type OccupancyEntry } from "@/components/admin/OccupancyCalendar";
+
+/** availability_blocks-Row inkl. Buchungs-Join (nur fürs Dashboard). */
+interface BlockRow {
+  id: string;
+  retreat_id: string;
+  start_date: string;
+  end_date: string;
+  source: OccupancyEntry["source"];
+  booking_id: string | null;
+  note: string | null;
+  bookings: {
+    guest_name: string;
+    booking_number: string;
+    status: string;
+    payment_status: string;
+    demo: boolean;
+    created_at: string;
+  } | null;
+}
 
 const iso = (d: Date) => format(d, "yyyy-MM-dd");
 
@@ -31,7 +51,7 @@ export default async function AdminDashboardPage() {
   const monthAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
   const weekAhead = iso(addDays(new Date(), 7));
 
-  const [paidRes, openRes, arrivalsRes, failedRes, recentRes, cronRes, giftSoldRes, giftOpenRes] = await Promise.all([
+  const [paidRes, openRes, arrivalsRes, failedRes, recentRes, cronRes, giftSoldRes, giftOpenRes, retreatsRes, blocksRes, priceRulesRes] = await Promise.all([
     sb
       .from("bookings")
       .select("total_cents")
@@ -68,6 +88,13 @@ export default async function AdminDashboardPage() {
       .gte("paid_at", monthAgo),
     // Offenes Guthaben: aktive Karten = ausstehende Leistungsverpflichtung.
     sb.from("gift_cards").select("balance_cents").eq("status", "active").eq("demo", false),
+    // Belegungskalender: alle Wohnungen (auch ausgeblendete — Buchungen bleiben real).
+    sb.from("retreats").select("id, name_de, base_price_cents").order("sort_order", { ascending: true }),
+    sb
+      .from("availability_blocks")
+      .select("*, bookings(guest_name, booking_number, status, payment_status, demo, created_at)"),
+    // Preis-Overrides fürs Kalender-Preispanel (Airbnb-Modell).
+    sb.from("price_rules").select("*").eq("active", true),
   ]);
 
   const revenue30 = (paidRes.data ?? []).reduce((sum, r) => sum + r.total_cents, 0);
@@ -78,6 +105,40 @@ export default async function AdminDashboardPage() {
     booking: mapBooking(row),
     retreatName: (row as { retreats?: { name_de?: string } }).retreats?.name_de ?? "",
   }));
+
+  // Belegungskalender: stornierte Buchungen raus; verfallene pending-Buchungen
+  // (unbezahlt, älter als 30 min) blockieren nicht mehr — wie lib/booking/db.fetchBlocks.
+  const pendingCutoff = Date.now() - 30 * 60 * 1000;
+  const calendarRetreats = ((retreatsRes.data ?? []) as { id: string; name_de: string; base_price_cents: number }[]).map((r) => ({
+    id: r.id,
+    name: r.name_de,
+    basePriceCents: r.base_price_cents,
+  }));
+  const calendarPriceRules = (priceRulesRes.data ?? []).map(mapPriceRule);
+  const calendarEntries: OccupancyEntry[] = ((blocksRes.data ?? []) as unknown as BlockRow[])
+    .filter((b) => {
+      if (b.source !== "booking" || !b.bookings) return true;
+      if (b.bookings.status === "cancelled") return false;
+      if (
+        b.bookings.status === "pending" &&
+        ["unpaid", "awaiting_payment", "failed"].includes(b.bookings.payment_status)
+      ) {
+        return new Date(b.bookings.created_at).getTime() > pendingCutoff;
+      }
+      return true;
+    })
+    .map((b) => ({
+      id: b.id,
+      retreatId: b.retreat_id,
+      start: b.start_date,
+      end: b.end_date,
+      source: b.source,
+      bookingId: b.booking_id,
+      guestName: b.bookings?.guest_name ?? null,
+      bookingNumber: b.bookings?.booking_number ?? null,
+      note: b.note ?? "",
+      demo: Boolean(b.bookings?.demo),
+    }));
 
   return (
     <div>
@@ -107,6 +168,14 @@ export default async function AdminDashboardPage() {
         <StatCard label="Offene Buchungen" value={openRes.count ?? 0} />
         <StatCard label="Anreisen (7 Tage)" value={arrivalsRes.count ?? 0} />
         <StatCard label="Fehlgeschlagene Abbuchungen" value={failedCharges.length} alert={failedCharges.length > 0} />
+      </div>
+
+      {/* Belegungskalender */}
+      <div className="mt-10">
+        <h2 className="font-display text-xl text-forest-900">Belegungskalender</h2>
+        <div className="mt-4">
+          <OccupancyCalendar retreats={calendarRetreats} entries={calendarEntries} priceRules={calendarPriceRules} />
+        </div>
       </div>
 
       {/* Cron / Sync */}

@@ -1,9 +1,10 @@
 "use client";
 
 /**
- * Admin-Gerüst: Sidebar (Desktop) / Bottom-Tabs (Mobil) in Markenfarben.
- * Die Login-Seite rendert ohne Shell (Vollbild).
+ * Admin-Gerüst: Sidebar (Desktop) / Topbar mit Burger-Menü + Slide-in-Drawer
+ * (Mobil) in Markenfarben. Die Login-Seite rendert ohne Shell (Vollbild).
  */
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { adminLogout } from "@/app/admin/actions";
@@ -89,6 +90,25 @@ const NAV = [
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Drawer bei Navigation schließen (z. B. Browser-Zurück).
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  // Hintergrund nicht scrollen, solange der Drawer offen ist; Escape schließt.
+  useEffect(() => {
+    if (!menuOpen) return;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [menuOpen]);
+
   if (pathname === "/admin/login") return <>{children}</>;
 
   const isActive = (href: string) =>
@@ -141,26 +161,108 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         </div>
       </aside>
 
+      {/* Topbar (Mobil): Marke + Burger */}
+      <header className="sticky top-0 z-40 flex items-center justify-between bg-forest-900 ps-5 pe-2 py-2.5 md:hidden">
+        <Link href="/admin" className="block">
+          <span className="font-display text-base tracking-wide text-cream-50">Black Forest</span>
+          <span className="ms-2 font-body text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-brass-300">
+            Admin
+          </span>
+        </Link>
+        <button
+          type="button"
+          aria-label="Menü öffnen"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(true)}
+          className="flex h-11 w-11 items-center justify-center rounded-[5px] text-cream-50 transition-colors hover:bg-cream-50/10"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" aria-hidden className="h-6 w-6">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </header>
+
+      {/* Drawer (Mobil): Backdrop + Slide-in-Navigation */}
+      <div
+        className={`fixed inset-0 z-50 md:hidden ${menuOpen ? "" : "pointer-events-none"}`}
+        aria-hidden={!menuOpen}
+      >
+        <button
+          type="button"
+          aria-label="Menü schließen"
+          tabIndex={menuOpen ? 0 : -1}
+          onClick={() => setMenuOpen(false)}
+          className={`absolute inset-0 bg-night/50 transition-opacity duration-200 ${
+            menuOpen ? "opacity-100" : "opacity-0"
+          }`}
+        />
+        <aside
+          className={`absolute inset-y-0 start-0 flex w-72 max-w-[85vw] flex-col bg-forest-900 shadow-[20px_0_60px_-30px_rgba(0,0,0,0.6)] transition-transform duration-200 ease-out ${
+            menuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        >
+          <div className="flex items-start justify-between ps-6 pe-2 pt-4 pb-3">
+            <Link href="/admin" onClick={() => setMenuOpen(false)} className="block pt-2">
+              <span className="font-display text-lg tracking-wide text-cream-50">Black Forest</span>
+              <span className="mt-0.5 block font-body text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-brass-300">
+                Admin
+              </span>
+            </Link>
+            <button
+              type="button"
+              aria-label="Menü schließen"
+              tabIndex={menuOpen ? 0 : -1}
+              onClick={() => setMenuOpen(false)}
+              className="flex h-11 w-11 items-center justify-center rounded-[5px] text-cream-100/75 transition-colors hover:bg-cream-50/10 hover:text-cream-50"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" aria-hidden className="h-6 w-6">
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            </button>
+          </div>
+          <nav className="flex-1 space-y-1 overflow-y-auto px-3 pt-2">
+            {NAV.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                tabIndex={menuOpen ? 0 : -1}
+                className={`flex items-center gap-3 rounded-[5px] px-4 py-3 font-body text-sm transition-colors ${
+                  isActive(item.href)
+                    ? "bg-cream-50/10 font-semibold text-brass-300"
+                    : "text-cream-100/75 hover:bg-cream-50/5 hover:text-cream-50"
+                }`}
+              >
+                <NavIcon name={item.icon} className="h-5 w-5 shrink-0" />
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="space-y-1 px-3 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-3">
+            <Link
+              href="/"
+              onClick={() => setMenuOpen(false)}
+              tabIndex={menuOpen ? 0 : -1}
+              className="block rounded-[5px] px-4 py-3 font-body text-xs text-cream-100/60 transition-colors hover:text-cream-50"
+            >
+              → Zur Website
+            </Link>
+            <button
+              type="button"
+              onClick={() => adminLogout()}
+              tabIndex={menuOpen ? 0 : -1}
+              className="w-full rounded-[5px] px-4 py-3 text-start font-body text-xs text-cream-100/60 transition-colors hover:text-cream-50"
+            >
+              Abmelden
+            </button>
+          </div>
+        </aside>
+      </div>
+
       {/* Inhalt */}
-      <main className="min-w-0 flex-1 px-5 py-8 pb-24 md:px-10 md:py-10 md:pb-10">
+      <main className="min-w-0 flex-1 px-5 py-8 md:px-10 md:py-10">
         {children}
       </main>
-
-      {/* Bottom-Tabs (Mobil) */}
-      <nav className="fixed inset-x-0 bottom-0 z-40 flex justify-around border-t border-forest-900/10 bg-forest-900 py-2 md:hidden">
-        {NAV.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={`flex flex-col items-center gap-1 px-2 py-1 font-body text-[0.6rem] ${
-              isActive(item.href) ? "text-brass-300" : "text-cream-100/65"
-            }`}
-          >
-            <NavIcon name={item.icon} className="h-5 w-5" />
-            {item.label}
-          </Link>
-        ))}
-      </nav>
     </div>
   );
 }
